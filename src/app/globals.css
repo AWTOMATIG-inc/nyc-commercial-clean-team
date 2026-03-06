@@ -3,10 +3,12 @@
 @theme inline {
   --color-red: #ed0505;
   --color-skyblue-light: #f4f5f7;
+  --color-skylight: #f8ffff;
   --color-slate: #1d2f64;
   --color-dark-slate: #020303;
   --font-jetbrains: var(--font-jetbrains-mono);
   --font-inter: var(--font-inter);
+  --shadow-custom: 7px 7px 24.4px 0px #00000030;
 }
 @utility container {
   @apply mx-auto max-w-none 2xl:max-w-360 px-4 md:px-10! lg:px-8;
@@ -41,7 +43,10 @@
     @apply text-2xl sm:text-3xl md:text-4xl lg:text-[40px] leading-[130%];
   }
   .heading-5 {
-    @apply text-xl sm:text-2xl md:text-3xl lg:text-[32px] leading-[130%];
+    @apply text-xl md:text-2xl leading-[140%];
+  }
+  .heading-5-bold {
+    @apply text-xl md:text-2xl  leading-[140%] font-bold;
   }
   .heading-6 {
     @apply text-lg sm:text-xl md:text-2xl lg:text-[26px] leading-[140%];

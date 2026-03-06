@@ -1,37 +1,26 @@
 import { services } from "@/constant/home/services";
-import Image from "next/image";
+import BlogCard from "../BlogCard";
 import CommonHeading from "../CommonHeading";
-import LinkWithArrow from "../LinkWithArrow";
 
 export default function ServicesSection() {
   return (
     <section className="container mt-16">
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-2 gap-32">
         <div>
           <CommonHeading
             title="Services"
             heading="What we handle"
             subHeading="Complete cleaning solutions for every commercial need."
           />
+           <div className="mt-21">
+          {services.slice(0,1).map((item) => (
+            <BlogCard key={item.id} blog={item} isClean={true}/>
+          ))}
         </div>
-        <div>
-          {services.map((item) => (
-            <div key={item.id}>
-              <div>
-                <div>
-                  <p>{item.title}</p>
-                  <h4>{item.heading}</h4>
-                  <p>{item.desc}</p>
-                  <LinkWithArrow>learn more</LinkWithArrow>
-                </div>
-                {item.overlayImage && (
-                  <Image src={item.overlayImage} alt="overlay" />
-                )}
-              </div>
-              <div>
-                <Image src={item.image} alt={item.title}/>
-              </div>
-            </div>
+        </div>
+        <div className="space-y-5">
+          {services.slice(1,services.length).map((item) => (
+            <BlogCard key={item.id} blog={item}/>
           ))}
         </div>
       </div>
