@@ -30,6 +30,13 @@
   }
 }
 @layer components {
+  .swiper-pagination-bullet {
+    @apply w-3 h-3 bg-gray-400 opacity-100;
+  }
+
+  .swiper-pagination-bullet-active {
+    @apply bg-purple-600! w-6 rounded-full;
+  }
   .heading-1 {
     @apply text-[40px] md:text-[56px];
   }

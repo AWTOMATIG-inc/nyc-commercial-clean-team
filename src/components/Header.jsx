@@ -10,7 +10,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 ">
-        <div className=" before:bg-slate before:blur-[100px]  before:absolute before:w-full before:h-full relative z-10">
+        <div className={`   before:absolute before:w-full before:h-full relative z-10 ${isMenuOpen?"before:bg-white lg:before:bg-slate lg:before:blur-[100px]":"before:bg-slate before:blur-[100px]"}`}>
             <nav className="container flex justify-between py-6 relative z-50">
               <button className="lg:hidden cursor-pointer" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {isMenuOpen ? (

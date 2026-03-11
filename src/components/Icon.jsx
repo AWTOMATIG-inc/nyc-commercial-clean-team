@@ -87,6 +87,7 @@ export const GroupPeopleIcon = ({ className }) => {
       width="60"
       height="60"
       fill="none"
+      className={className}
       viewBox="0 0 60 60"
     >
       <mask

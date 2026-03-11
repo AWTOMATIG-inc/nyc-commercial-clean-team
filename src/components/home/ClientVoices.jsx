@@ -58,15 +58,15 @@ export default function ClientVoices() {
             <div>
               <item.icon/>
             </div>
-            <p className="mt-12 mb-6 md:text-lg">{item.review}</p>
+            <p className="mt-12 mb-6 text-base md:text-sm lg:text-lg">{item.review}</p>
             <div className="flex items-center gap-3  mb-8">
               <Image width={50} height={50} src={item.user.avatar} alt="user" className="size-10 rounded-full"/>
               <div>
-                <h5 className="font-bold">{item.user.name}</h5>
-                <p>{item.user.prof}</p>
+                <h5 className="text-base sm:text-sm lg:text-lg font-bold">{item.user.name}</h5>
+                <p className="text-base sm:text-sm lg:text-lg">{item.user.prof}</p>
               </div>
             </div>
-            <LinkWithArrow className="font-normal flex gap-2">View case study</LinkWithArrow>
+            <LinkWithArrow className="text-base sm:text-sm lg:text-lg font-normal flex gap-2">View case study</LinkWithArrow>
           </div>
           </SwiperSlide>
         ))}

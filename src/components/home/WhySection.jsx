@@ -30,23 +30,32 @@ export default function WhySection() {
           <CommonHeading
             title="Why"
             heading="Trusted by NYC's leading businesses"
-            subHeading=""
-          />
-          <p className="body-text mb-8">
-            We’ve built our reputation on consistency, compliance, and
+            subHeading="We’ve built our reputation on consistency, compliance, and
             measurable results. Every project is handled with precision and
             professionalism, ensuring the highest standards are met from start
             to finish. Our clients stay with us because we deliver reliable
-            performance, transparent communication, and long-term value.
-          </p>
-          <ArrowButton>Discover More</ArrowButton>
+            performance, transparent communication, and long-term value."
+          />
+
+          <div className="mt-8 mx-auto md:mx-0 w-fit">
+            <ArrowButton>Discover More</ArrowButton>
+          </div>
         </div>
         <div className="grid grid-cols-2 gap-6">
           {staticstics.map((item) => (
-            <div key={item.id} className="text-center bg-skyblue-light px-9 py-5 rounded-2xl flex flex-col items-center justify-center">
-                <h1 className="text-[64px] font-bold">{item.value}</h1>
-                <hr className="text-black h-1"/>
-                <p className="lg:text-lg font-medium pt-4 border-black border-t">{item.title}</p>
+            <div
+              key={item.id}
+              className="text-center bg-skyblue-light px-5 sm:px-9 py-4 sm:py-5 rounded-2xl flex flex-col items-center justify-center"
+            >
+              <h1 className="text-slate text-[28px] md:text-[64px] font-bold">
+                {item.value}
+              </h1>
+              <span
+                className="w-full bg-black rounded-full border border-transparent [border-image:linear-gradient(90deg,#FFFFFF_-4.54%,rgba(23,38,80,0.46)_46.64%,#FFFFFF_108.06%)_1]"
+              ></span>
+              <p className="text-sm md:text-base lg:text-lg font-medium pt-4 border-black ">
+                {item.title}
+              </p>
             </div>
           ))}
         </div>

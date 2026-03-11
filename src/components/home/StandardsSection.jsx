@@ -8,21 +8,22 @@ export default function StandardsSection() {
   const [step, setStep] = useState(0);
   return (
     <section className="bg-[linear-gradient(114.32deg,#F5FCFF_4.47%,#DBF3FA_25.06%,#B7E9F7_51.47%,#92DFF3_98.36%,#7AD7F0_121.91%)]">
-      <div className="container py-16">
+      <div className="container py-10 sm:py-12 lg:py-16">
         <div>
           <CommonHeading
             title="Standards"
             heading="How we work"
+            center={true}
             subHeading="Every detail matters in commercial cleaning."
           />
         </div>
-        <div className="mt-20">
+        <div className="mt-6 sm:mt-10 md:mt-16 lg:mt-20">
           <div className="relative py-10 hidden lg:block">
             <div className="border-t-2 relative border-black">
               <span className="size-3.5 bg-black inline-block absolute top-/2 left-0 -translate-y-1/2 rounded-full"></span>
               <span className="size-3.5 bg-black inline-block absolute top-/2 right-0 -translate-y-1/2 rounded-full"></span>
             </div>
-            <div className="flex  justify-evenly absolute top-1/2 -translate-y-1/2 left-0 w-full ">
+            <div className="flex justify-between lg:px-34 xl:px-44 absolute top-1/2 -translate-y-1/2 left-0 w-full ">
               <button
                 onMouseOver={() => setStep(1)}
                 onMouseOut={() => setStep(0)}
@@ -46,27 +47,27 @@ export default function StandardsSection() {
               </button>
             </div>
           </div>
-          <div className="mt-28 border border-white rounded-xl pt-20 pb-30 px-10 relative ">
+          <div className="lg:mt-28 border border-white rounded-xl p-5 lg:pt-20 lg:pb-30 lg:px-10 relative ">
             <div className="grid lg:grid-cols-3 gap-8">
               {ourStandards.map((item) => (
                 <div key={item.id}>
                   <div className="lg:max-w-79.5 mx-auto lg:text-center">
                     <div className="flex justify-between items-center">
                     <div
-                      className={` p-3 w-fit lg:mx-auto rounded-xl border ${step === item.id ? "bg-gray-400 border-black" : "bg-skyblue-light  border-skyblue-light"}`}
+                      className={` p-2 md:p-3 w-fit lg:mx-auto rounded-xl border ${step === item.id ? "bg-gray-400 border-black" : "bg-skyblue-light  border-skyblue-light"}`}
                     >
-                      <item.Icon />
+                      <item.Icon className="size-8"/>
                     </div>
                     <button
                       onMouseOver={() => setStep(item.id)}
                       onMouseOut={() => setStep(0)}
-                      className="lg:hidden bg-white h-13 px-8 rounded-full hover:bg-slate hover:text-white"
+                      className="text-sm md:text-base lg:hidden bg-white h-8 md:h-13 px-5 md:px-8 rounded-full hover:bg-slate hover:text-white"
                     >
                       Step Three
                     </button>
                     </div>
-                    <h5 className="heading-5-bold mt-4.5 mb-2">{item.title}</h5>
-                    <p className="">{item.desc}</p>
+                    <h5 className="text-lg sm:text-xl md:text-2xl font-bold mt-4.5 mb-2">{item.title}</h5>
+                    <p className="text-sm md:text-base">{item.desc}</p>
                   </div>
                 </div>
               ))}

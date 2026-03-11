@@ -6,7 +6,7 @@ export default function ServicesSection() {
   return (
     <section className="container mt-16">
       <div className="grid md:grid-cols-2 gap-32">
-        <div>
+        <div className="sticky top-24 h-fit">
           <CommonHeading
             title="Services"
             heading="What we handle"
