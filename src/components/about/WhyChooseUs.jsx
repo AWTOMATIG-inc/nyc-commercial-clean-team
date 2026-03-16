@@ -12,7 +12,7 @@ export default function WhyChooseUs() {
           subHeading="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moreIt is a reader will be distracted by the readable"
         />
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-[1fr_3fr] mt-20">
         <div>
           <div className="mt-6">
             <Image

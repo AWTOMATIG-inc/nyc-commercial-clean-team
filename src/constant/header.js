@@ -22,18 +22,23 @@ export const headerLinks = [
   {
     id: 6,
     name: "Locations",
-    href: "/locations",
-    dropdownList: [
-      {
-        id: 1,
-        name: "Bangladesh",
-        href: "/locations/bangladesh",
-      },
-      {
-        id: 2,
-        name: "India",
-        href: "/services/india",
-      },
-    ],
+    href: "/service-area",
   },
+  // {
+  //   id: 6,
+  //   name: "Locations",
+  //   href: "/locations",
+  //   dropdownList: [
+  //     {
+  //       id: 1,
+  //       name: "Bangladesh",
+  //       href: "/locations/bangladesh",
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "India",
+  //       href: "/services/india",
+  //     },
+  //   ],
+  // },
 ];

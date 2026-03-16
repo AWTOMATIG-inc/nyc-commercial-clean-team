@@ -53,7 +53,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          <div >
             <p className="text-lg font-semibold">Company</p>
             <ul className="mt-4 space-y-3.5">
               {companyLinks.map((link) => (
@@ -68,7 +68,23 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="sm:hidden">
+            <p className="text-lg font-semibold">Follow us</p>
+            <ul className="mt-4 space-y-3.5 flex">
+              {followUsLinks.map((link) => (
+                <li key={link.id}>
+                  <a
+                    className={`flex items-center gap-3 capitalize text-light hover:underline hover:text-blue-500 border-y border-l p-2 ${followUsLinks.length===link.id&&"border-r"}`}
+                    href={link.href}
+                  >
+                    <Icon icon={link.icon} width="24" height="24" />
+                  
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hidden sm:block">
             <p className="text-lg font-semibold">Follow us</p>
             <ul className="mt-4 space-y-3.5">
               {followUsLinks.map((link) => (
@@ -88,7 +104,7 @@ export default function Footer() {
       </div>
       <div className="container">
         <hr className=" text-gray-300 my-8" />
-        <div className="flex flex-col-reverse md:flex-row gap-y-6 justify-between md:items-center ">
+        <div className="flex flex-col-reverse lg:flex-row gap-y-6 justify-between md:items-center ">
           <p className="text-center text-light">
             © 2025 NYC Clean Team. All rights reserved.
           </p>

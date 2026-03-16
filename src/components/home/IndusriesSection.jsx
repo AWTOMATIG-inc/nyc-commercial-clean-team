@@ -19,7 +19,7 @@ export default function IndusriesSection() {
             key={blog.id}
             className={`flex flex-col justify-end rounded-3xl group border border-[#03020326]`}
           >
-            <div className="space-y-4 px-7 py-9 mb-59">
+            <div className="space-y-4 px-7 py-9 md:mb-59">
               <p className="font-semibold">{blog.title}</p>
               <h5 className="heading-5">{blog.heading}</h5>
               <p>{blog.desc}</p>
