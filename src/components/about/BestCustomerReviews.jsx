@@ -83,7 +83,7 @@ export default function BestCustomerReviews() {
                 alt={review.name}
                 className="w-full min-h-50 sm:min-h-71.25 h-full object-cover rounded-xl"
               />
-              {active === i && <div className="absolute top-0 left-0 w-full h-full bg-[#92DFF3]/40  rounded-xl"><span className="flex flex-col justify-center items-center h-full"><QoateIcon /></span></div>}
+              {active === i && <div className="absolute top-0 left-0 w-full h-full bg-[#92DFF3]/40  rounded-xl"><span className="flex flex-col justify-end items-center h-full pb-4"><QoateIcon /></span></div>}
             </div>
           ))}
         </div>
