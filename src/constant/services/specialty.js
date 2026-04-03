@@ -7,24 +7,24 @@ export const speciality = [
     id: 1,
     image: windowClean,
 
-    title: "Janitorial",
-    heading: "Janitorial services",
-    desc: "Routine maintenance for lobbies, restrooms, and common areas",
+    title: "SPECIALTY",
+    heading: "Post-Construction Cleaning",
+    desc: "Debris removal, surface cleaning, and final detailing after renovation or new build — leaving your commercial space ready for occupancy.",
   },
   {
     id: 2,
     image: officeClean,
-    title: "Core",
-    heading: "Office cleaning",
-    desc: "Professional spaces kept spotless and ready for business.",
+    title: "SPECIALTY",
+    heading: "Deep Cleaning & Disinfection",
+    desc: "Full facility disinfection using commercial-grade products. Available for move-ins, seasonal cleans, post-illness events, or compliance requirements.",
   },
   {
     id: 3,
     image: dayPorter,
 
-    title: "Core",
-    heading: "Day porter services",
-    desc: "On-site support throughout your business day.",
+    title: "SPECIALTY",
+    heading: "Move-Out &\nEvent Cleaning",
+    desc: `Pre- and post-event cleaning for commercial spaces, and move-out deep cleans for offices and retail units between tenants. "this is for demo"`,
   },
   
   

@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-slate md:rounded-t-3xl text-white py-8 md:py-12 lg:py-16">
-      <div className="container grid lg:grid-cols-[1fr_1.2fr]  lg:gap-x-28">
+      <div className="container grid lg:grid-cols-[1fr_1.5fr] xl:grid-cols-[1fr_1.2fr] lg:gap-x-14  xl:gap-x-28">
         <div>
           <div>
             <Image
@@ -19,7 +19,7 @@ export default function Footer() {
             />
           </div>
           <p className="py-8 text-lg">
-            Stay informed on facility maintenance and cleaning standards.
+           Professional commercial cleaning services across all five NYC boroughs — offices, retail, medical, and more.
           </p>
           <div>
             <div className="flex flex-col sm:flex-row gap-5 items-center w-full sm:w-[85%] md:w-[70%] lg:w-full">
@@ -32,8 +32,8 @@ export default function Footer() {
                 Subscribe
               </button>
             </div>
-            <p className="mt-3 text-xs">
-             We respect your privacy and send updates only when necessary.
+            <p className="mt-5 text-xs">
+             Facility maintenance tips for NYC commercial property managers — delivered occasionally.
             </p>{" "}
           </div>
         </div>
@@ -51,6 +51,9 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-37 xl:top-27">
+              Privacy Policy
+            </Link>
             </ul>
           </div>
           <div >
@@ -66,6 +69,9 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-37 xl:top-27">
+              Terms of Service
+            </Link>
             </ul>
           </div>
           <div className="sm:hidden">
@@ -82,6 +88,7 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+              
             </ul>
           </div>
           <div className="hidden sm:block">
@@ -98,6 +105,9 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+               <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-37 xl:top-27">
+              Cookies settings
+            </Link>
             </ul>
           </div>
         </div>
@@ -105,18 +115,18 @@ export default function Footer() {
       <div className="container">
         <hr className=" text-gray-300 my-8" />
         <div className="flex flex-col-reverse lg:flex-row gap-y-6 justify-between md:items-center ">
-          <p className="text-center text-light">
+          <p className="text-light">
             © 2025 NYC Clean Team. All rights reserved.
           </p>
-          <div className="flex flex-col md:flex-row gap-4">
-            <Link href="#" className="text-light underline hover:text-blue-500">
+          <div className="flex flex-col md:flex-row gap-4 lg:hidden">
+            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-57.5">
               Privacy Policy
             </Link>
 
-            <Link href="#" className="text-light underline hover:text-blue-500">
+            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-32.5">
               Terms of Service
             </Link>
-            <Link href="#" className="text-light underline hover:text-blue-500">
+            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-12">
               Cookies settings
             </Link>
           </div>

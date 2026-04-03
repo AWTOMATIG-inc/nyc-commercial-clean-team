@@ -1,41 +1,26 @@
-import brush from "@/assets/home/services/brush.png";
-import dayPorter from "@/assets/home/services/day-porter.webp";
-import floorCare from "@/assets/home/services/floor-care.webp";
-import girlCleaning from "@/assets/home/services/girl-cleaner.png";
-import moping from "@/assets/home/services/moping.png";
-import officeClean from "@/assets/home/services/office-cleaning.webp";
-import windowClean from "@/assets/home/services/window-cleaning.webp";
-
+import glassClean from "@/assets/home/services/glass-clean.webp";
+import { ServiceCardIcon } from "@/components/Icon";
 export const services = [
   {
     id: 1,
-    image: officeClean,
-    title: "Core",
+    image: glassClean,
+    icon:ServiceCardIcon,
     heading: "Office cleaning",
-    desc: "Professional spaces kept spotless and ready for business.",
+    desc: "Workspaces, restrooms, breakrooms, and common areas are thoroughly cleaned and prepared before your team arrives, ensuring every scheduled visit delivers a consistent, spotless, and professional environment without disruption.",
   },
   {
     id: 2,
-    image: windowClean,
-    overlayImage: moping,
-    title: "Specialty",
-    heading: "Window cleaning",
-    desc: "Crystal clear glass from ground to roofline.",
+    image: glassClean,
+    icon:ServiceCardIcon,
+    heading: "Janitorial Services",
+    desc: "Full-building janitorial coverage for lobbies, hallways, restrooms, and shared spaces, delivered with consistent quality and care. Flexible daily or nightly schedules ensure your facility stays clean, organized, and ready for use.",
   },
   {
     id: 3,
-    image: dayPorter,
-    overlayImage: girlCleaning,
-    title: "Core",
-    heading: "Day porter services",
-    desc: "On-site support throughout your business day.",
+    image: glassClean,
+    icon:ServiceCardIcon,
+    heading: "Day Porter Services",
+    desc: "Full-building janitorial coverage for lobbies, hallways, restrooms, and shared spaces, delivered with consistent quality and care. Flexible daily or nightly schedules ensure your facility stays clean, organized, and ready for use.",
   },
-  {
-    id: 4,
-    image: floorCare,
-    overlayImage: brush,
-    title: "Core",
-    heading: "Floor and carpet care",
-    desc: "Restoration and maintenance for all floor surfaces.",
-  },
+  
 ];

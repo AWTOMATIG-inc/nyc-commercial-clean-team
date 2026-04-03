@@ -13,7 +13,7 @@ export default function ServicesBlogCard({ blog, view = "col" }) {
           <div className="space-y-4">
             <p className="font-semibold">{blog.title}</p>
             <h5 className="heading-5">{blog.heading}</h5>
-            <p>{blog.desc}</p>
+            <p className="text-justify">{blog.desc}</p>
             <LinkWithArrow href={`/blogs/${blog.id}`}>learn more</LinkWithArrow>
           </div>
         </div>
@@ -40,7 +40,7 @@ export default function ServicesBlogCard({ blog, view = "col" }) {
           <div className="space-y-4">
             <p className="font-semibold">{blog.title}</p>
             <h5 className="heading-5">{blog.heading}</h5>
-            <p>{blog.desc}</p>
+            <p className="text-justify">{blog.desc}</p>
             <LinkWithArrow href={`/blogs/${blog.id}`}>learn more</LinkWithArrow>
           </div>
         </div>
@@ -73,8 +73,8 @@ export default function ServicesBlogCard({ blog, view = "col" }) {
       <div className="flex items-start justify-between px-7 py-9 ">
         <div className="space-y-4">
           <p className="font-semibold">{blog.title}</p>
-          <h5 className="heading-5">{blog.heading}</h5>
-          <p>{blog.desc}</p>
+          <h5 className="heading-5 whitespace-pre-line">{blog.heading}</h5>
+          <p className="text-justify">{blog.desc}</p>
           <LinkWithArrow href={`/blogs/${blog.id}`}>learn more</LinkWithArrow>
         </div>
       </div>

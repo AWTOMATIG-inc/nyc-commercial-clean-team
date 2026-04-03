@@ -63,20 +63,20 @@ export default function StandardsSection() {
                       onMouseOut={() => setStep(0)}
                       className="text-sm md:text-base lg:hidden bg-white h-8 md:h-13 px-5 md:px-8 rounded-full hover:bg-slate hover:text-white"
                     >
-                      Step Three
+                      {item.stepName}
                     </button>
                     </div>
                     <h5 className="text-lg sm:text-xl md:text-2xl font-bold mt-4.5 mb-2">{item.title}</h5>
-                    <p className="text-sm md:text-base">{item.desc}</p>
+                    <p className="text-sm md:text-base ">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div className="hidden max-w-260 w-full  bg-white border border-black/30 rounded-full lg:flex justify-between items-center p-1.5 absolute -bottom-8 left-1/2 -translate-x-1/2">
               <h6 className="heading-6 text-center w-full flex-1">
-                Elevate Your Space with Professional Cleaning
+               Ready for a Cleaner Facility?
               </h6>
-              <ArrowButton>Discover More</ArrowButton>
+              <ArrowButton>Get a Free Quote</ArrowButton>
             </div>
           </div>
         </div>

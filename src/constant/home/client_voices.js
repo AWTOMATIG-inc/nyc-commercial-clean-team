@@ -4,7 +4,7 @@ export const clientVoices = [
   {
     id: 1,
     icon: WebFlowIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
+    review: `"We've used three commercial cleaners in the last five years. NYC Clean Team is the only one that's been consistent same crew, same standard, every single visit."`,
     user: {
       name: "Michael Chen",
       avatar: "/images/placeholder.jpg",
@@ -14,7 +14,7 @@ export const clientVoices = [
   {
     id: 2,
     icon: RelumeIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
+    review: `"I manage commercial properties in Brooklyn and Queens. Having one reliable cleaning partner across all my sites has simplified operations significantly."`,
     user: {
       name: "Sarah Rodriguez",
       avatar: "/images/placeholder.jpg",
@@ -24,7 +24,7 @@ export const clientVoices = [
   {
     id: 3,
     icon: WebFlowIcon,
-    review: `"For a medical facility, cleanliness isn't optional. NYC Clean Team understands compliance requirements and executes flawlessly."`,
+    review: `"For a medical facility, cleanliness is non-negotiable. NYC Clean Team understands compliance requirements and executes without shortcuts. We've renewed our contract twice."`,
     user: {
       name: "Dr. James Walsh",
       avatar: "/images/placeholder.jpg",
@@ -34,7 +34,7 @@ export const clientVoices = [
   {
     id: 4,
     icon: WebFlowIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
+    review: `"We've used three commercial cleaners in the last five years. NYC Clean Team is the only one that's been consistent same crew, same standard, every single visit."`,
     user: {
       name: "Michael Chen",
       avatar: "/images/placeholder.jpg",
@@ -44,7 +44,7 @@ export const clientVoices = [
   {
     id: 5,
     icon: RelumeIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
+    review: `"I manage commercial properties in Brooklyn and Queens. Having one reliable cleaning partner across all my sites has simplified operations significantly."`,
     user: {
       name: "Sarah Rodriguez",
       avatar: "/images/placeholder.jpg",
@@ -54,41 +54,12 @@ export const clientVoices = [
   {
     id: 6,
     icon: WebFlowIcon,
-    review: `"For a medical facility, cleanliness isn't optional. NYC Clean Team understands compliance requirements and executes flawlessly."`,
+    review: `"For a medical facility, cleanliness is non-negotiable. NYC Clean Team understands compliance requirements and executes without shortcuts. We've renewed our contract twice."`,
     user: {
       name: "Dr. James Walsh",
       avatar: "/images/placeholder.jpg",
       prof: "Medical Director, Queens",
     },
   },
-  {
-    id: 7,
-    icon: WebFlowIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
-    user: {
-      name: "Michael Chen",
-      avatar: "/images/placeholder.jpg",
-      prof: "Facilities Manager, Manhattan",
-    },
-  },
-  {
-    id: 8,
-    icon: RelumeIcon,
-    review: `"They show up on time, every time. Our facility has never looked better, and their team treats the space like it's their own."`,
-    user: {
-      name: "Sarah Rodriguez",
-      avatar: "/images/placeholder.jpg",
-      prof: "Operations Director, Brooklyn",
-    },
-  },
-  {
-    id: 9,
-    icon: WebFlowIcon,
-    review: `"For a medical facility, cleanliness isn't optional. NYC Clean Team understands compliance requirements and executes flawlessly."`,
-    user: {
-      name: "Dr. James Walsh",
-      avatar: "/images/placeholder.jpg",
-      prof: "Medical Director, Queens",
-    },
-  },
+ 
 ];

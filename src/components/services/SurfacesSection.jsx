@@ -9,7 +9,7 @@ export default function SurfacesSection() {
         center={true}
         title="Surfaces"
         heading="Floors and finishes maintained"
-        subHeading="Protect your investment with professional floor care and restoration"
+        subHeading="Professional floor care that protects your surfaces and extends their lifespan."
       />
       <div className="mt-21">
         <div className="grid sm:grid-cols-2  xl:grid-cols-[1.8fr_1fr_1fr] gap-4 md:gap-8">

@@ -14,8 +14,8 @@ export default function FAQs() {
         <div>
           <CommonHeading
             title="FAQS"
-            heading="Answers to Your Most Common Queries!"
-            subHeading="Answers to Your Most Common Queries!"
+            heading="Common Questions"
+            subHeading="Everything you need to know before booking commercial cleaning for your facility."
           />
         </div>
         <Image width={487} height={320} src={faqImage} alt="faq" className="hidden md:block max-h-55 md:max-h-80 object-cover rounded-2xl mt-8" />

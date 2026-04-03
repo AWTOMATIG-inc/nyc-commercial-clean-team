@@ -28,17 +28,13 @@ export default function WhySection() {
       <div className="grid lg:grid-cols-2 gap-20">
         <div>
           <CommonHeading
-            title="Why"
-            heading="Trusted by NYC's leading businesses"
-            subHeading="We’ve built our reputation on consistency, compliance, and
-            measurable results. Every project is handled with precision and
-            professionalism, ensuring the highest standards are met from start
-            to finish. Our clients stay with us because we deliver reliable
-            performance, transparent communication, and long-term value."
+            title="Why Choose Us"
+            heading="NYC Businesses Trust Us for Reliable Cleaning"
+            subHeading="Office managers and property managers across New York City rely on us because we show up when scheduled, perform to a consistent standard, and communicate clearly. No rotating crews. No missed visits. No surprises."
           />
 
           <div className="mt-8 mx-auto md:mx-0 w-fit">
-            <ArrowButton>Discover More</ArrowButton>
+            <ArrowButton>Learn How We Work</ArrowButton>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-6">

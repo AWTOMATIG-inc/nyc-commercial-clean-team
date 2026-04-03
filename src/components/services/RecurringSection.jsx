@@ -13,7 +13,7 @@ export default function RecurringSection() {
         center={true}
         title="Recurring"
         heading="Daily cleaning that works"
-        subHeading="Consistent janitorial coverage keeps your space ready"
+        subHeading="Scheduled, consistent janitorial and office cleaning — so your facility is always ready."
       />
       <div className="mt-16">
         <Swiper

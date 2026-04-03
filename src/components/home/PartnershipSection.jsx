@@ -14,20 +14,26 @@ export default function PartnershipSection() {
     {
       id: 1,
       image: "/images/partnership/cleaning-discussion.webp",
-      title: "Customized plans",
-      desc: "Background-checked staff trained in commercial cleaning best practices and safety protocols.",
+      title: "Plans Built Around Your Facility",
+      desc: "Every space is different. We assess your facility, traffic patterns, and schedule before building a cleaning plan — then we stick to it.",
     },
     {
       id: 2,
       image: "/images/partnership/coverage-1.jpg",
-      title: "Reliable coverage",
-      desc: "Our teams are equipped with industry-grade tools and modern cleaning solutions.",
+      title: "The Same Crew, Every Visit",
+      desc: "Our staff are background-checked, uniformed, and trained in commercial protocols. You'll see the same faces — not a new team every week.",
     },
     {
       id: 3,
       image: "/images/partnership/coverage-2.jpg",
-      title: "Consistent results",
-      desc: "Quality assurance and inspections ensure every space stays spotless.",
+      title: "Consistent Quality, Verified",
+      desc: "We use standardized checklists and supervisory checks on every visit. The first service and the twentieth meet the same standard.",
+    },
+    {
+      id: 4,
+      image: "/images/partnership/coverage-2.jpg",
+      title: "Quality inspections",
+      desc: "Regular audits ensure standards are met consistently across every visit.",
     },
   ];
 
@@ -92,12 +98,16 @@ export default function PartnershipSection() {
         {/* LEFT CONTENT */}
         <div className="flex flex-col justify-between py-14">
           <div className="space-y-6">
+            <p
+              className={`font-semibold text-red border px-4.5 py-1 w-fit rounded-full `}
+            >
+              Partnership
+            </p>
             <h2 className="text-4xl font-semibold">
               Why NYC Clean Team stands apart
             </h2>
             <p>
-              We build lasting relationships with our clients through
-              accountability and results.
+             We earn long-term contracts by solving the three problems commercial clients complain about most.
             </p>
           </div>
 
@@ -129,7 +139,6 @@ export default function PartnershipSection() {
             />
           ))}
         </div>
-       
       </div>
     </section>
   );

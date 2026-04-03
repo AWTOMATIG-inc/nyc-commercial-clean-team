@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function HeroBanner({title,pageName}) {
+export default function HeroBanner({title,desc,pageName}) {
   return (
      <section className="mt-10 relative w-[calc(100%-32px)] mx-auto h-80 md:h-100 lg:h-112.5 overflow-hidden rounded-lg">
       {/* Background placeholder image with overlay */}
@@ -18,9 +18,10 @@ export default function HeroBanner({title,pageName}) {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+      <div className="relative z-10 flex flex-col items-center text-center justify-center h-full text-white px-8">
         <h1 className="heading-3 mb-4">{title}</h1>
-        <nav className="flex items-center gap-2 text-sm md:text-base">
+        <p className="text-red-500 md:text-xl font-jetbrains ">{desc}</p>
+        {!desc&&<nav className="flex items-center gap-2 text-sm md:text-base">
           <Link
             href="/"
             className="text-red hover:underline font-medium transition-colors"
@@ -29,7 +30,7 @@ export default function HeroBanner({title,pageName}) {
           </Link>
           <span className="text-white/70">►</span>
           <span className="text-white/90">{pageName}</span>
-        </nav>
+        </nav>}
       </div>
     </section>
   )

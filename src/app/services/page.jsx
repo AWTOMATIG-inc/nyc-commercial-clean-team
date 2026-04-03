@@ -8,7 +8,7 @@ import SurfacesSection from "@/components/services/SurfacesSection";
 export default function page() {
   return (
     <main>
-        <HeroBanner title="Services" pageName="Services"/>
+        <HeroBanner title="Commercial Cleaning Done Right" desc="Every service we offer is built for commercial facilities — offices, retail, medical, and more"/>
         <RecurringSection/>
         <SpecialitySection/>
         <SurfacesSection/>

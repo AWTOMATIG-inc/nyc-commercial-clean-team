@@ -10,55 +10,55 @@ import { QoateIcon } from "../Icon";
 const reviews = [
   {
     id: 1,
-    name: "John Doe",
-    location: "New York",
+    name: "David Park",
+    location: "Manhattan",
     rating: 5,
     comment:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moreIt is a reader will be distracted by the readable",
+      "They've been cleaning our office building for over two years. The standard has never dropped — same team, same results, every week. That consistency is rare.",
     image: glassClean,
   },
   {
     id: 2,
-    name: "John Doe",
-    location: "New York",
+    name: "Priya Mehta",
+    location: "Brooklyn",
     rating: 5,
     comment:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moreIt is a reader will be distracted by the readable",
+      "Our retail space sees heavy foot traffic. NYC Clean Team keeps it in excellent shape without us having to follow up. They handle it.",
     image: glassClean,
   },
   {
     id: 3,
-    name: "John Doe",
-    location: "New York",
+    name: "Angela Torres",
+    location: "Queens",
     rating: 5,
     comment:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a moreIt is a reader will be distracted by the readable",
+      "Compliance matters in a medical setting. They understand that and execute accordingly. No reminders needed, no corners cut.",
     image: glassClean,
   },
 ];
 const steps = [
   {
     id: 1,
-    score: "5000+",
-    title: "location",
+    score: "500+",
+    title: "Facilities\nServiced",
     image: glassClean,
   },
   {
     id: 2,
-    score: "1000+",
-    title: "location",
+    score: "5",
+    title: "NYC\nBoroughs Covered",
     image: glassClean,
   },
   {
     id: 3,
     score: "98%",
-    title: "location",
+    title: "Client\nRetention Rate",
     image: glassClean,
   },
   {
     id: 4,
-    score: "35+",
-    title: "location",
+    score: "15+",
+    title: "Years\nof Experience",
     image: glassClean,
   },
 ];
@@ -135,7 +135,7 @@ export default function BestCustomerReviews() {
             key={item.id}
             className={` flex-col items-center justify-center text-center p-10 ${steps.length - 1 === id ? "" : " border-r border-b md:border-b-0"}`}
           >
-            <h1 className="text-4xl sm:text-4xl lg:text-5xl xl:text-7xl">
+            <h1 className="text-4xl sm:text-4xl lg:text-5xl xl:text-7xl whitespace-pre-wrap">
               {item.score}
             </h1>
             <p>{item.title}</p>

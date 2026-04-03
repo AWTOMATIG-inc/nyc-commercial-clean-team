@@ -10,7 +10,7 @@ export const surfaces = [
     view: "row",
     title: "Floors",
     heading: "Floor strip and wax",
-    desc: "Strip old finish and apply new protective wax coating",
+    desc: "Strip old finish down to the surface, clean thoroughly, and apply fresh protective wax coating. Restores appearance and extends floor life significantly.",
   },
   {
     id: 2,
@@ -18,15 +18,15 @@ export const surfaces = [
     view: "row-reverse",
     title: "Carpet",
     heading: "Carpet cleaning",
-    desc: "Deep extraction removes embedded dirt and extends carpet life",
+    desc: "Deep extraction removes embedded dirt and extends carpet life.",
   },
   {
     id: 3,
     image: windowClean,
     view: "row-reverse",
-    title: "Specialty",
+    title: "Glass",
     heading: "Window cleaning",
-    desc: "Crystal clear glass from ground to roofline.",
+    desc: "Crystal clear glass and frames for a professional appearance.",
   },
   
 ];

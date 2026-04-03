@@ -8,9 +8,9 @@ export default function ExpertiseSection() {
     <section className="container mt-16">
       <div className="">
          <CommonHeading
-            title="Expertise"
-            heading="Redefining Clean for Homes and Businesses"
-            subHeading="We handle every facility type across NYC with precision and accountability."
+            title="Who We Are"
+            heading="Commercial Cleaning Built on Accountability"
+            subHeading="We serve offices, retail spaces, medical facilities, and commercial properties across New York City."
           />
       </div>
       
@@ -62,15 +62,15 @@ export default function ExpertiseSection() {
           </div>
           <div className="sm:h-104 shadow-sm rounded-xl">
             <div className="h-47.75 rounded-xl flex flex-col items-center justify-center bg-[linear-gradient(114.32deg,#F5FCFF_4.47%,#DBF3FA_25.06%,#B7E9F7_51.47%,#92DFF3_98.36%,#7AD7F0_121.91%)]">
-              <h1 className="heading-1 font-bold">98%</h1>
+              <h1 className="heading-1 font-bold">100%</h1>
              <span
                 className="w-[80%] my-1 mx-auto bg-black rounded-full border border-transparent [border-image:linear-gradient(90deg,#FFFFFF_-4.54%,rgba(23,38,80,0.46)_46.64%,#FFFFFF_108.06%)_1]"
               ></span>
-              <p className="font-medium lg:text-lg">Client retention rate</p>
+              <p className="font-medium lg:text-lg">Insured & Background-Checked</p>
             </div>
             <div className="h-[191px] flex flex-col items-center justify-center">
-              <p className="font-medium lg:text-lg text-center">Years of Work Experience</p>
-              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-bold text-red">15</h1>
+              <p className="font-medium lg:text-lg text-center"> Boroughs Served</p>
+              <h1 className="text-6xl md:text-7xl lg:text-[96px] font-bold text-red">5</h1>
             </div>
           </div>
         </div>

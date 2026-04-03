@@ -36,7 +36,7 @@ export default function ContactForm() {
             placeholder="Enter Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all"
+            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all h-14 md:h-20"
           />
           <input
             type="email"
@@ -44,7 +44,7 @@ export default function ContactForm() {
             placeholder="Enter Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all"
+            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all h-14 md:h-20"
           />
         </div>
 
@@ -56,7 +56,7 @@ export default function ContactForm() {
             placeholder="Enter Subject"
             value={formData.subject}
             onChange={handleChange}
-            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all"
+            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all h-14 md:h-20"
           />
           <input
             type="tel"
@@ -64,7 +64,7 @@ export default function ContactForm() {
             placeholder="Enter Phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all"
+            className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all h-14 md:h-20"
           />
         </div>
 
@@ -75,7 +75,7 @@ export default function ContactForm() {
           rows={5}
           value={formData.message}
           onChange={handleChange}
-          className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all resize-none"
+          className="w-full px-5 py-3.5 bg-[#DDE1E6] rounded-lg text-sm md:text-base placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red/30 transition-all resize-none h-30 md:h-40"
         />
 
         {/* Buttons */}

@@ -10,7 +10,7 @@ export default function SupportSection() {
         center={true}
         title="Support"
         heading="Beyond cleaning alone"
-        subHeading="Complete facility management solutions that keep operations running smooth"
+        subHeading="Additional facility support services that keep your commercial property running smoothly. "
       />
       <div className="mt-21 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {supports.map((item) => (

@@ -13,7 +13,8 @@ export default function ClientVoices() {
         <CommonHeading
           title="Client Voices"
           heading="What our clients say"
-          subHeading="From Manhattan to Long Island, we're your local cleaning partner."
+          subHeading="Real feedback from facilities across New York City.
+"
         />
       </div>
       <div className="mt-16">
@@ -58,7 +59,7 @@ export default function ClientVoices() {
             <div>
               <item.icon/>
             </div>
-            <p className="mt-12 mb-6 text-base md:text-sm lg:text-lg">{item.review}</p>
+            <p className="mt-12 mb-6 text-base md:text-sm lg:text-[17.65px] text-justify">{item.review}</p>
             <div className="flex items-center gap-3  mb-8">
               <Image width={50} height={50} src={item.user.avatar} alt="user" className="size-10 rounded-full"/>
               <div>

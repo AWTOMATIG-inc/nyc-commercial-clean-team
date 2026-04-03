@@ -13,7 +13,7 @@ export default function SpecialitySection() {
         center={true}
         title="Specialty"
         heading="Specialized work when it matters"
-        subHeading="Demanding projects handled with expertise and precision"
+        subHeading="One-time and periodic specialty cleaning for demanding commercial projects across NYC."
       />
       <div className="mt-21 relative">
        

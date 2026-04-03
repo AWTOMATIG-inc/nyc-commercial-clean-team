@@ -7,24 +7,23 @@ export const recurrings = [
     id: 1,
     image: windowClean,
 
-    title: "Janitorial",
+    title: "RECURRING",
     heading: "Janitorial services",
-    desc: "Routine maintenance for lobbies, restrooms, and common areas",
+    desc: "Scheduled maintenance for lobbies, restrooms, hallways, and building-wide shared surfaces. Daily or nightly schedules available across NYC.",
   },
   {
     id: 2,
     image: officeClean,
-    title: "Core",
+    title: "RECURRING",
     heading: "Office cleaning",
-    desc: "Professional spaces kept spotless and ready for business.",
+    desc: "Workstations, conference rooms, breakrooms, and restrooms — cleaned to commercial standard before your team arrives each morning.",
   },
   {
     id: 3,
     image: dayPorter,
-
-    title: "Core",
+    title: "RECURRING",
     heading: "Day porter services",
-    desc: "On-site support throughout your business day.",
+    desc: "Dedicated on-site cleaning coverage during business hours — managing restrooms, spills, and common area upkeep in real time services. ",
   },
   
   

@@ -8,15 +8,12 @@ export default function CleaningQuote() {
         <div className="order-2 md:order-1 mt-5 md:mt-0 text-center sm:text-left">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[60px]">Request your free cleaning quote</h1>
           <p className="mt-6 mb-5">
-            Let us evaluate your facility and create a customized cleaning plan
-            tailored to your space, schedule, and industry requirements. Our
-            team will assess your needs, identify high-traffic areas, and design
-            a solution that ensures consistent cleanliness and long-term
-            efficiency.
+            Tell us about your facility — space type, square footage, and schedule. We'll assess your needs and deliver a clear, written quote within 24–48 hours.
+No obligation. 
           </p>
           <div className="flex gap-8 justify-center sm:justify-start">
-            <ButtonSolid>Quote</ButtonSolid>
-            <ButtonSolid color="white">Call</ButtonSolid>
+            <ButtonSolid>Get a Quote</ButtonSolid>
+            <ButtonSolid color="white">Call Now</ButtonSolid>
           </div>
         </div>
         <div className="order-1 md:order-2">
