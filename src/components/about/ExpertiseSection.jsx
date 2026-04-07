@@ -5,7 +5,7 @@ import ArrowButton from "../ArrowButton";
 import CommonHeading from "../CommonHeading";
 export default function ExpertiseSection() {
   return (
-    <section className="container mt-16">
+    <section className="container mt-8 sm:mt-16">
       <div className="">
         <CommonHeading
           title="Who We Are"

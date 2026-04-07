@@ -41,7 +41,7 @@ const coverageStep = [
 ];
 export default function Coverage() {
   return (
-    <section className="container mt-16">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Where We Work"
@@ -50,7 +50,9 @@ export default function Coverage() {
           center={true}
         />
       </div>
-      <div style={{height:coverageStep.length*810+"px"}} className="relative mt-20">
+      {/* this for dynamic handling height  */}
+      {/* style={{height:coverageStep.length*810+"px"}} */}
+      <div  className="h-875 sm:h-1012.5 relative mt-8 sm:mt-16">
         {Array.from({ length: coverageStep.length }).map((_, id) => (
           <div
             style={{
@@ -69,7 +71,7 @@ export default function Coverage() {
             style={{
               top: (100 / coverageStep.length) * Number(id) +1 + "%",
             }}
-            className="absolute left-6 sm:left-12  md:w-1/2 h-190 bg-white max-w-xl flex flex-col justify-between rounded-md shadow overflow-hidden md:odd:right-[53%] md:even:left-[53%] "
+            className="absolute left-6 sm:left-12  md:w-1/2 sm:h-190 bg-white max-w-xl flex flex-col justify-between rounded-md shadow overflow-hidden md:odd:right-[53%] md:even:left-[53%] "
           >
             <div className="p-8">
               <h4 className="heading-4 capitalize">{step.name}</h4>

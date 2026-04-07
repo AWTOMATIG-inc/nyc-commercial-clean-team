@@ -4,7 +4,7 @@ import CommonHeading from "../CommonHeading";
 import LinkWithArrow from "../LinkWithArrow";
 export default function Foundation() {
   return (
-    <section className="container mt-16 grid md:grid-cols-2 items-center gap-20">
+    <section className="container mt-8 sm:mt-16 grid md:grid-cols-2 items-center gap-8 sm:gap-16 lg:gap-20">
       <div>
         <CommonHeading
           title="Foundation"

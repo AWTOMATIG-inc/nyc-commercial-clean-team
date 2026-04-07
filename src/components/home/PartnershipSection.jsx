@@ -93,10 +93,10 @@ export default function PartnershipSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="container mt-20">
+    <section ref={sectionRef} className="container mt-8 sm:mt-16">
       <div className="grid md:grid-cols-2 md:gap-12">
         {/* LEFT CONTENT */}
-        <div className="flex flex-col justify-between py-14">
+        <div className="flex flex-col justify-between  md:pt-14 pb-16 md:pb-14">
           <div className="space-y-6">
             <p
               className={`font-semibold text-red border px-4.5 py-1 w-fit rounded-full `}

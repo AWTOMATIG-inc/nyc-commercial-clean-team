@@ -9,7 +9,7 @@ import "../../app/swiper-custom.css";
 import CommonHeading from "../CommonHeading";
 export default function CoverageSection() {
   return (
-    <section className="container mt-16">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Coverage"
@@ -17,7 +17,7 @@ export default function CoverageSection() {
           subHeading="Manhattan, Brooklyn, Queens, the Bronx, and Staten Island — plus Long Island and surrounding areas."
         />
       </div>
-      <div className="mt-20">
+      <div className="mt-8 sm:mt-16">
         <Swiper
           effect={"coverflow"}
           grabCursor={true}

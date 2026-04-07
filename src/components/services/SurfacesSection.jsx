@@ -4,7 +4,7 @@ import ServicesBlogCard from "../ServicesBlogCard";
 
 export default function SurfacesSection() {
   return (
-    <section className="container mt-20">
+    <section className="container mt-8 sm:mt-16">
       <CommonHeading
         center={true}
         title="Surfaces"

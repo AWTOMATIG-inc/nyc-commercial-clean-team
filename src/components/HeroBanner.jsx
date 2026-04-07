@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function HeroBanner({title,desc,pageName}) {
   return (
-     <section className="mt-10 relative w-[calc(100%-32px)] mx-auto h-80 md:h-100 lg:h-112.5 overflow-hidden rounded-lg">
+     <section className="mt-8 sm:mt-16 relative w-[calc(100%-32px)] mx-auto h-80 md:h-100 lg:h-112.5 overflow-hidden rounded-lg">
       {/* Background placeholder image with overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-slate/95 via-dark-slate/90 to-slate/85">
         <div

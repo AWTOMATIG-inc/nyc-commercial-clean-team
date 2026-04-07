@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee";
 export default function MarqueHighlightText({ marqueeText }) {
   const textArray = Array.isArray(marqueeText) ? marqueeText : [marqueeText];
   return (
-    <div className="mt-8 md:mt-12 lg:mt-16">
+    <div className="mt-8 sm:mt-16">
       <Marquee speed={50} gradient={false} autoFill={true}>
         {textArray.map((text,id) => (
           <p key={id} className="text-3xl sm:text-5xl md:text-[54px] text-center overflow-hidden py-4">

@@ -24,8 +24,8 @@ const staticstics = [
 ];
 export default function WhySection() {
   return (
-    <section className="container mt-16">
-      <div className="grid lg:grid-cols-2 gap-20">
+    <section className="container mt-8 sm:mt-16">
+      <div className="grid lg:grid-cols-2 gap-8 sm:gap-16">
         <div>
           <CommonHeading
             title="Why Choose Us"

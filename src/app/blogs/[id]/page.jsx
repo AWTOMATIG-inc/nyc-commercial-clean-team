@@ -9,7 +9,7 @@ export default async function BlogDetails({ params }) {
   return (
     <main>
       <HeroBanner title="Blog Details" pageName="Blog" />
-      <section className="container my-16">
+      <section className="container my-8 sm:my-16">
         <div>
           <div className="relative">
             <Image
@@ -23,7 +23,7 @@ export default async function BlogDetails({ params }) {
               <h6 className="heading-6">28 Aug</h6>
             </div>
           </div>
-          <div className="mt-16">
+          <div className="mt-8 sm:mt-16">
             <h1 className="heading-2">{blog?.blogDetail.title}</h1>
             <div className="mt-6 space-y-6 body-text">
               {blog.blogDetail.desc.map((desc, id) => (
@@ -31,7 +31,7 @@ export default async function BlogDetails({ params }) {
               ))}
             </div>
           </div>
-          <div className="mt-16">
+          <div className="mt-8 sm:mt-16">
             <h1 className="heading-2">02 Comments</h1>
             <div className="mt-10 space-y-6 body-text">
               {
@@ -47,7 +47,7 @@ export default async function BlogDetails({ params }) {
               }
             </div>
           </div>
-          <div className="mt-16">
+          <div className="mt-8 sm:mt-16">
             <CommentForm/>
           </div>
           

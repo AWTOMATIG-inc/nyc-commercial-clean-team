@@ -16,7 +16,7 @@ export default function BookingForm() {
           within 24 hours.
         </p>
       </div>
-      <form action="#" className="mt-12 md:mt-22">
+      <form action="#" className="mt-8 sm:mt-16">
         <div>
           <p className="border border-red-500 w-fit px-3 py-2 rounded-full font-semibold text-red-500">
             Contact Information

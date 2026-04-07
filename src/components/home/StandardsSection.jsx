@@ -8,7 +8,7 @@ export default function StandardsSection() {
   const [step, setStep] = useState(0);
   return (
     <section className="bg-[linear-gradient(114.32deg,#F5FCFF_4.47%,#DBF3FA_25.06%,#B7E9F7_51.47%,#92DFF3_98.36%,#7AD7F0_121.91%)]">
-      <div className="container py-10 sm:py-12 lg:py-16">
+      <div className="container mt-8 sm:mt-16 py-8 sm:py-12 lg:py-16">
         <div>
           <CommonHeading
             title="Standards"
@@ -61,7 +61,7 @@ export default function StandardsSection() {
                     <button
                       onMouseOver={() => setStep(item.id)}
                       onMouseOut={() => setStep(0)}
-                      className="text-sm md:text-base lg:hidden bg-white h-8 md:h-13 px-5 md:px-8 rounded-full hover:bg-slate hover:text-white"
+                      className="text-sm md:text-base lg:hidden bg-white h-10 md:h-13 px-5 md:px-8 rounded-full hover:bg-slate hover:text-white"
                     >
                       {item.stepName}
                     </button>

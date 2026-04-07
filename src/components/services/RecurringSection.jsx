@@ -8,14 +8,14 @@ import CommonHeading from "../CommonHeading";
 import ServicesBlogCard from "../ServicesBlogCard";
 export default function RecurringSection() {
   return (
-    <section className="container mt-20">
+    <section className="container mt-8 sm:mt-16">
       <CommonHeading
         center={true}
         title="Recurring"
         heading="Daily cleaning that works"
         subHeading="Scheduled, consistent janitorial and office cleaning — so your facility is always ready."
       />
-      <div className="mt-16">
+      <div className="mt-8 sm:mt-16">
         <Swiper
         slidesPerView={3}
         spaceBetween={50}

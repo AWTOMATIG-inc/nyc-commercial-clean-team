@@ -8,7 +8,7 @@ import CommonHeading from "../CommonHeading";
 import LinkWithArrow from "../LinkWithArrow";
 export default function ClientVoices() {
   return (
-    <section className="container mt-16">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Client Voices"
@@ -17,7 +17,7 @@ export default function ClientVoices() {
 "
         />
       </div>
-      <div className="mt-16">
+      <div className="mt-8 sm:mt-16">
         <Swiper
                spaceBetween={50}
               slidesPerView={3}

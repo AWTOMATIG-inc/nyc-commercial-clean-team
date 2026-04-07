@@ -66,7 +66,7 @@ export default function BestCustomerReviews() {
   const [active, setActive] = useState(0);
   const swiperRef = useRef(null);
   return (
-    <section className="container my-16 bg-[linear-gradient(149.48deg,#212222_-21.76%,#92DFF3_29.38%,#7AD7F0_100.94%)] py-14 md:py-20 sm:px-14 md:px-20 rounded-xl">
+    <section className="container my-8 sm:my-16 py-8 sm:py-16 sm:px-14 md:px-20 bg-[linear-gradient(149.48deg,#212222_-21.76%,#92DFF3_29.38%,#7AD7F0_100.94%)]  rounded-xl">
       <CommonHeading
         center={true}
         title="Client Reviews"
@@ -74,7 +74,7 @@ export default function BestCustomerReviews() {
         "
         subHeading="Installations and repairs completed successfully."
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 border rounded-xl p-5 gap-10 my-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 border rounded-xl p-5 gap-8 sm:gap-10 my-8 sm:my-16">
         <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
           {reviews.map((review, i) => (
             <div  onClick={()=> swiperRef.current.slideTo(i)} key={review.id} className=" rounded-xl relative">

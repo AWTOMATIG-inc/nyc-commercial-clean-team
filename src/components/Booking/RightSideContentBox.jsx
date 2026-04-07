@@ -101,7 +101,7 @@ const contactList = [
 export default function RightSideContentBox() {
   return (
     <div>
-      <div className="shadow shadow-black/50 rounded-xl px-5 py-10 sm:px-8 sm:py-14">
+      <div className="shadow shadow-black/50 rounded-xl px-5 py-8 sm:px-8 sm:py-14">
         <h1 className="font-bold text-xl md:text-2xl">What's Included</h1>
         <div className="pt-2">
           {includeSteps.map((step) => (
@@ -117,7 +117,7 @@ export default function RightSideContentBox() {
           ))}
         </div>
       </div>
-      <div className="shadow shadow-black/50 rounded-xl px-5 py-10 sm:px-8 sm:py-14 mt-14">
+      <div className="shadow shadow-black/50 rounded-xl px-5 py-8 sm:px-8 sm:py-14 mt-8 sm:mt-16">
         <h1 className="font-bold text-xl md:text-2xl">Services We Offer</h1>
         <div className="pt-2 flex flex-wrap gap-4 mt-6">
           {servicesOptions.map((step) => (
@@ -131,7 +131,7 @@ export default function RightSideContentBox() {
           ))}
         </div>
       </div>
-      <div className="shadow shadow-black/50 rounded-xl px-5 py-10 sm:px-8 sm:py-14 mt-14">
+      <div className="shadow shadow-black/50 rounded-xl px-5 py-8 sm:px-8 sm:py-14 mt-8 sm:mt-16">
         <h1 className="font-bold text-xl md:text-2xl">Prefer to Talk?</h1>
         <div className="pt-2 mt-6 space-y-4">
           {contactList.map((contact) => (

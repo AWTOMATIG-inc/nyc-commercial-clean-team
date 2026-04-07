@@ -5,7 +5,7 @@ import LinkWithArrow from "../LinkWithArrow";
 
 export default function IndusriesSection() {
   return (
-    <section className="container my-16">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Industries"

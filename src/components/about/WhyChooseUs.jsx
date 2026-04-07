@@ -50,7 +50,7 @@ const ourProcces = [
 ];
 export default function WhyChooseUs() {
   return (
-    <section className="container mt-16">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Why Choose Us ?"
@@ -59,7 +59,7 @@ export default function WhyChooseUs() {
         />
       </div>
 
-      <div className=" mt-20">
+      <div className="mt-8 sm:mt-16">
         <div className="grid lg:grid-cols-[1fr_2fr] xl:grid-cols-[1fr_3fr] gap-4">
           <div>
             <div className="relative lg:max-w-90 overflow-hidden">

@@ -8,7 +8,7 @@ import CommonHeading from "../CommonHeading";
 export default function FAQs() {
   const [openFaq, setOpenFaq] = useState(1)
   return (
-    <section className="container mt-8 md:mt-12 lg:mt-16 mb-16">
+    <section className="container my-8 sm:my-16">
       <div className="grid md:grid-cols-[1fr_1.2fr] lg:grid-cols-[1fr_1.3fr] gap-10">
         <div className="flex flex-col lg:justify-between">
         <div>

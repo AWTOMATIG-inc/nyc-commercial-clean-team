@@ -7,7 +7,7 @@ import { GreenSignIcon } from "../Icon";
 export default function ServicesSection() {
   return (
     <section className="bg-[linear-gradient(114.32deg,#F5FCFF_4.47%,#DBF3FA_25.06%,#B7E9F7_51.47%,#92DFF3_98.36%,#7AD7F0_121.91%)] ">
-      <div className="container mt-16 py-16">
+      <div className="container mt-8 sm:mt-16 py-8 sm:py-16">
         <div className=" grid lg:grid-cols-2 gap-6 xl:gap-32">
           <div className="lg:sticky top-24 h-fit">
             <CommonHeading

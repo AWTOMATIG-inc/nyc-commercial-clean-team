@@ -50,7 +50,7 @@ const serviceStep = [
 ];
 export default function Available() {
   return (
-    <section className="container mt-20">
+    <section className="container mt-8 sm:mt-16">
       <div>
         <CommonHeading
           title="Available"
@@ -59,7 +59,7 @@ export default function Available() {
           center={true}
         />
       </div>
-      <div className="mt-20 grid lg:grid-cols-3 gap-8">
+      <div className="mt-8 sm:mt-16 grid lg:grid-cols-3 gap-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-1 gap-6">
           {serviceStep.slice(0,2).map((service) => (
           <div
@@ -152,7 +152,7 @@ export default function Available() {
         </div>
         
       </div>
-      <div className="my-16">
+      <div className="my-8 sm:my-16">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-[32px] sm:text-5xl lg:text-[56px] leading-[120%]">
             Ready to upgrade <br /> Your facility deserves better

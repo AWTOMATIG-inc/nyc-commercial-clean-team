@@ -1,9 +1,9 @@
 import ButtonSolid from "../ButtonSolid";
 export default function HeroSection() {
   return (
-    <section className="container mt-10">
+    <section className="container mt-8 sm:mt-16">
       
-      <div className="mt-6 relative overflow-hidden ">
+      <div className="relative overflow-hidden ">
         <video
         autoPlay
         muted

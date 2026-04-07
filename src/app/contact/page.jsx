@@ -9,13 +9,13 @@ export default function Contact() {
       <HeroBanner title="Get a Fast, Free Cleaning Quote"  desc="Tell us about your facility and we'll be in touch within 24 hours.
 " />
       {/* Form + Info Section */}
-      <section className="container py-16 md:py-20 lg:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-end">
+      <section className="container py-8 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-end">
           <ContactForm />
           <ContactInfo />
         </div>
       </section>
-      <section className="container pb-16 md:pb-20 lg:pb-24">
+      <section className="container pb-8 sm:pb-16">
         <ContactMap/>
       </section>
       
