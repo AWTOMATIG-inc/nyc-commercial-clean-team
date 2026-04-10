@@ -29,13 +29,13 @@ export default function IndusriesSection() {
               </LinkWithArrow>
             </div>
 
-            <div className="mt-4.5">
+            <div className="mt-4.5 overflow-hidden rounded-[20px]">
               <Image
                 src={blog.image}
                 alt={blog.title}
                 width={581}
                 height={253}
-                className={`rounded-3xl object-cover w-full h-full max-h-100.25`}
+                className={`object-cover w-full h-full max-h-100.25 hover:scale-110 transition-transform duration-300`}
               />
             </div>
           </div>
@@ -56,13 +56,13 @@ export default function IndusriesSection() {
                 </LinkWithArrow>
               </div>
 
-              <div className="mt-4.5">
+              <div className="mt-4.5 overflow-hidden rounded-[20px]">
                 <Image
                   src={industy.image}
                   alt={industy.title}
                   width={304}
                   height={171}
-                  className={`rounded-3xl object-cover w-full h-42.75`}
+                  className={`rounded-3xl object-cover w-full h-42.75 hover:scale-110 transition-transform duration-300`}
                 />
               </div>
             </div>

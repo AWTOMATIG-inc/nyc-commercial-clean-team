@@ -17,6 +17,9 @@ const inter = Inter({
 export const metadata = {
   title: "NYC-SERVICES",
   description: "Commercial cleaning services in NYC",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {

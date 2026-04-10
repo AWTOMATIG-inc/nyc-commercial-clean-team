@@ -1,4 +1,4 @@
-import glassClean from "@/assets/home/services/glass-clean.webp";
+import glassClean from "@/assets/home/services/clean-man.jpg";
 import { services } from "@/constant/home/services";
 import Image from "next/image";
 import Link from "next/link";

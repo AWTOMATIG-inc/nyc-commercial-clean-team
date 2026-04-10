@@ -104,7 +104,7 @@ export default function PartnershipSection() {
               Partnership
             </p>
             <h2 className="text-4xl font-semibold">
-              Why NYC Clean Team stands apart
+              Why New York Commercial Clean Team stands apart
             </h2>
             <p>
              We earn long-term contracts by solving the three problems commercial clients complain about most.

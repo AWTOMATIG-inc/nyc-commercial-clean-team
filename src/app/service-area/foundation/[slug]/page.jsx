@@ -1,3 +1,4 @@
+import CleaningQuote from "@/components/services/CleaningQuote";
 import { foundations } from "@/constant/service-area";
 import Image from "next/image";
 export default async function SurfaceDetails({params}) {
@@ -21,6 +22,7 @@ export default async function SurfaceDetails({params}) {
           </div>
         </div>
       </section>
+      <CleaningQuote/>
     </main>
   );
 }

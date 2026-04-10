@@ -10,7 +10,7 @@ export const companyLinks = [
   { id: 2, name: "Service areas", href: "services" },
   { id: 3, name: "Blog", href: "/blogs" },
   { id: 4, name: "Contact", href: "/contact" },
-  { id: 5, name: "Get a quote", href: "#" },
+  { id: 5, name: "Quote", href: "#" },
 ];
 export const followUsLinks = [
   { id: 1, icon: "ic:baseline-facebook", name: "facebook", href: "#" },

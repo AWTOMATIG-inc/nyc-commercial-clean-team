@@ -1,3 +1,4 @@
+import CleaningQuote from "@/components/services/CleaningQuote";
 import { industries } from "@/constant/home/industries";
 import Image from "next/image";
 export default async function IndustriesDetails({params}) {
@@ -5,7 +6,7 @@ export default async function IndustriesDetails({params}) {
   const item=industries.find(service=>service.slug===slug)
   return (
     <main>
-      <section className="container min-h-screen mt-8 sm:mt-16">
+      <section className="container  mt-8 sm:mt-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] gap-8 sm:gap-14">
           <div>
             <p
@@ -21,6 +22,7 @@ export default async function IndustriesDetails({params}) {
           </div>
         </div>
       </section>
+      <CleaningQuote/>
     </main>
   );
 }

@@ -60,12 +60,12 @@ export default function ExpertiseSection() {
               </div>
             </div>
             <div className="h-[191px] flex flex-col items-center justify-center">
-              <p className="font-medium lg:text-lg text-center">
-                Years of Work Experience
+              <p className="font-medium lg:text-lg text-center mb-2">
+                Happy Customers
               </p>
              
                
-                <Counter value={15} sign="" className="text-6xl md:text-7xl lg:text-[96px] font-bold text-red"/>
+                <Counter value={200} sign="+" className="heading-1 font-bold text-red"/>
              
             </div>
           </div>
@@ -81,11 +81,11 @@ export default function ExpertiseSection() {
               </div>
             </div>
             <div className="h-[191px] flex flex-col items-center justify-center">
-              <p className="font-medium lg:text-lg text-center">
+              <p className="font-medium lg:text-lg text-center mb-2">
                 {" "}
                 Boroughs Served
               </p>
-              <Counter value={5} sign="" className="text-6xl md:text-7xl lg:text-[96px] font-bold text-red"/>
+              <Counter value={5} sign="" className="heading-1 font-bold text-red"/>
              
             </div>
           </div>

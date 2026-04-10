@@ -61,9 +61,9 @@ const steps = [
   },
   {
     id: 4,
-    score: 15,
+    score: 200,
     sign:"+",
-    title: "Years\nof Experience",
+    title: "Happy\nCustomers",
     image: glassClean,
   },
 ];
@@ -141,7 +141,6 @@ export default function BestCustomerReviews() {
             className={` flex-col items-center justify-center text-center p-10 ${steps.length - 1 === id ? "" : " border-r border-b md:border-b-0"}`}
           >
           <Counter value={item.score} sign={item.sign} className="text-4xl sm:text-4xl lg:text-5xl xl:text-7xl whitespace-pre-wrap"/>
-          
             <p>{item.title}</p>
           </div>
         ))}
