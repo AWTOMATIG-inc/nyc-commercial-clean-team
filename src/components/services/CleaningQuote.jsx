@@ -11,9 +11,9 @@ export default function CleaningQuote() {
             Tell us about your facility — space type, square footage, and schedule. We'll assess your needs and deliver a clear, written quote within 24–48 hours.
 No obligation. 
           </p>
-          <div className="flex gap-8 justify-center sm:justify-start">
-            <ButtonSolid>Get a Free Quote</ButtonSolid>
-            <ButtonSolid color="white">Call Now</ButtonSolid>
+          <div className="flex flex-col-reverse sm:flex-row items-center gap-4 sm:gap-8 justify-center sm:justify-start">
+            <ButtonSolid className="text-nowrap">Get a Free Quote</ButtonSolid>
+            <ButtonSolid className="text-nowrap" color="white">Call Now</ButtonSolid>
           </div>
         </div>
         <div className="order-1 md:order-2">

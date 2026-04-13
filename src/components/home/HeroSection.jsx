@@ -10,7 +10,7 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="rounded-[20px] w-full  object-cover  "
+          className="rounded-[20px] w-full  object-cover h-100  xs:h-85 sm:h-full"
         >
           <source src="/videos/city-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
