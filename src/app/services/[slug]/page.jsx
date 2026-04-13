@@ -17,7 +17,7 @@ export default async function ServicesDetails({params}) {
             Services
           </p>
           <h4 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">{detail.heading}</h4>
-          <p className="text-base sm:text-lg mt-6">{detail.desc}</p>
+          <p className="text-base sm:text-lg mt-6 text-justify">{detail.desc}</p>
           <div className="mt-8">
             <h3 className="font-bold text-lg">{detail.serviceIncludes.heading}</h3>
             <p className="mt-4 font-medium">{detail.serviceIncludes.listHeading}</p>
@@ -32,18 +32,18 @@ export default async function ServicesDetails({params}) {
             <Image src={service.image} alt="detail-image" width={576} height={576} className="h-144 rounded-[20px] object-cover"/>
           </div>
         </div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
-          <div className="mt-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-12">
+          <div >
             <h3 className="font-bold text-lg">{detail.WhoThisService.heading}</h3>
-            <p className="mt-4 ">{detail.WhoThisService.desc}</p>           
+            <p className="mt-4 text-justify">{detail.WhoThisService.desc}</p>           
           </div>
-          <div className="mt-4">
+          <div >
             <h3 className="font-bold text-lg">{detail.whyThisService.heading}</h3>
-            <p className="mt-4 ">{detail.whyThisService.desc}</p>           
+            <p className="mt-4 text-justify">{detail.whyThisService.desc}</p>           
           </div>
-          <div className="mt-4">
+          <div>
             <h3 className="font-bold text-lg">{detail.whyChoose.heading}</h3>
-            <p className="mt-4 ">{detail.whyChoose.desc}</p>           
+            <p className="mt-4 text-justify">{detail.whyChoose.desc}</p>           
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ export default async function IndustriesDetails({params}) {
                  <h4 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">
                    {detail.heading}
                  </h4>
-                 <p className="text-base sm:text-lg mt-6">{detail.desc}</p>
+                 <p className="text-base sm:text-lg mt-6 text-justify">{detail.desc}</p>
                  <div className="mt-8">
                    <h3 className="font-bold text-lg">
                      {detail.challenges.heading}
@@ -41,27 +41,27 @@ export default async function IndustriesDetails({params}) {
                  />
                </div>
              </div>
-             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
-              <div className="mt-8">
+             <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-12">
+              <div>
                    <h3 className="font-bold text-lg">
                      {detail.environments.heading}
                    </h3>
                    
-                   <ul className="mt-2 list-disc ml-6">
+                   <ul className="mt-2 list-disc ml-6 text-justify">
                      {detail.environments.list.map((item, id) => (
                        <li key={id}>{item}</li>
                      ))}
                    </ul>
                  </div>
-               <div className="mt-4">
+               <div>
                  <h3 className="font-bold text-lg">
                    {detail.whyThisMatters.heading}
                  </h3>
-                 <p className="mt-4 ">{detail.whyThisMatters.desc}</p>
+                 <p className="mt-4 text-justify">{detail.whyThisMatters.desc}</p>
                </div>
-               <div className="mt-4">
+               <div>
                  <h3 className="font-bold text-lg">{detail.whyChoose.heading}</h3>
-                 <p className="mt-4 ">{detail.whyChoose.desc}</p>
+                 <p className="mt-4 text-justify">{detail.whyChoose.desc}</p>
                </div>
              </div>
            </section>

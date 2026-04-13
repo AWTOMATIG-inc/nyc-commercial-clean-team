@@ -4,7 +4,7 @@ import ButtonSolid from "../ButtonSolid";
 export default function CleaningQuote() {
   return (
     <section className="container my-8 sm:my-16">
-      <div className="border rounded-xl py-5 md:py-12 px-5 grid md:grid-cols-2  md:gap-10 xl:gap-22">
+      <div className="border rounded-xl p-8 grid md:grid-cols-2  md:gap-2 lg:gap-8 xl:gap-22">
         <div className="order-2 md:order-1 mt-5 md:mt-0 text-center sm:text-left">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[60px]">Request your free cleaning quote</h1>
           <p className="mt-6 mb-5">
@@ -17,7 +17,7 @@ No obligation.
           </div>
         </div>
         <div className="order-1 md:order-2">
-          <Image width={546} height={364} src={cleaningQuote} alt="cleaning-quote" className="rounded-2xl " />
+          <Image width={546} height={364} src={cleaningQuote} alt="cleaning-quote" className="rounded-2xl w-full" />
         </div>
       </div>
     </section>

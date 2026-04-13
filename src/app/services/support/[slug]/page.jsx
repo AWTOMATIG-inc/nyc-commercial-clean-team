@@ -19,7 +19,7 @@ export default async function SupportDetails({ params }) {
             <h4 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">
               {detail.heading}
             </h4>
-            <p className="text-base sm:text-lg mt-6">{detail.desc}</p>
+            <p className="text-base sm:text-lg mt-6 text-justify">{detail.desc}</p>
             <div className="mt-8">
               <h3 className="font-bold text-lg">
                 {detail.serviceIncludes.heading}
@@ -32,7 +32,7 @@ export default async function SupportDetails({ params }) {
                   <li key={id}>{item}</li>
                 ))}
               </ul>
-              <p className="mt-4">{detail.serviceIncludes.desc}</p>
+              <p className="mt-4 text-justify">{detail.serviceIncludes.desc}</p>
             </div>
           </div>
           <div className="md:mt-17">
@@ -45,22 +45,22 @@ export default async function SupportDetails({ params }) {
             />
           </div>
         </div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
-          <div className="mt-4">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 mt-12">
+          <div >
             <h3 className="font-bold text-lg">
               {detail.WhoThisService.heading}
             </h3>
-            <p className="mt-4 ">{detail.WhoThisService.desc}</p>
+            <p className="mt-4 text-justify">{detail.WhoThisService.desc}</p>
           </div>
-          <div className="mt-4">
+          <div >
             <h3 className="font-bold text-lg">
               {detail.whyThisService.heading}
             </h3>
-            <p className="mt-4 ">{detail.whyThisService.desc}</p>
+            <p className="mt-4 text-justify">{detail.whyThisService.desc}</p>
           </div>
-          <div className="mt-4">
+          <div >
             <h3 className="font-bold text-lg">{detail.whyChoose.heading}</h3>
-            <p className="mt-4 ">{detail.whyChoose.desc}</p>
+            <p className="mt-4 text-justify">{detail.whyChoose.desc}</p>
           </div>
         </div>
       </section>
