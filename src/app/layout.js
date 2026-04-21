@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import ToastProvider from "@/components/ToastProvider";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "swiper/css";
 import "./globals.css";
@@ -14,6 +15,7 @@ const inter = Inter({
   variant: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
+
 export const metadata = {
   title: "NYC-SERVICES",
   description: "Commercial cleaning services in NYC",
@@ -28,9 +30,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${jetBrainsMono.variable} ${inter.variable} antialiased`}
       >
-       <Header/>
-        {children}
-        <Footer/>
+        <ToastProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );

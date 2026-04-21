@@ -1,10 +1,49 @@
+"use client"
 import logo from "@/assets/logos/nyc-logo.png";
 import { companyLinks, followUsLinks, servicesLinks } from "@/constant/footer";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+   const path = usePathname();
+  const handleSubmit = async () => {
+    if (!email) {
+      return toast.error("Please add a valid gmail");
+    }
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = regex.test(email);
+    if (!isValid) {
+      return toast.error("Please add a valid gmail");
+    }
+    try {
+      const res = await fetch("/api/subscriber", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 409) {
+        setEmail("");
+        return toast.error("You have already Subscribed!");
+      }
+      const data = await res.json();
+      if (data) {
+        setEmail("");
+        return toast.success("Subscribe successfuly!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (path.includes("thankyou")) {
+    return null;
+  }
   return (
     <footer className="bg-slate md:rounded-t-3xl text-white py-8 md:py-12 lg:py-13.25">
       <div className="container grid lg:grid-cols-[1fr_1.4fr] xl:grid-cols-[1fr_1.2fr] lg:gap-x-14  xl:gap-x-28">
@@ -25,10 +64,11 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row gap-5 items-center w-full sm:w-[85%] md:w-[70%] lg:w-full">
               <input
                 type="email"
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
                 className=" border border-gray-300 text-white placeholder:text-white py-2 w-full rounded-full pl-6 focus:outline-none max-h-9.25"
               />
-              <button className="w-full sm:w-fit flex items-center justify-center shadow shadow-[#F4F5F7] h-10 px-6 rounded-full hover:shadow-lg transistion-transform duration-300 max-h-9.25">
+              <button onClick={handleSubmit} className="w-full sm:w-fit flex items-center justify-center shadow shadow-[#F4F5F7] h-10 px-6 rounded-full hover:shadow-lg transistion-transform duration-300 max-h-9.25">
                 Subscribe
               </button>
             </div>
@@ -97,6 +137,7 @@ export default function Footer() {
               {followUsLinks.map((link) => (
                 <li key={link.id}>
                   <a
+                  target="_blank"
                     className="flex items-center gap-3 capitalize text-light hover:underline hover:text-blue-500"
                     href={link.href}
                   >
@@ -116,7 +157,9 @@ export default function Footer() {
         <hr className=" text-gray-300 mt-2 mb-4" />
         <div className="flex flex-col-reverse lg:flex-row gap-y-6 justify-between md:items-center ">
           <p className="text-light text-sm sm:text-base">
-            © 2025 NYC Clean Team. All rights reserved.
+            © 2026 Developed by <a href="https://awtomatig.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">
+              AWTOMATIG
+            </a>. All rights reserved.
           </p>
           <div className="flex flex-col md:flex-row gap-4 lg:hidden">
             <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-57.5">

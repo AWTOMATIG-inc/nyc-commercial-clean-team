@@ -75,7 +75,7 @@ export default function Coverage() {
             style={{
               top: (100 / coverageStep.length) * Number(id) +1 + "%",
             }}
-            className="absolute left-6 sm:left-12  md:w-1/2 sm:h-232 bg-white max-w-xl flex flex-col justify-between rounded-md shadow overflow-hidden md:odd:right-[53%] md:even:left-[53%] "
+            className="absolute left-6 sm:left-12  md:w-1/2 sm:h-232 bg-white max-w-xl flex flex-col justify-between rounded-[20px] shadow overflow-hidden md:odd:right-[53%] md:even:left-[53%] "
           >
             <div className="p-8">
               <h4 className="heading-4 capitalize">{step.name}</h4>

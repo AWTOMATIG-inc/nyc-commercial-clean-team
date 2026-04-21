@@ -9,14 +9,29 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
     "gsap": "^3.14.2",
+    "jose": "^6.2.2",
+    "jsonwebtoken": "^9.0.3",
     "maplibre-gl": "^5.19.0",
+    "mime-types": "^3.0.2",
+    "mongoose": "^9.4.1",
     "next": "16.1.6",
+    "nodemailer": "^8.0.5",
+    "quill-image-resize-module-react": "^3.0.0",
     "react": "19.2.3",
     "react-countup": "^6.5.3",
     "react-dom": "19.2.3",
     "react-fast-marquee": "^1.6.5",
-    "swiper": "^12.1.2"
+    "react-hook-form": "^7.72.1",
+    "react-hot-toast": "^2.6.0",
+    "react-quill-new": "^3.8.3",
+    "react-super-responsive-table": "^6.0.2",
+    "swiper": "^12.1.2",
+    "uuid": "^13.0.0",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@iconify/react": "^6.0.2",

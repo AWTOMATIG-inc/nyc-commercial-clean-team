@@ -3,8 +3,8 @@ export const contactInfoCards = [
     id: 1,
     icon: "fa-solid:phone-alt",
     label: "Have any question?",
-    value: "(631) 381-7252",
-    href: "tel:+920209850",
+    value: "+1 (631) 381-7252",
+    href: "tel:+1 (631) 381-7252",
     isLink: true,
   },
   {

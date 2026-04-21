@@ -1,0 +1,12 @@
+.ql-container.ql-snow {
+  min-height: 400px;
+}
+
+.ql-toolbar {
+  border: 1px solid #ccc; /* For debugging */
+  padding: 10px; /* For visibility */
+  background: #f5f5f5; /* For visibility */
+}
+.ql-tooltip.ql-editing {
+  left: 0px !important;
+}

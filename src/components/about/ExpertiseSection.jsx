@@ -1,6 +1,7 @@
 import commercialCleaning from "@/assets/about/commercial-cleaning.webp";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Link from "next/link";
 import ArrowButton from "../ArrowButton";
 import CommonHeading from "../CommonHeading";
 import Counter from "../Counter";
@@ -26,11 +27,14 @@ export default function ExpertiseSection() {
               className="rounded-t-xl object-cover rounded-br-xl w-full max-h-[415px]"
             />
             <div className="absolute bottom-0 left-0 bg-white px-4 pt-6 flex flex-col-reverse sm:flex-row items-center gap-4 mt-6 rounded-tr-4xl">
-              <ArrowButton>Discover More</ArrowButton>
+              <Link href="/services">
+               <ArrowButton>Discover More</ArrowButton>
+              </Link>
+              
               <div className="flex items-center gap-4">
                 <h5 className="text-4xl">4.8</h5>
                 <div>
-                  <div className="flex text-red">
+                  <div className="flex text-red relative -left-0.75">
                     {Array.from({ length: 5 }).map((_, index) => (
                       <Icon
                         key={index}
@@ -42,7 +46,7 @@ export default function ExpertiseSection() {
                     ))}
                   </div>
                   <span className="text-xs sm:text-sm md:text-base">
-                    base on user reviews
+                    based on user reviews
                   </span>
                 </div>
               </div>

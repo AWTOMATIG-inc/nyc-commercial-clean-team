@@ -8,20 +8,22 @@ import ServicesSection from "@/components/home/ServicesSection";
 import StandardsSection from "@/components/home/StandardsSection";
 import WhySection from "@/components/home/WhySection";
 import MarqueHighlightText from "@/components/MarqueHighlightText";
+import { getFeedback } from "@/utility/getFeedback";
 
-export default function Home() {
+export default async function Home() {
+  const feedbacks = await getFeedback();
   return (
     <main>
-      <HeroSection/>
-      <WhySection/>
-      <ServicesSection/>
-      <IndusriesSection/>
-      <StandardsSection/>
-      <PartnershipSection/>
-      <CoverageSection/>
-      <ClientVoices/>
-      <MarqueHighlightText marqueeText="Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference. Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference."/>
-      <FAQs/>
+      <HeroSection />
+      <WhySection />
+      <ServicesSection />
+      <IndusriesSection />
+      <StandardsSection />
+      <PartnershipSection />
+      <CoverageSection />
+      <ClientVoices feedbacks={feedbacks} />
+      <MarqueHighlightText marqueeText="Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference. Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference." />
+      <FAQs />
     </main>
   );
 }

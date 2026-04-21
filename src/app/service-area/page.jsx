@@ -6,7 +6,7 @@ import Foundation from "@/components/service-area/Foundation";
 export default function ServieArea() {
   return (
     <main>
-       <HeroBanner title="Locations" pageName="Locations"/>
+       <HeroBanner title="Commercial Cleaning Across New York City" pageName="Locations" desc="Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and Long Island — local teams, consistent standards."/>
         <Foundation/>
         <Coverage/>
         <Available/>

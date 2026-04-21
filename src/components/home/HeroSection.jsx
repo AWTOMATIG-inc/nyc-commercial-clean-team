@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import ButtonSolid from "../ButtonSolid";
 export default function HeroSection() {
   return (
@@ -30,8 +31,14 @@ export default function HeroSection() {
               focus on what matters.
             </p>
             <div className="flex flex-col-reverse xs:flex-row gap-4  items-center xs:gap-5 sm:gap-8">
-              <ButtonSolid>Get a Free Quote</ButtonSolid>
-              <ButtonSolid color="white">Call Now</ButtonSolid>
+              <Link href="/contact">
+                <ButtonSolid>Get a Free Quote</ButtonSolid>
+              </Link>
+             
+              <a href="tel:+1 (631) 381-7252">
+                <ButtonSolid color="white">Call Now</ButtonSolid>
+              </a>
+              
             </div>
           </div>
         </div>

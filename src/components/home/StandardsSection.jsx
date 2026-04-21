@@ -1,5 +1,6 @@
 "use client";
 import { ourStandards } from "@/constant/home/ourStandarts";
+import Link from "next/link";
 import { useState } from "react";
 import ArrowButton from "../ArrowButton";
 import CommonHeading from "../CommonHeading";
@@ -76,7 +77,8 @@ export default function StandardsSection() {
               <h6 className="heading-6 text-center w-full flex-1">
                Ready for a Cleaner Facility?
               </h6>
-              <ArrowButton>Get a Free Quote</ArrowButton>
+              <Link href="/contact" ><ArrowButton>Get a Free Quote</ArrowButton></Link>
+              
             </div>
           </div>
         </div>

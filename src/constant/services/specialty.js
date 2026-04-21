@@ -22,6 +22,6 @@ export const speciality = [
     slug: "move-out-event-cleaning",
     title: "SPECIALTY",
     heading: "Move-Out &\nEvent Cleaning",
-    desc: `Pre- and post-event cleaning for commercial spaces, and move-out deep cleans for offices and retail units between tenants. "this is for demo"`,
+    desc: `Pre- and post-event cleaning for commercial spaces, and move-out deep cleans for offices and retail units between tenants. Sanitization and disinfection services available.`,
   },
 ];

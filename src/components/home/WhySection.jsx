@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ArrowButton from "../ArrowButton";
 import CommonHeading from "../CommonHeading";
 import Counter from "../Counter";
@@ -40,7 +41,12 @@ export default function WhySection() {
           />
 
           <div className="mt-8 mx-auto md:mx-0 w-fit">
-            <ArrowButton>Learn How We Work</ArrowButton>
+            <Link
+              href="/about"
+              className="text-sm md:text-base lg:text-lg font-medium"
+            >
+              <ArrowButton>Learn How We Work</ArrowButton>
+            </Link>
           </div>
         </div>
         <div className="grid grid-cols-2 gap-6">

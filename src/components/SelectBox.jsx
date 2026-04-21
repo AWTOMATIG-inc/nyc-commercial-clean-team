@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-export default function SelectBox({ label,required,options,placeholder, error, ...rest }) {
+export default function SelectBox({ label,required,onChange,value,options,placeholder, error, ...rest }) {
   const dropdownRef = useRef(null);
     const wrapperRef = useRef(null);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(value||"");
 
    useEffect(() => {
     function handleClickOutside(e) {
@@ -51,6 +51,7 @@ export default function SelectBox({ label,required,options,placeholder, error, .
               onClick={() => {
                 dropdownRef.current.classList.add("hidden");
                 setSelected(option);
+                onChange(option)
               }}
               key={index}
               className="px-4 py-2 hover:bg-red-300 cursor-pointer"
@@ -60,6 +61,7 @@ export default function SelectBox({ label,required,options,placeholder, error, .
           ))}
         </ul>
       </div>
+      {error &&<p className="text-xs pl-1 mt-0.5 text-red-500">{error}</p> }
     </div>
   );
  

@@ -1,12 +1,12 @@
 "use client";
-import { clientVoices } from "@/constant/home/client_voices";
+import { timeAgo } from "@/utility/timeAgo";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CommonHeading from "../CommonHeading";
-export default function ClientVoices() {
+export default function ClientVoices({feedbacks}) {
   return (
     <section className="container mt-8 sm:mt-16">
       <div>
@@ -17,7 +17,7 @@ export default function ClientVoices() {
 "
         />
       </div>
-      <div className="mt-8 sm:mt-16">
+      {feedbacks.length<=0?<p>There is no client say</p>:<div className="mt-8 sm:mt-16">
         <Swiper
           spaceBetween={50}
           slidesPerView={3}
@@ -51,7 +51,7 @@ export default function ClientVoices() {
           // onSwiper={(swiper) => console.log(swiper)}
           modules={[Autoplay]}
         >
-          {clientVoices.map((item) => (
+          {feedbacks.map((item) => (
             <SwiperSlide style={{ height: "100%" }} key={item.id}>
               <div className="flex  flex-col justify-between  border border-gray-300 p-8 rounded-[20px]  h-92.5 ">
                 <div>
@@ -63,7 +63,7 @@ export default function ClientVoices() {
                     />
                   </div>
                   <p className="mt-2.5 text-base md:text-sm lg:text-[17.65px] text-justify">
-                    {item.review}
+                    {item?.feedback}
                   </p>
                 </div>
                 <div className="flex items-center justify-between mt-5">
@@ -71,16 +71,16 @@ export default function ClientVoices() {
                     <Image
                       width={50}
                       height={50}
-                      src={item.user.avatar}
+                      src={`/api/uploads/feedback/${item?.image}`}
                       alt="user"
                       className="size-10 rounded-full"
                     />
                     <div>
                       <h5 className="text-sm sm:text-sm lg:text-[15.69px] font-bold font-inter">
-                        {item.user.name}
+                        {item?.clientName}
                       </h5>
                       <p className="text-sm sm:text-sm lg:text-[15px] font-light">
-                        {item.date}
+                        {timeAgo(item?.feedbackDate)}
                       </p>
                     </div>
                   </div>
@@ -99,7 +99,8 @@ export default function ClientVoices() {
             </SwiperSlide>
           ))}
         </Swiper>
-      </div>
+      </div>}
+      
     </section>
   );
 }

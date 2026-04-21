@@ -5,7 +5,8 @@ import HeroBanner from "@/components/HeroBanner";
 export default function page() {
   return (
     <main>
-      <HeroBanner title="Booking" pageName="Booking" />
+      <HeroBanner title="Schedule Your Commercial Cleaning Service
+" desc="Fill out the form and we'll have a custom quote ready within 24 hours — no obligation." pageName="Booking" />
       <section className="container grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] xl:grid-cols-[1fr_424px] lg:gap-10 xl:gap-20 my-8 lg:my-16">
         <div className="order-2 lg:order-1 mt-8 lg:mt-0">
           <BookingForm />

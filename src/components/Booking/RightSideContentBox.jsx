@@ -86,16 +86,16 @@ const contactList = [
   {
     id: 1,
     icon: "proicons:call",
-    name: "(800) 234-5678 — Call Us Now",
+    name: "+1 (631) 381-7252 — Call Us Now",
     type: "call",
-    href: "#",
+    href: "tel:+1 (631) 381-7252",
   },
   {
     id: 2,
     icon: "material-symbols:mail-outline-sharp",
     type: "mail",
-    name: "hellonyc@gmail.com",
-    href: "#",
+    name: "info@nyccleantinc.com",
+    href: "mailto:info@nyccleantinc.com",
   },
 ];
 export default function RightSideContentBox() {
@@ -111,7 +111,7 @@ export default function RightSideContentBox() {
               </div>
               <div>
                 <h4 className="font-medium">{step.title}</h4>
-                <p className="pt-6 text-light-blue text-sm mt-1">{step.desc}</p>
+                <p className="pt-2 text-light-blue text-sm mt-1">{step.desc}</p>
               </div>
             </div>
           ))}

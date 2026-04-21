@@ -109,7 +109,7 @@ export default function BestCustomerReviews() {
               <SwiperSlide key={id}>
                 <div>
                   <div>
-                    <div className="flex text-red">
+                    <div className="flex text-red relative -left-1">
                       {Array.from({ length: review.rating }).map((_, index) => (
                         <Icon
                           key={index}

@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
+import CommonHeading from "../CommonHeading";
 
 export default function PartnershipSection() {
   const sectionRef = useRef(null);
@@ -97,21 +98,10 @@ export default function PartnershipSection() {
       <div className="grid md:grid-cols-2 md:gap-12">
         {/* LEFT CONTENT */}
         <div className="flex flex-col justify-between  md:pt-14 pb-16 md:pb-14">
-          <div className="space-y-6">
-            <p
-              className={`font-semibold text-red border px-4.5 py-1 w-fit rounded-full `}
-            >
-              Partnership
-            </p>
-            <h2 className="text-4xl font-semibold">
-              Why New York Commercial Clean Team stands apart
-            </h2>
-            <p>
-             We earn long-term contracts by solving the three problems commercial clients complain about most.
-            </p>
-          </div>
+          <CommonHeading title="Partnership" subHeading="We earn long-term contracts by solving the three problems commercial clients complain about most." heading="Why New York Commercial Clean Team stands apart"/>
+         
 
-          <div className="relative min-h-14 md:min-h-30 mt-6 sm:mt-8 mb-10">
+          <div className="text-center md:text-left relative min-h-14 md:min-h-30 mt-6 sm:mt-8 mb-10">
             {sliderItems.map((item, i) => (
               <div
                 key={item.id}

@@ -5,11 +5,13 @@ import { headerLinks } from "@/constant/header";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ButtonSolid from "./ButtonSolid";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const path = usePathname();
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -28,7 +30,9 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  if (path.includes("thankyou")) {
+    return null;
+  }
   return (
     <header
       className={`sticky top-0 z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
@@ -106,7 +110,11 @@ export default function Header() {
                     );
                   })}
                 </div>
-                <Link onClick={() => setIsMenuOpen(!isMenuOpen)} href="/booking" className="w-fit mx-auto mt-10 block">
+                <Link
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  href="/booking"
+                  className="w-fit mx-auto mt-10 block"
+                >
                   <ButtonSolid className="">Schedule Service</ButtonSolid>
                 </Link>
               </div>
