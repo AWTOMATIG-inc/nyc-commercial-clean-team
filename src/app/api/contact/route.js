@@ -31,7 +31,7 @@ export async function POST(request) {
     `;
     const mailOptions = {
       from: process.env.EMAIL,
-      to: email,
+      to: process.env.EMAIL,
       subject: `${subject}`,
       html: mail_html,
       attachments: [],
