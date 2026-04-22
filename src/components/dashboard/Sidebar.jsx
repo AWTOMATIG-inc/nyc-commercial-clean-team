@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [isSidebar, setIsSidebar] = useState(false);
   return (
     <div
-      className={`bg-slate text-white h-screen w-72 sm:w-96 p-6 flex flex-col gap-8 fixed lg:sticky top-0 z-10 rounded-[20px]  ${
+      className={`bg-slate text-white h-screen w-72 sm:w-96 p-6 flex flex-col gap-8 fixed lg:sticky top-0 z-100 lg:rounded-[20px]  ${
         isSidebar ? "left-[0px]" : "-left-[290px] sm:-left-[385px]"
       }`}
     >

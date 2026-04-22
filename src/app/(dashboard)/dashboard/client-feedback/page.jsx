@@ -43,7 +43,7 @@ export default function Feedback() {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <div className="flex justify-between mt-8">
         <h1 className="text-2xl font-bold">Client Feedback list</h1>
         <Link
@@ -74,7 +74,7 @@ export default function Feedback() {
               <Tr className="text-left border-b border-gray-200 !py-4">
                 <Th className="py-2">Client</Th>
                 <Th className="py-2">Feedback</Th>
-                <Th className="py-2">Rating</Th>
+                <Th className="py-2 md:px-4">Rating</Th>
                 <Th className="py-2">Feedback Date</Th>
                 <Th className="py-2">Action</Th>
               </Tr>
@@ -88,8 +88,8 @@ export default function Feedback() {
                       <p className="mt-1">{feedback.clientName}</p>
                     </div>
                   </Td>
-                  <Td className="py-2">{feedback.feedback}</Td>
-                  <Td className="py-2">{feedback.rating}</Td>
+                  <Td className="py-2 md:max-w-40 text-justify">{feedback.feedback.slice(0, 100)}...</Td>
+                  <Td className="py-2 md:px-8 md:w-30">{feedback.rating}</Td>
                   <Td className="py-2">{GetTime(feedback.feedbackDate)}</Td>
                   
                   <Td className="py-2">
