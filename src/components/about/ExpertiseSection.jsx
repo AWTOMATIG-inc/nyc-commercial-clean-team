@@ -1,5 +1,4 @@
 import commercialCleaning from "@/assets/about/commercial-cleaning.webp";
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 import ArrowButton from "../ArrowButton";
@@ -26,30 +25,12 @@ export default function ExpertiseSection() {
               height={415}
               className="rounded-t-xl object-cover rounded-br-xl w-full max-h-[415px]"
             />
-            <div className="absolute bottom-0 left-0 bg-white px-4 pt-6 flex flex-col-reverse sm:flex-row items-center gap-4 mt-6 rounded-tr-4xl">
+            <div className="absolute bottom-0 left-0 bg-white pr-4 pt-4 flex flex-col-reverse sm:flex-row items-center gap-4 mt-6 rounded-tr-4xl">
               <Link href="/services">
                <ArrowButton>Discover More</ArrowButton>
               </Link>
               
-              <div className="flex items-center gap-4">
-                <h5 className="text-4xl">4.8</h5>
-                <div>
-                  <div className="flex text-red relative -left-0.75">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Icon
-                        key={index}
-                        icon="material-symbols-light:star"
-                        width="24"
-                        height="24"
-                        className="size-4 md:size-5 lg:size-6"
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs sm:text-sm md:text-base">
-                    based on user reviews
-                  </span>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>

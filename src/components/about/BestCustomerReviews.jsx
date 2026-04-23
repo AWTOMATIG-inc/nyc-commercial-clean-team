@@ -1,4 +1,6 @@
 "use client";
+import femaleAvatar from "@/assets/about/female-avatar.png";
+import maleAvatar from "@/assets/about/male-avatar.png";
 import glassClean from "@/assets/home/services/glass-clean.webp";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -7,17 +9,8 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CommonHeading from "../CommonHeading";
 import Counter from "../Counter";
-import { QoateIcon } from "../Icon";
 const reviews = [
-  {
-    id: 1,
-    name: "David Park",
-    location: "Manhattan",
-    rating: 5,
-    comment:
-      "They've been cleaning our office building for over two years. The standard has never dropped — same team, same results, every week. That consistency is rare.",
-    image: glassClean,
-  },
+  
   {
     id: 2,
     name: "Priya Mehta",
@@ -25,7 +18,17 @@ const reviews = [
     rating: 5,
     comment:
       "Our retail space sees heavy foot traffic. NYC Clean Team keeps it in excellent shape without us having to follow up. They handle it.",
-    image: glassClean,
+    image: femaleAvatar,
+  },
+  {
+    id: 1,
+    name: "David Park",
+    location: "Manhattan",
+    rating: 5,
+    comment:
+      "They've been cleaning our office building for over two years. The standard has never dropped — same team, same results, every week. That consistency is rare.",
+    image: maleAvatar,
+    
   },
   {
     id: 3,
@@ -34,7 +37,7 @@ const reviews = [
     rating: 5,
     comment:
       "Compliance matters in a medical setting. They understand that and execute accordingly. No reminders needed, no corners cut.",
-    image: glassClean,
+    image: femaleAvatar,
   },
 ];
 const steps = [
@@ -82,13 +85,13 @@ export default function BestCustomerReviews() {
       <div className="grid grid-cols-1 md:grid-cols-2 border rounded-xl p-5 gap-8 sm:gap-10 my-8 sm:my-16">
         <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
           {reviews.map((review, i) => (
-            <div  onClick={()=> swiperRef.current.slideTo(i)} key={review.id} className=" rounded-xl relative">
+            <div  onClick={()=> swiperRef.current.slideTo(i)} key={review.id} className=" rounded-xl relative bg-white h-71.25">
               <Image
                 src={review.image}
                 alt={review.name}
-                className="w-full min-h-50 sm:min-h-71.25 h-full object-cover rounded-xl"
+                className="object-cover rounded-xl absolute top-1/2 left-1/2 -translate-1/2 "
               />
-              {active === i && <div className="absolute top-0 left-0 w-full h-full bg-[#92DFF3]/40  rounded-xl"><span className="flex flex-col justify-end items-center h-full pb-4"><QoateIcon /></span></div>}
+              {active === i && <div className="absolute top-0 left-0 w-full h-full bg-red-500/20  rounded-xl"><span className="flex flex-col justify-end items-center h-full pb-4 text-red-500"><Icon icon="gg:quote" width="48" height="48" /></span></div>}
             </div>
           ))}
         </div>

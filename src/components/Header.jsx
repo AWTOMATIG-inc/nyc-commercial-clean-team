@@ -14,7 +14,8 @@ export default function Header() {
   const path = usePathname();
 
   useEffect(() => {
-    let lastScrollY = window.scrollY;
+    let lastScrollY = window.scrollY + 100;
+
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
         setScrolled(true);
@@ -37,7 +38,7 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
         scrolled
-          ? "opacity-0 -translate-y-full   transition-transform duration-300"
+          ? "opacity-0 -translate-y-full transition-transform duration-300"
           : "opacity-100 translate-y-0 transition-transform duration-300"
       }`}
     >

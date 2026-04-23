@@ -1,4 +1,4 @@
-import { ServiceCardIcon } from "@/components/Icon";
+import { DayPorterServiceIcon, JanitorialServiceIcon, ServiceCardIcon } from "@/components/Icon";
 export const services = [
   {
     id: 1,
@@ -12,7 +12,7 @@ export const services = [
   {
     id: 2,
     image: "/images/home/services/floor-moping.jpg",
-    icon:ServiceCardIcon,
+    icon:JanitorialServiceIcon,
     slug: "janitorial-services",
     heading: "Janitorial Services",
     desc: "Full-building janitorial coverage for lobbies, hallways, restrooms, and shared spaces, delivered with consistent quality and care. Flexible daily or nightly schedules ensure your facility stays clean, organized, and ready for use.",
@@ -20,7 +20,7 @@ export const services = [
   {
     id: 3,
     image: "/images/home/services/wall-cleaning.jpg",
-    icon:ServiceCardIcon,
+    icon:DayPorterServiceIcon,
     slug: "day-porter-services",
     heading: "Day Porter Services",
     desc: "Full-building janitorial coverage for lobbies, hallways, restrooms, and shared spaces, delivered with consistent quality and care. Flexible daily or nightly schedules ensure your facility stays clean, organized, and ready for use.",
