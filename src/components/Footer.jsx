@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import logo from "@/assets/logos/nyc-logo.png";
 import { companyLinks, followUsLinks, servicesLinks } from "@/constant/footer";
 import { Icon } from "@iconify/react";
@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-   const path = usePathname();
+  const path = usePathname();
   const handleSubmit = async () => {
     if (!email) {
       return toast.error("Please add a valid gmail");
@@ -33,10 +33,8 @@ export default function Footer() {
         return toast.error("You have already Subscribed!");
       }
       const data = await res.json();
-      if (data) {
-        setEmail("");
-        return toast.success("Subscribe successfuly!");
-      }
+      setEmail("");
+      return toast.success("Subscribe successfuly!");
     } catch (error) {
       console.log(error);
     }
@@ -58,22 +56,28 @@ export default function Footer() {
             />
           </div>
           <p className="py-3.5 text-lg">
-           Professional commercial cleaning services across all five NYC boroughs — offices, retail, medical, and more.
+            Professional commercial cleaning services across all five NYC
+            boroughs — offices, retail, medical, and more.
           </p>
           <div>
             <div className="flex flex-col sm:flex-row gap-5 items-center w-full sm:w-[85%] md:w-[70%] lg:w-full">
               <input
                 type="email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
                 className=" border border-gray-300 text-white placeholder:text-white py-2 w-full rounded-full pl-6 focus:outline-none max-h-9.25"
               />
-              <button onClick={handleSubmit} className="w-full sm:w-fit flex items-center justify-center shadow shadow-[#F4F5F7] h-10 px-6 rounded-full hover:shadow-lg transistion-transform duration-300 max-h-9.25">
+              <button
+                onClick={handleSubmit}
+                className="w-full sm:w-fit flex items-center justify-center shadow shadow-[#F4F5F7] h-10 px-6 rounded-full hover:shadow-lg transistion-transform duration-300 max-h-9.25"
+              >
                 Subscribe
               </button>
             </div>
             <p className="mt-4.75 text-xs">
-             Facility maintenance tips for NYC commercial property managers — delivered occasionally.
+              Facility maintenance tips for NYC commercial property managers —
+              delivered occasionally.
             </p>{" "}
           </div>
         </div>
@@ -91,12 +95,15 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-              <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0">
-              Privacy Policy
-            </Link>
+              <Link
+                href="#"
+                className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
+              >
+                Privacy Policy
+              </Link>
             </ul>
           </div>
-          <div >
+          <div>
             <p className="text-lg font-semibold">Company</p>
             <ul className="mt-4.75 space-y-3.5">
               {companyLinks.map((link) => (
@@ -109,9 +116,12 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
-              <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0">
-              Terms of Service
-            </Link>
+              <Link
+                href="#"
+                className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
+              >
+                Terms of Service
+              </Link>
             </ul>
           </div>
           <div className="sm:hidden">
@@ -120,15 +130,13 @@ export default function Footer() {
               {followUsLinks.map((link) => (
                 <li key={link.id}>
                   <a
-                    className={`flex items-center gap-3 capitalize text-light hover:underline hover:text-blue-500 border-y border-l p-2 ${followUsLinks.length===link.id&&"border-r"}`}
+                    className={`flex items-center gap-3 capitalize text-light hover:underline hover:text-blue-500 border-y border-l p-2 ${followUsLinks.length === link.id && "border-r"}`}
                     href={link.href}
                   >
                     <Icon icon={link.icon} width="24" height="24" />
-                  
                   </a>
                 </li>
               ))}
-              
             </ul>
           </div>
           <div className="hidden sm:block">
@@ -137,7 +145,7 @@ export default function Footer() {
               {followUsLinks.map((link) => (
                 <li key={link.id}>
                   <a
-                  target="_blank"
+                    target="_blank"
                     className="flex items-center gap-3 capitalize text-light hover:underline hover:text-blue-500"
                     href={link.href}
                   >
@@ -146,9 +154,12 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
-               <Link href="#" className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0">
-              Cookies settings
-            </Link>
+              <Link
+                href="#"
+                className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
+              >
+                Cookies settings
+              </Link>
             </ul>
           </div>
         </div>
@@ -157,19 +168,35 @@ export default function Footer() {
         <hr className=" text-gray-300 mt-2 mb-4" />
         <div className="flex flex-col-reverse lg:flex-row gap-y-6 justify-between md:items-center ">
           <p className="text-light text-sm sm:text-base">
-            © 2026 Developed by <a href="https://awtomatig.com/" className="hover:underline" target="_blank" rel="noopener noreferrer">
+            © 2026 Developed by{" "}
+            <a
+              href="https://awtomatig.com/"
+              className="hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               AWTOMATIG
-            </a>. All rights reserved.
+            </a>
+            . All rights reserved.
           </p>
           <div className="flex flex-col md:flex-row gap-4 lg:hidden">
-            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-57.5">
+            <Link
+              href="#"
+              className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-57.5"
+            >
               Privacy Policy
             </Link>
 
-            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-32.5">
+            <Link
+              href="#"
+              className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-32.5"
+            >
               Terms of Service
             </Link>
-            <Link href="#" className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-12">
+            <Link
+              href="#"
+              className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-12"
+            >
               Cookies settings
             </Link>
           </div>

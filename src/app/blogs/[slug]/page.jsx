@@ -25,7 +25,7 @@ export default async function BlogDetails({ params }) {
           </div>
           <div className="mt-8 sm:mt-16">
             <h1 className="heading-2">{blog?.title}</h1>
-            <div className="mt-6 body-text" dangerouslySetInnerHTML={{__html:blog?.content}}/>
+            <div className="mt-6 body-text wrap-break-word" dangerouslySetInnerHTML={{__html:blog?.content}}/>
               
             
           </div>

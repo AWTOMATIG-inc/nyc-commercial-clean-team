@@ -42,7 +42,7 @@ export async function DELETE(request, context) {
       );
     }
     deleteFile("blog", deleteBlog.image);
-    const paths = ["/", "/blogs"];
+    const paths = ["/", "/blogs","/blog/" + deleteBlog.slug];
     paths.forEach((p) => revalidatePath(p));
     return NextResponse.json(
       { message: "blog deleted successfully" },

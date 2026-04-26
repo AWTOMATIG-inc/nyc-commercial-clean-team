@@ -118,7 +118,7 @@ export default function BlogPost() {
                 className="rounded-md object-cover w-full h-50"
               />
               <div
-                className="my-2"
+                className="my-2 wrap-break-word"
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
             </div>

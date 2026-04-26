@@ -13,7 +13,7 @@ export const feedbackYupSchema = yup
     feedback: yup
       .string()
       .required("Feedback is required")
-      .min(5, "feedback must be at least 5 character"),
+      .min(5, "feedback must be at least 5 character").max(255, "Feedback must be at most 255 characters"),
     image: yup
       .mixed()
       .required("Image is required")

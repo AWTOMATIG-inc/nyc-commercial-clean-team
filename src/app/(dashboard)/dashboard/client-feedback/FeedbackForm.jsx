@@ -3,14 +3,16 @@ import Button from "@/components/Button";
 import { feedbackYupSchema } from "@/yup/feedbackYupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function FeedbackForm() {
   const [loading, setLoading] = useState(false);
+
   const {
     reset,
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -23,7 +25,10 @@ export default function FeedbackForm() {
     },
     resolver: yupResolver(feedbackYupSchema),
   });
-
+  const feedbackField = useWatch({
+    control,
+    name: "feedback",
+  });
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("clientName", data.clientName);
@@ -63,7 +68,9 @@ export default function FeedbackForm() {
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label htmlFor="" className="mb-1 block">Client Name:</label>
+              <label htmlFor="" className="mb-1 block">
+                Client Name:
+              </label>
               <input
                 type="text"
                 className={`border  p-4 rounded-md w-full focus:outline-none ${
@@ -78,8 +85,10 @@ export default function FeedbackForm() {
                 </p>
               )}
             </div>
-             <div>
-              <label htmlFor="" className="mb-1 block">Client Profile:</label>
+            <div>
+              <label htmlFor="" className="mb-1 block">
+                Client Profile:
+              </label>
               <input
                 type="file"
                 className={`border  p-4 rounded-md accent-amber-50 w-full focus:outline-none ${
@@ -94,23 +103,34 @@ export default function FeedbackForm() {
                 </p>
               )}
             </div>
-            
+
             <div>
-              <label htmlFor="" className="mb-1 block">Rating:</label>
-              <select   {...register("rating")} className={`border  p-4 rounded-md w-full focus:outline-none ${
+              <label htmlFor="" className="mb-1 block">
+                Rating:
+              </label>
+              <select
+                {...register("rating")}
+                className={`border  p-4 rounded-md w-full focus:outline-none ${
                   errors.clientName ? "border-red-500" : "border-gray-300"
-                }`}>
-                {Array.from({length:6}).map((_,index)=><option key={index} value={index}>{index}</option>)}                
+                }`}
+              >
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <option key={index} value={index}>
+                    {index}
+                  </option>
+                ))}
               </select>
-              
+
               {errors.rating && (
                 <p className="text-red-500 text-sm mt-1 ml-1">
                   {errors.rating.message}
                 </p>
               )}
             </div>
-           <div>
-              <label htmlFor="" className="mb-1 block">Feedback Date:</label>
+            <div>
+              <label htmlFor="" className="mb-1 block">
+                Feedback Date:
+              </label>
               <input
                 type="datetime-local"
                 className={`border  p-4 rounded-md w-full focus:outline-none ${
@@ -127,7 +147,9 @@ export default function FeedbackForm() {
             </div>
           </div>
           <div>
-            <label htmlFor="" className="mb-1 block">Feedback:</label>
+            <label htmlFor="" className="mb-1 block">
+              Feedback:
+            </label>
             <textarea
               placeholder="Write something..."
               className={`border border-gray-300 w-full focus:outline-0 rounded-md p-3 min-h-24 focus:outline-none ${
@@ -135,18 +157,21 @@ export default function FeedbackForm() {
               }`}
               {...register("feedback")}
             ></textarea>
-            {errors.feedback && (
-              <p className="text-red-500 text-sm mt-1 ml-1">
-                {errors.feedback.message}
-              </p>
-            )}
+            <div className="flex items-center justify-between">
+              {errors.feedback && (
+                <p className="text-red-500 text-sm mt-1 ml-1">
+                  {errors.feedback.message}
+                </p>
+              )}
+              <p className={`w-fit ml-auto ${feedbackField.length>255&&"text-red"}`}>{feedbackField.length}</p>
+            </div>
           </div>
-         <div className="w-fit ml-auto">
-           <Button
-            className="text-white !bg-blue-600"
-            name={loading ? "submiting..." : "Submit"}
-          />
-         </div>
+          <div className="w-fit ml-auto">
+            <Button
+              className="text-white !bg-blue-600"
+              name={loading ? "submiting..." : "Submit"}
+            />
+          </div>
         </form>
       </div>
     </div>
