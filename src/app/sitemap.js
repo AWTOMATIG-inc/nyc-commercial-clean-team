@@ -1,5 +1,5 @@
 import { getBlogs } from "@/utility/getBlogs";
-
+export const dynamic = "force-dynamic";
 export default async function sitemap() {
     const blogs=await getBlogs()
     const blogUrls = blogs.map(blog => ({
