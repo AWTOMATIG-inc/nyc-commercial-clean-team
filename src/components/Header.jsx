@@ -13,27 +13,53 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const path = usePathname();
 
+  // useEffect(() => {
+  //   let lastScrollY = window.scrollY + 100;
+
+  //   const handleScroll = () => {
+  //     if (window.scrollY > lastScrollY) {
+  //       setScrolled(true);
+  //     } else {
+  //       setScrolled(false);
+  //     }
+
+  //     lastScrollY = window.scrollY;
+  //   };
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   useEffect(() => {
-    let lastScrollY = window.scrollY + 100;
+  let lastScrollY = window.scrollY;
 
-    const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
 
-      lastScrollY = window.scrollY;
-    };
-    window.addEventListener("scroll", handleScroll);
+    // Guard against iOS negative scroll (rubber-band effect)
+    if (currentScrollY < 0) return;
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    if (currentScrollY > lastScrollY && currentScrollY > 10) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
+
   if (path.includes("thankyou")) {
     return null;
   }
+
   return (
     <header
       className={`sticky top-0 z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
