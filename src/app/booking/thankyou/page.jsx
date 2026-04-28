@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
 export const metadata = {
-  title: "NYC-SERVICES - THANK YOU",
+  title: "ThankYou - New York Commercial Clean Team INC",
   description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
 };
 export default function ThankYou() {

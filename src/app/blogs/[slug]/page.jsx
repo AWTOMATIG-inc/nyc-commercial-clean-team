@@ -8,7 +8,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
   return {
-    title: `${blog.title} | NYC-SERVICES`,
+    title: `Blogs - ${blog.title} |`,
     description: blog.shortDescription || blog.metaDescription,
   };
 }

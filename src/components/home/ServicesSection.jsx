@@ -48,7 +48,8 @@ export default function ServicesSection() {
                   height={216}
                   width={553}
                   src={glassClean}
-                  alt="glass-clean"
+                  alt="Professional office cleaning service with certified staff"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="w-full max-h-54 rounded-lg object-cover"
                 />
               </div>
@@ -87,7 +88,8 @@ export default function ServicesSection() {
                     height={216}
                     width={553}
                     src={item.image}
-                    alt="glass-clean"
+                    alt={`${item.heading} - Professional commercial cleaning service`}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="w-full h-full rounded-lg object-cover group-hover:scale-110 transition-all duration-300"
                   />
                 </div>

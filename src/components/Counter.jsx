@@ -6,6 +6,7 @@ import CountUp from "react-countup";
 export default function Counter({ value,className="text-slate text-[28px] md:text-[64px] font-bold pt-2",sign="" }) {
   const ref = useRef(null);
   const [start, setStart] = useState(false);
+  const [displayValue, setDisplayValue] = useState(value);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,7 +29,7 @@ export default function Counter({ value,className="text-slate text-[28px] md:tex
       ref={ref}
       className={className}
     >
-      {start && <CountUp end={value} duration={2} /> }<span>{sign}</span>
+      {start ? <CountUp end={value} duration={2} /> : value}<span>{sign}</span>
     </h1>
   );
 }

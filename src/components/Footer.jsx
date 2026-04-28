@@ -96,7 +96,7 @@ export default function Footer() {
                 </li>
               ))}
               <Link
-                href="#"
+                href="/privacy-policy"
                 className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
               >
                 Privacy Policy
@@ -117,7 +117,7 @@ export default function Footer() {
                 </li>
               ))}
               <Link
-                href="#"
+                href="/terms-of-service"
                 className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
               >
                 Terms of Service
@@ -155,7 +155,7 @@ export default function Footer() {
                 </li>
               ))}
               <Link
-                href="#"
+                href="/privacy-policy"
                 className="hidden lg:block text-light underline hover:text-blue-500 relative lg:top-13 xl:top-6.25 h-0"
               >
                 Cookies settings
@@ -181,20 +181,20 @@ export default function Footer() {
           </p>
           <div className="flex flex-col md:flex-row gap-4 lg:hidden">
             <Link
-              href="#"
+              href="/privacy-policy"
               className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-57.5"
             >
               Privacy Policy
             </Link>
 
             <Link
-              href="#"
+              href="/terms-of-service"
               className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-32.5"
             >
               Terms of Service
             </Link>
             <Link
-              href="#"
+              href="/privacy-policy"
               className="text-light underline hover:text-blue-500 relative xl:right-57.5 2xl:right-12"
             >
               Cookies settings

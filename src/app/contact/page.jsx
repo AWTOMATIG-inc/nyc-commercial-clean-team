@@ -2,7 +2,7 @@ import ContactForm from "@/components/contact/ContactForm";
 import ContactInfo from "@/components/contact/Contactinfo";
 import HeroBanner from "@/components/HeroBanner";
 export const metadata = {
-  title: "NYC-SERVICES - CONTACT",
+  title: "Contact - New York Commercial Clean Team INC",
   description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
 };
 export default function Contact() {

@@ -5,7 +5,7 @@ import SpecialitySection from "@/components/services/SpecialitySection";
 import SupportSection from "@/components/services/SupportSection";
 import SurfacesSection from "@/components/services/SurfacesSection";
 export const metadata = {
-  title: "NYC-SERVICES - SERVICES",
+  title: "Services - New York Commercial Clean Team INC",
   description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
 };
 export default function page() {

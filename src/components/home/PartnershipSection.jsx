@@ -122,8 +122,9 @@ export default function PartnershipSection() {
               key={item.id}
               ref={(el) => (imagesRef.current[i] = el)}
               src={item.image}
-              alt="partnership"
+              alt={`Partnership benefit ${i + 1}: ${item.title}`}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority={i === 0}
               className="absolute inset-0 object-cover"
             />

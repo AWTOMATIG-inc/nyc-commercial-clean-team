@@ -8,12 +8,14 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   variant: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   variant: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
