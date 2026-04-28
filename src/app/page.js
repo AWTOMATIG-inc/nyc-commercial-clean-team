@@ -24,7 +24,7 @@ const DynamicMarqueHighlightText = dynamic(
 );
 const DynamicFAQs = dynamic(() => import("@/components/home/FAQs"));
 export const metadata = {
-  title: "Home - New York Commercial Clean Team INC",
+  title: "New York Commercial Clean Team INC",
   description:
     "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
   links: [

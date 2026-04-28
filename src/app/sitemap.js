@@ -37,6 +37,14 @@ export default async function sitemap() {
         lastModified: new Date().toISOString(), 
     },
     {
+        url: `${process.env.BASE_URL}/privacy-policy`,
+        lastModified: new Date().toISOString(), 
+    },
+    {
+        url: `${process.env.BASE_URL}/terms-of-service`,
+        lastModified: new Date().toISOString(), 
+    },
+    {
         url: `${process.env.BASE_URL}/blogs`,
         lastModified: new Date().toISOString(), 
     },
