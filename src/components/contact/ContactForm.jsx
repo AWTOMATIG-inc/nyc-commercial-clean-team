@@ -1,5 +1,6 @@
 "use client";
 
+import { trackContactFormSubmit } from "@/lib/gtm";
 import { contactYupSchema } from "@/yup/contactYupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
@@ -34,6 +35,7 @@ export default function ContactForm() {
         reset();
         setLoading(false);
         toast.success("Email sent successfully");
+        trackContactFormSubmit({ subject: data.subject });
         reset();
       } else {
         setLoading(false);

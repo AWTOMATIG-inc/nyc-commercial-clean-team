@@ -1,4 +1,5 @@
 "use client";
+import { trackCtaClick, trackPhoneClick } from "@/lib/gtm";
 import Link from "next/link";
 import ButtonSolid from "../ButtonSolid";
 export default function HeroSection() {
@@ -44,11 +45,11 @@ export default function HeroSection() {
               shortcuts. Just consistent results.
             </p>
             <div className="flex flex-col-reverse xs:flex-row gap-4  items-center xs:gap-5 sm:gap-8">
-              <Link href="/contact">
+              <Link href="/contact" onClick={() => trackCtaClick("Get a Free Quote", "hero_section")}>
                 <ButtonSolid>Get a Free Quote</ButtonSolid>
               </Link>
 
-              <a href="tel:+1 (631) 381-7252">
+              <a href="tel:+16313817252" onClick={() => trackPhoneClick("hero_cta")}>
                 <ButtonSolid color="white">Call Now</ButtonSolid>
               </a>
             </div>

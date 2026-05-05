@@ -1,5 +1,6 @@
 "use client";
 import logo from "@/assets/logos/nyc-logo.png";
+import { trackCtaClick } from "@/lib/gtm";
 import { followUsLinks } from "@/constant/footer";
 import { headerLinks } from "@/constant/header";
 import { Icon } from "@iconify/react";
@@ -13,7 +14,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const path = usePathname();
 
- 
+
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -122,7 +123,7 @@ export default function Header() {
                   })}
                 </div>
                 <Link
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  onClick={() => { setIsMenuOpen(!isMenuOpen); trackCtaClick("Schedule Service", "navbar"); }}
                   href="/booking"
                   className="w-fit mx-auto mt-10 block"
                 >
@@ -156,7 +157,7 @@ export default function Header() {
               className="h-auto"
             />
           </Link>
-          <Link href="/booking">
+          <Link href="/booking" onClick={() => trackCtaClick("Schedule Service", "navbar")}>
             <ButtonSolid className="hidden lg:block">
               Schedule Service
             </ButtonSolid>

@@ -1,3 +1,5 @@
+"use client";
+import { trackCtaClick, trackPhoneClick } from "@/lib/gtm";
 import { availableSteps } from "@/constant/service-area";
 import Image from "next/image";
 import Link from "next/link";
@@ -124,11 +126,11 @@ export default function Available() {
             your business.
           </p>
           <div className="flex gap-8">
-            <Link href="/contact">
+            <Link href="/contact" onClick={() => trackCtaClick("Get a Free Quote", "service_area_section")}>
               <ButtonSolid>Get a Free Quote</ButtonSolid>
             </Link>
 
-            <a href="tel:+1 (631) 381-7252">
+            <a href="tel:+16313817252" onClick={() => trackPhoneClick("service_page")}>
               <ButtonSolid color="white">Call Now</ButtonSolid>
             </a>
           </div>

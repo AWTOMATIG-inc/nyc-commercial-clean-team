@@ -1,5 +1,8 @@
+"use client";
+import { trackCtaClick, trackPhoneClick } from "@/lib/gtm";
 import cleaningQuote from "@/assets/services/quote/cleaning-quote.webp";
 import Image from "next/image";
+import Link from "next/link";
 import ButtonSolid from "../ButtonSolid";
 export default function CleaningQuote() {
   return (
@@ -9,11 +12,15 @@ export default function CleaningQuote() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[60px]">Request your free cleaning quote</h2>
           <p className="mt-6 mb-5">
             Tell us about your facility — space type, square footage, and schedule. We'll assess your needs and deliver a clear, written quote within 24–48 hours.
-No obligation. 
+No obligation.
           </p>
           <div className="flex flex-col-reverse sm:flex-row items-center gap-4 sm:gap-8 justify-center sm:justify-start">
-            <ButtonSolid className="text-nowrap">Get a Free Quote</ButtonSolid>
-            <ButtonSolid className="text-nowrap" color="white">Call Now</ButtonSolid>
+            <Link href="/contact" onClick={() => trackCtaClick("Get a Free Quote", "cleaning_quote_section")}>
+              <ButtonSolid className="text-nowrap">Get a Free Quote</ButtonSolid>
+            </Link>
+            <a href="tel:+16313817252" onClick={() => trackPhoneClick("service_page")}>
+              <ButtonSolid className="text-nowrap" color="white">Call Now</ButtonSolid>
+            </a>
           </div>
         </div>
         <div className="order-1 md:order-2">

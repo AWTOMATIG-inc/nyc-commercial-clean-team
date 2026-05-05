@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Directory)",
+      "Bash(Select-Object Name)",
+      "Bash(xargs grep -l \"gtag\\\\|google\\\\|analytics\\\\|segment\\\\|mixpanel\\\\|track\\\\|pixel\\\\|gtm\\\\|hotjar\")"
+    ]
+  }
+}

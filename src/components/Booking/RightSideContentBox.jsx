@@ -1,3 +1,5 @@
+"use client";
+import { trackPhoneClick } from "@/lib/gtm";
 import { Icon } from "@iconify/react";
 import {
   AssessmentIcon,
@@ -145,6 +147,7 @@ export default function RightSideContentBox() {
               {contact.type == "call" ? (
                 <a
                   href={`tel:${contact.href}`}
+                  onClick={() => trackPhoneClick("booking_page")}
                   className="font-medium hover:underline"
                 >
                   {contact.name}

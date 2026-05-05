@@ -9,6 +9,7 @@ import {
   serviceOptions,
   usingACleanerOptions,
 } from "@/constant/booking/booking";
+import { trackBookingSubmit } from "@/lib/gtm";
 import { createFormData } from "@/utility/createFormData";
 import { bookingYupSchema } from "@/yup/bookingSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -37,7 +38,7 @@ export default function BookingForm() {
     control,
     name:"termAndCondition"
   })
- 
+
 
   const onSubmit = async (values) => {
     const formData = createFormData(values);
@@ -50,8 +51,13 @@ export default function BookingForm() {
       const data = await res.json();
       if (data) {
         setLoading(false)
+        trackBookingSubmit({
+          service: values.services?.join(", "),
+          industry: values.facilityType,
+          facilitySize: values.facilitySize,
+        });
         // toast.success("Booking request successfull!");
-        router.push("/booking/thankyou")        
+        router.push("/booking/thankyou")
         console.log(data);
       }
     } catch (error) {
