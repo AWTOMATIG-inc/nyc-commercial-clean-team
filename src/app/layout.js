@@ -25,31 +25,42 @@ const inter = Inter({
 export const metadata = {
   title: "NYC-SERVICES",
   description: "Commercial cleaning services in NYC",
+
+  metadataBase: new URL("https://nyccleantinc.com"),
+
   icons: {
     icon: "/favicon.png",
   },
+
   openGraph: {
     title: "NYC-SERVICES",
     description: "Commercial cleaning services in NYC",
     url: "https://nyccleantinc.com",
     siteName: "NYC-SERVICES",
+    locale: "en_US",
+    type: "website",
+
     images: [
       {
-        url: "/images/home/services/floor-moping.jpg",
+        url: "https://nyccleantinc.com/images/home/services/floor-moping.jpg",
         width: 1200,
         height: 630,
         alt: "Floor Moping Service",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
     title: "NYC-SERVICES",
     description: "Commercial cleaning services in NYC",
-    images: ["/images/home/services/floor-moping.jpg"],
+    images: [
+      "https://nyccleantinc.com/images/home/services/floor-moping.jpg",
+    ],
+  },
+
+  other: {
+    "pinterest-rich-pin": "true",
   },
 };
 export default function RootLayout({ children }) {
