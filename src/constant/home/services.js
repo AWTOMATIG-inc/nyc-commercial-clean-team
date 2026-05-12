@@ -19,7 +19,7 @@ export const services = [
   },
   {
     id: 3,
-    image: "/images/home/services/wall-cleaning.jpg",
+    image: "/images/home/services/bookself-cleaning.png",
     icon:DayPorterServiceIcon,
     slug: "day-porter-services",
     heading: "Day Porter Services",

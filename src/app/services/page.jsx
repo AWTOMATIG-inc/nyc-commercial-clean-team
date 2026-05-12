@@ -11,7 +11,7 @@ export const metadata = {
 export default function page() {
   return (
     <main>
-        <HeroBanner title="Commercial Cleaning Done Right" desc="Every service we offer is built for commercial facilities — offices, retail, medical, and more"/>
+        <HeroBanner imageURL="/images/banners/services.webp" title="Commercial Cleaning Done Right" desc="Every service we offer is built for commercial facilities — offices, retail, medical, and more"/>
         <RecurringSection/>
         <SpecialitySection/>
         <SurfacesSection/>

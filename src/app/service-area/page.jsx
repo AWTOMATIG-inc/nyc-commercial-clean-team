@@ -9,7 +9,7 @@ export const metadata = {
 export default function ServieArea() {
   return (
     <main>
-       <HeroBanner title="Commercial Cleaning Across New York City" pageName="Locations" desc="Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and Long Island — local teams, consistent standards."/>
+       <HeroBanner imageURL="/images/banners/location.webp" title="Commercial Cleaning Across New York City" pageName="Locations" desc="Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and Long Island — local teams, consistent standards."/>
         <Foundation/>
         <Coverage/>
         <Available/>

@@ -9,6 +9,7 @@ export default function Contact() {
   return (
     <main>
       <HeroBanner
+      imageURL="/images/banners/contact-us.webp"
         title="Get a Fast, Free Cleaning Quote"
         desc="Tell us about your facility and we'll be in touch within 24 hours.
 "

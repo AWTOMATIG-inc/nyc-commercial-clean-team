@@ -12,6 +12,7 @@ export default function AboutUs() {
   return (
     <main>
       <HeroBanner
+        imageURL="/images/banners/about-us.webp"
         title="Built on Accountability. Trusted Across NYC."
         pageName="About"
         desc="Fully insured, background-checked commercial cleaning — serving offices, retail, medical,

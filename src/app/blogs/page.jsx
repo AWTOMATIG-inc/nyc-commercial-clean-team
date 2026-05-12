@@ -8,7 +8,7 @@ export default async function Blogs() {
 
   return (
     <main>
-        <HeroBanner title="NYC Facility Cleaning Insights & Resources" desc="Commercial cleaning guides, compliance tips, and facility management best practices for NYC businesses."  pageName="Blogs"/>
+        <HeroBanner imageURL="/images/banners/blogs.webp" title="NYC Facility Cleaning Insights & Resources" desc="Commercial cleaning guides, compliance tips, and facility management best practices for NYC businesses."  pageName="Blogs"/>
         <BlogListArea/>
     </main>
   )
