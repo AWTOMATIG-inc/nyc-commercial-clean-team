@@ -16,27 +16,6 @@
   @apply mx-auto max-w-none 2xl:max-w-360 px-4 md:px-10! lg:px-8;
 }
 @layer base {
-  ol,
-  ul {
-    list-style: none;
-    counter-reset: item;
-    padding-left: 0;
-  }
-
-  ol li,
-  ul li {
-    counter-increment: item;
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  ol li::before {
-    content: counter(item) ".";
-  }
-  ul li::before {
-    content: "•";
-  }
-
   body {
     @apply font-inter;
   }
@@ -119,4 +98,25 @@
 .ql-editor a {
   color: var(--color-slate);
   text-decoration: underline !important;
+}
+
+.ql-editor ol,
+.ql-editor ul {
+  list-style: none;
+  counter-reset: item;
+  padding-left: 0;
+}
+
+.ql-editor ol li,
+.ql-editor ul li {
+  counter-increment: item;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ql-editor ol li::before {
+  content: counter(item) ".";
+}
+.ql-editor ul li::before {
+  content: "•";
 }

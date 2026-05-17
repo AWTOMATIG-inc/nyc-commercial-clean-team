@@ -4,6 +4,7 @@ import { GetTime } from "@/utility/GetTime";
 import { timeAgo } from "@/utility/timeAgo";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import "react-quill-new/dist/quill.snow.css";
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
