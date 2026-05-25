@@ -1,5 +1,6 @@
 import ContactForm from "@/components/contact/ContactForm";
 import ContactInfo from "@/components/contact/Contactinfo";
+import DiscountPopup from "@/components/DiscountPopup";
 import HeroBanner from "@/components/HeroBanner";
 export const metadata = {
   title: "Contact - New York Commercial Clean Team INC",
@@ -32,6 +33,7 @@ export default function Contact() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </section>
+      <DiscountPopup popupName="contact_discount_popup" />
     </main>
   );
 }

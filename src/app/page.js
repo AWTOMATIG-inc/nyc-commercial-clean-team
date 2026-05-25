@@ -23,6 +23,7 @@ const DynamicMarqueHighlightText = dynamic(
   () => import("@/components/MarqueHighlightText"),
 );
 const DynamicFAQs = dynamic(() => import("@/components/home/FAQs"));
+const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 export const metadata = {
   title: "Commercial Cleaning Services NYC | NYC Clean Team",
   description:
@@ -81,6 +82,7 @@ export default async function Home() {
       <DynamicClientVoices feedbacks={feedbacks} />
       <DynamicMarqueHighlightText marqueeText="Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference. Making Every Corner Shine. Professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference." />
       <DynamicFAQs />
+      <DiscountPopup/>
     </main>
   );
 }
