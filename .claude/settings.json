@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" status)",
+      "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" log --oneline -5)",
+      "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" diff --staged)",
+      "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" log --oneline origin/main -5)"
+    ]
+  }
+}
