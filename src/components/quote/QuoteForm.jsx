@@ -99,7 +99,8 @@ export default function QuoteForm() {
         </div>
         <button
           type="submit"
-          className="bg-[#BC0001] hover:bg-red text-white font-bold py-4 px-4 rounded-full flex w-full justify-center items-center mt-6 text-center text-sm"
+          disabled={loading}
+          className="bg-[#BC0001] hover:bg-red text-white font-bold py-4 px-4 rounded-full flex w-full justify-center items-center mt-6 text-center text-sm disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span>Get My Free Quote</span>
           <Icon
