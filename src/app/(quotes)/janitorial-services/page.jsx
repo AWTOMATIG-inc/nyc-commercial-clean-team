@@ -78,39 +78,39 @@ const handles = [
 export default function Quotes() {
   return (
     <main>
-      <section className="relative mt-6 bg-[linear-gradient(to_right,rgba(29,47,100,0.9),rgba(29,47,100,0.4)),url('/images/quotes/quote.jpg')] bg-cover bg-center bg-no-repeat w-full h-320 md:h-260 lg:h-200 xl:h-250 ">
+      <section className="relative mt-6 bg-[linear-gradient(to_right,rgba(29,47,100,0.9),rgba(29,47,100,0.4)),url('/images/quotes/quote.jpg')] bg-cover bg-center bg-no-repeat w-full h-300 md:h-260 lg:h-200 xl:h-250 ">
         
         <div className="flex items-center w-full h-full absolute top-0 left-0">
           <div className="container grid lg:grid-cols-2 items-center gap-10 md:gap-15 xl:gap-25  text-white">
             <div>
-              <p className="text-xs border border-white font-medium w-fit px-5 py-1.5 rounded-full">
+              <p className="text-sm border border-white font-medium w-fit px-5 py-1.5 rounded-full">
                 Janitorial Services
               </p>
-              <h1 className="text-[22px] lg:text-5xl leading-[120%] font-medium my-8">
+              <h1 className="text-[23px] lg:text-5xl leading-[120%] font-medium my-6 md:my-8">
                 Reliable Commercial Janitorial Service for NYC Facilities
               </h1>
-              <p className="text-sm sm:text-base md:text-lg max-w-3xl py-4 pb-6">
+              <p className="text-base md:text-lg max-w-3xl mt-4">
                 NYC's most trusted commercial cleaning crews — tailored to your
                 schedule.
               </p>
-              <div className="mt-6">
+              <div className="mt-6 md:mt-12">
                 
-                <div className="grid grid-cols-2 items-start gap-4 md:w-4/5   gap-y-4 mt-4">
+                <div className="grid grid-cols-2 items-start gap-4 md:w-4/5   gap-y-4 ">
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="text-xs sm:text-sm md:text-base">Fully Insured & Bonded</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Fully Insured & Bonded</span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="text-xs sm:text-sm md:text-base">Custom Schedules</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Custom Schedules</span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="text-xs sm:text-sm md:text-base">Eco-Friendly Products</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Eco-Friendly Products</span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="text-xs sm:text-sm md:text-base">Dedicated Account Manager</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Dedicated Account Manager</span>
                   </div>
                 </div>
               </div>
