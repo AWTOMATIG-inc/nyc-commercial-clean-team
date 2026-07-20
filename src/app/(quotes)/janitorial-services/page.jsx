@@ -2,6 +2,7 @@ import ButtonSolid from "@/components/ButtonSolid";
 import Counter from "@/components/Counter";
 import ManagerReview from "@/components/quote/ManagerReview";
 import QuoteForm from "@/components/quote/QuoteForm";
+import { getFeedback } from "@/utility/getFeedback";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 const steps = [
@@ -14,7 +15,7 @@ const steps = [
   {
     id: 2,
     score: 24,
-    sign: "-48 Hrs",
+    sign: "Hrs",
     title: "FAST QUOTING",
   },
   {
@@ -75,11 +76,11 @@ const handles = [
     name: "Retail & Storefront",
   },
 ];
-export default function Quotes() {
+export default async function Quotes() {
+  const feedbacks = await getFeedback();
   return (
     <main>
       <section className="relative mt-6 bg-[linear-gradient(to_right,rgba(29,47,100,0.9),rgba(29,47,100,0.4)),url('/images/quotes/quote.jpg')] bg-cover bg-center bg-no-repeat w-full h-300 md:h-260 lg:h-200 xl:h-250 ">
-        
         <div className="flex items-center w-full h-full absolute top-0 left-0">
           <div className="container grid lg:grid-cols-2 items-center gap-10 md:gap-15 xl:gap-25  text-white">
             <div>
@@ -94,23 +95,30 @@ export default function Quotes() {
                 schedule.
               </p>
               <div className="mt-6 md:mt-12">
-                
                 <div className="grid grid-cols-2 items-start gap-4 md:w-4/5   gap-y-4 ">
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Fully Insured & Bonded</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">
+                      Fully Insured & Bonded
+                    </span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Custom Schedules</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">
+                      Custom Schedules
+                    </span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Eco-Friendly Products</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">
+                      Eco-Friendly Products
+                    </span>
                   </div>
                   <div className="flex items-start sm:items-center gap-2">
                     <Icon icon="ix:success" width={17} height={17} />{" "}
-                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">Dedicated Account Manager</span>
+                    <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">
+                      Dedicated Account Manager
+                    </span>
                   </div>
                 </div>
               </div>
@@ -118,11 +126,11 @@ export default function Quotes() {
                 <ButtonSolid>Call Now (631) 381-7252</ButtonSolid>
               </a>
             </div>
-            <div >
+            <div>
               <QuoteForm />
             </div>
           </div>
-          </div>
+        </div>
       </section>
       <section className="bg-slate text-white">
         <div className="grid grid-cols-2 md:grid-cols-4 p-10">
@@ -143,7 +151,7 @@ export default function Quotes() {
           ))}
         </div>
       </section>
-      
+
       <section className="container mt-10 md:mt-14 lg:mt-20">
         <div className="text-center">
           <h2 className="text-slate text-2xl md:text-3xl lg:text-4xl font-bold">
@@ -182,22 +190,22 @@ export default function Quotes() {
           ))}
         </div>
       </section>
-      <ManagerReview/>
+      <ManagerReview feedbacks={feedbacks} />
       <section className="container my-10 md:my-14 lg:my-20">
         <h2 className="text-slate text-2xl md:text-2xl lg:text-4xl font-bold text-center">
-            We Also Handle
-          </h2>
-          <div className=" grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
-            {handles.map((item) => (
-              <div
-                key={item.id}
-                className="relative rounded-xl bg-[#EDEEF0] p-4 text-slate flex flex-col items-center justify-center gap-2 text-center"
-              >
-                <Icon icon={item.icon} width={24} height={24}  />
-                <h5 className="text-xs font-bold text-slate/80">{item.name}</h5>
-              </div>
-            ))}
-          </div>
+          We Also Handle
+        </h2>
+        <div className=" grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+          {handles.map((item) => (
+            <div
+              key={item.id}
+              className="relative rounded-xl bg-[#EDEEF0] p-4 text-slate flex flex-col items-center justify-center gap-2 text-center"
+            >
+              <Icon icon={item.icon} width={24} height={24} />
+              <h5 className="text-xs font-bold text-slate/80">{item.name}</h5>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
