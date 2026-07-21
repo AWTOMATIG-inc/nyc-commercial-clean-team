@@ -18,7 +18,8 @@
       "Bash(cd \"/c/Users/user/Desktop/nyc-commercial-clean-team\" && rm -f .graphify_step5.py .graphify_label.py)",
       "Bash(python .graphify_step6_html.py)",
       "Bash(python .graphify_step8.py)",
-      "Bash(python .graphify_step9.py)"
+      "Bash(python .graphify_step9.py)",
+      "Bash(timeout 60 bash -c 'until curl -sf http://localhost:3000 >/dev/null 2>&1; do sleep 1; done')"
     ],
     "additionalDirectories": [
       "c:\\c\\Users\\user\\Desktop\\nyc-commercial-clean-team"

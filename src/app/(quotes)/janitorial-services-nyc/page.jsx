@@ -1,10 +1,10 @@
 import ButtonSolid from "@/components/ButtonSolid";
 import Counter from "@/components/Counter";
+import ImageComparisonSlider from "@/components/ImageComparisonSlider";
 import ManagerReview from "@/components/quote/ManagerReview";
 import QuoteForm from "@/components/quote/QuoteForm";
 import { getFeedback } from "@/utility/getFeedback";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
 const steps = [
   {
     id: 1,
@@ -35,45 +35,100 @@ const services = [
   {
     id: 1,
     title: "Break Room Deep Clean",
-    image: "/images/quotes/break-room.jpg",
+    beforeImage: "/images/quotes/janitorial/janitorial-after01.jpeg",
+    afterImage: "/images/quotes/janitorial/janitorial-before01.png",
   },
   {
     id: 2,
     title: "Lobby Entrance Floor",
-    image: "/images/quotes/lobby-entrance.jpg",
+    beforeImage: "/images/quotes/janitorial/janitorial-after01.jpeg",
+    afterImage: "/images/quotes/janitorial/janitorial-before01.png",
   },
   {
     id: 3,
     title: "Restroom Deep Clean",
-    image: "/images/quotes/restroom-deep.jpg",
+    beforeImage: "/images/quotes/janitorial/janitorial-after01.jpeg",
+    afterImage: "/images/quotes/janitorial/janitorial-before01.png",
   },
 ];
 
-const handles = [
+const careServices = [
   {
     id: 1,
-    icon: "hugeicons:office",
-    name: "Office Cleaning",
+    icon: "material-symbols:corporate-fare-outline",
+    title: "Office Cleaning",
+    description:
+      "Daily or weekly cleaning tailored to your corporate environment. We ensure a pristine workspace for your team.",
   },
   {
     id: 2,
-    icon: "ci:layer",
-    name: "Floor Care & Waxing",
+    icon: "material-symbols:cleaning-services-outline",
+    title: "Janitorial Services",
+    description:
+      "Comprehensive facility maintenance including trash removal, dusting, and surface sanitation for NYC buildings.",
   },
   {
     id: 3,
-    icon: "material-symbols:construction",
-    name: "Post-Construction",
+    icon: "material-symbols:person-celebrate-outline",
+    title: "Day Porter Services",
+    description:
+      "On-site staff to maintain high-traffic areas, restrooms, and lobbies throughout your business hours.",
   },
   {
     id: 4,
-    icon: "icon-park-outline:medical-box",
-    name: "Medical Facility",
+    icon: "material-symbols:construction-outline",
+    title: "Post-Construction",
+    description:
+      "Detailed debris and dust removal to make your newly renovated space ready for immediate occupancy.",
   },
   {
     id: 5,
-    icon: "material-symbols:storefront-outline",
-    name: "Retail & Storefront",
+    icon: "material-symbols:sanitizer-outline",
+    title: "Deep Disinfection",
+    description:
+      "Hospital-grade sanitation and deep cleaning protocols to ensure the highest safety standards for your facility.",
+  },
+  {
+    id: 6,
+    icon: "material-symbols:event-outline",
+    title: "Move-Out & Event",
+    description:
+      "Pre and post-event cleanup or thorough move-out services to leave your space in perfect condition.",
+  },
+  {
+    id: 7,
+    icon: "material-symbols:layers-outline",
+    title: "Floor Stripping & Waxing",
+    description:
+      "Restore the shine to your hard floors with professional stripping, sealing, and high-gloss waxing services.",
+  },
+  {
+    id: 8,
+    icon: "material-symbols:texture-outline",
+    title: "Carpet Cleaning",
+    description:
+      "Deep steam cleaning and stain removal to extend the life of your commercial carpets and improve air quality.",
+  },
+  {
+    id: 9,
+    icon: "material-symbols:window-outline",
+    title: "Window Cleaning",
+    description:
+      "Streak-free interior and exterior window cleaning for a professional and bright business appearance.",
+  },
+  {
+    id: 10,
+    icon: "material-symbols:handyman-outline",
+    title: "Handyman Services",
+    description:
+      "Minor repairs, painting, and general maintenance to keep your facility running smoothly and looking its best.",
+  },
+  {
+    id: 11,
+    icon: "material-symbols:inventory-outline",
+    title: "Supply Management",
+    description:
+      "Automated restocking of paper products, soaps, and liners so you never run out of essential restroom supplies.",
   },
 ];
 export default async function Quotes() {
@@ -164,25 +219,13 @@ export default async function Quotes() {
 
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
           {services.map((item) => (
-            <div
-              key={item.id}
-              className="relative rounded-[20px] shadow-lg overflow-hidden"
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={400}
-                height={300}
-                className="w-full h-auto object-cover"
+            <div key={item.id}>
+              <ImageComparisonSlider
+                beforeImage={item.beforeImage}
+                afterImage={item.afterImage}
+                altBefore={`${item.title} before`}
+                altAfter={`${item.title} after`}
               />
-              <div className="flex justify-between items-start absolute top-5 left-0 w-full h-full px-4">
-                <span className="text-xs font-bold bg-black rounded-full text-white px-4 py-1.5 uppercase">
-                  before
-                </span>
-                <span className="text-xs font-bold bg-red rounded-full text-white px-4 py-1.5 uppercase">
-                  after
-                </span>
-              </div>
               <p className="text-sm  font-bold  py-6 text-center">
                 {item.title}
               </p>
@@ -192,17 +235,27 @@ export default async function Quotes() {
       </section>
       <ManagerReview feedbacks={feedbacks} />
       <section className="container my-10 md:my-14 lg:my-20">
-        <h2 className="text-slate text-2xl md:text-2xl lg:text-4xl font-bold text-center">
-          We Also Handle
-        </h2>
-        <div className=" grid grid-cols-2 md:grid-cols-5 gap-4 mt-8">
-          {handles.map((item) => (
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-slate text-2xl md:text-2xl lg:text-4xl font-bold">
+            Professional Care and Services
+          </h2>
+          <p className="mt-4 text-light-blue max-w-2xl mx-auto">
+            Advancing Cleaning & Outsourced Staff Service through Skilled
+            Management. Cleaning Driving And Security Service
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {careServices.map((item) => (
             <div
               key={item.id}
-              className="relative rounded-xl bg-[#EDEEF0] p-4 text-slate flex flex-col items-center justify-center gap-2 text-center"
+              className="p-8 rounded-xl border border-light-blue/30 bg-white shadow-sm flex flex-col gap-4"
             >
-              <Icon icon={item.icon} width={24} height={24} />
-              <h5 className="text-xs font-bold text-slate/80">{item.name}</h5>
+              <Icon icon={item.icon} width={40} height={40} className="text-slate" />
+              <h3 className="text-xl font-bold text-slate">{item.title}</h3>
+              <p className="text-sm flex-1 text-light-blue">{item.description}</p>
+              <button className="mt-auto w-max px-6 py-2 rounded-full text-sm font-bold border border-slate text-slate transition-colors duration-300 hover:bg-slate hover:text-white">
+                Book Now
+              </button>
             </div>
           ))}
         </div>
