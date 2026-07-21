@@ -87,7 +87,6 @@ const careServices = [
     title: "Deep Disinfection",
     description:
       "Hospital-grade sanitation and deep cleaning protocols to ensure the highest safety standards for your facility.",
-    highlight: true,
   },
   {
     id: 6,
@@ -249,35 +248,12 @@ export default async function Quotes() {
           {careServices.map((item) => (
             <div
               key={item.id}
-              className={`p-8 rounded-xl border flex flex-col gap-4 ${
-                item.highlight
-                  ? "bg-slate border-slate shadow-lg"
-                  : "bg-white border-light-blue/30 shadow-sm"
-              }`}
+              className="p-8 rounded-xl border border-light-blue/30 bg-white shadow-sm flex flex-col gap-4"
             >
-              <Icon
-                icon={item.icon}
-                width={40}
-                height={40}
-                className={item.highlight ? "text-white" : "text-slate"}
-              />
-              <h3
-                className={`text-xl font-bold ${item.highlight ? "text-white" : "text-slate"}`}
-              >
-                {item.title}
-              </h3>
-              <p
-                className={`text-sm flex-1 ${item.highlight ? "text-white/80" : "text-light-blue"}`}
-              >
-                {item.description}
-              </p>
-              <button
-                className={`mt-auto w-max px-6 py-2 rounded-full text-sm font-bold border transition-colors duration-300 ${
-                  item.highlight
-                    ? "bg-white text-slate border-white hover:bg-red hover:border-red hover:text-white"
-                    : "border-slate text-slate hover:bg-slate hover:text-white"
-                }`}
-              >
+              <Icon icon={item.icon} width={40} height={40} className="text-slate" />
+              <h3 className="text-xl font-bold text-slate">{item.title}</h3>
+              <p className="text-sm flex-1 text-light-blue">{item.description}</p>
+              <button className="mt-auto w-max px-6 py-2 rounded-full text-sm font-bold border border-slate text-slate transition-colors duration-300 hover:bg-slate hover:text-white">
                 Book Now
               </button>
             </div>
