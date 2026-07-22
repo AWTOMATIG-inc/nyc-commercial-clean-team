@@ -34,10 +34,10 @@ export default async function Quotes({ params }) {
                   {pageDetail.list.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-start sm:items-center gap-2"
+                      className="flex items-start gap-2"
                     >
                       <Icon icon="ix:success" width={17} height={17} />{" "}
-                      <span className="flex-1 relative -top-0.5 md:top-0 text-sm md:text-base">
+                      <span className="flex-1 relative -top-0.5 text-sm md:text-base">
                         {item}
                       </span>
                     </div>

@@ -2,13 +2,13 @@ export const quoteDetails = [
   {
     id: 1,
     pageName: "janitorial-services-nyc",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "NYC Janitorial Services",
+    subtitle: "Professional Janitorial Services for NYC Businesses",
+    desc: "Daily janitorial care from a licensed, insured NYC team — consistent results, every visit.",
     list: [
-      "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Licensed & Insured Crews",
+      "Flexible Daily Schedules",
+      "Eco-Friendly Supplies",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -61,14 +61,14 @@ export const quoteDetails = [
   {
     id: 2,
     pageName: "healthcare-facility-cleaning-nyc",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Healthcare Facility Cleaning",
+    subtitle: "Medical-Grade Cleaning for NYC Healthcare Facilities",
+    desc: "OSHA-compliant disinfection and sanitation trusted by NYC clinics, offices, and care facilities.",
     list: [
-      "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
-      "Dedicated Account Manager",
+      "OSHA-Compliant Protocols",
+      "Hospital-Grade Disinfectants",
+      "Trained Healthcare Crews",
+      "Flexible Off-Hours Service",
     ],
     steps: [
       {
@@ -120,14 +120,14 @@ export const quoteDetails = [
   {
     id: 3,
     pageName: "school-cleaning-nyc",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "School Cleaning Services",
+    subtitle: "Safe, Reliable School Cleaning Across NYC",
+    desc: "Keeping NYC schools clean and safe with vetted crews and child-safe cleaning products.",
     list: [
-      "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
-      "Dedicated Account Manager",
+      "Background-Checked Staff",
+      "Child-Safe Cleaning Products",
+      "Before & After-Hours Service",
+      "Summer Deep-Clean Programs",
     ],
     steps: [
       {
@@ -179,13 +179,13 @@ export const quoteDetails = [
   {
     id: 4,
     pageName: "commercial-office-cleaning-nyc",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Commercial Office Cleaning",
+    subtitle: "Office Cleaning Services for NYC Businesses",
+    desc: "Reliable office cleaning that keeps your NYC workspace spotless and client-ready.",
     list: [
-      "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
+      "Restroom & Kitchen Care",
+      "Trash & Recycling Removal",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -238,13 +238,13 @@ export const quoteDetails = [
   {
     id: 5,
     pageName: "commercial-cleaning-services-manhattan-nyc",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Manhattan Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services in Manhattan, NYC",
+    desc: "Trusted commercial cleaning for Manhattan offices, retail, and high-rise buildings.",
     list: [
+      "High-Rise Building Experience",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Flexible After-Hours Access",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -297,13 +297,13 @@ export const quoteDetails = [
   {
     id: 6,
     pageName: "commercial-cleaning-brooklyn",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Brooklyn Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services in Brooklyn, NY",
+    desc: "Dependable commercial cleaning crews serving Brooklyn offices, retail, and warehouses.",
     list: [
+      "Local Brooklyn Crews",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -356,13 +356,13 @@ export const quoteDetails = [
   {
     id: 7,
     pageName: "commercial-cleaning-queens",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Queens Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services in Queens, NY",
+    desc: "Reliable commercial cleaning for Queens offices, warehouses, and retail spaces.",
     list: [
+      "Local Queens Crews",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -415,13 +415,13 @@ export const quoteDetails = [
   {
     id: 8,
     pageName: "commercial-cleaning-bronx",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Bronx Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services in the Bronx, NY",
+    desc: "Trusted commercial cleaning crews for Bronx offices, facilities, and retail spaces.",
     list: [
+      "Local Bronx Crews",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -474,13 +474,13 @@ export const quoteDetails = [
   {
     id: 9,
     pageName: "commercial-cleaning-staten-island",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Staten Island Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services on Staten Island",
+    desc: "Reliable commercial cleaning for Staten Island offices, retail, and facilities.",
     list: [
+      "Local Staten Island Crews",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
       "Dedicated Account Manager",
     ],
     steps: [
@@ -533,13 +533,13 @@ export const quoteDetails = [
   {
     id: 10,
     pageName: "commercial-cleaning-long-island",
-    title: "Janitorial Services",
-    subtitle: "Reliable Commercial Janitorial Service for NYC Facilities",
-    desc: "NYC's most trusted commercial cleaning crews — tailored to your schedule.",
+    title: "Long Island Commercial Cleaning",
+    subtitle: "Commercial Cleaning Services Across Long Island",
+    desc: "Trusted commercial cleaning crews serving Long Island offices, retail, and facilities.",
     list: [
+      "Local Long Island Crews",
       "Fully Insured & Bonded",
-      "Custom Schedules",
-      "Eco-Friendly Products",
+      "Custom Cleaning Schedules",
       "Dedicated Account Manager",
     ],
     steps: [
