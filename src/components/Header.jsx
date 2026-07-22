@@ -2,6 +2,7 @@
 import logo from "@/assets/logos/nyc-logo.png";
 import { followUsLinks } from "@/constant/footer";
 import { headerLinks } from "@/constant/header";
+import { quoteDetails } from "@/constant/quotes/quoteDetails";
 import { trackCtaClick } from "@/lib/gtm";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -13,7 +14,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const path = usePathname();
-
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -44,12 +44,9 @@ export default function Header() {
   if (path.includes("thankyou")) {
     return null;
   }
-
   return (
-    
-    
     <header
-      className={`sticky ${path.includes("janitorial-services")?"top-0":"top-8"} z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
+      className={`sticky ${quoteDetails.some((item) => path.includes(item.pageName)) ? "top-0" : "top-8"} z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
         scrolled
           ? "opacity-0 -translate-y-full transition-transform duration-300"
           : "opacity-100 translate-y-0 transition-transform duration-300"
@@ -125,7 +122,10 @@ export default function Header() {
                   })}
                 </div>
                 <Link
-                  onClick={() => { setIsMenuOpen(!isMenuOpen); trackCtaClick("Schedule Service", "navbar"); }}
+                  onClick={() => {
+                    setIsMenuOpen(!isMenuOpen);
+                    trackCtaClick("Schedule Service", "navbar");
+                  }}
                   href="/booking"
                   className="w-fit mx-auto mt-10 block"
                 >
@@ -159,7 +159,10 @@ export default function Header() {
               className="h-auto"
             />
           </Link>
-          <Link href="/booking" onClick={() => trackCtaClick("Schedule Service", "navbar")}>
+          <Link
+            href="/booking"
+            onClick={() => trackCtaClick("Schedule Service", "navbar")}
+          >
             <ButtonSolid className="hidden lg:block">
               Schedule Service
             </ButtonSolid>
@@ -174,6 +177,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  
   );
 }
