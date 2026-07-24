@@ -76,4 +76,11 @@ export const careServices = [
     description:
       "Automated restocking of paper products, soaps, and liners so you never run out of essential restroom supplies.",
   },
+  {
+    id: 12,
+    icon: "material-symbols:water-drop-outline",
+    title: "Power Washing",
+    description:
+      "High-pressure exterior cleaning for sidewalks, facades, loading docks, and entryways to remove grime and buildup.",
+  },
 ];
