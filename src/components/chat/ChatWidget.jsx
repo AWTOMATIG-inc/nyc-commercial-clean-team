@@ -13,31 +13,54 @@ export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([OPENING_MESSAGE]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isLoading]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const trimmed = input.trim();
-    if (!trimmed) return;
+    if (!trimmed || isLoading) return;
 
-    setMessages((prev) => [...prev, { role: "user", content: trimmed }]);
+    const nextMessages = [...messages, { role: "user", content: trimmed }];
+    setMessages(nextMessages);
     setInput("");
+    setIsLoading(true);
 
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: nextMessages.map((m) => ({
+            role: m.role === "bot" ? "assistant" : "user",
+            content: m.content,
+          })),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.reply) {
+        throw new Error(data.error || "Chat request failed");
+      }
+
+      setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
+    } catch (error) {
       setMessages((prev) => [
         ...prev,
         {
           role: "bot",
           content:
-            "Thanks for your message! (AI isn't connected yet — that's Phase 2.)",
+            "Sorry, something went wrong — please try again in a moment.",
         },
       ]);
-    }, 600);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -77,6 +100,11 @@ export default function ChatWidget() {
                 {message.content}
               </div>
             ))}
+            {isLoading && (
+              <div className="self-start bg-white text-dark-slate border border-light-blue/30 rounded-2xl rounded-bl-sm max-w-[85%] px-4 py-2 text-sm leading-relaxed">
+                ...
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
 
@@ -87,12 +115,14 @@ export default function ChatWidget() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Type your message..."
-              className="flex-1 text-sm px-3 py-2 rounded-full border border-light-blue/50 focus:outline-none focus:border-slate"
+              disabled={isLoading}
+              className="flex-1 text-sm px-3 py-2 rounded-full border border-light-blue/50 focus:outline-none focus:border-slate disabled:opacity-60"
             />
             <button
               onClick={handleSend}
               aria-label="Send message"
-              className="size-9 shrink-0 flex items-center justify-center rounded-full bg-red text-white hover:bg-slate transition"
+              disabled={isLoading}
+              className="size-9 shrink-0 flex items-center justify-center rounded-full bg-red text-white hover:bg-slate transition disabled:opacity-60"
             >
               <Icon icon="mdi:send" width={18} height={18} />
             </button>
