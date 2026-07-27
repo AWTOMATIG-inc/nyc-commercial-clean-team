@@ -1,7 +1,8 @@
+import ChatWidget from "@/components/chat/ChatWidget";
 import Footer from "@/components/Footer";
 import GTMPageTracker from "@/components/GTMPageTracker";
 import Header from "@/components/Header";
-import ScrollToTopButton from "@/components/ScrollToTopButton";
+// import ScrollToTopButton from "@/components/ScrollToTopButton";
 import ToastProvider from "@/components/ToastProvider";
 import Topbar from "@/components/Topbar";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -78,7 +79,8 @@ export default function RootLayout({ children }) {
           <Topbar />
           <Header />
           {children}
-          <ScrollToTopButton />
+          {/* <ScrollToTopButton /> */}
+          <ChatWidget />
           <Footer />
         </ToastProvider>
       </body>
