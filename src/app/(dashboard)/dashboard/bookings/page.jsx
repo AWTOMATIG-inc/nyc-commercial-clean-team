@@ -1,234 +1,423 @@
 "use client";
-import { getColorStatus } from "@/utility/getStatusColor";
-import { GetTime } from "@/utility/GetTime";
-import { Icon } from "@iconify/react";
-import Image from "next/image";
-import { useEffect, useState, useTransition } from "react";
-import toast from "react-hot-toast";
-const statusList = [
-  { color: "bg-gray-400", name: "All" },
-  { color: "bg-orange-500", name: "Pending" },
-  { color: "bg-green-500", name: "Confirmed" },
-  { color: "bg-red-500", name: "Cencelled" },
-];
-export default function Bookings() {
-  const [bookings, setBookings] = useState([]);
-  const [page, setPage] = useState(1);
-  const [isPending, startTransition] = useTransition();
-  const [statusVal, setStatusVal] = useState("all");
-  const [totalPages, setTotalPages] = useState(1);
-  const [isRefresh, setIsRefresh] = useState(false);
-  const limit = 10;
 
-  const fetchBookings = async (currentPage, currentStatusVal) => {
-    const res = await fetch(
-      `/api/booking?page=${currentPage}&limit=${limit}&status=${currentStatusVal}`,
-    );
-    const result = await res.json();
-    if (result.success) {
-      setBookings(result.data);
-      setTotalPages(result.pagination.totalPages);
-    }
-  };
-  const handleStatusChange = async (id, status) => {
+import React, { useEffect, useState, useMemo, Suspense } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Icon } from "@iconify/react";
+import toast from "react-hot-toast";
+import StatusBadge from "@/components/dashboard/ui/StatusBadge";
+import DataTable from "@/components/dashboard/ui/DataTable";
+import Pagination from "@/components/dashboard/ui/Pagination";
+import BookingDrawer from "@/components/dashboard/ui/BookingDrawer";
+
+function BookingsContent() {
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get("search") || "";
+
+  const [bookings, setBookings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const pageSize = 10;
+
+  // Fetch all bookings from API
+  const fetchBookings = async () => {
     try {
-      const formData = new FormData();
-      formData.append("status", status);
-      const res = await fetch("/api/booking/" + id, {
-        method: "PUT",
-        body: formData,
-      });
+      setIsLoading(true);
+      const res = await fetch("/api/booking?limit=100");
+      if (!res.ok) throw new Error("Failed to fetch bookings");
       const data = await res.json();
 
-      if (data) {
-        setIsRefresh(!isRefresh);
-        toast.success("Status change successfully!");
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      const items = Array.isArray(data)
+        ? data
+        : data.data || [];
+
+      setBookings(items);
+    } catch (err) {
+      console.error("Error loading bookings:", err);
+      toast.error(err.message);
+    } finally {
+      setIsLoading(false);
     }
   };
-   const handleDelete = async (id) => {
-    const userConfirmed = confirm("Are you sure you want to delete this item?");
-    if (!userConfirmed) return;
+
+  useEffect(() => {
+    fetchBookings();
+  }, []);
+
+  // Sync initial query param if present
+  useEffect(() => {
+    if (initialSearch) {
+      setSearchQuery(initialSearch);
+    }
+  }, [initialSearch]);
+
+  // Status counts calculated from real fetched data
+  const statusCounts = useMemo(() => {
+    const counts = { all: bookings.length, pending: 0, confirmed: 0, cancelled: 0 };
+    bookings.forEach((b) => {
+      const st = String(b.status || "").toLowerCase().trim();
+      if (st === "pending") counts.pending += 1;
+      else if (st === "confirmed") counts.confirmed += 1;
+      else if (st === "cancelled" || st === "cencelled") counts.cancelled += 1;
+    });
+    return counts;
+  }, [bookings]);
+
+  // Handle Delete
+  const handleDelete = async (id, e) => {
+    if (e) e.stopPropagation();
+    if (!confirm("Are you sure you want to delete this booking?")) return;
 
     try {
-      const response = await fetch(`/api/booking/${id}`, {
+      const res = await fetch(`/api/booking/${id}`, {
         method: "DELETE",
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      setIsRefresh(!isRefresh);
+      if (!res.ok) throw new Error("Failed to delete booking");
+      setBookings((prev) => prev.filter((b) => b._id !== id));
       toast.success("Booking deleted successfully!");
-    } catch (error) {
-      toast.error(error.message);
-      console.error("There was a problem with the delete operation:", error);
+    } catch (err) {
+      toast.error(err.message);
     }
   };
-  useEffect(() => {
-    startTransition(() => {
-      fetchBookings(page, statusVal);
+
+  // Handle Status Change
+  const handleStatusChange = async (id, newStatus) => {
+    try {
+      const res = await fetch(`/api/booking/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      if (!res.ok) throw new Error("Failed to update status");
+
+      setBookings((prev) =>
+        prev.map((b) => (b._id === id ? { ...b, status: newStatus } : b))
+      );
+      if (selectedBooking && selectedBooking._id === id) {
+        setSelectedBooking((prev) => ({ ...prev, status: newStatus }));
+      }
+      toast.success(`Booking status updated to ${newStatus}`);
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  // Filtered & Paginated Bookings
+  const filteredBookings = useMemo(() => {
+    return bookings.filter((b) => {
+      // Search query check
+      const query = searchQuery.toLowerCase().trim();
+      const name = `${b.firstName || ""} ${b.lastName || ""}`.toLowerCase();
+      const company = (b.companyName || "").toLowerCase();
+      const idStr = (b.bookingId || b._id || "").toLowerCase();
+      const email = (b.email || "").toLowerCase();
+      const matchesSearch =
+        !query ||
+        name.includes(query) ||
+        company.includes(query) ||
+        idStr.includes(query) ||
+        email.includes(query);
+
+      // Status check
+      const st = String(b.status || "").toLowerCase();
+      const matchesStatus =
+        statusFilter === "all" ||
+        (statusFilter === "cancelled" ? ["cancelled", "cencelled"].includes(st) : st === statusFilter);
+
+      // Facility Type check
+      const matchesType =
+        typeFilter === "all" ||
+        (b.facilityType || "").toLowerCase().includes(typeFilter.toLowerCase());
+
+      return matchesSearch && matchesStatus && matchesType;
     });
-  }, [page, statusVal, isRefresh]);
+  }, [bookings, searchQuery, statusFilter, typeFilter]);
+
+  const totalPages = Math.ceil(filteredBookings.length / pageSize) || 1;
+  const paginatedBookings = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return filteredBookings.slice(start, start + pageSize);
+  }, [filteredBookings, currentPage, pageSize]);
+
+  // Reset to page 1 on filter change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter, typeFilter]);
+
+  // Export CSV Helper
+  const handleExportCSV = () => {
+    if (filteredBookings.length === 0) {
+      toast.error("No bookings to export");
+      return;
+    }
+    const headers = ["Booking ID,Client Name,Company,Email,Phone,Service Type,Date,Status\n"];
+    const rows = filteredBookings.map(
+      (b) =>
+        `"${b.bookingId || b._id}","${b.firstName || ""} ${b.lastName || ""}","${b.companyName || ""}","${b.email || ""}","${b.phone || ""}","${b.facilityType || ""}","${b.preferredStartDate || ""}","${b.status || ""}"`
+    );
+    const csvContent = "data:text/csv;charset=utf-8," + headers.concat(rows).join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `NYC_Clean_Bookings_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    toast.success("Bookings exported to CSV!");
+  };
+
+  const columns = [
+    {
+      header: "Booking ID",
+      accessor: "bookingId",
+      cell: (row) => (
+        <span className="font-jetbrains font-bold text-slate-900">
+          #{row.bookingId || row._id?.slice(-6).toUpperCase()}
+        </span>
+      ),
+    },
+    {
+      header: "Client & Company",
+      cell: (row) => (
+        <div>
+          <p className="font-bold text-slate-900">
+            {row.firstName} {row.lastName}
+          </p>
+          <p className="text-xs text-slate-500 font-medium">{row.companyName || "Personal Client"}</p>
+        </div>
+      ),
+    },
+    {
+      header: "Facility Type",
+      accessor: "facilityType",
+      cell: (row) => (
+        <span className="capitalize text-slate-700 font-semibold">
+          {row.facilityType || "Standard Commercial"}
+        </span>
+      ),
+    },
+    {
+      header: "Schedule Date",
+      cell: (row) => (
+        <span className="text-slate-600 font-medium">
+          {row.preferredStartDate || "Flexible"}
+        </span>
+      ),
+    },
+    {
+      header: "Location / Zip",
+      accessor: "zipCode",
+      cell: (row) => (
+        <span className="text-slate-500 font-jetbrains text-xs">
+          {row.area || "NYC"} ({row.zipCode || "10001"})
+        </span>
+      ),
+    },
+    {
+      header: "Status",
+      cell: (row) => <StatusBadge status={row.status} />,
+    },
+    {
+      header: "Actions",
+      cell: (row) => (
+        <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={() => {
+              setSelectedBooking(row);
+              setIsDrawerOpen(true);
+            }}
+            className="p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-all cursor-pointer"
+            title="View Details"
+          >
+            <Icon icon="lucide:eye" className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => {
+              setSelectedBooking(row);
+              setIsDrawerOpen(true);
+            }}
+            className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all cursor-pointer"
+            title="Edit Booking Status"
+          >
+            <Icon icon="lucide:edit-3" className="w-4 h-4" />
+          </button>
+          <button
+            onClick={(e) => handleDelete(row._id, e)}
+            className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all cursor-pointer"
+            title="Delete Booking"
+          >
+            <Icon icon="lucide:trash-2" className="w-4 h-4" />
+          </button>
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <div className="mt-8">
-      {bookings.length <= 0 ? (
-        <div className="w-fit mx-auto text-center">
-          <Image
-            src="/images/dashboard/empty.png"
-            width={400}
-            height={400}
-            alt="empty"
-          />
-          <p className="text-gray-500 text-xl mt-8 font-inter">
-            There is no booking yet!
+    <div className="space-y-6 font-inter">
+      {/* Header Title & Navigation Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-extrabold text-slate-900 font-jetbrains tracking-tight">
+            Booking Management
+          </h1>
+          <p className="text-xs text-slate-500 mt-1">
+            Monitor, filter, export and manage commercial cleaning dispatches and client requests.
           </p>
         </div>
-      ) : (
-        <div className="w">
-          <div className="bg-slate w-full p-2 rounded-2xl text-slate-300 flex gap-3 mb-1">
-            {statusList.map((item, id) => (
-              <button
-                key={id}
-                onClick={() => setStatusVal(item.name.toLowerCase())}
-                className="bg-[#1e3370] px-4 py-2 flex gap-1 items-center"
-              >
-                <span
-                  className={`size-2 rounded-full inline-block ${item.color}`}
-                ></span>
-                <span>{item.name}</span>
-              </button>
-            ))}
-          </div>
-          <div className="border border-gray-500 rounded-xl overflow-hidden">
-            <table className="table-auto w-full">
-              <thead className="">
-                <tr className="bg-slate text-slate-300 text-left">
-                  <th className="px-4 py-5">ID</th>
-                  <th className="px-2 py-5">CLIENT</th>
-                  <th className="px-2 py-5 ">SERVICES</th>
-                  <th className="px-2 py-5">LOCATION</th>
-                  <th className="px-2 py-5">DATE</th>
-                  <th className="px-2 py-5">FIQUENCY</th>
-                  <th className="px-2 py-5">STATUS</th>
-                  <th className="px-2 py-5">ACTION</th>
-                </tr>
-              </thead>
 
-              <tbody>
-                {bookings?.map((booking, index) => (
-                  <tr
-                    key={booking._id}
-                    className="bg-slate text-slate-400 border-t text-sm"
-                  >
-                    <td className="px-4 py-2.5 lg:min-w-40">
-                      NYC-{booking.bookingId}
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 flex flex-col">
-                      <span className="text-slate-200 capitalize">
-                        {booking.firstName} {booking.lastName}
-                      </span>
-                      <span className="text-sm">{booking?.companyName}</span>
-                      <p className="text-sm flex items-center gap-0.5"><Icon icon="ic:outline-email"/>{booking.email}</p>
-                      <p className="text-sm flex items-center gap-0.5"><Icon icon="ic:outline-phone"/>{booking.phone}</p>
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 max-w-70">
-                      <div className="flex flex-wrap gap-2 text-xs">
-                        {booking?.services.map((item, sId) => (
-                          <span
-                            key={sId}
-                            className="bg-[#1e3370] px-2 py-1 rounded-lg"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 ">
-                    
-                        <span className="">{booking.propertyAddress}</span>
-                   
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 ">
-                      <div className="flex flex-col">
-                        <span>{GetTime(booking.preferredStartDate)}</span>
-                      </div>
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40">
-                      {booking?.cleaningSchedule}
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 ">
-                      <div
-                        className={` text-sm  p-2 rounded-xl flex items-center gap-1 ${getColorStatus(booking.status)[0]}`}
-                      >
-                        <span
-                          className={`size-2 rounded-full inline-block ${getColorStatus(booking.status)[1]}`}
-                        ></span>
-                        <select
-                          onChange={(e) => handleStatusChange(booking._id,e.target.value)}
-                          value={booking.status}
-                        >
-                          <option value="pending">Pending</option>
-                          <option value="confirmed">Confirmed</option>
-                          <option value="cenceled">Cenceled</option>
-                        </select>
-                      </div>
-                    </td>
-                    <td className="px-2 py-2">
-                      <div className="flex items-center gap-x-2">
-                        <button onClick={() => handleDelete(booking._id)} className="cursor-pointer hover:text-red-500 hover:border-red-500">
-                          <Icon
-                            icon="mingcute:delete-2-line"
-                            width="20"
-                            height="20"
-                          />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-8">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleExportCSV}
+            className="flex items-center gap-2 px-4 py-2 text-xs border border-slate-200 rounded-xl text-slate-700 bg-white hover:bg-slate-50 font-bold transition-all shadow-xs cursor-pointer"
+          >
+            <Icon icon="lucide:download" className="w-4 h-4" />
+            <span>Export CSV</span>
+          </button>
 
-            {[...Array(totalPages)].map((_, index) => {
-              const pageNumber = index + 1;
-
-              return (
-                <button
-                  key={pageNumber}
-                  onClick={() => setPage(pageNumber)}
-                  className={`px-4 py-2 rounded ${
-                    page === pageNumber ? "bg-slate text-white" : "bg-gray-200"
-                  }`}
-                >
-                  {pageNumber}
-                </button>
-              );
-            })}
-
-            <button
-              disabled={page === totalPages}
-              onClick={() => setPage((prev) => prev + 1)}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          <Link
+            href="/booking"
+            target="_blank"
+            className="flex items-center gap-2 px-4 py-2 text-xs rounded-xl text-white bg-[#ed0505] hover:bg-red-700 font-bold transition-all shadow-xs cursor-pointer"
+          >
+            <Icon icon="lucide:plus" className="w-4 h-4" />
+            <span>New Booking</span>
+          </Link>
         </div>
-      )}
+      </div>
+
+      {/* Status Nav Tabs (All, Pending, Confirmed, Cancelled) */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-200/80">
+        {[
+          { key: "all", label: "All Bookings", count: statusCounts.all },
+          { key: "pending", label: "Pending", count: statusCounts.pending },
+          { key: "confirmed", label: "Confirmed", count: statusCounts.confirmed },
+          { key: "cancelled", label: "Cancelled", count: statusCounts.cancelled },
+        ].map((tab) => {
+          const isActive = statusFilter === tab.key;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => setStatusFilter(tab.key)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer shrink-0 border ${
+                isActive
+                  ? "bg-[#1d2f64] text-white border-[#1d2f64] shadow-xs"
+                  : "bg-white text-slate-600 border-slate-200/80 hover:bg-slate-50 hover:text-slate-900"
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] ${
+                  isActive
+                    ? "bg-white/20 text-white"
+                    : "bg-slate-100 text-slate-600"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Toolbar Filter Inputs */}
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-3 w-full">
+          {/* Search Input */}
+          <div className="relative flex-1 min-w-[240px]">
+            <Icon
+              icon="lucide:search"
+              className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"
+            />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by ID, client name, email, company..."
+              className="w-full pl-10 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/20 focus:border-[#1d2f64] text-slate-800 placeholder-slate-400 font-medium transition-all"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              >
+                <Icon icon="lucide:x" className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {/* Facility Type Filter */}
+          <select
+            value={typeFilter}
+            onChange={(e) => setTypeFilter(e.target.value)}
+            className="px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#1d2f64] text-slate-700 font-semibold transition-all cursor-pointer"
+          >
+            <option value="all">Facility: All Types</option>
+            <option value="office">Office Cleaning</option>
+            <option value="medical">Medical Facility</option>
+            <option value="industrial">Industrial / Warehouse</option>
+            <option value="retail">Retail / Storefront</option>
+          </select>
+
+          {/* Reset Filters */}
+          {(searchQuery || statusFilter !== "all" || typeFilter !== "all") && (
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setStatusFilter("all");
+                setTypeFilter("all");
+              }}
+              className="px-3 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-xl font-semibold transition-all cursor-pointer flex items-center gap-1"
+            >
+              <Icon icon="lucide:rotate-ccw" className="w-3.5 h-3.5" />
+              <span>Reset</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Main Data Table */}
+      <DataTable
+        columns={columns}
+        data={paginatedBookings}
+        isLoading={isLoading}
+        emptyMessage="No bookings matching selected criteria"
+        onRowClick={(row) => {
+          setSelectedBooking(row);
+          setIsDrawerOpen(true);
+        }}
+      />
+
+      {/* Pagination Footer */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalResults={filteredBookings.length}
+        pageSize={pageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
+
+      {/* Slide-over Detail Drawer */}
+      <BookingDrawer
+        booking={selectedBooking}
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        onStatusChange={handleStatusChange}
+      />
     </div>
+  );
+}
+
+export default function BookingsManagementPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-slate-400 text-xs">Loading bookings...</div>}>
+      <BookingsContent />
+    </Suspense>
   );
 }

@@ -1,13 +1,17 @@
 "use client";
-import Button from "@/components/Button";
+
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Icon } from "@iconify/react";
 import { feedbackYupSchema } from "@/yup/feedbackYupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import toast from "react-hot-toast";
 
 export default function FeedbackForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     reset,
@@ -18,17 +22,19 @@ export default function FeedbackForm() {
   } = useForm({
     defaultValues: {
       clientName: "",
-      date: "",
-      rating: "0",
+      feedbackDate: "",
+      rating: "5",
       feedback: "",
       image: null,
     },
     resolver: yupResolver(feedbackYupSchema),
   });
+
   const feedbackField = useWatch({
     control,
     name: "feedback",
-  });
+  }) || "";
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("clientName", data.clientName);
@@ -44,133 +50,174 @@ export default function FeedbackForm() {
         method: "POST",
         body: formData,
       });
-      const FeedbackData = await res.json();
-      if (FeedbackData) {
+      const feedbackData = await res.json();
+      if (res.ok) {
         reset();
         toast.success("Feedback added successfully!");
+        router.push("/dashboard/client-feedback");
+      } else {
+        toast.error(feedbackData?.error || "Failed to create feedback");
       }
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+      console.error(error);
       toast.error(error?.message);
+    } finally {
+      setLoading(false);
     }
   };
+
   return (
-    <div className="mt-14 md:w-[70%] mx-auto">
-      <h1 className="font-bold text-3xl mb-6">NYC Customers Feedback</h1>
-      <div className="custom-shadow border border-gray-300 px-8 py-10 rounded-lg">
-        <h1 className="font-semibold text-2xl">Create Feedback</h1>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className=" mt-6 space-y-5"
-          action="#"
+    <div className="max-w-3xl mx-auto space-y-6 font-inter">
+      {/* Header Bar */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900 font-jetbrains tracking-tight">
+            Create Client Feedback
+          </h1>
+          <p className="text-xs text-slate-500 mt-1">
+            Add a new verified testimonial entry and client rating.
+          </p>
+        </div>
+
+        <Link
+          href="/dashboard/client-feedback"
+          className="flex items-center gap-2 px-4 py-2.5 text-xs rounded-xl border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:border-slate-400 font-bold transition-all shadow-2xs w-fit"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            <div>
-              <label htmlFor="" className="mb-1 block">
-                Client Name:
+          <Icon icon="lucide:arrow-left" className="w-4 h-4" />
+          <span>Back to Feedback</span>
+        </Link>
+      </div>
+
+      {/* Main Form Container */}
+      <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Client Name */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+                Client Name <span className="text-[#ed0505]">*</span>
               </label>
               <input
                 type="text"
-                className={`border  p-4 rounded-md w-full focus:outline-none ${
-                  errors.clientName ? "border-red-500" : "border-gray-300"
-                }`}
-                placeholder="Ex: John Doe"
+                placeholder="e.g. Sarah Jenkins"
+                className={`w-full px-4 py-3 text-xs bg-white border ${
+                  errors.clientName ? "border-rose-500 bg-rose-50/20" : "border-slate-300 hover:border-slate-400"
+                } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 placeholder:text-slate-400 font-medium transition-all shadow-2xs`}
                 {...register("clientName")}
               />
               {errors.clientName && (
-                <p className="text-red-500 text-sm mt-1 ml-1">
+                <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">
                   {errors.clientName.message}
                 </p>
               )}
             </div>
-            <div>
-              <label htmlFor="" className="mb-1 block">
-                Client Profile:
+
+            {/* Client Profile Photo */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+                Client Profile Photo
               </label>
               <input
                 type="file"
-                className={`border  p-4 rounded-md accent-amber-50 w-full focus:outline-none ${
-                  errors.image ? "border-red-500" : "border-gray-300"
-                }`}
+                accept="image/jpg, image/jpeg, image/png, image/webp"
+                className={`w-full px-4 py-2.5 text-xs bg-white border ${
+                  errors.image ? "border-rose-500" : "border-slate-300 hover:border-slate-400"
+                } rounded-xl focus:outline-none focus:border-[#1d2f64] text-slate-700 cursor-pointer shadow-2xs`}
                 {...register("image")}
-                accept="image/jpg, image/jpeg, image/png"
               />
               {errors.image && (
-                <p className="text-red-500 text-sm mt-1 ml-1">
+                <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">
                   {errors.image.message}
                 </p>
               )}
             </div>
 
-            <div>
-              <label htmlFor="" className="mb-1 block">
-                Rating:
+            {/* Rating Selector */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+                Rating Score (Stars) <span className="text-[#ed0505]">*</span>
               </label>
               <select
                 {...register("rating")}
-                className={`border  p-4 rounded-md w-full focus:outline-none ${
-                  errors.clientName ? "border-red-500" : "border-gray-300"
-                }`}
+                className="w-full px-4 py-3 text-xs bg-white border border-slate-300 hover:border-slate-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 font-bold transition-all cursor-pointer shadow-2xs"
               >
-                {Array.from({ length: 6 }).map((_, index) => (
-                  <option key={index} value={index}>
-                    {index}
-                  </option>
-                ))}
+                <option value="5">5 Stars (Excellent)</option>
+                <option value="4">4 Stars (Good)</option>
+                <option value="3">3 Stars (Average)</option>
+                <option value="2">2 Stars (Poor)</option>
+                <option value="1">1 Star (Very Poor)</option>
               </select>
-
               {errors.rating && (
-                <p className="text-red-500 text-sm mt-1 ml-1">
+                <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">
                   {errors.rating.message}
                 </p>
               )}
             </div>
-            <div>
-              <label htmlFor="" className="mb-1 block">
-                Feedback Date:
+
+            {/* Feedback Date */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+                Feedback Date & Time
               </label>
               <input
                 type="datetime-local"
-                className={`border  p-4 rounded-md w-full focus:outline-none ${
-                  errors.feedbackDate ? "border-red-500" : "border-gray-300"
-                }`}
-                placeholder="feedback date"
+                className={`w-full px-4 py-2.5 text-xs bg-white border ${
+                  errors.feedbackDate ? "border-rose-500 bg-rose-50/20" : "border-slate-300 hover:border-slate-400"
+                } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 font-medium transition-all shadow-2xs`}
                 {...register("feedbackDate")}
               />
               {errors.feedbackDate && (
-                <p className="text-red-500 text-sm mt-1 ml-1">
+                <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">
                   {errors.feedbackDate.message}
                 </p>
               )}
             </div>
           </div>
-          <div>
-            <label htmlFor="" className="mb-1 block">
-              Feedback:
+
+          {/* Feedback Testimonial Content */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+              Feedback Testimonial Content <span className="text-[#ed0505]">*</span>
             </label>
             <textarea
-              placeholder="Write something..."
-              className={`border border-gray-300 w-full focus:outline-0 rounded-md p-3 min-h-24 focus:outline-none ${
-                errors.feedback ? "border-red-500" : "border-gray-300"
-              }`}
+              placeholder="Enter client testimonial or feedback details..."
+              className={`w-full px-4 py-3 text-xs bg-white border ${
+                errors.feedback ? "border-rose-500 bg-rose-50/20" : "border-slate-300 hover:border-slate-400"
+              } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 placeholder:text-slate-400 font-medium transition-all min-h-28 shadow-2xs`}
               {...register("feedback")}
-            ></textarea>
-            <div className="flex items-center justify-between">
-              {errors.feedback && (
-                <p className="text-red-500 text-sm mt-1 ml-1">
+            />
+            <div className="flex items-center justify-between mt-1">
+              {errors.feedback ? (
+                <p className="text-xs font-semibold text-rose-500 pl-0.5">
                   {errors.feedback.message}
                 </p>
-              )}
-              <p className={`w-fit ml-auto ${feedbackField.length>255&&"text-red"}`}>{feedbackField.length}</p>
+              ) : <span />}
+              <span
+                className={`text-[11px] font-mono ${
+                  feedbackField.length > 255 ? "text-rose-500 font-bold" : "text-slate-400"
+                }`}
+              >
+                {feedbackField.length} / 255
+              </span>
             </div>
           </div>
-          <div className="w-fit ml-auto">
-            <Button
-              className="text-white !bg-blue-600"
-              name={loading ? "submiting..." : "Submit"}
-            />
+
+          {/* Form Actions */}
+          <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+            <Link
+              href="/dashboard/client-feedback"
+              className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 font-bold text-xs transition-all shadow-2xs"
+            >
+              Cancel
+            </Link>
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-2.5 rounded-xl text-white bg-[#ed0505] hover:bg-red-700 font-bold text-xs transition-all shadow-xs cursor-pointer disabled:opacity-50 flex items-center gap-2"
+            >
+              <Icon icon="lucide:check-circle-2" className="w-4 h-4" />
+              <span>{loading ? "Submitting..." : "Submit Feedback"}</span>
+            </button>
           </div>
         </form>
       </div>
