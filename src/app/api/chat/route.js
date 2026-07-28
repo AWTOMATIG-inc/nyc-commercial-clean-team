@@ -24,6 +24,17 @@ function detectsBookingIntent(message) {
   return BOOKING_INTENT_PATTERN.test(message || "");
 }
 
+// Simple, non-exhaustive keyword check for gratitude/closing phrases — see
+// 00-ARCHITECTURE.md's "Session closing" section. Only checked outside an
+// active quote flow so it can't misfire on a field answer that happens to
+// contain "thanks".
+const CLOSING_INTENT_PATTERN =
+  /\b(thanks|thank you|thank u|thx|ty|that'?s all|that is all|no more questions|nothing else|goodbye|good ?bye|bye)\b/i;
+
+function detectsClosingIntent(message) {
+  return CLOSING_INTENT_PATTERN.test(message || "");
+}
+
 async function submitQuote(request, collected, category) {
   const formData = new FormData();
   formData.append("fullName", collected.fullName);
@@ -67,6 +78,7 @@ export async function POST(request) {
             reply:
               "I wasn't able to get a valid answer for that, so I'll close this chat for now. Feel free to start over anytime, or give us a call!",
             quoteFlow: null,
+            close: true,
           });
         }
         return NextResponse.json({
@@ -106,6 +118,13 @@ export async function POST(request) {
         reply:
           "You're all set! Your quote request has been submitted and our team will be in touch shortly. Anything else I can help with?",
         quoteFlow: null,
+      });
+    }
+
+    if (detectsClosingIntent(lastUserMessage)) {
+      return NextResponse.json({
+        reply: "Great, glad I could help! Closing this chat now.",
+        close: true,
       });
     }
 

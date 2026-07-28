@@ -14,6 +14,18 @@ const QUOTE_FLOW_KEY = "chat_quote_flow";
 const CHAR_TRIM_THRESHOLD = 7000;
 const MAX_MESSAGES = 60;
 
+const NUDGE_MS = 3 * 60 * 1000;
+const IDLE_CLOSE_MS = 10 * 60 * 1000;
+const COLLAPSE_DELAY_MS = 3000;
+
+const NUDGE_MESSAGE = {
+  role: "bot",
+  content: "Still there? Happy to help if you have more questions.",
+};
+
+const IDLE_CLOSE_MESSAGE =
+  "It looks like you've stepped away, so I'll close this chat for now. Feel free to start a new conversation anytime!";
+
 function trimHistory(msgs) {
   let trimmed = msgs;
   const totalChars = (arr) =>
@@ -38,6 +50,9 @@ export default function ChatWidget() {
   const [quoteFlow, setQuoteFlow] = useState(null);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const nudgeTimeoutRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
+  const nudgeFiredRef = useRef(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -89,6 +104,59 @@ export default function ChatWidget() {
     }
   }, [quoteFlow]);
 
+  // Shared close behavior for all four triggers (thank-you, idle 10-min,
+  // retry-exhaustion, and — indirectly — the idle 3-min nudge which never
+  // calls this). Shows the closing line, then collapses to the launcher and
+  // clears the conversation so reopening starts completely fresh.
+  const closeChat = (closingMessage) => {
+    if (nudgeTimeoutRef.current) clearTimeout(nudgeTimeoutRef.current);
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+
+    setMessages((prev) =>
+      trimHistory([...prev, { role: "bot", content: closingMessage }])
+    );
+    setQuoteFlow(null);
+
+    setTimeout(() => {
+      setIsOpen(false);
+      setMessages([OPENING_MESSAGE]);
+      setInput("");
+      nudgeFiredRef.current = false;
+      try {
+        sessionStorage.removeItem(CHAT_HISTORY_KEY);
+        sessionStorage.removeItem(QUOTE_FLOW_KEY);
+      } catch (error) {
+        // sessionStorage unavailable — nothing to clear.
+      }
+    }, COLLAPSE_DELAY_MS);
+  };
+
+  // Idle nudge (3 min) + idle auto-close (10 min). Both timers reset on
+  // every new message (user or bot), including the nudge message itself —
+  // the nudgeFiredRef guard just stops the nudge from repeating every 3
+  // minutes while the close timer keeps counting down toward 10.
+  useEffect(() => {
+    if (!isOpen) return;
+    const hasExchange = messages.some((m) => m.role === "user");
+    if (!hasExchange) return;
+
+    if (!nudgeFiredRef.current) {
+      nudgeTimeoutRef.current = setTimeout(() => {
+        nudgeFiredRef.current = true;
+        setMessages((prev) => trimHistory([...prev, NUDGE_MESSAGE]));
+      }, NUDGE_MS);
+    }
+
+    closeTimeoutRef.current = setTimeout(() => {
+      closeChat(IDLE_CLOSE_MESSAGE);
+    }, IDLE_CLOSE_MS);
+
+    return () => {
+      clearTimeout(nudgeTimeoutRef.current);
+      clearTimeout(closeTimeoutRef.current);
+    };
+  }, [messages, isOpen]);
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
@@ -99,6 +167,7 @@ export default function ChatWidget() {
     ]);
     setMessages(nextMessages);
     setInput("");
+    nudgeFiredRef.current = false;
     setIsLoading(true);
 
     try {
@@ -128,12 +197,16 @@ export default function ChatWidget() {
       }
 
       setQuoteFlow(data.quoteFlow ?? null);
-      setMessages((prev) =>
-        trimHistory([
-          ...prev,
-          { role: "bot", content: data.reply, booking: !!data.booking },
-        ])
-      );
+      if (data.close) {
+        closeChat(data.reply);
+      } else {
+        setMessages((prev) =>
+          trimHistory([
+            ...prev,
+            { role: "bot", content: data.reply, booking: !!data.booking },
+          ])
+        );
+      }
     } catch (error) {
       setMessages((prev) =>
         trimHistory([
