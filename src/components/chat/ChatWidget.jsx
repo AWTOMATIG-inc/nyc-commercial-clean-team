@@ -9,6 +9,26 @@ const OPENING_MESSAGE = {
     "Hi! I can answer questions about our services or help you request a free quote. How can I help?",
 };
 
+const CHAT_HISTORY_KEY = "chat_history";
+const CHAR_TRIM_THRESHOLD = 7000;
+const MAX_MESSAGES = 60;
+
+function trimHistory(msgs) {
+  let trimmed = msgs;
+  const totalChars = (arr) =>
+    arr.reduce((sum, m) => sum + m.content.length, 0);
+
+  while (totalChars(trimmed) > CHAR_TRIM_THRESHOLD && trimmed.length > 2) {
+    trimmed = trimmed.slice(2);
+  }
+
+  if (trimmed.length > MAX_MESSAGES) {
+    trimmed = trimmed.slice(trimmed.length - MAX_MESSAGES);
+  }
+
+  return trimmed;
+}
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([OPENING_MESSAGE]);
@@ -22,11 +42,36 @@ export default function ChatWidget() {
     }
   }, [messages, isOpen, isLoading]);
 
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(CHAT_HISTORY_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMessages(trimHistory(parsed));
+        }
+      }
+    } catch (error) {
+      // sessionStorage unavailable/corrupted — fall back to the opening message.
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+    } catch (error) {
+      // sessionStorage unavailable (e.g. private browsing quota) — skip persisting.
+    }
+  }, [messages]);
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
 
-    const nextMessages = [...messages, { role: "user", content: trimmed }];
+    const nextMessages = trimHistory([
+      ...messages,
+      { role: "user", content: trimmed },
+    ]);
     setMessages(nextMessages);
     setInput("");
     setIsLoading(true);
@@ -48,16 +93,20 @@ export default function ChatWidget() {
         throw new Error(data.error || "Chat request failed");
       }
 
-      setMessages((prev) => [...prev, { role: "bot", content: data.reply }]);
+      setMessages((prev) =>
+        trimHistory([...prev, { role: "bot", content: data.reply }])
+      );
     } catch (error) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "bot",
-          content:
-            "Sorry, something went wrong — please try again in a moment.",
-        },
-      ]);
+      setMessages((prev) =>
+        trimHistory([
+          ...prev,
+          {
+            role: "bot",
+            content:
+              "Sorry, something went wrong — please try again in a moment.",
+          },
+        ])
+      );
     } finally {
       setIsLoading(false);
     }

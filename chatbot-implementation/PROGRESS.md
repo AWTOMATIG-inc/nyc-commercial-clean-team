@@ -12,7 +12,7 @@ Gemini key provided had no usable quota). See `00-ARCHITECTURE.md`'s
 |---|---|---|---|---|---|
 | 1 | Widget shell | `phase-01-widget-shell.md` | Done ✅ | 2026-07-27 | |
 | 2 | Gemini connection + basic Q&A | `phase-02-gemini-qa.md` | Done ✅ | 2026-07-27 | Provider switched to Groq (`openai/gpt-oss-120b`), see note above |
-| 3 | Client-side memory | `phase-03-client-memory.md` | Not Started | | |
+| 3 | Client-side memory | `phase-03-client-memory.md` | Done ✅ | 2026-07-28 | |
 | 4 | Quote flow | `phase-04-quote-flow.md` | Not Started | | |
 | 5 | Booking intent | `phase-05-booking-intent.md` | Not Started | | |
 | 6 | Session closing | `phase-06-session-closing.md` | Not Started | | |
