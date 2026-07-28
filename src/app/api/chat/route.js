@@ -11,6 +11,19 @@ import {
 const MODEL = "openai/gpt-oss-120b";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 
+// Simple keyword check for "wants to book" intent — distinct from
+// detectsQuoteIntent's keywords (quote/estimate/pricing/price/proposal/how
+// much), so the two rarely collide. Checked before quote intent: on the
+// genuinely ambiguous overlap ("how much to book weekly cleaning"), a low-
+// friction "Book Now" link is a safer default than kicking off the 5-field
+// quote flow the customer may not have wanted.
+const BOOKING_INTENT_PATTERN =
+  /\b(book|booking|schedule|scheduling|reserve|reservation|appointment)\b/i;
+
+function detectsBookingIntent(message) {
+  return BOOKING_INTENT_PATTERN.test(message || "");
+}
+
 async function submitQuote(request, collected, category) {
   const formData = new FormData();
   formData.append("fullName", collected.fullName);
@@ -93,6 +106,13 @@ export async function POST(request) {
         reply:
           "You're all set! Your quote request has been submitted and our team will be in touch shortly. Anything else I can help with?",
         quoteFlow: null,
+      });
+    }
+
+    if (detectsBookingIntent(lastUserMessage)) {
+      return NextResponse.json({
+        reply: "You can book directly here:",
+        booking: true,
       });
     }
 

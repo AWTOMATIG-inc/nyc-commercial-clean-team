@@ -129,7 +129,10 @@ export default function ChatWidget() {
 
       setQuoteFlow(data.quoteFlow ?? null);
       setMessages((prev) =>
-        trimHistory([...prev, { role: "bot", content: data.reply }])
+        trimHistory([
+          ...prev,
+          { role: "bot", content: data.reply, booking: !!data.booking },
+        ])
       );
     } catch (error) {
       setMessages((prev) =>
@@ -182,6 +185,16 @@ export default function ChatWidget() {
                 }`}
               >
                 {message.content}
+                {message.booking && (
+                  <a
+                    href="/booking"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex items-center justify-center w-full rounded-full bg-red text-white text-sm font-medium px-4 py-2 hover:bg-slate transition"
+                  >
+                    Book Now
+                  </a>
+                )}
               </div>
             ))}
             {isLoading && (

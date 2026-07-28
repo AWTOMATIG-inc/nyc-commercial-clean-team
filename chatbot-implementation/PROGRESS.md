@@ -14,7 +14,7 @@ Gemini key provided had no usable quota). See `00-ARCHITECTURE.md`'s
 | 2 | Gemini connection + basic Q&A | `phase-02-gemini-qa.md` | Done ✅ | 2026-07-27 | Provider switched to Groq (`openai/gpt-oss-120b`), see note above |
 | 3 | Client-side memory | `phase-03-client-memory.md` | Done ✅ | 2026-07-28 | |
 | 4 | Quote flow | `phase-04-quote-flow.md` | Done ✅ | 2026-07-28 | |
-| 5 | Booking intent | `phase-05-booking-intent.md` | Not Started | | |
+| 5 | Booking intent | `phase-05-booking-intent.md` | Done ✅ | 2026-07-28 | |
 | 6 | Session closing | `phase-06-session-closing.md` | Not Started | | |
 | 7 | Rate limiting & abuse hardening | `phase-07-rate-limiting.md` | Not Started | | |
 | 8 | Polish & full QA pass | `phase-08-polish-qa.md` | Not Started | | |
