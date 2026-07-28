@@ -10,6 +10,7 @@ const OPENING_MESSAGE = {
 };
 
 const CHAT_HISTORY_KEY = "chat_history";
+const QUOTE_FLOW_KEY = "chat_quote_flow";
 const CHAR_TRIM_THRESHOLD = 7000;
 const MAX_MESSAGES = 60;
 
@@ -34,13 +35,21 @@ export default function ChatWidget() {
   const [messages, setMessages] = useState([OPENING_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [quoteFlow, setQuoteFlow] = useState(null);
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages, isOpen, isLoading]);
+
+  useEffect(() => {
+    if (isOpen && !isLoading) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen, isLoading]);
 
   useEffect(() => {
     try {
@@ -50,6 +59,10 @@ export default function ChatWidget() {
         if (Array.isArray(parsed) && parsed.length > 0) {
           setMessages(trimHistory(parsed));
         }
+      }
+      const storedFlow = sessionStorage.getItem(QUOTE_FLOW_KEY);
+      if (storedFlow) {
+        setQuoteFlow(JSON.parse(storedFlow));
       }
     } catch (error) {
       // sessionStorage unavailable/corrupted — fall back to the opening message.
@@ -64,6 +77,18 @@ export default function ChatWidget() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    try {
+      if (quoteFlow) {
+        sessionStorage.setItem(QUOTE_FLOW_KEY, JSON.stringify(quoteFlow));
+      } else {
+        sessionStorage.removeItem(QUOTE_FLOW_KEY);
+      }
+    } catch (error) {
+      // sessionStorage unavailable — skip persisting.
+    }
+  }, [quoteFlow]);
+
   const handleSend = async () => {
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
@@ -77,6 +102,13 @@ export default function ChatWidget() {
     setIsLoading(true);
 
     try {
+      let category = "chatbot-general";
+      try {
+        category = sessionStorage.getItem("chatCategory") || category;
+      } catch (error) {
+        // sessionStorage unavailable — keep the default category.
+      }
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -85,6 +117,8 @@ export default function ChatWidget() {
             role: m.role === "bot" ? "assistant" : "user",
             content: m.content,
           })),
+          quoteFlow,
+          category,
         }),
       });
 
@@ -93,6 +127,7 @@ export default function ChatWidget() {
         throw new Error(data.error || "Chat request failed");
       }
 
+      setQuoteFlow(data.quoteFlow ?? null);
       setMessages((prev) =>
         trimHistory([...prev, { role: "bot", content: data.reply }])
       );
@@ -159,6 +194,7 @@ export default function ChatWidget() {
 
           <div className="flex items-center gap-2 p-3 border-t border-light-blue/30 bg-white shrink-0">
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
