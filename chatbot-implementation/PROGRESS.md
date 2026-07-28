@@ -18,6 +18,7 @@ Gemini key provided had no usable quota). See `00-ARCHITECTURE.md`'s
 | 6 | Session closing | `phase-06-session-closing.md` | Done ✅ | 2026-07-28 | |
 | 7 | Rate limiting & abuse hardening | `phase-07-rate-limiting.md` | Done ✅ | 2026-07-28 | |
 | 8 | Polish & full QA pass | `phase-08-polish-qa.md` | Done ✅ | 2026-07-28 | ScrollToTopButton left commented out per user decision |
+| 9 | Visual redesign & interaction polish | `phase-09-ui-polish.md` | Done ✅ | 2026-07-28 | Avatar cropped/backdropped via new `BotAvatar.jsx`; agent icon swapped from `nyc-logo.png` crop to `public/images/customer-agent.png` (converted from a JPEG with baked-in checkerboard to a real transparent PNG) |
 
 Status values: `Not Started`, `In Progress`, `Done ✅`, `Blocked` (add a note
 explaining why if blocked).

@@ -4,6 +4,8 @@ import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
+import BotAvatar from "./BotAvatar";
+import TypingIndicator from "./TypingIndicator";
 
 const MARKDOWN_COMPONENTS = {
   p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
@@ -50,6 +52,7 @@ const MAX_MESSAGES = 60;
 const NUDGE_MS = 3 * 60 * 1000;
 const IDLE_CLOSE_MS = 10 * 60 * 1000;
 const COLLAPSE_DELAY_MS = 3000;
+const CLEAR_CONFIRM_MS = 3000;
 
 const NUDGE_MESSAGE = {
   role: "bot",
@@ -81,10 +84,12 @@ export default function ChatWidget() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [quoteFlow, setQuoteFlow] = useState(null);
+  const [confirmClear, setConfirmClear] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const nudgeTimeoutRef = useRef(null);
   const closeTimeoutRef = useRef(null);
+  const clearConfirmTimeoutRef = useRef(null);
   const nudgeFiredRef = useRef(false);
 
   useEffect(() => {
@@ -162,6 +167,45 @@ export default function ChatWidget() {
         // sessionStorage unavailable — nothing to clear.
       }
     }, COLLAPSE_DELAY_MS);
+  };
+
+  // Manual "clear chat" — same end state as closeChat (collapse to launcher,
+  // wipe sessionStorage, fresh conversation on reopen) but immediate, with no
+  // closing-line bubble, since the user asked for it directly rather than the
+  // bot deciding the conversation ended.
+  const clearChat = () => {
+    if (nudgeTimeoutRef.current) clearTimeout(nudgeTimeoutRef.current);
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+
+    setIsOpen(false);
+    setMessages([OPENING_MESSAGE]);
+    setQuoteFlow(null);
+    setInput("");
+    nudgeFiredRef.current = false;
+    try {
+      sessionStorage.removeItem(CHAT_HISTORY_KEY);
+      sessionStorage.removeItem(QUOTE_FLOW_KEY);
+    } catch (error) {
+      // sessionStorage unavailable — nothing to clear.
+    }
+  };
+
+  // Guard against a single accidental tap losing an in-progress quote flow:
+  // first click arms a confirm state, second click (within CLEAR_CONFIRM_MS)
+  // actually clears.
+  const handleClearClick = () => {
+    if (!confirmClear) {
+      setConfirmClear(true);
+      clearConfirmTimeoutRef.current = setTimeout(() => {
+        setConfirmClear(false);
+      }, CLEAR_CONFIRM_MS);
+      return;
+    }
+    if (clearConfirmTimeoutRef.current) {
+      clearTimeout(clearConfirmTimeoutRef.current);
+    }
+    setConfirmClear(false);
+    clearChat();
   };
 
   // Idle nudge (3 min) + idle auto-close (10 min). Both timers reset on
@@ -273,16 +317,40 @@ export default function ChatWidget() {
           className="fixed bottom-24 right-5 z-60 w-[calc(100vw-2.5rem)] max-w-90 sm:max-w-105 h-[min(70vh,calc(100dvh-8rem))] max-h-125 bg-white rounded-2xl shadow-custom flex flex-col overflow-hidden border border-light-blue/30"
         >
           <div className="bg-slate text-white px-4 py-3 flex items-center justify-between shrink-0">
-            <span className="font-jetbrains font-medium text-sm sm:text-base">
-              Chat with NYC Clean Team
-            </span>
-            <button
-              onClick={() => setIsOpen(false)}
-              aria-label="Close chat"
-              className="size-8 flex items-center justify-center rounded-full hover:bg-white/10 transition"
-            >
-              <Icon icon="mdi:close" width={20} height={20} />
-            </button>
+            <div className="flex items-center gap-2.5 min-w-0">
+              <BotAvatar size={36} online />
+              <div className="flex flex-col leading-tight min-w-0">
+                <span className="font-jetbrains font-medium text-sm sm:text-base truncate">
+                  NYC Clean Team
+                </span>
+                <span className="font-inter text-[11px] sm:text-xs text-light-blue">
+                  Online
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={handleClearClick}
+                aria-label={confirmClear ? "Confirm clear chat" : "Clear chat"}
+                title={confirmClear ? "Click again to clear chat" : "Clear chat"}
+                className={`size-8 flex items-center justify-center rounded-full transition ${
+                  confirmClear ? "bg-red/80 hover:bg-red" : "hover:bg-white/10"
+                }`}
+              >
+                <Icon
+                  icon={confirmClear ? "mdi:alert-circle-outline" : "mdi:broom"}
+                  width={18}
+                  height={18}
+                />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                aria-label="Close chat"
+                className="size-8 flex items-center justify-center rounded-full hover:bg-white/10 transition"
+              >
+                <Icon icon="mdi:close" width={20} height={20} />
+              </button>
+            </div>
           </div>
 
           <div
@@ -291,46 +359,53 @@ export default function ChatWidget() {
             aria-label="Chat messages"
             className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 bg-skyblue-light"
           >
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`px-4 py-2 rounded-2xl text-sm leading-relaxed ${
-                  message.role === "user"
-                    ? "max-w-[85%] self-end bg-red text-white rounded-br-sm whitespace-pre-wrap"
-                    : "max-w-[92%] self-start bg-white text-dark-slate border border-light-blue/30 rounded-bl-sm"
-                }`}
-              >
-                {message.role === "bot" ? (
-                  <ReactMarkdown
-                    remarkPlugins={[remarkBreaks]}
-                    components={MARKDOWN_COMPONENTS}
-                  >
-                    {message.content}
-                  </ReactMarkdown>
-                ) : (
-                  message.content
-                )}
-                {message.booking && (
-                  <a
-                    href="/booking"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center justify-center w-full rounded-full bg-red text-white text-sm font-medium px-4 py-2 hover:bg-slate transition"
-                  >
-                    Book Now
-                  </a>
-                )}
-              </div>
-            ))}
+            {messages.map((message, index) =>
+              message.role === "user" ? (
+                <div
+                  key={index}
+                  className="max-w-[85%] self-end px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed bg-red text-white whitespace-pre-wrap"
+                >
+                  {message.content}
+                </div>
+              ) : (
+                <div
+                  key={index}
+                  className="max-w-[92%] self-start flex items-end gap-2"
+                >
+                  <BotAvatar size={24} />
+                  <div className="px-4 py-2.5 rounded-2xl rounded-bl-sm text-sm leading-relaxed bg-white text-dark-slate border border-light-blue/30 min-w-0">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkBreaks]}
+                      components={MARKDOWN_COMPONENTS}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
+                    {message.booking && (
+                      <a
+                        href="/booking"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center justify-center w-full rounded-full bg-red text-white text-sm font-medium px-4 py-2 hover:bg-slate transition"
+                      >
+                        Book Now
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )
+            )}
             {isLoading && (
-              <div className="self-start bg-white text-dark-slate border border-light-blue/30 rounded-2xl rounded-bl-sm max-w-[85%] px-4 py-2 text-sm leading-relaxed">
-                ...
+              <div className="max-w-[85%] self-start flex items-end gap-2">
+                <BotAvatar size={24} />
+                <div className="bg-white border border-light-blue/30 rounded-2xl rounded-bl-sm px-4 py-3">
+                  <TypingIndicator />
+                </div>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="flex items-center gap-2 p-3 border-t border-light-blue/30 bg-white shrink-0">
+          <div className="flex items-center gap-2 p-3 border-t border-light-blue/20 bg-white shrink-0">
             <input
               ref={inputRef}
               type="text"
@@ -339,13 +414,13 @@ export default function ChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Type your message..."
               disabled={isLoading}
-              className="flex-1 text-base sm:text-sm px-3 py-2 rounded-full border border-light-blue/50 focus:outline-none focus:border-slate disabled:opacity-60"
+              className="flex-1 text-base sm:text-sm px-4 py-2.5 rounded-full border border-light-blue/40 bg-skyblue-light/60 placeholder:text-light-blue focus:outline-none focus:border-slate focus:bg-white transition disabled:opacity-60"
             />
             <button
               onClick={handleSend}
               aria-label="Send message"
               disabled={isLoading}
-              className="size-9 shrink-0 flex items-center justify-center rounded-full bg-red text-white hover:bg-slate transition disabled:opacity-60"
+              className="size-10 shrink-0 flex items-center justify-center rounded-full bg-red text-white shadow-sm hover:bg-slate hover:scale-105 active:scale-95 transition disabled:opacity-60 disabled:hover:scale-100"
             >
               <Icon icon="mdi:send" width={18} height={18} />
             </button>
