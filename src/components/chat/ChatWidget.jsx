@@ -2,6 +2,39 @@
 
 import { Icon } from "@iconify/react";
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+
+const MARKDOWN_COMPONENTS = {
+  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+  ul: ({ children }) => (
+    <ul className="mb-2 last:mb-0 pl-4 list-disc space-y-1">{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mb-2 last:mb-0 pl-4 list-decimal space-y-1">{children}</ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+  em: ({ children }) => <em className="italic">{children}</em>,
+  h1: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  h2: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  h3: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  code: ({ children }) => (
+    <code className="bg-black/5 rounded px-1 py-0.5 text-[13px]">
+      {children}
+    </code>
+  ),
+  a: ({ children, href }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      {children}
+    </a>
+  ),
+};
 
 const OPENING_MESSAGE = {
   role: "bot",
@@ -233,7 +266,12 @@ export default function ChatWidget() {
   return (
     <>
       {isOpen && (
-        <div className="fixed bottom-24 right-5 z-999 w-[calc(100vw-2.5rem)] max-w-90 h-[70vh] max-h-125 bg-white rounded-2xl shadow-custom flex flex-col overflow-hidden border border-light-blue/30">
+        <div
+          role="dialog"
+          aria-modal="false"
+          aria-label="Chat with NYC Clean Team"
+          className="fixed bottom-24 right-5 z-60 w-[calc(100vw-2.5rem)] max-w-90 sm:max-w-105 h-[min(70vh,calc(100dvh-8rem))] max-h-125 bg-white rounded-2xl shadow-custom flex flex-col overflow-hidden border border-light-blue/30"
+        >
           <div className="bg-slate text-white px-4 py-3 flex items-center justify-between shrink-0">
             <span className="font-jetbrains font-medium text-sm sm:text-base">
               Chat with NYC Clean Team
@@ -247,17 +285,31 @@ export default function ChatWidget() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 bg-skyblue-light">
+          <div
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+            className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 bg-skyblue-light"
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`max-w-[85%] px-4 py-2 rounded-2xl text-sm leading-relaxed ${
+                className={`px-4 py-2 rounded-2xl text-sm leading-relaxed ${
                   message.role === "user"
-                    ? "self-end bg-red text-white rounded-br-sm"
-                    : "self-start bg-white text-dark-slate border border-light-blue/30 rounded-bl-sm"
+                    ? "max-w-[85%] self-end bg-red text-white rounded-br-sm whitespace-pre-wrap"
+                    : "max-w-[92%] self-start bg-white text-dark-slate border border-light-blue/30 rounded-bl-sm"
                 }`}
               >
-                {message.content}
+                {message.role === "bot" ? (
+                  <ReactMarkdown
+                    remarkPlugins={[remarkBreaks]}
+                    components={MARKDOWN_COMPONENTS}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
+                ) : (
+                  message.content
+                )}
                 {message.booking && (
                   <a
                     href="/booking"
@@ -287,7 +339,7 @@ export default function ChatWidget() {
               onKeyDown={handleKeyDown}
               placeholder="Type your message..."
               disabled={isLoading}
-              className="flex-1 text-sm px-3 py-2 rounded-full border border-light-blue/50 focus:outline-none focus:border-slate disabled:opacity-60"
+              className="flex-1 text-base sm:text-sm px-3 py-2 rounded-full border border-light-blue/50 focus:outline-none focus:border-slate disabled:opacity-60"
             />
             <button
               onClick={handleSend}
@@ -304,7 +356,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         aria-label={isOpen ? "Close chat" : "Open chat"}
-        className="size-12 flex justify-center items-center fixed bottom-5 right-5 text-xl bg-red text-white rounded-full shadow-lg hover:bg-slate transition z-999"
+        className="size-12 flex justify-center items-center fixed bottom-5 right-5 text-xl bg-red text-white rounded-full shadow-lg hover:bg-slate transition z-60"
       >
         <Icon
           icon={isOpen ? "mdi:close" : "mdi:message-text"}

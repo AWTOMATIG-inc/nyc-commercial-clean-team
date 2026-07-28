@@ -23,7 +23,7 @@ export default function DiscountPopup({ popupName = "home_discount_popup" }) {
 
   if (!showPopup) return null;
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed top-0 left-0 w-full h-full bg-black/50 bg-opacity-50 flex items-center justify-center z-70">
       <div className="bg-white rounded-lg px-10 py-16 shadow-lg max-w-129.75 w-[90%] sm:w-full items-center flex flex-col justify-center relative">
         <button className="absolute top-6 right-6" onClick={handleClose}>
           <Icon

@@ -17,7 +17,7 @@ Gemini key provided had no usable quota). See `00-ARCHITECTURE.md`'s
 | 5 | Booking intent | `phase-05-booking-intent.md` | Done ✅ | 2026-07-28 | |
 | 6 | Session closing | `phase-06-session-closing.md` | Done ✅ | 2026-07-28 | |
 | 7 | Rate limiting & abuse hardening | `phase-07-rate-limiting.md` | Done ✅ | 2026-07-28 | |
-| 8 | Polish & full QA pass | `phase-08-polish-qa.md` | Not Started | | |
+| 8 | Polish & full QA pass | `phase-08-polish-qa.md` | Done ✅ | 2026-07-28 | ScrollToTopButton left commented out per user decision |
 
 Status values: `Not Started`, `In Progress`, `Done ✅`, `Blocked` (add a note
 explaining why if blocked).

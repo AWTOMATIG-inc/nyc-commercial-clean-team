@@ -93,6 +93,22 @@ export async function POST(request) {
     }
 
     if (quoteFlow?.active) {
+      if (quoteFlow.field === "__retry_submit__") {
+        const submitted = await submitQuote(request, quoteFlow.collected, category);
+        if (!submitted) {
+          return NextResponse.json({
+            reply:
+              "Still couldn't submit your quote request. Send any message and I'll try again, or give us a call and we'll take it from there.",
+            quoteFlow,
+          });
+        }
+        return NextResponse.json({
+          reply:
+            "You're all set! Your quote request has been submitted and our team will be in touch shortly. Anything else I can help with?",
+          quoteFlow: null,
+        });
+      }
+
       const result = advanceQuoteFlow(quoteFlow, lastUserMessage);
 
       if (result.status === "invalid") {
@@ -133,8 +149,13 @@ export async function POST(request) {
       if (!submitted) {
         return NextResponse.json({
           reply:
-            "Sorry, something went wrong submitting your quote request. Please try again in a moment or give us a call.",
-          quoteFlow: null,
+            "Sorry, something went wrong submitting your quote request. Send any message and I'll try again, or give us a call.",
+          quoteFlow: {
+            active: true,
+            field: "__retry_submit__",
+            collected: result.collected,
+            attempts: quoteFlow.attempts,
+          },
         });
       }
       return NextResponse.json({
