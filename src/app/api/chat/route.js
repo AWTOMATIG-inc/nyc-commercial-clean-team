@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
+import { isRateLimited } from "@/lib/chat/rateLimiter";
 import {
   advanceQuoteFlow,
   createInitialQuoteFlowState,
@@ -10,6 +11,15 @@ import {
 
 const MODEL = "openai/gpt-oss-120b";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MAX_MESSAGE_LENGTH = 500;
+
+function getClientIp(request) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0].trim();
+  }
+  return request.headers.get("x-real-ip") || "unknown";
+}
 
 // Simple keyword check for "wants to book" intent — distinct from
 // detectsQuoteIntent's keywords (quote/estimate/pricing/price/proposal/how
@@ -58,6 +68,12 @@ export async function POST(request) {
     );
   }
 
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json({
+      reply: "You're sending messages a bit fast — give me a moment!",
+    });
+  }
+
   try {
     const { messages, quoteFlow, category } = await request.json();
     if (!Array.isArray(messages) || messages.length === 0) {
@@ -68,6 +84,13 @@ export async function POST(request) {
     }
 
     const lastUserMessage = messages[messages.length - 1]?.content || "";
+
+    if (lastUserMessage.length > MAX_MESSAGE_LENGTH) {
+      return NextResponse.json({
+        reply:
+          "That message is a bit long — could you shorten it to under 500 characters?",
+      });
+    }
 
     if (quoteFlow?.active) {
       const result = advanceQuoteFlow(quoteFlow, lastUserMessage);
