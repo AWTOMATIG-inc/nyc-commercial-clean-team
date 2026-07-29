@@ -62,16 +62,16 @@ export default function ImageComparisonSlider({
         style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
       >
         <img
-          src={afterImage}
-          alt={altAfter}
+          src={beforeImage}
+          alt={altBefore}
           className="h-full w-full object-cover object-left"
           draggable="false"
         />
       </div>
 
       <img
-        src={beforeImage}
-        alt={altBefore}
+        src={afterImage}
+        alt={altAfter}
         className="block h-full w-full object-cover object-left"
         draggable="false"
       />
