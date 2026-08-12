@@ -76,7 +76,7 @@ export default function RootLayout({ children }) {
       >
         <ToastProvider>
           <GTMPageTracker />
-          <Topbar />
+          {/* <Topbar /> */}
           <Header />
           {children}
           {/* <ScrollToTopButton /> */}
