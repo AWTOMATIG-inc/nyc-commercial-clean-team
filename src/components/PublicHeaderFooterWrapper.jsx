@@ -20,10 +20,10 @@ export default function PublicHeaderFooterWrapper({ children }) {
 
   return (
     <>
-      <Topbar />
+      {/* <Topbar /> */}
       <Header />
       {children}
-      <ScrollToTopButton />
+      {/* <ScrollToTopButton /> */}
       <ChatWidget />
       <Footer />
     </>

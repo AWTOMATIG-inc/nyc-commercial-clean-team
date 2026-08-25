@@ -1,13 +1,17 @@
 
 import dns from "node:dns";
-
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
-
 import mongoose from "mongoose";
+
 export async function db_connect() {
   try {
     if (mongoose.connection.readyState === 1) {
       return;
+    }
+
+    try {
+      dns.setServers(["8.8.8.8", "1.1.1.1"]);
+    } catch (e) {
+      // ignore if setServers fails
     }
 
     await mongoose.connect(process.env.DATABASE_URL);
