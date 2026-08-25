@@ -1,0 +1,444 @@
+"use client";
+
+import { Icon } from "@iconify/react";
+import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkBreaks from "remark-breaks";
+import BotAvatar from "./BotAvatar";
+import TypingIndicator from "./TypingIndicator";
+
+const MARKDOWN_COMPONENTS = {
+  p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+  ul: ({ children }) => (
+    <ul className="mb-2 last:mb-0 pl-4 list-disc space-y-1">{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="mb-2 last:mb-0 pl-4 list-decimal space-y-1">{children}</ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+  em: ({ children }) => <em className="italic">{children}</em>,
+  h1: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  h2: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  h3: ({ children }) => <p className="font-semibold mb-1">{children}</p>,
+  code: ({ children }) => (
+    <code className="bg-black/5 rounded px-1 py-0.5 text-[13px]">
+      {children}
+    </code>
+  ),
+  a: ({ children, href }) => (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="underline"
+    >
+      {children}
+    </a>
+  ),
+};
+
+const OPENING_MESSAGE = {
+  role: "bot",
+  content:
+    "Hi! I can answer questions about our services or help you request a free quote. How can I help?",
+};
+
+const CHAT_HISTORY_KEY = "chat_history";
+const QUOTE_FLOW_KEY = "chat_quote_flow";
+const CHAR_TRIM_THRESHOLD = 7000;
+const MAX_MESSAGES = 60;
+
+const NUDGE_MS = 3 * 60 * 1000;
+const IDLE_CLOSE_MS = 10 * 60 * 1000;
+const COLLAPSE_DELAY_MS = 3000;
+const CLEAR_CONFIRM_MS = 3000;
+
+const NUDGE_MESSAGE = {
+  role: "bot",
+  content: "Still there? Happy to help if you have more questions.",
+};
+
+const IDLE_CLOSE_MESSAGE =
+  "It looks like you've stepped away, so I'll close this chat for now. Feel free to start a new conversation anytime!";
+
+function trimHistory(msgs) {
+  let trimmed = msgs;
+  const totalChars = (arr) =>
+    arr.reduce((sum, m) => sum + m.content.length, 0);
+
+  while (totalChars(trimmed) > CHAR_TRIM_THRESHOLD && trimmed.length > 2) {
+    trimmed = trimmed.slice(2);
+  }
+
+  if (trimmed.length > MAX_MESSAGES) {
+    trimmed = trimmed.slice(trimmed.length - MAX_MESSAGES);
+  }
+
+  return trimmed;
+}
+
+export default function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([OPENING_MESSAGE]);
+  const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [quoteFlow, setQuoteFlow] = useState(null);
+  const [confirmClear, setConfirmClear] = useState(false);
+  const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const nudgeTimeoutRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
+  const clearConfirmTimeoutRef = useRef(null);
+  const nudgeFiredRef = useRef(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isOpen, isLoading]);
+
+  useEffect(() => {
+    if (isOpen && !isLoading) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen, isLoading]);
+
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(CHAT_HISTORY_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMessages(trimHistory(parsed));
+        }
+      }
+      const storedFlow = sessionStorage.getItem(QUOTE_FLOW_KEY);
+      if (storedFlow) {
+        setQuoteFlow(JSON.parse(storedFlow));
+      }
+    } catch (error) {
+      // sessionStorage unavailable/corrupted — fall back to the opening message.
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(messages));
+    } catch (error) {
+      // sessionStorage unavailable (e.g. private browsing quota) — skip persisting.
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    try {
+      if (quoteFlow) {
+        sessionStorage.setItem(QUOTE_FLOW_KEY, JSON.stringify(quoteFlow));
+      } else {
+        sessionStorage.removeItem(QUOTE_FLOW_KEY);
+      }
+    } catch (error) {
+      // sessionStorage unavailable — skip persisting.
+    }
+  }, [quoteFlow]);
+
+  // Shared close behavior for all four triggers (thank-you, idle 10-min,
+  // retry-exhaustion, and — indirectly — the idle 3-min nudge which never
+  // calls this). Shows the closing line, then collapses to the launcher and
+  // clears the conversation so reopening starts completely fresh.
+  const closeChat = (closingMessage) => {
+    if (nudgeTimeoutRef.current) clearTimeout(nudgeTimeoutRef.current);
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+
+    setMessages((prev) =>
+      trimHistory([...prev, { role: "bot", content: closingMessage }])
+    );
+    setQuoteFlow(null);
+
+    setTimeout(() => {
+      setIsOpen(false);
+      setMessages([OPENING_MESSAGE]);
+      setInput("");
+      nudgeFiredRef.current = false;
+      try {
+        sessionStorage.removeItem(CHAT_HISTORY_KEY);
+        sessionStorage.removeItem(QUOTE_FLOW_KEY);
+      } catch (error) {
+        // sessionStorage unavailable — nothing to clear.
+      }
+    }, COLLAPSE_DELAY_MS);
+  };
+
+  // Manual "clear chat" — same end state as closeChat (collapse to launcher,
+  // wipe sessionStorage, fresh conversation on reopen) but immediate, with no
+  // closing-line bubble, since the user asked for it directly rather than the
+  // bot deciding the conversation ended.
+  const clearChat = () => {
+    if (nudgeTimeoutRef.current) clearTimeout(nudgeTimeoutRef.current);
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
+
+    setIsOpen(false);
+    setMessages([OPENING_MESSAGE]);
+    setQuoteFlow(null);
+    setInput("");
+    nudgeFiredRef.current = false;
+    try {
+      sessionStorage.removeItem(CHAT_HISTORY_KEY);
+      sessionStorage.removeItem(QUOTE_FLOW_KEY);
+    } catch (error) {
+      // sessionStorage unavailable — nothing to clear.
+    }
+  };
+
+  // Guard against a single accidental tap losing an in-progress quote flow:
+  // first click arms a confirm state, second click (within CLEAR_CONFIRM_MS)
+  // actually clears.
+  const handleClearClick = () => {
+    if (!confirmClear) {
+      setConfirmClear(true);
+      clearConfirmTimeoutRef.current = setTimeout(() => {
+        setConfirmClear(false);
+      }, CLEAR_CONFIRM_MS);
+      return;
+    }
+    if (clearConfirmTimeoutRef.current) {
+      clearTimeout(clearConfirmTimeoutRef.current);
+    }
+    setConfirmClear(false);
+    clearChat();
+  };
+
+  // Idle nudge (3 min) + idle auto-close (10 min). Both timers reset on
+  // every new message (user or bot), including the nudge message itself —
+  // the nudgeFiredRef guard just stops the nudge from repeating every 3
+  // minutes while the close timer keeps counting down toward 10.
+  useEffect(() => {
+    if (!isOpen) return;
+    const hasExchange = messages.some((m) => m.role === "user");
+    if (!hasExchange) return;
+
+    if (!nudgeFiredRef.current) {
+      nudgeTimeoutRef.current = setTimeout(() => {
+        nudgeFiredRef.current = true;
+        setMessages((prev) => trimHistory([...prev, NUDGE_MESSAGE]));
+      }, NUDGE_MS);
+    }
+
+    closeTimeoutRef.current = setTimeout(() => {
+      closeChat(IDLE_CLOSE_MESSAGE);
+    }, IDLE_CLOSE_MS);
+
+    return () => {
+      clearTimeout(nudgeTimeoutRef.current);
+      clearTimeout(closeTimeoutRef.current);
+    };
+  }, [messages, isOpen]);
+
+  const handleSend = async () => {
+    const trimmed = input.trim();
+    if (!trimmed || isLoading) return;
+
+    const nextMessages = trimHistory([
+      ...messages,
+      { role: "user", content: trimmed },
+    ]);
+    setMessages(nextMessages);
+    setInput("");
+    nudgeFiredRef.current = false;
+    setIsLoading(true);
+
+    try {
+      let category = "chatbot-general";
+      try {
+        category = sessionStorage.getItem("chatCategory") || category;
+      } catch (error) {
+        // sessionStorage unavailable — keep the default category.
+      }
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: nextMessages.map((m) => ({
+            role: m.role === "bot" ? "assistant" : "user",
+            content: m.content,
+          })),
+          quoteFlow,
+          category,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.reply) {
+        throw new Error(data.error || "Chat request failed");
+      }
+
+      setQuoteFlow(data.quoteFlow ?? null);
+      if (data.close) {
+        closeChat(data.reply);
+      } else {
+        setMessages((prev) =>
+          trimHistory([
+            ...prev,
+            { role: "bot", content: data.reply, booking: !!data.booking },
+          ])
+        );
+      }
+    } catch (error) {
+      setMessages((prev) =>
+        trimHistory([
+          ...prev,
+          {
+            role: "bot",
+            content:
+              "Sorry, something went wrong — please try again in a moment.",
+          },
+        ])
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
+  return (
+    <>
+      {isOpen && (
+        <div
+          role="dialog"
+          aria-modal="false"
+          aria-label="Chat with NYC Clean Team"
+          className="fixed bottom-24 right-5 z-60 w-[calc(100vw-2.5rem)] max-w-90 sm:max-w-105 h-[min(70vh,calc(100dvh-8rem))] max-h-125 bg-white rounded-2xl shadow-custom flex flex-col overflow-hidden border border-light-blue/30"
+        >
+          <div className="bg-slate text-white px-4 py-3 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <BotAvatar size={36} online />
+              <div className="flex flex-col leading-tight min-w-0">
+                <span className="font-jetbrains font-medium text-sm sm:text-base truncate">
+                  NYC Clean Team
+                </span>
+                <span className="font-inter text-[11px] sm:text-xs text-light-blue">
+                  Online
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                onClick={handleClearClick}
+                aria-label={confirmClear ? "Confirm clear chat" : "Clear chat"}
+                title={confirmClear ? "Click again to clear chat" : "Clear chat"}
+                className={`size-8 flex items-center justify-center rounded-full transition ${
+                  confirmClear ? "bg-red/80 hover:bg-red" : "hover:bg-white/10"
+                }`}
+              >
+                <Icon
+                  icon={confirmClear ? "mdi:alert-circle-outline" : "mdi:broom"}
+                  width={18}
+                  height={18}
+                />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                aria-label="Close chat"
+                className="size-8 flex items-center justify-center rounded-full hover:bg-white/10 transition"
+              >
+                <Icon icon="mdi:close" width={20} height={20} />
+              </button>
+            </div>
+          </div>
+
+          <div
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+            className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 bg-skyblue-light"
+          >
+            {messages.map((message, index) =>
+              message.role === "user" ? (
+                <div
+                  key={index}
+                  className="max-w-[85%] self-end px-4 py-2.5 rounded-2xl rounded-br-sm text-sm leading-relaxed bg-red text-white whitespace-pre-wrap"
+                >
+                  {message.content}
+                </div>
+              ) : (
+                <div
+                  key={index}
+                  className="max-w-[92%] self-start flex items-end gap-2"
+                >
+                  <BotAvatar size={24} />
+                  <div className="px-4 py-2.5 rounded-2xl rounded-bl-sm text-sm leading-relaxed bg-white text-dark-slate border border-light-blue/30 min-w-0">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkBreaks]}
+                      components={MARKDOWN_COMPONENTS}
+                    >
+                      {message.content}
+                    </ReactMarkdown>
+                    {message.booking && (
+                      <a
+                        href="/booking"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 inline-flex items-center justify-center w-full rounded-full bg-red text-white text-sm font-medium px-4 py-2 hover:bg-slate transition"
+                      >
+                        Book Now
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )
+            )}
+            {isLoading && (
+              <div className="max-w-[85%] self-start flex items-end gap-2">
+                <BotAvatar size={24} />
+                <div className="bg-white border border-light-blue/30 rounded-2xl rounded-bl-sm px-4 py-3">
+                  <TypingIndicator />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 border-t border-light-blue/20 bg-white shrink-0">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type your message..."
+              disabled={isLoading}
+              className="flex-1 text-base sm:text-sm px-4 py-2.5 rounded-full border border-light-blue/40 bg-skyblue-light/60 placeholder:text-light-blue focus:outline-none focus:border-slate focus:bg-white transition disabled:opacity-60"
+            />
+            <button
+              onClick={handleSend}
+              aria-label="Send message"
+              disabled={isLoading}
+              className="size-10 shrink-0 flex items-center justify-center rounded-full bg-red text-white shadow-sm hover:bg-slate hover:scale-105 active:scale-95 transition disabled:opacity-60 disabled:hover:scale-100"
+            >
+              <Icon icon="mdi:send" width={18} height={18} />
+            </button>
+          </div>
+        </div>
+      )}
+
+      <button
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
+        className="size-12 flex justify-center items-center fixed bottom-5 right-5 text-xl bg-red text-white rounded-full shadow-lg hover:bg-slate transition z-60"
+      >
+        <Icon
+          icon={isOpen ? "mdi:close" : "mdi:message-text"}
+          width={24}
+          height={24}
+        />
+      </button>
+    </>
+  );
+}

@@ -1,4 +1,5 @@
 import ButtonSolid from "@/components/ButtonSolid";
+import ChatCategorySync from "@/components/chat/ChatCategorySync";
 import Counter from "@/components/Counter";
 import ImageComparisonSlider from "@/components/ImageComparisonSlider";
 import ManagerReview from "@/components/quote/ManagerReview";
@@ -20,6 +21,7 @@ const imageUrl = `/api/uploads/page/${pageDetail?.bannerImage}`;
 
   return (
     <main>
+      <ChatCategorySync slug={slug} />
       <section
         style={{
           backgroundImage: `linear-gradient(

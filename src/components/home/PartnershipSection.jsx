@@ -90,7 +90,26 @@ export default function PartnershipSection() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    // The pin's start/end scroll offsets are cached at creation time. If layout
+    // above this section shifts afterward (webfont swap reflow, sibling
+    // next/dynamic sections settling, async icons/images), those offsets go
+    // stale and GSAP pins at the wrong scroll position — causing this section
+    // to visually overlap the one above it. Re-sync whenever the page height
+    // changes.
+    document.fonts?.ready?.then(() => ScrollTrigger.refresh());
+
+    let resizeTimeout;
+    const resizeObserver = new ResizeObserver(() => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => ScrollTrigger.refresh(), 200);
+    });
+    resizeObserver.observe(document.body);
+
+    return () => {
+      clearTimeout(resizeTimeout);
+      resizeObserver.disconnect();
+      ctx.revert();
+    };
   }, []);
 
   return (

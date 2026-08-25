@@ -1,3 +1,10 @@
+## chatbot implementation
+
+Working on the website chatbot? Read `chatbot-implementation/CLAUDE.md`
+first — it has the phase workflow rules. The full architecture and all
+decisions live in `chatbot-implementation/00-ARCHITECTURE.md`, and current
+progress is tracked in `chatbot-implementation/PROGRESS.md`.
+
 ## graphify
 
 This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.

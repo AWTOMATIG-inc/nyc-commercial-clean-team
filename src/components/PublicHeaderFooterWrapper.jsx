@@ -6,6 +6,7 @@ import Topbar from "@/components/Topbar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
+import ChatWidget from "@/components/chat/ChatWidget";
 
 export default function PublicHeaderFooterWrapper({ children }) {
   const pathname = usePathname();
@@ -23,6 +24,7 @@ export default function PublicHeaderFooterWrapper({ children }) {
       <Header />
       {children}
       <ScrollToTopButton />
+      <ChatWidget />
       <Footer />
     </>
   );

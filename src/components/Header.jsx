@@ -2,7 +2,6 @@
 import logo from "@/assets/logos/nyc-logo.png";
 import { followUsLinks } from "@/constant/footer";
 import { headerLinks } from "@/constant/header";
-import { quoteDetails } from "@/constant/quotes/quoteDetails";
 import { trackCtaClick } from "@/lib/gtm";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
@@ -46,7 +45,7 @@ export default function Header() {
   }
   return (
     <header
-      className={`sticky ${quoteDetails.some((item) => path.includes(item.pageName)) ? "top-0" : "top-8"} z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
+      className={`sticky top-0 z-50  bg-slate rounded-b-[20px] text-white lg:py-2 ${!isMenuOpen ? "bg-slate" : "bg-white lg:bg-slate"} ${
         scrolled
           ? "opacity-0 -translate-y-full transition-transform duration-300"
           : "opacity-100 translate-y-0 transition-transform duration-300"

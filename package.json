@@ -29,8 +29,10 @@
     "react-form-stepper": "^2.0.3",
     "react-hook-form": "^7.72.1",
     "react-hot-toast": "^2.6.0",
+    "react-markdown": "^10.1.0",
     "react-quill-new": "^3.8.3",
     "react-super-responsive-table": "^6.0.2",
+    "remark-breaks": "^4.0.0",
     "swiper": "^12.1.2",
     "uuid": "^13.0.2",
     "yup": "^1.7.1"

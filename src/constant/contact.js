@@ -27,7 +27,7 @@ export const contactInfoCards = [
     id: 4,
     icon: "fa6-solid:clock",
     label: "Hours",
-    value: "Monday–Friday, 9:00 AM–5:00 PM",
+    value: "Open 24 Hours, 7 Days a Week",
     href: null,
     isLink: false,
   },
