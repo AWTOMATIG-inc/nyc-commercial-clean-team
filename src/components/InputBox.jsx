@@ -1,10 +1,24 @@
-export default function InputBox({ label, id, required,error, ...rest }) {
+import React from "react";
+
+export default function InputBox({ label, id, required, error, className = "", ...rest }) {
   return (
-    <div className="flex flex-col">
-      <label htmlFor={id}>{label}{required&& <span className="text-red-500 pl-0.5">*</span>}</label>
-      <input type="text" id={id} name={id} className="mt-4 border border-light-blue rounded-[20px] h-14 pl-4 pr-2 placeholder:text-light-blue font-inter focus:outline-none focus:border focus:border-red-500 "  {...rest} />
-      {error &&<p className="text-xs pl-1 mt-0.5 text-red-500">{error}</p> }
-      
+    <div className="flex flex-col space-y-1.5 w-full">
+      {label && (
+        <label htmlFor={id} className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+          {label}
+          {required && <span className="text-[#ed0505] pl-1">*</span>}
+        </label>
+      )}
+      <input
+        type="text"
+        id={id}
+        name={id}
+        className={`w-full px-4 py-3 text-xs bg-white border ${
+          error ? "border-rose-500 bg-rose-50/20" : "border-slate-300 hover:border-slate-400"
+        } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 placeholder:text-slate-400 font-medium transition-all shadow-2xs ${className}`}
+        {...rest}
+      />
+      {error && <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">{error}</p>}
     </div>
   );
 }

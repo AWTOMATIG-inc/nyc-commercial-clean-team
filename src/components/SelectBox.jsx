@@ -1,15 +1,31 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-export default function SelectBox({ label,required,onChange,value,options,placeholder, error, ...rest }) {
-  const dropdownRef = useRef(null);
-    const wrapperRef = useRef(null);
-  const [selected, setSelected] = useState(value||"");
+import React, { useEffect, useRef, useState } from "react";
+import { Icon } from "@iconify/react";
 
-   useEffect(() => {
+export default function SelectBox({
+  label,
+  required,
+  onChange,
+  value,
+  options = [],
+  placeholder,
+  error,
+  className = "",
+  ...rest
+}) {
+  const dropdownRef = useRef(null);
+  const wrapperRef = useRef(null);
+  const [selected, setSelected] = useState(value || "");
+
+  useEffect(() => {
+    setSelected(value || "");
+  }, [value]);
+
+  useEffect(() => {
     function handleClickOutside(e) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target)) {
-       dropdownRef.current.classList.add("hidden")
+        if (dropdownRef.current) dropdownRef.current.classList.add("hidden");
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -17,52 +33,48 @@ export default function SelectBox({ label,required,onChange,value,options,placeh
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
-    <div ref={wrapperRef}>
-      <p>
-        {label}
-        {required && <span className="text-red-500 pl-0.5">*</span>}
-      </p>
-      <div className="mt-4 flex flex-col h-14 border border-light-blue rounded-[20px] pl-4 pr-2 placeholder:text-light-blue font-inter focus:outline-none focus:border hover:border-red-500 relative">
-        <div
-          onClick={() => dropdownRef.current.classList.toggle("hidden")}
-          className="flex justify-between items-center h-full pr-2 cursor-pointer"
-        >
-          <p className="text-light-blue">{selected&&<span className="text-black">{selected}</span> || (placeholder?placeholder:"Select an option")}</p>
-          <svg
-            width="11"
-            height="9"
-            viewBox="0 0 11 9"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.19531 9L10.3915 0H-0.00083971L5.19531 9Z"
-              fill="#060606"
-            />
-          </svg>
-        </div>
-        <ul
-          ref={dropdownRef}
-          className="absolute top-14 left-0 bg-white border border-light-blue rounded-[20px] shadow-lg w-full mt-1 overflow-hidden z-10 hidden"
-        >
-          {options.map((option, index) => (
-            <li
-              onClick={() => {
-                dropdownRef.current.classList.add("hidden");
-                setSelected(option);
-                onChange(option)
-              }}
-              key={index}
-              className="px-4 py-2 hover:bg-red-300 cursor-pointer"
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
+    <div ref={wrapperRef} className={`flex flex-col space-y-1.5 w-full relative ${className}`}>
+      {label && (
+        <label className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+          {label}
+          {required && <span className="text-[#ed0505] pl-1">*</span>}
+        </label>
+      )}
+      <div
+        onClick={() => dropdownRef.current?.classList.toggle("hidden")}
+        className={`w-full px-4 py-3 text-xs bg-white border ${
+          error ? "border-rose-500 bg-rose-50/20" : "border-slate-300 hover:border-slate-400"
+        } rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/15 focus:border-[#1d2f64] text-slate-900 font-medium transition-all cursor-pointer flex justify-between items-center shadow-2xs`}
+      >
+        <span className={selected ? "text-slate-900 font-bold" : "text-slate-400 font-medium"}>
+          {selected || (placeholder ? placeholder : "Select an option")}
+        </span>
+        <Icon icon="lucide:chevron-down" className="w-4 h-4 text-slate-500 shrink-0 ml-2" />
       </div>
-      {error &&<p className="text-xs pl-1 mt-0.5 text-red-500">{error}</p> }
+
+      <ul
+        ref={dropdownRef}
+        className="absolute top-[calc(100%+6px)] left-0 bg-white border border-slate-300 rounded-xl shadow-xl w-full max-h-60 overflow-y-auto z-40 hidden py-1 text-xs text-slate-800 animate-in fade-in duration-150"
+      >
+        {options.map((option, index) => (
+          <li
+            key={index}
+            onClick={() => {
+              dropdownRef.current?.classList.add("hidden");
+              setSelected(option);
+              if (onChange) onChange(option);
+            }}
+            className={`px-4 py-2.5 hover:bg-slate-100 cursor-pointer font-medium transition-colors ${
+              selected === option ? "bg-slate-100 font-bold text-[#1d2f64]" : ""
+            }`}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
+      {error && <p className="text-xs font-semibold text-rose-500 mt-1 pl-0.5">{error}</p>}
     </div>
   );
- 
 }

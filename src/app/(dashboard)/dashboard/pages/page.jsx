@@ -1,189 +1,196 @@
 "use client";
-import { Icon } from "@iconify/react";
-import Image from "next/image";
+
+import React, { useEffect, useState, useTransition, useMemo } from "react";
 import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
+import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
-const statusList = [
-  { color: "bg-gray-400", name: "All" },
-  { color: "bg-orange-500", name: "Pending" },
-  { color: "bg-green-500", name: "Confirmed" },
-  { color: "bg-red-500", name: "Cencelled" },
-];
-export default function Quotes() {
+import DataTable from "@/components/dashboard/ui/DataTable";
+import Pagination from "@/components/dashboard/ui/Pagination";
+import MetricCard from "@/components/dashboard/ui/MetricCard";
+
+export default function PagesManagementPage() {
   const [pages, setPages] = useState([]);
   const [page, setPage] = useState(1);
   const [isPending, startTransition] = useTransition();
   const [statusVal, setStatusVal] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [totalPages, setTotalPages] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
   const [isRefresh, setIsRefresh] = useState(false);
   const limit = 10;
 
-  const fetchQuotes = async (currentPage, currentStatusVal) => {
-    const res = await fetch(
-      `/api/pages?page=${currentPage}&limit=${limit}&status=${currentStatusVal}`,
-    );
-    const result = await res.json();
-    if (result.success) {
-      setPages(result.data);
-      setTotalPages(result.pagination.totalPages);
+  const fetchPages = async (currentPage, currentStatusVal) => {
+    try {
+      const res = await fetch(
+        `/api/pages?page=${currentPage}&limit=${limit}&status=${currentStatusVal}`
+      );
+      if (!res.ok) throw new Error("Failed to fetch dynamic pages");
+      const result = await res.json();
+      if (result.success) {
+        setPages(result.data || []);
+        setTotalPages(result.pagination?.totalPages || 1);
+        setTotalItems(result.pagination?.total || (result.data || []).length);
+      }
+    } catch (err) {
+      console.error("Error loading dynamic pages:", err);
+      toast.error(err.message);
     }
   };
 
-   const handleDelete = async (id) => {
-    const userConfirmed = confirm("Are you sure you want to delete this item?");
+  const handleDelete = async (id, e) => {
+    if (e) e.stopPropagation();
+    const userConfirmed = confirm("Are you sure you want to delete this page entry?");
     if (!userConfirmed) return;
 
     try {
       const response = await fetch(`/api/pages/${id}`, {
         method: "DELETE",
       });
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      if (!response.ok) throw new Error("Failed to delete page");
+
       setIsRefresh(!isRefresh);
-      toast.success("Pages deleted successfully!");
+      toast.success("Page deleted successfully!");
     } catch (error) {
       toast.error(error.message);
-      console.error("There was a problem with the delete operation:", error);
     }
   };
+
   useEffect(() => {
     startTransition(() => {
-      fetchQuotes(page, statusVal);
+      fetchPages(page, statusVal);
     });
   }, [page, statusVal, isRefresh]);
 
+  const filteredPages = useMemo(() => {
+    if (!searchQuery.trim()) return pages;
+    const query = searchQuery.toLowerCase().trim();
+    return pages.filter((p) => {
+      const name = (p.pageName || "").toLowerCase();
+      const title = (p.title || "").toLowerCase();
+      const idStr = (p._id || "").toLowerCase();
+      return name.includes(query) || title.includes(query) || idStr.includes(query);
+    });
+  }, [pages, searchQuery]);
+
+  const columns = [
+    {
+      header: "Page ID",
+      accessor: "_id",
+      cell: (row) => (
+        <span className="font-jetbrains font-bold text-slate-900">
+          #NYC-{row._id?.slice(-6).toUpperCase()}
+        </span>
+      ),
+    },
+    {
+      header: "Page Name",
+      accessor: "pageName",
+      cell: (row) => (
+        <span className="font-bold text-slate-900 capitalize">
+          {row.pageName || "Custom Page"}
+        </span>
+      ),
+    },
+    {
+      header: "Title",
+      accessor: "title",
+      cell: (row) => (
+        <span className="text-slate-700 font-medium line-clamp-1 max-w-sm">
+          {row.title || "Untitled Page"}
+        </span>
+      ),
+    },
+    {
+      header: "Actions",
+      cell: (row) => (
+        <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+          <Link
+            href={`/dashboard/pages/edit/${row._id}`}
+            className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all"
+            title="Edit Page"
+          >
+            <Icon icon="lucide:edit-3" className="w-4 h-4" />
+          </Link>
+          <button
+            onClick={(e) => handleDelete(row._id, e)}
+            className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all cursor-pointer"
+            title="Delete Page"
+          >
+            <Icon icon="lucide:trash-2" className="w-4 h-4" />
+          </button>
+        </div>
+      ),
+    },
+  ];
+
   return (
-    <div>
-        <div className="flex justify-between mt-8">
-        <h1 className="text-2xl font-bold">Page list</h1>
-        <div className="flex gap-2">
-            <Link
-          className="border-slate border text-slate px-4 py-2 rounded-xl"
-          href="/dashboard/pages/page-name/create"
-        >
-          {" "}
-          Create page name
-        </Link>
-        <Link
-          className="bg-slate text-white px-4 py-2 rounded-xl"
-          href="/dashboard/pages/create"
-        >
-          {" "}
-          Create page
-        </Link>
+    <div className="space-y-6 font-inter">
+      {/* Clean Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <h1 className="text-2xl font-bold text-slate-900 font-jetbrains tracking-tight">
+          Dynamic Pages
+        </h1>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            className="px-3.5 py-2 text-xs rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-bold transition-all shadow-xs"
+            href="/dashboard/pages/page-name/create"
+          >
+            Create Page Name
+          </Link>
+          <Link
+            className="flex items-center gap-2 px-4 py-2 text-xs rounded-xl text-white bg-[#ed0505] hover:bg-red-700 font-bold transition-all shadow-xs cursor-pointer"
+            href="/dashboard/pages/create"
+          >
+            <Icon icon="lucide:plus" className="w-4 h-4" />
+            <span>Create Page</span>
+          </Link>
         </div>
       </div>
-    
-    <div className="mt-8">
-      {pages.length <= 0 ? (
-        <div className="w-fit mx-auto text-center">
-          <Image
-            src="/images/dashboard/empty.png"
-            width={400}
-            height={400}
-            alt="empty"
+
+      {/* Total Dynamic Pages Count Card */}
+      <div className="max-w-xs">
+        <MetricCard
+          title="Total Dynamic Pages"
+          value={totalItems.toString()}
+          icon="lucide:layers"
+          badgeType="info"
+        />
+      </div>
+
+      {/* Toolbar */}
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex items-center justify-between gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Icon
+            icon="lucide:search"
+            className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"
           />
-          <p className="text-gray-500 text-xl mt-8 font-inter">
-            There is no Quote yet!
-          </p>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search page name, title, or ID..."
+            className="w-full pl-10 pr-4 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d2f64]/20 focus:border-[#1d2f64] text-slate-800 placeholder-slate-400 font-medium transition-all"
+          />
         </div>
-      ) : (
-        <div className="flex flex-col">
-          <div className="border border-gray-500 rounded-xl overflow-hidden">
-            <table className="table-auto w-full">
-              <thead className="">
-                <tr className="bg-slate text-slate-300 text-left">
-                  <th className="px-4 py-5">ID</th>
-                  <th className="px-2 py-5">PageName</th>
-                  <th className="px-2 py-5">Title</th>
-                  <th className="px-2 py-5">ACTION</th>
-                </tr>
-              </thead>
+      </div>
 
-              <tbody>
-                {pages?.map((item, index) => (
-                  <tr
-                    key={item._id}
-                    className="bg-slate text-slate-400 border-t text-sm"
-                  >
-                    <td className="px-4 py-2.5 lg:min-w-40">
-                      NYC-{item._id.slice(-6).toUpperCase()}
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 flex flex-col">
-                      <span className="text-slate-200 capitalize">
-                        {item.pageName}
-                      </span>
-                     
-                    </td>
-                    <td className="px-2 py-2.5 lg:min-w-40 max-w-70">
-                      <span className="text-slate-200">
-                        {item.title}
-                      </span>
-                    </td>
-                    
-                    
-                    <td className="px-2 py-2">
-                      <div className="flex items-center gap-x-2">
-                        <button onClick={() => handleDelete(item._id)} className="cursor-pointer hover:text-red-500 hover:border-red-500">
-                          <Icon
-                            icon="mingcute:delete-2-line"
-                            width="20"
-                            height="20"
-                          />
-                        </button>
-                        <Link href={`/dashboard/pages/edit/${item._id}`}  className="cursor-pointer hover:text-red-500 hover:border-red-500">
-                          <Icon
-                            icon="material-symbols:edit-outline-rounded"
-                            width="20"
-                            height="20"
-                          />
-                        </Link>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-8">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((prev) => prev - 1)}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Prev
-            </button>
+      {/* Table */}
+      <DataTable
+        columns={columns}
+        data={filteredPages}
+        isLoading={isPending}
+        emptyMessage="No dynamic pages found"
+      />
 
-            {[...Array(totalPages)].map((_, index) => {
-              const pageNumber = index + 1;
-
-              return (
-                <button
-                  key={pageNumber}
-                  onClick={() => setPage(pageNumber)}
-                  className={`px-4 py-2 rounded ${
-                    page === pageNumber ? "bg-slate text-white" : "bg-gray-200"
-                  }`}
-                >
-                  {pageNumber}
-                </button>
-              );
-            })}
-
-            <button
-              disabled={page === totalPages}
-              onClick={() => setPage((prev) => prev + 1)}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
+      {/* Pagination */}
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        totalResults={totalItems}
+        pageSize={limit}
+        onPageChange={(newPage) => setPage(newPage)}
+      />
     </div>
   );
 }

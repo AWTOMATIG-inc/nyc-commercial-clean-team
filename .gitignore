@@ -45,6 +45,7 @@ next-env.d.ts
 graphify-out/
 .graphify_*
 .graphify_python
+.env*
 
 # chatbot implementation (local-only, not pushed)
 chatbot-implementation/
