@@ -104,6 +104,19 @@ export default function PagesManagementPage() {
       header: "Actions",
       cell: (row) => (
         <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={() =>
+              window.open(
+                `https://nyccleantinc.com/${row.pageName}`,
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+            className="p-2 rounded-xl text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-all cursor-pointer"
+            title="View Live Page"
+          >
+            <Icon icon="lucide:arrow-up-right" className="w-4 h-4" />
+          </button>
           <Link
             href={`/dashboard/pages/edit/${row._id}`}
             className="p-2 rounded-xl text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-all"
