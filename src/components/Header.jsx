@@ -15,6 +15,10 @@ export default function Header() {
   const path = usePathname();
 
   useEffect(() => {
+    setScrolled(false);
+  }, [path]);
+
+  useEffect(() => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
