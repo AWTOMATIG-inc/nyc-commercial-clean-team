@@ -9,6 +9,7 @@ import { getFeedback } from "@/utility/getFeedback";
 import { getPageBySlug } from "@/utility/getPages";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 export default async function Quotes({ params }) {
   const { slug } = await params;
@@ -144,9 +145,12 @@ const imageUrl = `/api/uploads/page/${pageDetail?.bannerImage}`;
               <p className="text-sm flex-1 text-light-blue">
                 {item.description}
               </p>
-              <button className="mt-auto w-max px-6 py-2 rounded-full text-sm font-bold border border-slate text-slate transition-colors duration-300 hover:bg-slate hover:text-white">
+              <Link
+                href="/contact"
+                className="mt-auto w-max px-6 py-2 rounded-full text-sm font-bold border border-slate text-slate transition-colors duration-300 hover:bg-slate hover:text-white"
+              >
                 Book Now
-              </button>
+              </Link>
             </div>
           ))}
         </div>
