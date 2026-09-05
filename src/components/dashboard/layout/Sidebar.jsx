@@ -34,6 +34,16 @@ const NAV_GROUPS = [
     ],
   },
   {
+    category: "MARKETING",
+    items: [
+      {
+        label: "Google Ads",
+        href: "/dashboard/google-ads",
+        icon: "lucide:megaphone",
+      },
+    ],
+  },
+  {
     category: "CONTENT MANAGEMENT",
     items: [
       {
