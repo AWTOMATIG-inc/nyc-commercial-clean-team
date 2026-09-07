@@ -1,4 +1,9 @@
 import cleaningImg from "@/assets/serviceArea/floor-smoke-clean.webp";
+import statenIsland from "@/assets/serviceArea/5.png";
+import bronx from "@/assets/serviceArea/4.png";
+import queens from "@/assets/serviceArea/3.png";
+import brooklyn from "@/assets/serviceArea/2.png";
+import manhattan from "@/assets/serviceArea/1.png";
 import { CycleCircleIcon, GridIcon, ThreeDotIcon } from "@/components/Icon";
 export const foundations = [
   {
@@ -8,6 +13,54 @@ export const foundations = [
     heading: "Built on experience and accountability",
     desc: "NYC Clean Team has maintained the highest standards of commercial cleaning across the city for twenty-five years. We are fully insured, background-checked, and licensed to serve the most demanding facilities in Manhattan, Brooklyn, Queens, the Bronx, and Long Island.",
     image:cleaningImg
+  },
+];
+
+export const boroughs = [
+  {
+    id: 1,
+    slug: "long-island",
+    image: statenIsland,
+    heroImage: "/images/service-area/long-island.webp",
+    name: "one",
+    title: "Long Island",
+    desc: "Office parks, retail centers, medical facilities, and commercial properties across Nassau and Suffolk Counties. Available for recurring contracts, one time cleans, and everything in between.",
+  },
+  {
+    id: 2,
+    slug: "bronx",
+    image: bronx,
+    heroImage: "/images/service-area/bronx.webp",
+    name: "two",
+    title: "Bronx",
+    desc: "Commercial cleaning for offices, schools, retail spaces, and facilities throughout the Bronx, scheduled around your business hours with fully insured, background checked crews you can trust.",
+  },
+  {
+    id: 3,
+    slug: "queens",
+    image: queens,
+    heroImage: "/images/service-area/queens.webp",
+    name: "three",
+    title: "Queens",
+    desc: "Medical facilities, logistics warehouses, restaurants, and multi tenant commercial buildings across Long Island City, Flushing, Jamaica, and every neighborhood in between, big or small.",
+  },
+  {
+    id: 4,
+    slug: "brooklyn",
+    image: brooklyn,
+    heroImage: "/images/service-area/brooklyn.webp",
+    name: "four",
+    title: "Brooklyn",
+    desc: "Creative offices in DUMBO, retail spaces in Williamsburg, and industrial facilities in Sunset Park, professional commercial cleaning across every Brooklyn neighborhood you operate in.",
+  },
+  {
+    id: 5,
+    slug: "manhattan",
+    image: manhattan,
+    heroImage: "/images/service-area/manhattan.webp",
+    name: "Five",
+    title: "Manhattan",
+    desc: "Office towers, corporate headquarters, law firms, medical practices, and retail spaces across Midtown, Downtown, and everywhere in between, cleaned to the highest possible standard.",
   },
 ];
 

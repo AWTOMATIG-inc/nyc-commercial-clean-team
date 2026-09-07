@@ -1,48 +1,8 @@
-import manhattan from "@/assets/serviceArea/1.png";
-import brooklyn from "@/assets/serviceArea/2.png";
-import queens from "@/assets/serviceArea/3.png";
-import bronx from "@/assets/serviceArea/4.png";
-import statenIsland from "@/assets/serviceArea/5.png";
+import { boroughs as coverageStep } from "@/constant/service-area";
 import Image from "next/image";
+import Link from "next/link";
 import ButtonSolid from "../ButtonSolid";
 import CommonHeading from "../CommonHeading";
-const coverageStep = [
-  {
-    id: 1,
-    image: statenIsland,
-    name: "one",
-    title: "Long Island",
-    desc: "Office parks, retail centers, medical facilities, and commercial properties across Nassau and Suffolk Counties — available for recurring and one-time contracts.",
-  },
-  {
-    id: 2,
-    image: bronx,
-    name: "two",
-    title: "Bronx",
-    desc: "Commercial cleaning for offices, schools, retail spaces, and facilities throughout the Bronx — scheduled around your business hours.",
-  },
-  {
-    id: 3,
-    image: queens,
-    name: "three",
-    title: "Queens",
-    desc: "Medical facilities, logistics warehouses, restaurants, and multi-tenant commercial buildings across Long Island City, Flushing, Jamaica, and beyond.",
-  },
-  {
-    id: 4,
-    image: brooklyn,
-    name: "four",
-    title: "Brooklyn",
-    desc: "From DUMBO creative offices to Williamsburg retail to industrial facilities in Sunset Park — professional commercial cleaning across every Brooklyn neighborhood.",
-  },
-  {
-    id: 5,
-    image: manhattan,
-    name: "Five",
-    title: "Manhattan",
-    desc: "Office towers, corporate headquarters, law firms, medical practices, and retail — Midtown, Downtown, and everywhere in between.",
-  },
-];
 export default function Coverage() {
   return (
     <section className="container mt-8 sm:mt-16">
@@ -81,7 +41,9 @@ export default function Coverage() {
               <h4 className="heading-4 capitalize">{step.name}</h4>
               <h4 className="heading-4 font-bold mt-6 mb-8">{step.title}</h4>
               <p className="mb-8">{step.desc}</p>
-              <ButtonSolid minWidth="sm:w-28"  >Next</ButtonSolid>
+              <Link href={`/service-area/${step.slug}`}>
+                <ButtonSolid minWidth="sm:w-28">Next</ButtonSolid>
+              </Link>
             </div>
             <div>
               <Image src={step.image} alt="image" height={576} width={576} className="w-full h-full max-h-144 object-cover rounded-[20px]" />
