@@ -41,10 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# graphify
-graphify-out/
-.graphify_*
-.graphify_python
 .env*
 
 # chatbot implementation (local-only, not pushed)

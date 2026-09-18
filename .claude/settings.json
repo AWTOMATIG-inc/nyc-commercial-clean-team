@@ -6,36 +6,10 @@
       "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" diff --staged)",
       "Bash(git -C \"c:\\\\Users\\\\user\\\\Desktop\\\\nyc-commercial-clean-team\" log --oneline origin/main -5)",
       "Bash(python -c ' *)",
-      "Bash(python .graphify_count_dirs.py)",
-      "Bash(rm .graphify_count_dirs.py)",
-      "Bash(cd \"/c/Users/user/Desktop/nyc-commercial-clean-team\" && python .graphify_count_dirs.py && rm .graphify_count_dirs.py)",
-      "Bash(python .graphify_filter_detect.py)",
-      "Bash(python .graphify_set_tokens.py)",
-      "Bash(python .graphify_step_3_merge_final.py)",
-      "Bash(python .graphify_step4.py)",
-      "Bash(python .graphify_label.py)",
-      "Bash(python .graphify_step5.py)",
-      "Bash(cd \"/c/Users/user/Desktop/nyc-commercial-clean-team\" && rm -f .graphify_step5.py .graphify_label.py)",
-      "Bash(python .graphify_step6_html.py)",
-      "Bash(python .graphify_step8.py)",
-      "Bash(python .graphify_step9.py)",
       "Bash(timeout 60 bash -c 'until curl -sf http://localhost:3000 >/dev/null 2>&1; do sleep 1; done')"
     ],
     "additionalDirectories": [
       "c:\\c\\Users\\user\\Desktop\\nyc-commercial-clean-team"
-    ]
-  },
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "CMD=$(python3 -c \"import json,sys; d=json.load(sys.stdin); print(d.get('tool_input',d).get('command',''))\" 2>/dev/null || true); case \"$CMD\" in *grep*|*rg\\ *|*ripgrep*|*find\\ *|*fd\\ *|*ack\\ *|*ag\\ *)   [ -f graphify-out/graph.json ] &&   echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"additionalContext\":\"graphify: Knowledge graph exists. Read graphify-out/GRAPH_REPORT.md for god nodes and community structure before searching raw files.\"}}'   || true ;; esac"
-          }
-        ]
-      }
     ]
   }
 }

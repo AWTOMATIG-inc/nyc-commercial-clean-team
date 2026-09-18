@@ -5,12 +5,15 @@ first — it has the phase workflow rules. The full architecture and all
 decisions live in `chatbot-implementation/00-ARCHITECTURE.md`, and current
 progress is tracked in `chatbot-implementation/PROGRESS.md`.
 
-## graphify
+## codegraph
 
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+This project has a CodeGraph index at `.codegraph/` (SQLite-backed code
+intelligence graph of files, functions, imports, routes, and their
+relationships).
 
 Rules:
-- ALWAYS read graphify-out/GRAPH_REPORT.md before reading any source files, running grep/glob searches, or answering codebase questions. The graph is your primary map of the codebase.
-- IF graphify-out/wiki/index.md EXISTS, navigate it instead of reading raw files
-- For cross-module "how does X relate to Y" questions, prefer `graphify query "<question>"`, `graphify path "<A>" "<B>"`, or `graphify explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+- For finding symbols, prefer `codegraph query "<term>"` over grep/glob.
+- For "how does X relate to Y" / call-path questions, prefer `codegraph explore <query...>`, `codegraph context <task...>`, or `codegraph node <name>` over manually tracing code.
+- To find who calls or is called by a symbol, use `codegraph callers <symbol>` / `codegraph callees <symbol>`.
+- Before changing a symbol, check blast radius with `codegraph impact <symbol>` and find affected tests with `codegraph affected [files...]`.
+- After modifying code, run `codegraph sync` to keep the index current.
