@@ -3,19 +3,27 @@ import { getBlogBySlug } from "@/utility/getBlogs";
 import { GetTime } from "@/utility/GetTime";
 import { timeAgo } from "@/utility/timeAgo";
 import { Icon } from "@iconify/react";
+import { cache } from "react";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 import "react-quill-new/dist/quill.snow.css";
+
+const getCachedBlog = cache(async (slug) => getBlogBySlug(slug));
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const blog = await getCachedBlog(slug);
+  if (!blog) return {};
   return {
     title: `Blogs - ${blog.title} |`,
     description: blog.shortDescription || blog.metaDescription,
+    alternates: { canonical: `https://nyccleantinc.com/blogs/${slug}` },
   };
 }
 export default async function BlogDetails({ params }) {
   const { slug } = await params;
-  const blog = await getBlogBySlug(slug);
+  const blog = await getCachedBlog(slug);
+  if (!blog) notFound();
   return (
     <main>
       <section className="container my-8 sm:my-16">

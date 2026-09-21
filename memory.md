@@ -12,7 +12,7 @@ Read this before starting any task in `gsc-tasks.md`. Update it after finishing 
 | 2 | `getPages()` utility | Done ✅ | 2026-09-21 | Added to `src/utility/getPages.js`, unused until Task 7 wires it into the sitemap |
 | 3 | Guard static routes vs 500 | Done ✅ | 2026-09-21 | All 7 files guarded with `notFound()`; spot-checked 3 routes live, all return real 404s now |
 | 4 | Canonical + og:url on static routes | Done ✅ | 2026-09-21 | `generateMetadata` added to all 6 remaining files (recurring/specialty/surface/support/industries/foundation), borough route's existing `generateMetadata` extended with canonical+og:url. `services/[slug]` skipped on purpose — dies in Task 6 |
-| 5 | Blog canonical + DB dedup | Not Started | | |
+| 5 | Blog canonical + DB dedup | Done ✅ | 2026-09-21 | `generateMetadata` + page body in `blogs/[slug]/page.jsx` now share one `getBlogBySlug` call via `cache()` (was 2 DB calls/load, now 1); added canonical; added `notFound()` guard for stale/deleted slugs (was crashing to 500) |
 | 6 | Redirects + retire duplicate routes | Not Started | | |
 | 7 | Rebuild sitemap.js | Not Started | | |
 | 8 | Deploy + GSC revalidation | Not Started | | |
@@ -28,7 +28,7 @@ Captured before Task 1's edit, on 2026-09-21: `npm run build` completed clean (`
 
 - Build time: ~28-30s
 - Route count: 72 route lines in build output (includes API routes, dashboard routes, and page routes)
-- Known pre-existing issue found during audit: `blogs/[slug]/page.jsx` calls `getBlogBySlug` twice per page load (once in `generateMetadata`, once in the page body) — this is a **pre-existing bug**, not something the GSC work introduced. Task 5 fixes it.
+- Known pre-existing issue found during audit: `blogs/[slug]/page.jsx` calls `getBlogBySlug` twice per page load (once in `generateMetadata`, once in the page body) — this was a **pre-existing bug**, not something the GSC work introduced. Fixed in Task 5 (2026-09-21) — build stayed at 21.6s, no regression.
 
 ---
 
@@ -61,6 +61,8 @@ Captured before Task 1's edit, on 2026-09-21: `npm run build` completed clean (`
 ---
 
 ## Last updated
+
+2026-09-21 — Task 5 done: `blogs/[slug]/page.jsx` now wraps `getBlogBySlug` in `cache()` so `generateMetadata` and the page body share one DB call instead of two; added a self-referencing canonical (`https://nyccleantinc.com/blogs/:slug`); added a `notFound()` guard so a stale/deleted blog slug returns a real 404 instead of crashing to a 500 (it was previously reading `.title` off a null result). Build clean at 21.6s, no new warnings. Live-verified: `/blogs/not-a-real-slug-xyz` returns 404, and a real post shows the correct `<title>` and `<link rel="canonical">`. Not committed yet — will commit as part of this task's wrap-up.
 
 2026-09-21 — Task 4 done: `generateMetadata` (canonical + og:url) added to `services/recurring/[slug]`, `services/specialty/[slug]`, `services/surface/[slug]`, `services/support/[slug]`, `industries/[slug]`, `service-area/foundation/[slug]`; `service-area/[slug]` (borough) had its existing `generateMetadata` extended rather than replaced. `services/[slug]` (flat route) intentionally left untouched — it's deleted in Task 6. Build clean at 21.6s (faster than the 27.7s/30.3s baseline, no regression). Live-verified canonical + og:url on `services/recurring/office-cleaning`, `service-area/bronx`, `service-area/foundation/built-on-experience-and-accountability`, and confirmed Task 3's 404 guards still fire on `industries/not-a-real-slug` and `services/specialty/not-a-real-slug`.
 
