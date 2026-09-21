@@ -429,7 +429,7 @@ Once Task 8's validations clear and a few weeks of GSC data come in, check how m
 - [x] Task 3 — 7 static routes guarded against 500
 - [x] Task 4 — canonical + og:url on 7 static routes
 - [x] Task 5 — blog canonical + DB call dedup
-- [ ] Task 6 — redirects + duplicate routes retired
+- [x] Task 6 — redirects + duplicate routes retired
 - [ ] Task 7 — sitemap rebuilt
 - [ ] Task 8 — deployed + GSC validations submitted
 - [ ] Task 9 — blocked, waiting on real photos
