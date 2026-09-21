@@ -431,7 +431,7 @@ Once Task 8's validations clear and a few weeks of GSC data come in, check how m
 - [x] Task 5 — blog canonical + DB call dedup
 - [x] Task 6 — redirects + duplicate routes retired
 - [x] Task 7 — sitemap rebuilt
-- [ ] Task 8 — deployed + GSC validations submitted
+- [x] Task 8 — deployed + GSC validations submitted
 - [ ] Task 9 — blocked, waiting on real photos
 
 **Next action right now:** open a new Claude session, say "do Task 1 in gsc-tasks.md."
