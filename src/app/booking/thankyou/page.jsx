@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata = {
   title: "ThankYou - New York Commercial Clean Team INC",
   description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+  robots: { index: false, follow: false },
 };
 export default function ThankYou() {
   return (
