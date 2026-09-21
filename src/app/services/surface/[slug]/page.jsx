@@ -3,6 +3,21 @@ import { details } from "@/constant/services";
 import { surfaces } from "@/constant/services/surfaces";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const surface = surfaces.find((service) => service.slug === slug);
+  const detail = details.find((service) => service.slug === slug);
+  if (!surface || !detail) return {};
+  const url = `https://nyccleantinc.com/services/surface/${slug}`;
+  return {
+    title: `${detail.heading} | NYC Commercial Clean Team`,
+    description: detail.desc,
+    alternates: { canonical: url },
+    openGraph: { url, title: detail.heading, description: detail.desc },
+  };
+}
+
 export default async function SurfaceDetails({params}) {
   const {slug}=await params
   const surface=surfaces.find(service=>service.slug===slug)

@@ -427,7 +427,7 @@ Once Task 8's validations clear and a few weeks of GSC data come in, check how m
 - [x] Task 1 — CMS page metadata (74 pages)
 - [x] Task 2 — `getPages()` utility
 - [x] Task 3 — 7 static routes guarded against 500
-- [ ] Task 4 — canonical + og:url on 7 static routes
+- [x] Task 4 — canonical + og:url on 7 static routes
 - [ ] Task 5 — blog canonical + DB call dedup
 - [ ] Task 6 — redirects + duplicate routes retired
 - [ ] Task 7 — sitemap rebuilt

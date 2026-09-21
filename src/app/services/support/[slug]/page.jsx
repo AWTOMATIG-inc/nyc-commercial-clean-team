@@ -3,6 +3,21 @@ import { details } from "@/constant/services";
 import { supports } from "@/constant/services/support";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const support = supports.find((service) => service.slug === slug);
+  const detail = details.find((service) => service.slug === slug);
+  if (!support || !detail) return {};
+  const url = `https://nyccleantinc.com/services/support/${slug}`;
+  return {
+    title: `${detail.heading} | NYC Commercial Clean Team`,
+    description: detail.desc,
+    alternates: { canonical: url },
+    openGraph: { url, title: detail.heading, description: detail.desc },
+  };
+}
+
 export default async function SupportDetails({ params }) {
   const { slug } = await params;
   const support = supports.find((service) => service.slug === slug);

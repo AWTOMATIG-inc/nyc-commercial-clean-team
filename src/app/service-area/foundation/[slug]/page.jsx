@@ -2,6 +2,20 @@ import CleaningQuote from "@/components/services/CleaningQuote";
 import { foundations } from "@/constant/service-area";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const foundation = foundations.find((service) => service.slug === slug);
+  if (!foundation) return {};
+  const url = `https://nyccleantinc.com/service-area/foundation/${slug}`;
+  return {
+    title: `${foundation.heading} | NYC Commercial Clean Team`,
+    description: foundation.desc,
+    alternates: { canonical: url },
+    openGraph: { url, title: foundation.heading, description: foundation.desc },
+  };
+}
+
 export default async function SurfaceDetails({params}) {
   const {slug}=await params
   const foundation=foundations.find(service=>service.slug===slug)

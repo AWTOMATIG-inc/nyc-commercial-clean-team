@@ -11,9 +11,12 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const borough = boroughs.find((item) => item.slug === slug);
   if (!borough) return {};
+  const url = `https://nyccleantinc.com/service-area/${slug}`;
   return {
     title: `Commercial Cleaning in ${borough.title} - New York Commercial Clean Team INC`,
     description: borough.desc,
+    alternates: { canonical: url },
+    openGraph: { url },
   };
 }
 
