@@ -9,7 +9,7 @@ Read this before starting any task in `gsc-tasks.md`. Update it after finishing 
 | # | Task | Status | Date | Notes |
 |---|---|---|---|---|
 | 1 | CMS page metadata (74 pages) | Done ✅ | 2026-09-21 | `generateMetadata` added to `(quotes)/[slug]/page.jsx`, wrapped `getPageBySlug` in `cache()` so metadata + page body share one DB call |
-| 2 | `getPages()` utility | Not Started | | |
+| 2 | `getPages()` utility | Done ✅ | 2026-09-21 | Added to `src/utility/getPages.js`, unused until Task 7 wires it into the sitemap |
 | 3 | Guard static routes vs 500 | Not Started | | |
 | 4 | Canonical + og:url on static routes | Not Started | | |
 | 5 | Blog canonical + DB dedup | Not Started | | |
@@ -62,4 +62,4 @@ Captured before Task 1's edit, on 2026-09-21: `npm run build` completed clean (`
 
 ## Last updated
 
-2026-09-21 — Task 1 done: `generateMetadata` added to `(quotes)/[slug]/page.jsx` for the 74 CMS pages, `getPageBySlug` wrapped in `cache()` to avoid a duplicate DB call. Build clean. Not yet committed to git (next step).
+2026-09-21 — Task 2 done: `getPages()` added to `src/utility/getPages.js`. Build clean, committed. Task 1 also done and committed: `generateMetadata` added to `(quotes)/[slug]/page.jsx` for the 74 CMS pages, `getPageBySlug` wrapped in `cache()` to avoid a duplicate DB call.

@@ -23,3 +23,14 @@ export const getPageBySlug = async (slug) => {
     throw err;
   }
 };
+
+export const getPages = async () => {
+  try {
+    await db_connect();
+    const pages = await PageModel.find({}, { pageName: 1, updatedAt: 1 }).lean();
+    return JSON.parse(JSON.stringify(pages));
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
