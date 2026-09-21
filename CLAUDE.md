@@ -5,6 +5,18 @@ first — it has the phase workflow rules. The full architecture and all
 decisions live in `chatbot-implementation/00-ARCHITECTURE.md`, and current
 progress is tracked in `chatbot-implementation/PROGRESS.md`.
 
+## GSC indexing fix
+
+Working on the Google Search Console indexing problem? This is a
+multi-session task list — each task is meant to be run in its own fresh
+Claude session. Read `gsc-tasks.md` first (it has the workflow rules and
+non-negotiables at the top, including "commit only, never push" and "never
+regress performance"), then `memory.md` for current progress before doing
+any task. `gsc-implementation.md` has the full technical investigation and
+root-cause analysis behind the plan, and `report.md` is the original GSC
+audit that kicked this off (note: `gsc-implementation.md` documents where
+that original audit got things wrong).
+
 ## codegraph
 
 This project has a CodeGraph index at `.codegraph/` (SQLite-backed code
