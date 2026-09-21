@@ -10,7 +10,7 @@ Read this before starting any task in `gsc-tasks.md`. Update it after finishing 
 |---|---|---|---|---|
 | 1 | CMS page metadata (74 pages) | Done ✅ | 2026-09-21 | `generateMetadata` added to `(quotes)/[slug]/page.jsx`, wrapped `getPageBySlug` in `cache()` so metadata + page body share one DB call |
 | 2 | `getPages()` utility | Done ✅ | 2026-09-21 | Added to `src/utility/getPages.js`, unused until Task 7 wires it into the sitemap |
-| 3 | Guard static routes vs 500 | Not Started | | |
+| 3 | Guard static routes vs 500 | Done ✅ | 2026-09-21 | All 7 files guarded with `notFound()`; spot-checked 3 routes live, all return real 404s now |
 | 4 | Canonical + og:url on static routes | Not Started | | |
 | 5 | Blog canonical + DB dedup | Not Started | | |
 | 6 | Redirects + retire duplicate routes | Not Started | | |
@@ -62,4 +62,4 @@ Captured before Task 1's edit, on 2026-09-21: `npm run build` completed clean (`
 
 ## Last updated
 
-2026-09-21 — Task 2 done: `getPages()` added to `src/utility/getPages.js`. Build clean, committed. Task 1 also done and committed: `generateMetadata` added to `(quotes)/[slug]/page.jsx` for the 74 CMS pages, `getPageBySlug` wrapped in `cache()` to avoid a duplicate DB call.
+2026-09-21 — Task 3 done: all 7 static routes (`services/[slug]`, `services/recurring/[slug]`, `services/surface/[slug]`, `services/support/[slug]`, `services/specialty/[slug]`, `industries/[slug]`, `service-area/foundation/[slug]`) now call `notFound()` when their `.find()` lookup(s) come back empty, instead of crashing to a 500. Live-tested 3 of the 7 — all return real 404s. Tasks 1 and 2 also done and committed (CMS page metadata, `getPages()` utility).

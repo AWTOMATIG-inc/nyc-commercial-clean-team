@@ -1,9 +1,11 @@
 import CleaningQuote from "@/components/services/CleaningQuote";
 import { foundations } from "@/constant/service-area";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 export default async function SurfaceDetails({params}) {
   const {slug}=await params
   const foundation=foundations.find(service=>service.slug===slug)
+  if (!foundation) notFound();
   return (
     <main>
       <section className="container min-h-screen mt-8 sm:mt-16">

@@ -1,10 +1,12 @@
 import CleaningQuote from "@/components/services/CleaningQuote";
 import { details, industries } from "@/constant/home/industries";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 export default async function IndustriesDetails({params}) {
   const {slug}=await params
   const item=industries.find(service=>service.slug===slug)
   const detail = details.find((service) => service.slug === slug);
+  if (!item || !detail) notFound();
   return (
     <main>
       <section className="container  mt-8 sm:mt-16">

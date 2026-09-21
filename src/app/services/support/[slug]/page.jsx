@@ -2,10 +2,12 @@ import CleaningQuote from "@/components/services/CleaningQuote";
 import { details } from "@/constant/services";
 import { supports } from "@/constant/services/support";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 export default async function SupportDetails({ params }) {
   const { slug } = await params;
   const support = supports.find((service) => service.slug === slug);
   const detail = details.find((service) => service.slug === slug);
+  if (!support || !detail) notFound();
   return (
     <main>
       <section className="container  mt-8 sm:mt-16">
