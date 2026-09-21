@@ -9,11 +9,27 @@ import { getFeedback } from "@/utility/getFeedback";
 import { getPageBySlug } from "@/utility/getPages";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
+import { cache } from "react";
+
+const getCachedPage = cache(async (slug) => getPageBySlug(slug));
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const pageDetail = await getCachedPage(slug);
+  if (!pageDetail) return {};
+  const url = `https://nyccleantinc.com/${slug}`;
+  return {
+    title: `${pageDetail.title} | NYC Commercial Clean Team`,
+    description: pageDetail.shortDescription,
+    alternates: { canonical: url },
+    openGraph: { url, title: pageDetail.title, description: pageDetail.shortDescription },
+  };
+}
 
 export default async function Quotes({ params }) {
   const { slug } = await params;
   const feedbacks = await getFeedback();
-  const pageDetail = await getPageBySlug(slug);
+  const pageDetail = await getCachedPage(slug);
   if (!pageDetail) {
     notFound();
   }
