@@ -44,7 +44,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/service-area/available/${service.slug}`}>
+                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
                   learn more
                 </LinkWithArrow>
               </div>
@@ -76,7 +76,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/service-area/available/${service.slug}`}>
+                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
                   learn more
                 </LinkWithArrow>
               </div>
@@ -108,7 +108,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/service-area/available/${service.slug}`}>
+                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
                   learn more
                 </LinkWithArrow>
               </div>

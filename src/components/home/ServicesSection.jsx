@@ -76,7 +76,7 @@ export default function ServicesSection() {
                         </p>
                       </div>
                     </div>
-                    <Link href={`/services/${item.slug}`}>
+                    <Link href={`/services/recurring/${item.slug}`}>
                       <ButtonSolid color="white" className="text-nowrap">
                         Learn more
                       </ButtonSolid>

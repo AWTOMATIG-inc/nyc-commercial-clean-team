@@ -68,6 +68,7 @@ export const availableSteps = [
   {
     id: 1,
     slug:"janitorial-services",
+    category: "recurring",
     image: "/images/service-area/floor-moping.jpg",
     name: "Recurring",
     title: "Janitorial services",
@@ -76,6 +77,7 @@ export const availableSteps = [
   {
     id: 4,
     slug:"office-cleaning",
+    category: "recurring",
     image: "/images/services/recurring/office-meet.png",
     icon: ThreeDotIcon,
     title: "Office cleaning",
@@ -84,14 +86,16 @@ export const availableSteps = [
   {
     id: 2,
     slug:"day-porter-services",
+    category: "recurring",
     image: "/images/services/recurring/wall-cleaning.jpg",
-    icon: CycleCircleIcon,   
+    icon: CycleCircleIcon,
     title: "Day porter services",
     desc: "On-site support during business hours for immediate needs",
   },
   {
     id: 5,
     slug:"post-construction-cleaning",
+    category: "specialty",
     image: "/images/service-area/construction.jpg",
     name: "Specialty",
     title: "Post-construction cleaning",
@@ -100,14 +104,16 @@ export const availableSteps = [
   {
     id: 3,
     slug:"carpet-cleaning",
+    category: "surface",
     image: "/images/service-area/carpet.webp",
     name: "Surfaces",
     title: "Floor and carpet care",
     desc: "Stripping, waxing, and deep cleaning for all floor types.",
-  },  
+  },
   {
     id: 6,
     slug:"window-cleaning",
+    category: "surface",
     image: "/images/services/surface/glass.webp",
     icon: GridIcon,
     title: "Window cleaning",
