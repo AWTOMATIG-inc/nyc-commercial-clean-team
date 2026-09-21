@@ -71,8 +71,8 @@ GSC actions completed by the user:
 - **Pages → Duplicate without user-selected canonical → Validate Fix** — clicked.
 - **URL Inspection**, 10 priority URLs run through manually (capped there for GSC's daily quota):
   1. `/commercial-office-cleaning-nyc` — requested, now indexed
-  2. `/commercial-cleaning-services-manhattan-nyc` — status not confirmed back to Claude, check before re-requesting
-  3. `/janitorial-services-nyc` — status not confirmed back to Claude, check before re-requesting
+  2. `/commercial-cleaning-services-manhattan-nyc` — requested for indexing 2026-09-21
+  3. `/janitorial-services-nyc` — requested for indexing 2026-09-21
   4. `/services/recurring/office-cleaning` — already indexed, no request needed
   5. `/services/specialty/post-construction-cleaning` — already indexed, no request needed
   6. `/service-area/manhattan` — already indexed, no request needed
@@ -84,7 +84,7 @@ GSC actions completed by the user:
 
 **Validation timeline:** GSC said 3–14 days for the 404/5xx/duplicate-canonical Validate Fix results to clear. Don't re-click daily — it doesn't speed it up.
 
-**Remaining for a future session:** confirm indexing status on `/commercial-cleaning-services-manhattan-nyc` and `/janitorial-services-nyc` if not already resolved; otherwise nothing left in Task 8. Task 9 is still blocked on real photos. See "Watch-and-revisit" in `gsc-tasks.md` for the optional follow-up (schema markup + cross-linking) once a few weeks of post-fix GSC data comes in.
+**Remaining for a future session:** nothing left in Task 8 — all 10 priority URLs requested/confirmed indexed. Task 9 is still blocked on real photos. See "Watch-and-revisit" in `gsc-tasks.md` for the optional follow-up (schema markup + cross-linking) once a few weeks of post-fix GSC data comes in.
 
 2026-09-21 — Task 7 done: rebuilt `src/app/sitemap.js`. Old version only listed 10 hardcoded static paths (including `/booking/thankyou`) plus blog posts — missing every service/location/industry/CMS URL entirely. New version pulls in `recurrings`, `speciality`, `surfaces`, `supports` (service categories), `boroughs` + `foundations` (service-area), `industries`, `getBlogs()`, and Task 2's `getPages()` for the 74 CMS pages — all confirmed against actual current export names before writing (re-checked per the doc's warning since Tasks 3/4/6 touched these files). `/booking/thankyou` given `robots: {index:false, follow:false}` in its `metadata` export and dropped from the sitemap's static list. Build clean at 21.8s (faster than baseline, no new warnings). Live-verified by building fresh and running `next start` on an unused port (3005/3999 were already occupied by other unrelated running processes on this machine, left untouched) — `/sitemap.xml` returned 116 `<loc>` entries (static + 3 recurring + 3 specialty + 3 surface + 2 support + 5 boroughs + 1 foundation + 5 industries + 11 blogs + 74 CMS pages ≈ matches the "115+" target), zero `thankyou` occurrences. Committed (sitemap.js + thankyou/page.jsx only — left the pre-existing unrelated `.gitignore`/`CLAUDE.md` modifications and untracked `report.md`/`gsc-implementation.md` alone). Not pushed.
 
