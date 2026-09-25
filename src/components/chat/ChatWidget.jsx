@@ -46,11 +46,12 @@ const OPENING_MESSAGE = {
 
 const CHAT_HISTORY_KEY = "chat_history";
 const QUOTE_FLOW_KEY = "chat_quote_flow";
+const AUTO_OPEN_KEY = "chat_auto_opened";
 const CHAR_TRIM_THRESHOLD = 7000;
 const MAX_MESSAGES = 60;
 
 const NUDGE_MS = 3 * 60 * 1000;
-const IDLE_CLOSE_MS = 10 * 60 * 1000;
+const IDLE_CLOSE_MS = 2.5 * 60 * 1000;
 const COLLAPSE_DELAY_MS = 3000;
 const CLEAR_CONFIRM_MS = 3000;
 
@@ -119,6 +120,20 @@ export default function ChatWidget() {
       }
     } catch (error) {
       // sessionStorage unavailable/corrupted — fall back to the opening message.
+    }
+  }, []);
+
+  // Auto-open on the visitor's first page load of the session. Once this
+  // flag is set it persists for the whole session, so navigating between
+  // pages — or the visitor closing the chat themselves — won't reopen it.
+  useEffect(() => {
+    try {
+      if (!sessionStorage.getItem(AUTO_OPEN_KEY)) {
+        sessionStorage.setItem(AUTO_OPEN_KEY, "1");
+        setIsOpen(true);
+      }
+    } catch (error) {
+      // sessionStorage unavailable — leave the chat closed by default.
     }
   }, []);
 
@@ -215,9 +230,8 @@ export default function ChatWidget() {
   useEffect(() => {
     if (!isOpen) return;
     const hasExchange = messages.some((m) => m.role === "user");
-    if (!hasExchange) return;
 
-    if (!nudgeFiredRef.current) {
+    if (hasExchange && !nudgeFiredRef.current) {
       nudgeTimeoutRef.current = setTimeout(() => {
         nudgeFiredRef.current = true;
         setMessages((prev) => trimHistory([...prev, NUDGE_MESSAGE]));
