@@ -14,7 +14,7 @@ export default function SupportSection() {
       />
       <div className="mt-8 sm:mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2">
         {supports.map((item) => (
-          <ServicesBlogCard view={"row"} key={item.id} blog={item} href={`/services/support/${item.slug}`} />
+          <ServicesBlogCard view={"row"} key={item.id} blog={item} href={item.newUrl} />
         ))}
       </div>
     </section>

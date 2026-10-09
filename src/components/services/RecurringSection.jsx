@@ -47,7 +47,7 @@ export default function RecurringSection() {
       >
         {recurrings.map((item, id) => (
           <SwiperSlide key={id}>
-            <ServicesBlogCard key={item.id} blog={item} href={`/services/recurring/${item.slug}`} />
+            <ServicesBlogCard key={item.id} blog={item} href={item.newUrl} />
           </SwiperSlide>
         ))}
       </Swiper>

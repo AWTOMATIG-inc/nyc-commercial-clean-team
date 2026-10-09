@@ -25,11 +25,11 @@ export default function Counter({ value,className="text-slate text-[28px] md:tex
   }, []);
 
   return (
-    <h1
+    <p
       ref={ref}
       className={className}
     >
       {start ? <CountUp end={value} duration={2} /> : value}<span>{sign}</span>
-    </h1>
+    </p>
   );
 }

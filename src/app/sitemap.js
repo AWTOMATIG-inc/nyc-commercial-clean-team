@@ -1,10 +1,6 @@
 import { getBlogs } from "@/utility/getBlogs";
 import { getPages } from "@/utility/getPages";
-import { boroughs, foundations } from "@/constant/service-area";
-import { recurrings } from "@/constant/services/recurring";
-import { speciality } from "@/constant/services/specialty";
-import { surfaces } from "@/constant/services/surfaces";
-import { supports } from "@/constant/services/support";
+import { foundations } from "@/constant/service-area";
 import { industries } from "@/constant/home/industries";
 
 export const dynamic = "force-dynamic";
@@ -19,17 +15,9 @@ export default async function sitemap() {
     "privacy-policy", "terms-of-service", "blogs",
   ].map(path => ({ url: `${base}/${path}`, lastModified: now }));
 
-  const serviceUrls = [
-    ...recurrings.map(s => `${base}/services/recurring/${s.slug}`),
-    ...speciality.map(s => `${base}/services/specialty/${s.slug}`),
-    ...surfaces.map(s => `${base}/services/surface/${s.slug}`),
-    ...supports.map(s => `${base}/services/support/${s.slug}`),
-  ].map(url => ({ url, lastModified: now }));
-
-  const locationUrls = boroughs.map(b => ({
-    url: `${base}/service-area/${b.slug}`,
-    lastModified: now,
-  }));
+  // Old /services/... and /service-area/<borough> duplicate pages are deliberately
+  // left out: they now 301-redirect to the stronger keyword pages, which are
+  // already covered by cmsPageUrls below (GSC fix, 10-4-26).
 
   const foundationUrls = foundations.map(f => ({
     url: `${base}/service-area/foundation/${f.slug}`,
@@ -51,5 +39,5 @@ export default async function sitemap() {
     lastModified: new Date(p.updatedAt).toISOString(),
   }));
 
-  return [...staticPages, ...serviceUrls, ...locationUrls, ...foundationUrls, ...industryUrls, ...blogUrls, ...cmsPageUrls];
+  return [...staticPages, ...foundationUrls, ...industryUrls, ...blogUrls, ...cmsPageUrls];
 }

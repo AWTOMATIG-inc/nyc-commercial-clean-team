@@ -20,6 +20,7 @@ export const boroughs = [
   {
     id: 1,
     slug: "long-island",
+    newUrl: "/commercial-cleaning-long-island",
     image: statenIsland,
     heroImage: "/images/service-area/long-island.webp",
     name: "one",
@@ -29,6 +30,7 @@ export const boroughs = [
   {
     id: 2,
     slug: "bronx",
+    newUrl: "/commercial-cleaning-bronx",
     image: bronx,
     heroImage: "/images/service-area/bronx.webp",
     name: "two",
@@ -38,6 +40,7 @@ export const boroughs = [
   {
     id: 3,
     slug: "queens",
+    newUrl: "/commercial-cleaning-queens",
     image: queens,
     heroImage: "/images/service-area/queens.webp",
     name: "three",
@@ -47,6 +50,7 @@ export const boroughs = [
   {
     id: 4,
     slug: "brooklyn",
+    newUrl: "/commercial-cleaning-brooklyn",
     image: brooklyn,
     heroImage: "/images/service-area/brooklyn.webp",
     name: "four",
@@ -56,6 +60,7 @@ export const boroughs = [
   {
     id: 5,
     slug: "manhattan",
+    newUrl: "/commercial-cleaning-services-manhattan-nyc",
     image: manhattan,
     heroImage: "/images/service-area/manhattan.webp",
     name: "Five",
@@ -68,6 +73,7 @@ export const availableSteps = [
   {
     id: 1,
     slug:"janitorial-services",
+    newUrl: "/janitorial-services-nyc",
     category: "recurring",
     image: "/images/service-area/floor-moping.jpg",
     name: "Recurring",
@@ -77,6 +83,7 @@ export const availableSteps = [
   {
     id: 4,
     slug:"office-cleaning",
+    newUrl: "/commercial-office-cleaning-nyc",
     category: "recurring",
     image: "/images/services/recurring/office-meet.png",
     icon: ThreeDotIcon,
@@ -86,6 +93,7 @@ export const availableSteps = [
   {
     id: 2,
     slug:"day-porter-services",
+    newUrl: "/day-porter-services-nyc",
     category: "recurring",
     image: "/images/services/recurring/wall-cleaning.jpg",
     icon: CycleCircleIcon,
@@ -95,6 +103,7 @@ export const availableSteps = [
   {
     id: 5,
     slug:"post-construction-cleaning",
+    newUrl: "/post-construction-cleaning-nyc",
     category: "specialty",
     image: "/images/service-area/construction.jpg",
     name: "Specialty",
@@ -104,6 +113,7 @@ export const availableSteps = [
   {
     id: 3,
     slug:"carpet-cleaning",
+    newUrl: "/commercial-carpet-cleaning-nyc",
     category: "surface",
     image: "/images/service-area/carpet.webp",
     name: "Surfaces",
@@ -113,6 +123,7 @@ export const availableSteps = [
   {
     id: 6,
     slug:"window-cleaning",
+    newUrl: "/commercial-window-cleaning-nyc",
     category: "surface",
     image: "/images/services/surface/glass.webp",
     icon: GridIcon,

@@ -44,7 +44,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
+                <LinkWithArrow href={service.newUrl}>
                   learn more
                 </LinkWithArrow>
               </div>
@@ -76,7 +76,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
+                <LinkWithArrow href={service.newUrl}>
                   learn more
                 </LinkWithArrow>
               </div>
@@ -108,7 +108,7 @@ export default function Available() {
                 <h4 className="heading-4 mt-6 mb-4">{service.title}</h4>
                 <p className="mb-6">{service.desc}</p>
 
-                <LinkWithArrow href={`/services/${service.category}/${service.slug}`}>
+                <LinkWithArrow href={service.newUrl}>
                   learn more
                 </LinkWithArrow>
               </div>
@@ -118,9 +118,9 @@ export default function Available() {
       </div>
       <div className="my-8 sm:my-16">
         <div className="flex flex-col items-center text-center">
-          <h1 className="text-[32px] sm:text-5xl lg:text-[56px] leading-[120%]">
+          <h2 className="text-[32px] sm:text-5xl lg:text-[56px] leading-[120%]">
             Ready to upgrade <br /> Your facility deserves better
-          </h1>
+          </h2>
           <p className="md:text-lg my-6">
             Let NYC Clean Team handle the details while you focus on running
             your business.

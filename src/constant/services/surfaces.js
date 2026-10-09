@@ -4,6 +4,7 @@ export const surfaces = [
   {
     id: 1,
     slug:"floor-strip-and-wax",
+    newUrl: "/floor-stripping-waxing-nyc",
     image: "/images/services/surface/floors.webp",
     view: "row",
     title: "Floors",
@@ -13,6 +14,7 @@ export const surfaces = [
   {
     id: 2,
     slug:"carpet-cleaning",
+    newUrl: "/commercial-carpet-cleaning-nyc",
     image: "/images/services/surface/carpet.webp",
     view: "row-reverse",
     title: "Carpet",
@@ -22,6 +24,7 @@ export const surfaces = [
   {
     id: 3,
     slug:"window-cleaning",
+    newUrl: "/commercial-window-cleaning-nyc",
     image: "/images/services/surface/glass.webp",
     view: "row-reverse",
     title: "Glass",

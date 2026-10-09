@@ -53,7 +53,7 @@ export default async function BlogDetails({ params }) {
           </div>
           {blog.comments.length > 0 && (
             <div className="mt-8 sm:mt-16">
-              <h1 className="heading-2">{blog.comments.length} Comments</h1>
+              <h2 className="heading-2">{blog.comments.length} Comments</h2>
               <div className="mt-10 space-y-6 body-text">
                 {blog.comments.map((comment) => (
                   <div

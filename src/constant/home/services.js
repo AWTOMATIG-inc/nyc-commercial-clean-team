@@ -5,6 +5,7 @@ export const services = [
     image: "/images/home/services/office-meet.png",
     icon:ServiceCardIcon,
     slug: "office-cleaning",
+    newUrl: "/commercial-office-cleaning-nyc",
     heading: "Office cleaning",
     desc: "Keep your workspace consistently clean, organized, and client-ready.",
     
@@ -14,6 +15,7 @@ export const services = [
     image: "/images/home/services/floor-moping.jpg",
     icon:JanitorialServiceIcon,
     slug: "janitorial-services",
+    newUrl: "/janitorial-services-nyc",
     heading: "Janitorial Services",
     desc: "Daily and scheduled cleaning programs designed for high-traffic facilities.",
   },
@@ -22,6 +24,7 @@ export const services = [
     image: "/images/home/services/bookself-cleaning.png",
     icon:DayPorterServiceIcon,
     slug: "day-porter-services",
+    newUrl: "/day-porter-services-nyc",
     heading: "Day Porter Services",
     desc: "On-site staff to maintain cleanliness throughout the day.",
   },

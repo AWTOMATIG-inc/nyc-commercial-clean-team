@@ -46,8 +46,10 @@ const jsonLd = {
   telephone: "+16313817252",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "New York",
+    streetAddress: "146-61 107th Ave, Suite 1",
+    addressLocality: "Jamaica",
     addressRegion: "NY",
+    postalCode: "11435",
     addressCountry: "US",
   },
   areaServed: [

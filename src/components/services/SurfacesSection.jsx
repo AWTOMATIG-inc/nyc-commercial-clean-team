@@ -14,7 +14,7 @@ export default function SurfacesSection() {
       <div className="mt-21">
         <div className="grid sm:grid-cols-2  xl:grid-cols-[1.8fr_1fr_1fr] gap-4 md:gap-8">
         {surfaces.map((item) => (
-          <ServicesBlogCard view={item.view} key={item.id} blog={item} href={`/services/surface/${item.slug}`}/>
+          <ServicesBlogCard view={item.view} key={item.id} blog={item} href={item.newUrl}/>
         ))}
       </div>
       {/* <div className="grid lg:grid-cols-2 gap-8">

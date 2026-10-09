@@ -41,7 +41,7 @@ export default function Coverage() {
               <h4 className="heading-4 capitalize">{step.name}</h4>
               <h4 className="heading-4 font-bold mt-6 mb-8">{step.title}</h4>
               <p className="mb-8">{step.desc}</p>
-              <Link href={`/service-area/${step.slug}`}>
+              <Link href={step.newUrl}>
                 <ButtonSolid minWidth="sm:w-28">Next</ButtonSolid>
               </Link>
             </div>

@@ -84,7 +84,7 @@ crews."
               </div>
             </div>
             <div className="mt-5 mb-10 lg:mb-0 text-center lg:text-left">
-              <h1 className="text-red text-5xl md:text-6xl lg:text-[96px] font-medium mt-4">5000+</h1>
+              <p className="text-red text-5xl md:text-6xl lg:text-[96px] font-medium mt-4">5000+</p>
               <p className="my-4">
                 Installations and repairs completed successfully.
               </p>
@@ -98,9 +98,9 @@ crews."
                 className="bg-[#F4F5F7] rounded-xl flex flex-col justify-center items-center text-center px-6 py-9 shadow shadow-black"
               >
                 <item.icon />
-                <h1 className="font-black text-2xl mt-5.5 mb-6">
+                <h5 className="font-black text-2xl mt-5.5 mb-6">
                   {item.title}
-                </h1>
+                </h5>
                 <p className="text-justify">{item.desc}</p>
               </div>
             ))}

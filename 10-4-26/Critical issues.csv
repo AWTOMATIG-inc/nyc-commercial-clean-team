@@ -1,0 +1,10 @@
+Reason,Source,Validation,Pages
+Not found (404),Website,Failed,33
+Duplicate without user-selected canonical,Website,Failed,9
+Page with redirect,Website,Failed,9
+Crawled - currently not indexed,Google systems,Failed,5
+Alternate page with proper canonical tag,Website,Not Started,3
+Excluded by ‘noindex’ tag,Website,Not Started,1
+Server error (5xx),Website,Started,19
+Discovered - currently not indexed,Google systems,Started,4
+Blocked due to access forbidden (403),Website,N/A,0

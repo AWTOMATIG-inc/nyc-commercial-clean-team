@@ -1,9 +1,9 @@
 export const servicesLinks = [
-  { id: 1, name: "Office cleaning", href: "/services/recurring/office-cleaning" },
-  { id: 2, name: "Janitorial services", href: "/services/recurring/janitorial-services" },
-  { id: 3, name: "Day porter services", href: "/services/recurring/day-porter-services" },
-  { id: 4, name: "Floor care", href: "/services/surface/floor-strip-and-wax" },
-  { id: 5, name: "Window cleaning", href: "/services/surface/window-cleaning" },
+  { id: 1, name: "Office cleaning", href: "/commercial-office-cleaning-nyc" },
+  { id: 2, name: "Janitorial services", href: "/janitorial-services-nyc" },
+  { id: 3, name: "Day porter services", href: "/day-porter-services-nyc" },
+  { id: 4, name: "Floor care", href: "/floor-stripping-waxing-nyc" },
+  { id: 5, name: "Window cleaning", href: "/commercial-window-cleaning-nyc" },
 ];
 export const companyLinks = [
   { id: 1, name: "About us", href: "/about" },

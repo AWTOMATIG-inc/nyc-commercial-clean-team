@@ -3,6 +3,7 @@ export const supports = [
   {
     id: 1,
     slug: "handyman-services",
+    newUrl: "/commercial-handyman-services-nyc",
     image: "/images/services/support/handyman-service.webp",
     listView: true,
     title: "",
@@ -12,6 +13,7 @@ export const supports = [
   {
     id: 2,
     slug: "restroom-supply-management",
+    newUrl: "/restroom-supply-management-nyc",
     image: "/images/services/support/supply-management.webp",
     title: "",
     heading: "Restroom Supply Management",
