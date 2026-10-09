@@ -55,10 +55,12 @@ export default function Footer() {
               className="w-full max-w-23 h-auto"
             />
           </div>
-          <p className="py-3.5 text-lg">
-            Professional commercial cleaning services across all five NYC
-            boroughs — offices, retail, medical, and more.
-          </p>
+          <div className="py-3.5 text-lg">
+            <p>146-61 107th Ave, Suite 1, Jamaica, NY 11435</p>
+            <a href="tel:+16313817252" className="hover:underline">
+              +1 (631) 381-7252
+            </a>
+          </div>
           <div>
             <div className="flex flex-col sm:flex-row gap-5 items-center w-full sm:w-[85%] md:w-[70%] lg:w-full">
               <input
