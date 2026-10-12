@@ -66,7 +66,20 @@ const jsonLd = {
   ],
   serviceType: "Commercial Cleaning",
   priceRange: "$$",
-  openingHours: "Mo-Fr 08:00-18:00",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
 };
 export default async function Home() {
   const feedbacks = await getFeedback();
