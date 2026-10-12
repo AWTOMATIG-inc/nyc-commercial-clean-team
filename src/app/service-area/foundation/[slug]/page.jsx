@@ -9,7 +9,7 @@ export async function generateMetadata({ params }) {
   if (!foundation) return {};
   const url = `https://nyccleantinc.com/service-area/foundation/${slug}`;
   return {
-    title: `${foundation.heading} | NYC Commercial Clean Team`,
+    title: `${foundation.heading} | nyccleantinc`,
     description: foundation.desc,
     alternates: { canonical: url },
     openGraph: { url, title: foundation.heading, description: foundation.desc },

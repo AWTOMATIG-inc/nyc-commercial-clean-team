@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
   if (!item || !detail) return {};
   const url = `https://nyccleantinc.com/industries/${slug}`;
   return {
-    title: `${detail.heading} | NYC Commercial Clean Team`,
+    title: `${detail.heading} | nyccleantinc`,
     description: detail.desc,
     alternates: { canonical: url },
     openGraph: { url, title: detail.heading, description: detail.desc },

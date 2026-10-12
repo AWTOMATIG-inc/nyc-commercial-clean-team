@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   if (!pageDetail) return {};
   const url = `https://nyccleantinc.com/${slug}`;
   return {
-    title: `${pageDetail.title} | NYC Commercial Clean Team`,
+    title: `${pageDetail.title} | nyccleantinc`,
     description: pageDetail.shortDescription,
     alternates: { canonical: url },
     openGraph: { url, title: pageDetail.title, description: pageDetail.shortDescription },

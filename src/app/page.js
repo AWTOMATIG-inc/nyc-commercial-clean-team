@@ -28,7 +28,7 @@ const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 export const metadata = {
   ...pageMeta({
     path: "/",
-    title: "Commercial Cleaning Services NYC | NYC Clean Team",
+    title: "Commercial Cleaning Services NYC | nyccleantinc",
     description:
       "NYC’s trusted commercial cleaning company for offices, retail, medical facilities & more. Serving all 5 boroughs. Request a free quote today.",
   }),
