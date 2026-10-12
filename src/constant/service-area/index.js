@@ -11,7 +11,7 @@ export const foundations = [
     slug: "built-on-experience-and-accountability",
     title: "Foundation",
     heading: "Built on experience and accountability",
-    desc: "NYC Clean Team has maintained the highest standards of commercial cleaning across the city for twenty-five years. We are fully insured, background-checked, and licensed to serve the most demanding facilities in Manhattan, Brooklyn, Queens, the Bronx, and Long Island.",
+    desc: "New York Commercial Clean Team Inc. has maintained the highest standards of commercial cleaning across the city for twenty-five years. We are fully insured, background-checked, and licensed to serve the most demanding facilities in Manhattan, Brooklyn, Queens, the Bronx, and Long Island.",
     image:cleaningImg
   },
 ];

@@ -327,7 +327,7 @@ export default function ChatWidget() {
         <div
           role="dialog"
           aria-modal="false"
-          aria-label="Chat with NYC Clean Team"
+          aria-label="Chat with New York Commercial Clean Team Inc."
           className="fixed bottom-24 right-5 z-60 w-[calc(100vw-2.5rem)] max-w-90 sm:max-w-105 h-[min(70vh,calc(100dvh-8rem))] max-h-125 bg-white rounded-2xl shadow-custom flex flex-col overflow-hidden border border-light-blue/30"
         >
           <div className="bg-slate text-white px-4 py-3 flex items-center justify-between shrink-0">
@@ -335,7 +335,7 @@ export default function ChatWidget() {
               <BotAvatar size={36} online />
               <div className="flex flex-col leading-tight min-w-0">
                 <span className="font-jetbrains font-medium text-sm sm:text-base truncate">
-                  NYC Clean Team
+                  New York Commercial Clean Team Inc.
                 </span>
                 <span className="font-inter text-[11px] sm:text-xs text-light-blue">
                   Online

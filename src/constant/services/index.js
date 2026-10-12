@@ -3,7 +3,7 @@ export const details = [
     id: 1,
     slug: "office-cleaning",
     heading: "Office Cleaning — Professional Service Your Workspace Depends On",
-    desc: "Your office is where your team spends most of their working day, where clients form their first in-person impression, and where your company culture is visible. A poorly maintained workspace isn't just unpleasant — it affects productivity, signals disorganization to visitors, and creates health and sanitation risks that accumulate over time. NYC Commercial Clean Team delivers office cleaning in NYC that is consistent, thorough, and built around your schedule — so you walk in to a clean office every morning without having to think about it.",
+    desc: "Your office is where your team spends most of their working day, where clients form their first in-person impression, and where your company culture is visible. A poorly maintained workspace isn't just unpleasant — it affects productivity, signals disorganization to visitors, and creates health and sanitation risks that accumulate over time. New York Commercial Clean Team Inc. delivers office cleaning in NYC that is consistent, thorough, and built around your schedule — so you walk in to a clean office every morning without having to think about it.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -29,7 +29,7 @@ export const details = [
       desc: "A clean office directly affects employee morale and retention. Studies consistently show that employees perform better and report higher satisfaction in clean, organized environments. For client-facing offices, cleanliness communicates competence — a client who walks into a dusty, cluttered space draws conclusions about how you run your business. Regular, professional office cleaning in NYC is not overhead — it's brand management.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We don't rotate random staff through your office every week. You get the same cleaning crew on the same schedule — people who understand your space and your expectations. Our office cleaning teams are background-checked, uniformed, and trained in commercial cleaning protocols. We carry full insurance coverage and operate across Manhattan, Brooklyn, Queens, the Bronx, Staten Island, and Long Island.",
     },
   },
@@ -37,7 +37,7 @@ export const details = [
     id: 2,
     slug: "janitorial-services",
     heading: "Janitorial Services — Consistent, Scheduled, and Fully Managed",
-    desc: "Running a commercial building or managing a facility in New York City means cleanliness isn't optional — it's operational. When your janitorial coverage is inconsistent, your staff notices, your clients notice, and your property deteriorates faster than it should. NYC Commercial Clean Team provides janitorial services in NYC built around reliability: fixed schedules, consistent crews, and documented results .No guessing whether the service happened. No chasing a vendor after a missed visit.",
+    desc: "Running a commercial building or managing a facility in New York City means cleanliness isn't optional — it's operational. When your janitorial coverage is inconsistent, your staff notices, your clients notice, and your property deteriorates faster than it should. New York Commercial Clean Team Inc. provides janitorial services in NYC built around reliability: fixed schedules, consistent crews, and documented results .No guessing whether the service happened. No chasing a vendor after a missed visit.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -63,7 +63,7 @@ export const details = [
       desc: "In a competitive commercial real estate market, a building's cleanliness is a direct reflection of its management. Tenants and visitors form impressions the moment they enter. Inconsistent janitorial coverage leads to tenant complaints, lease non-renewals, and maintenance issues that compound over time — including premature floor wear, restroom hygiene violations, and increased pest risk. A reliable janitorial services provider in NYC isn't just a vendor — it's a risk management decision.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We assign dedicated crews to each account so your building gets the same people every visit — staff who know your property, your preferences, and your standards. Every visit follows a standardized checklist verified by supervisory oversight. We are fully insured with general liability and workers' compensation coverage, and every team member is background-checked before entry. We serve all five NYC boroughs and Long Island, and we schedule around your building's operating hours — not ours.",
     },
   },
@@ -75,7 +75,7 @@ export const details = [
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
-        "A day porter from NYC Commercial Clean Team handles the real-time cleaning demands of a busy commercial facility:",
+        "A day porter from New York Commercial Clean Team Inc. handles the real-time cleaning demands of a busy commercial facility:",
       list: [
         "Continuous restroom monitoring, cleaning, and restocking",
         "Lobby and entrance area maintenance throughout the day",
@@ -97,7 +97,7 @@ export const details = [
       desc: "A lobby that looks pristine at 8 AM but deteriorating by noon reflects poorly on building management. Restrooms that aren't monitored during peak hours create hygiene and compliance issues that can lead to tenant complaints and — in regulated facilities — inspection failures. Day porter services in NYC bridge the gap between overnight cleaning and the unpredictable demands of a live commercial environment. It's proactive facility management, not reactive cleanup.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Our day porters are trained, uniformed, and professional — not entry-level staff left to figure it out. We assign the right coverage for your facility size and provide direct communication channels for facilities managers who need to coordinate in real time. All staff are background-checked and covered under our full insurance policy. We operate across all five NYC boroughs and Long Island, with dedicated account management so you always have a clear point of contact.",
     },
   },
@@ -105,7 +105,7 @@ export const details = [
     id: 4,
     slug: "post-construction-cleaning",
     heading: "Post-Construction Cleaning — Commercial Spaces Cleaned and Ready for Occupancy",
-    desc: "Construction and renovation create exactly the kind of mess that standard cleaning crews aren't equipped to handle. Fine construction dust penetrates every surface. Adhesive residue, paint overspray, grout haze, and debris accumulate in ways that standard mops and vacuums can't address. When a commercial space in New York City is within weeks of an opening, lease commencement, or tenant handover, the post-construction cleaning phase is what determines whether it's ready — and who pays for a delay if it isn't. NYC Commercial Clean Team handles post construction cleaning in NYC for commercial fit-outs, office renovations, retail buildouts, and new construction across all five boroughs.",
+    desc: "Construction and renovation create exactly the kind of mess that standard cleaning crews aren't equipped to handle. Fine construction dust penetrates every surface. Adhesive residue, paint overspray, grout haze, and debris accumulate in ways that standard mops and vacuums can't address. When a commercial space in New York City is within weeks of an opening, lease commencement, or tenant handover, the post-construction cleaning phase is what determines whether it's ready — and who pays for a delay if it isn't. New York Commercial Clean Team Inc. handles post construction cleaning in NYC for commercial fit-outs, office renovations, retail buildouts, and new construction across all five boroughs.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -131,7 +131,7 @@ export const details = [
       desc: "Construction dust is not just an aesthetic problem. Fine particulate matter settles into HVAC systems, damages flooring finishes, and creates air quality issues that can trigger complaints or regulatory scrutiny. A space that looks unfinished at handover costs everyone money — delayed openings, dissatisfied tenants, and contractor callbacks. Professional post-construction cleaning in NYC ensures the space is delivered to the standard the project budget and timeline demand.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We understand construction timelines. Our teams work efficiently in active or recently completed construction environments, coordinate with site supervisors, and deliver thorough results without becoming another scheduling problem. Every post-construction cleaning project is staffed by trained, insured personnel — not day workers sourced on short notice. We operate across all five NYC boroughs and can mobilize quickly when your handover date is locked in.",
     },
   },
@@ -139,7 +139,7 @@ export const details = [
     id: 5,
     slug: "deep-cleaning-disinfection",
     heading: "Commercial Deep Cleaning — Full Facility Treatment Beyond Routine Maintenance",
-    desc: "Routine cleaning maintains a surface-level standard — but it doesn't address what accumulates over time. Grout lines, upholstered furniture, ceiling vents, behind fixtures, under equipment, and inside storage areas all collect dirt, bacteria, and biological matter that a standard service pass never reaches. Every commercial facility in New York City reaches a point where routine maintenance isn't enough and a thorough reset is required. NYC Commercial Clean Team provides commercial deep cleaning in NYC — a systematic, intensive cleaning and disinfection process that addresses what regular service doesn't.",
+    desc: "Routine cleaning maintains a surface-level standard — but it doesn't address what accumulates over time. Grout lines, upholstered furniture, ceiling vents, behind fixtures, under equipment, and inside storage areas all collect dirt, bacteria, and biological matter that a standard service pass never reaches. Every commercial facility in New York City reaches a point where routine maintenance isn't enough and a thorough reset is required. New York Commercial Clean Team Inc. provides commercial deep cleaning in NYC — a systematic, intensive cleaning and disinfection process that addresses what regular service doesn't.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -165,7 +165,7 @@ export const details = [
       desc: "Accumulated biological matter in high-traffic commercial facilities is a health risk — not just an aesthetic one. Indoor air quality, surface pathogen loads, and facility odors all degrade when deep cleaning is deferred. For regulated industries, it can directly affect compliance standing. For all commercial facilities, a periodic deep clean protects the condition of your surfaces and fixtures, extends the life of flooring and upholstery, and maintains the baseline your regular cleaning program depends on.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We use commercial-grade disinfection products — not consumer-grade solutions repackaged for business use. Our deep cleaning teams are trained specifically for intensive facility work, not repurposed from our regular janitorial crews. Every project is scoped in advance so you know exactly what will be covered, what products will be used, and how long the service will take. We operate across all five NYC boroughs with full insurance coverage on every job.",
     },
   },
@@ -173,7 +173,7 @@ export const details = [
     id: 6,
     slug: "move-out-event-cleaning",
     heading: "Move-Out & Event Cleaning — Commercial Spaces Cleared, Cleaned, and Ready",
-    desc: "Lease turnover and event recovery both share the same pressure: a hard deadline, a space in disarray, and a standard that the next occupant or next business day demands. Commercial move out cleaning in New York City isn't simply vacuuming and mopping — it's a thorough restoration of a space that's been fully occupied or heavily used. NYC Commercial Clean Team handles the complete move-out and post-event cleaning process for commercial properties, ensuring that the space is delivered or reset to the condition required by lease terms, management standards, or the next day's operations.",
+    desc: "Lease turnover and event recovery both share the same pressure: a hard deadline, a space in disarray, and a standard that the next occupant or next business day demands. Commercial move out cleaning in New York City isn't simply vacuuming and mopping — it's a thorough restoration of a space that's been fully occupied or heavily used. New York Commercial Clean Team Inc. handles the complete move-out and post-event cleaning process for commercial properties, ensuring that the space is delivered or reset to the condition required by lease terms, management standards, or the next day's operations.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -203,7 +203,7 @@ export const details = [
       desc: "A commercial space that isn't properly cleaned at move-out can result in security deposit disputes, delayed re-leasing, or a new tenant who starts the relationship dissatisfied. Post-event cleaning that doesn't meet the venue's standard risks contract penalties, reputation damage, and operational delays. Commercial move out cleaning in NYC needs to be fast, documented, and thorough — not a last-minute scramble with whoever is available.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We work on your timeline — including same-week scheduling for urgent commercial move-out and event cleaning requests in New York City. Our teams are trained for intensive, deadline-driven projects and communicate clearly throughout the job. Every service comes with full insurance coverage and a team that shows up staffed and equipped — not a two-person crew sent to clean a 10,000 square foot space.",
     },
   },
@@ -236,7 +236,7 @@ export const details = [
       desc: "A worn floor finish doesn't just look bad — it stops protecting the floor beneath. Once the wax layer is gone, cleaning chemicals reach the base material directly, causing irreversible damage that requires full floor replacement rather than restoration. Regular floor stripping and waxing in NYC is significantly less expensive than early floor replacement and maintains the professional appearance your facility requires.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We use professional-grade stripping and finishing products calibrated for commercial flooring — not consumer products applied in high volumes. Our floor care technicians are trained specifically in hard floor restoration and work on a schedule that doesn't interfere with your operations. We serve all five NYC boroughs and Long Island, with full insurance coverage on every project.",
     },
   },
@@ -244,7 +244,7 @@ export const details = [
     id: 8,
     slug: "carpet-cleaning",
     heading: "Commercial Carpet Cleaning — Deep Extraction for High-Traffic Commercial Spaces",
-    desc: "Commercial carpets in New York City accumulate far more than what a vacuum removes. Fine soil particles, biological matter, allergens, and contaminants embed themselves deep in the carpet fiber over time — compacting the pile, dulling the appearance, degrading indoor air quality, and accelerating wear. Commercial carpet cleaning in NYC is not an aesthetic preference — it's a maintenance requirement for any facility where carpet is a significant investment and indoor air quality matters. NYC Commercial Clean Team provides professional carpet cleaning for offices and commercial facilities across all five boroughs. ",
+    desc: "Commercial carpets in New York City accumulate far more than what a vacuum removes. Fine soil particles, biological matter, allergens, and contaminants embed themselves deep in the carpet fiber over time — compacting the pile, dulling the appearance, degrading indoor air quality, and accelerating wear. Commercial carpet cleaning in NYC is not an aesthetic preference — it's a maintenance requirement for any facility where carpet is a significant investment and indoor air quality matters. New York Commercial Clean Team Inc. provides professional carpet cleaning for offices and commercial facilities across all five boroughs. ",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -269,7 +269,7 @@ export const details = [
       desc: "Carpet replacement in commercial facilities is expensive. A properly maintained carpet lasts significantly longer than one that receives only surface vacuuming. Beyond cost, heavily soiled commercial carpets contribute to poor indoor air quality — a documented factor in employee sick days and productivity loss. Regular commercial carpet cleaning in NYC protects your investment, your air quality, and the professional appearance your facility requires.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We use truck-mounted or portable commercial extraction equipment — not the consumer-grade rental machines that leave carpets oversaturated and slow-drying. Our carpet cleaning technicians assess each area before treating it, use appropriate products for your carpet type, and work on a schedule that minimizes disruption. We are fully insured and serve all five NYC boroughs and Long Island.",
     },
   },
@@ -281,7 +281,7 @@ export const details = [
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
-        "NYC Commercial Clean Team provides complete commercial window cleaning for interior and exterior glass:",
+        "New York Commercial Clean Team Inc. provides complete commercial window cleaning for interior and exterior glass:",
       list: [
         "Interior window and glass panel cleaning throughout your facility",
         "Exterior window cleaning — ground-floor and accessible upper-floor windows",
@@ -302,7 +302,7 @@ export const details = [
       desc: "Clean windows affect more than aesthetics. Natural light penetration improves employee wellbeing and reduces lighting costs. For retail, clean display windows increase the visibility of merchandise and the appeal of the storefront — a direct factor in foot traffic conversion. For client-facing offices, the condition of your building's glass is part of the first impression that either reinforces or undermines your company's credibility. Commercial window cleaning in NYC is a visible, measurable, and frequently overlooked element of facility management.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Our window cleaning staff are trained in professional streak-free technique and work with the right solutions for New York City's specific environmental conditions. We are fully insured, operate across all five NYC boroughs and Long Island, and offer flexible scheduling — including early morning or weekend service to avoid disruption to your business hours.",
     },
   },
@@ -310,7 +310,7 @@ export const details = [
     id: 10,
     slug: "handyman-services",
     heading: "Commercial Handyman Services — Facility Maintenance Without the Vendor Juggling",
-    desc: "Minor facility issues compound quickly when they're not addressed. A broken door closer, a flickering fixture, a damaged ceiling tile, or a stuck cabinet latch — individually minor, collectively a management headache that occupants notice and facilities directors track. Coordinating a separate vendor for each small repair is expensive and time-consuming. Commercial handyman services in NYC from NYC Commercial Clean Team allow you to consolidate minor maintenance and repair work under the same provider managing your cleaning — fewer vendors, less coordination, faster resolution.",
+    desc: "Minor facility issues compound quickly when they're not addressed. A broken door closer, a flickering fixture, a damaged ceiling tile, or a stuck cabinet latch — individually minor, collectively a management headache that occupants notice and facilities directors track. Coordinating a separate vendor for each small repair is expensive and time-consuming. Commercial handyman services in NYC from New York Commercial Clean Team Inc. allow you to consolidate minor maintenance and repair work under the same provider managing your cleaning — fewer vendors, less coordination, faster resolution.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -336,7 +336,7 @@ export const details = [
       desc: "Deferred minor maintenance costs more over time. A door closer that isn't adjusted wears out the door frame. A ceiling tile left unaddressed signals water damage that goes uninspected. Beyond the physical cost, unmaintained details affect tenant and employee perception of how seriously the building is managed. Commercial handyman services in NYC that are responsive and professionally handled protect both your facility's condition and its reputation.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Our handyman staff are trained, background-checked, and operate under the same professional standards as our cleaning teams. Because we already service many of our handyman clients' facilities for cleaning, we understand the properties we work in and can identify issues proactively. Full insurance coverage on all services. We operate across all five NYC boroughs and Long Island.",
     },
   },
@@ -344,7 +344,7 @@ export const details = [
     id: 11,
     slug: "restroom-supply-management",
     heading: "Restroom Supply Management — Stocked, Tracked, and Never Running Out",
-    desc: "A restroom that runs out of soap or paper towels during business hours is a facilities management failure that tenants and staff remember. In a commercial building with dozens or hundreds of daily users, restroom supply depletion is not a rare event — it's a predictable one that requires a system, not a response. Restroom supply management in NYC from NYC Commercial Clean Team takes the tracking, ordering, and replenishment of commercial restroom consumables off your plate entirely, ensuring your facilities are always stocked to standard without you monitoring it.",
+    desc: "A restroom that runs out of soap or paper towels during business hours is a facilities management failure that tenants and staff remember. In a commercial building with dozens or hundreds of daily users, restroom supply depletion is not a rare event — it's a predictable one that requires a system, not a response. Restroom supply management in NYC from New York Commercial Clean Team Inc. takes the tracking, ordering, and replenishment of commercial restroom consumables off your plate entirely, ensuring your facilities are always stocked to standard without you monitoring it.",
     serviceIncludes: {
       heading: "WHAT THIS SERVICE INCLUDES",
       listHeading:
@@ -370,7 +370,7 @@ export const details = [
       desc: "Restroom supply failures are disproportionately damaging to building reputation. Tenants who experience them escalate immediately to property management. Recurring supply issues are cited in lease reviews and tenant satisfaction surveys. For regulated facilities, hygiene supply gaps can create compliance issues. Managed restroom supply in NYC removes a predictable problem from your operational load — replacing reactive scrambles with a reliable, documented system.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Because we are already in your building for cleaning, integrating supply management is a natural extension — no additional vendor access coordination required. We track consumption by restroom, adjust par levels as your occupancy changes, and ensure replenishment happens on schedule. Full documentation is available for property management reporting. We serve all five NYC boroughs and Long Island with commercial-grade supply products.",
     },
   },

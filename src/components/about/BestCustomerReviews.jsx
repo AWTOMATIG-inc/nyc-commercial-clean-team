@@ -17,7 +17,7 @@ const reviews = [
     location: "Brooklyn",
     rating: 5,
     comment:
-      "Our retail space sees heavy foot traffic. NYC Clean Team keeps it in excellent shape without us having to follow up. They handle it.",
+      "Our retail space sees heavy foot traffic. New York Commercial Clean Team Inc. keeps it in excellent shape without us having to follow up. They handle it.",
     image: femaleAvatar,
   },
   {

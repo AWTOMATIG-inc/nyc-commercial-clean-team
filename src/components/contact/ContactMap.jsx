@@ -25,7 +25,7 @@ export default function ContactMap() {
         .setLngLat(LOCATION)
         .setPopup(
           new maplibregl.Popup().setHTML(`
-            <b>NYC Commercial Clean Team</b><br/>
+            <b>New York Commercial Clean Team Inc.</b><br/>
             146-61 107th Ave, Suite 1<br/>
             Jamaica, NY 11435
           `)

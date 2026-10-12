@@ -21,17 +21,17 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "NYC Clean Commercial Team Admin & Management",
+  title: "New York Commercial Clean Team Inc. Admin & Management",
   description: "Commercial cleaning services in NYC",
   metadataBase: new URL("https://nyccleantinc.com"),
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "NYC Clean Commercial Team",
+    title: "New York Commercial Clean Team Inc.",
     description: "Commercial cleaning services in NYC",
     url: "https://nyccleantinc.com",
-    siteName: "NYC Clean Commercial Team",
+    siteName: "New York Commercial Clean Team Inc.",
     locale: "en_US",
     type: "website",
     images: [
@@ -45,7 +45,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NYC Clean Commercial Team",
+    title: "New York Commercial Clean Team Inc.",
     description: "Commercial cleaning services in NYC",
     images: [
       "https://nyccleantinc.com/images/home/services/floor-moping.jpg",

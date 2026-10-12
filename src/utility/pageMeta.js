@@ -19,7 +19,7 @@ export function pageMeta({ path, title, description }) {
       url,
       title,
       description,
-      siteName: "NYC Clean Commercial Team",
+      siteName: "New York Commercial Clean Team Inc.",
       locale: "en_US",
       type: "website",
       images: [DEFAULT_OG_IMAGE],

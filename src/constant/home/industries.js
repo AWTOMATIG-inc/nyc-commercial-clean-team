@@ -77,8 +77,8 @@ export const details = [
       desc: "Office cleanliness is not a background function — it's a direct input to productivity and brand perception. Research consistently shows that employees in cleaner environments report higher job satisfaction and lower absenteeism. For law firms, financial services companies, and corporate offices that host clients regularly, the physical condition of your space communicates professionalism before a word is spoken. An unreliable office cleaning company in NYC creates a chain of small failures — missed trash, unwashed restrooms, dusty surfaces — that accumulate into a facility management problem with visible consequences.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
-      desc: "NYC Commercial Clean Team assigns consistent crews to each office account. You'll see the same cleaning staff on every scheduled visit — people who understand your space, your access requirements, and your standards. Every visit follows a standardized checklist, and our team is background-checked, uniformed, and trained in commercial office cleaning protocols. We schedule around your office hours and coordinate with your building management on access — without requiring you to manage that process.",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
+      desc: "New York Commercial Clean Team Inc. assigns consistent crews to each office account. You'll see the same cleaning staff on every scheduled visit — people who understand your space, your access requirements, and your standards. Every visit follows a standardized checklist, and our team is background-checked, uniformed, and trained in commercial office cleaning protocols. We schedule around your office hours and coordinate with your building management on access — without requiring you to manage that process.",
     },
   },
   {
@@ -117,7 +117,7 @@ export const details = [
       desc: "A restaurant's cleanliness is visible in ways that other commercial facilities are not. Customers scan dining rooms, restrooms, and open kitchens before they order. Online reviews regularly mention cleanliness before they mention food. NYC restaurant cleaning services that fail to maintain consistent daily sanitation put your health grade, your license, and your reputation at risk simultaneously. The cost of one DOH violation — in fines, remediation, and lost business — far exceeds the cost of professional cleaning done right.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Our teams understand the operational rhythm of a restaurant. We work around your service schedule — before opening, between lunch and dinner, or post-close — without disrupting your floor staff or kitchen operations. We use commercial-grade, food-safe cleaning and disinfection products, and our cleaning protocols are designed with DOH compliance requirements in mind. All staff are background-checked, uniformed, and trained in food service sanitation standards.",
     },
   },
@@ -158,7 +158,7 @@ export const details = [
       desc: "In retail, the physical environment drives purchasing behavior. A clean, well-maintained store communicates that your products are worth the price you're asking. A store that shows visible grime — sticky floors, smudged glass, unkempt fitting rooms — signals the opposite. Customer reviews of retail spaces in New York City regularly mention cleanliness alongside product quality and staff service. Retail store cleaning in NYC is not maintenance overhead — it's a direct input to sales conversion and brand loyalty.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We work around your store hours — early morning before doors open, or after closing — so your cleaning is never visible to customers and never disrupts your sales floor. For multi-location retail operations, we provide consistent crews and standardized protocols across all your NYC sites, with a single point of contact for scheduling and service management. All staff are background-checked, uniformed, and trained to handle merchandise environments with care.",
     },
   },
@@ -167,7 +167,7 @@ export const details = [
     slug: "medical",
     heading:
       "Medical Facility Cleaning — Infection Control and Compliance-Grade Sanitation for Healthcare Environments",
-    desc: "Medical facilities operate in an environment where cleaning failures are not an inconvenience — they are a patient safety risk. Infection control, cross-contamination prevention, and compliance with OSHA and CDC sanitation guidelines are not optional in a healthcare setting; they are baseline operational requirements. Medical facility cleaning in NYC demands a provider who understands clinical environments, uses the right disinfection products for healthcare use, and executes with a level of precision that standard commercial cleaning does not require. NYC Commercial Clean Team provides cleaning services specifically calibrated for medical offices, outpatient clinics, dental practices, imaging centers, and healthcare facilities across New York City.",
+    desc: "Medical facilities operate in an environment where cleaning failures are not an inconvenience — they are a patient safety risk. Infection control, cross-contamination prevention, and compliance with OSHA and CDC sanitation guidelines are not optional in a healthcare setting; they are baseline operational requirements. Medical facility cleaning in NYC demands a provider who understands clinical environments, uses the right disinfection products for healthcare use, and executes with a level of precision that standard commercial cleaning does not require. New York Commercial Clean Team Inc. provides cleaning services specifically calibrated for medical offices, outpatient clinics, dental practices, imaging centers, and healthcare facilities across New York City.",
     challenges: {
       heading: "OFFICE CLEANING CHALLENGES IN NEW YORK CITY",
       list: [
@@ -199,7 +199,7 @@ export const details = [
       desc: "Healthcare-associated infections (HAIs) are a documented, preventable patient safety issue — and inadequate environmental cleaning is a primary contributing factor. For medical offices and outpatient facilities in New York City, this translates to regulatory risk, liability exposure, and patient trust. A compliance failure in a medical cleaning program is not a vendor inconvenience — it is a clinical event with professional and legal consequences. Medical facility cleaning in NYC must be structured, documented, and executed by trained staff who understand what they are doing and why.",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "Our medical facility cleaning teams are trained specifically in healthcare environment protocols — not repurposed from general commercial cleaning crews. We use EPA-registered, healthcare-grade disinfectants appropriate for clinical contact surfaces, and our cleaning procedures follow CDC and OSHA guidelines for healthcare environmental services. All staff are background-checked, HIPAA-aware, and work in a way that respects the patient environment. We serve medical facilities across Manhattan, Brooklyn, Queens, the Bronx, and Staten Island, and we document every service visit for compliance reporting.",
     },
   },
@@ -240,7 +240,7 @@ export const details = [
       desc: "Children's immune systems are still developing, and educational settings are among the highest-risk environments for illness transmission in any community. When school cleaning standards fall short, illness spreads faster, absenteeism increases among students and staff, and parents notice. For private schools and independent academies in New York City, facility cleanliness is also a reputational factor — it communicates to parents whether the institution cares about the physical environment their children spend seven or more hours in daily. School cleaning services in NYC are a direct investment in student health, staff wellbeing, and institutional credibility",
     },
     whyChoose: {
-      heading: "WHY CHOOSE NYC COMMERCIAL CLEAN TEAM",
+      heading: "WHY CHOOSE NEW YORK COMMERCIAL CLEAN TEAM INC.",
       desc: "We work around your school's schedule — cleaning after dismissal, during breaks, or in the early morning before staff arrive. For facilities running extended day programs, we coordinate cleaning windows that don't interrupt operations. Our teams use cleaning products safe for educational environments and follow protocols appropriate for spaces occupied by children. All staff are background-checked prior to entering your campus. We serve private schools, independent academies, tutoring centers, and educational campuses across all five NYC boroughs.",
     },
   },

@@ -122,7 +122,7 @@ export default function Available() {
             Ready to upgrade <br /> Your facility deserves better
           </h2>
           <p className="md:text-lg my-6">
-            Let NYC Clean Team handle the details while you focus on running
+            Let New York Commercial Clean Team Inc. handle the details while you focus on running
             your business.
           </p>
           <div className="flex gap-8">

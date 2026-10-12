@@ -10,7 +10,7 @@ export default function Coverage() {
         <CommonHeading
           title="Where We Work"
           heading="Local Teams Across All Five Boroughs"
-          subHeading="NYC Clean Team brings 25+ years of expertise to every facility we service across New York City."
+          subHeading="New York Commercial Clean Team Inc. brings 25+ years of expertise to every facility we service across New York City."
           center={true}
         />
       </div>

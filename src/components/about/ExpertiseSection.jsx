@@ -11,7 +11,7 @@ export default function ExpertiseSection() {
         <CommonHeading
           title="Who We Are"
           heading="Commercial Cleaning Built on Accountability"
-          subHeading="NYC Commercial Clean Team provides professional commercial cleaning services to offices,
+          subHeading="New York Commercial Clean Team Inc. provides professional commercial cleaning services to offices,
 retail spaces, medical facilities, restaurants, and schools across New York City. We work
 exclusively with commercial clients — no residential work, ever. Every service agreement is
 structured around your facility’s specific demands, not a one-size-fits-all package. Our teams

@@ -402,7 +402,7 @@ export default function BookingForm() {
                 className="size-4 border-red border rounded-full"
               />
               <label htmlFor="agree">
-                I agree to be contacted by NYC Clean Team Regarding this
+                I agree to be contacted by New York Commercial Clean Team Inc. Regarding this
                 booking. View our Privacy Policy
               </label>
             </div>
