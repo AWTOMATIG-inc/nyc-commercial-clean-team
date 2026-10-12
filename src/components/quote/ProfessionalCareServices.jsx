@@ -10,8 +10,8 @@ export default function ProfessionalCareServices() {
           Professional Care and Services
         </h2>
         <p className="mt-4 text-light-blue max-w-2xl mx-auto">
-          Advancing Cleaning & Outsourced Staff Service through Skilled
-          Management. Cleaning Driving And Security Service
+          Insured, trained crews delivering reliable commercial cleaning across
+          all five NYC boroughs.
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
