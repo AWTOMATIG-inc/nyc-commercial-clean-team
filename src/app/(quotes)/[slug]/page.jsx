@@ -77,7 +77,7 @@ const imageUrl = `/api/uploads/page/${pageDetail?.bannerImage}`;
                   ))}
                 </div>
               </div>
-              <a href="tel:+1 (631) 381-7252" className="block mt-10">
+              <a href="tel:+16313817252" className="block mt-10">
                 <ButtonSolid>Call Now (631) 381-7252</ButtonSolid>
               </a>
             </div>

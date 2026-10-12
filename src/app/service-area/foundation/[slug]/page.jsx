@@ -30,7 +30,7 @@ export default async function SurfaceDetails({params}) {
           >
             {foundation.title}
           </p>
-          <h4 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">{foundation.heading}</h4>
+          <h1 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">{foundation.heading}</h1>
           <p className="text-base sm:text-lg mt-6 text-justify">{foundation.desc}</p>
           </div>
           <div>

@@ -32,9 +32,9 @@ export default async function IndustriesDetails({params}) {
                  >
                    {item.title}
                  </p>
-                 <h4 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">
+                 <h1 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">
                    {detail.heading}
-                 </h4>
+                 </h1>
                  <p className="text-base sm:text-lg mt-6 text-justify">{detail.desc}</p>
                  <div className="mt-8">
                    <h3 className="font-bold text-lg">

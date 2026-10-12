@@ -4,7 +4,7 @@ export const contactInfoCards = [
     icon: "fa-solid:phone-alt",
     label: "Have any question?",
     value: "+1 (631) 381-7252",
-    href: "tel:+1 (631) 381-7252",
+    href: "tel:+16313817252",
     isLink: true,
   },
   {
@@ -19,7 +19,7 @@ export const contactInfoCards = [
     id: 3,
     icon: "fa-solid:paper-plane",
     label: "Address",
-    value: "146-61 107th Ave, Jamaica, NY 11435",
+    value: "146-61 107th Ave, Suite 1, Jamaica, NY 11435",
     href: null,
     isLink: false,
   },

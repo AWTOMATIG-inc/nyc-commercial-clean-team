@@ -15,7 +15,7 @@ export default function Topbar() {
           <a
             onClick={() => trackPhoneClick("topbar_phone")}
             className="hover:underline"
-            href="tel:+1 (631) 381-7252"
+            href="tel:+16313817252"
           >
             (631) 381-7252
           </a>

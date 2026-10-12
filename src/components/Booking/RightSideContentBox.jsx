@@ -90,7 +90,7 @@ const contactList = [
     icon: "proicons:call",
     name: "+1 (631) 381-7252 — Call Us Now",
     type: "call",
-    href: "tel:+1 (631) 381-7252",
+    href: "tel:+16313817252",
   },
   {
     id: 2,
@@ -146,7 +146,7 @@ export default function RightSideContentBox() {
               </div>
               {contact.type == "call" ? (
                 <a
-                  href={`tel:${contact.href}`}
+                  href={contact.href}
                   onClick={() => trackPhoneClick("booking_page")}
                   className="font-medium hover:underline"
                 >
@@ -154,7 +154,7 @@ export default function RightSideContentBox() {
                 </a>
               ) : (
                 <a
-                  href={`mailto:${contact.href}`}
+                  href={contact.href}
                   className="font-medium hover:underline"
                 >
                   {contact.name}
