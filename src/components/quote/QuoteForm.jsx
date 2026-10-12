@@ -112,7 +112,7 @@ export default function QuoteForm({pageName}) {
         </button>
         <p className="text-sm text-center mt-6 flex items-center justify-center gap-1 text-red font-medium">
           <Icon icon="mdi:star" width={16} height={16} className="inline " />
-          <span className="ml-1">4.9 rated by 200+ NYC facility managers</span>
+          <span className="ml-1">4.9 rating on Google (55 reviews)</span>
         </p>
       </form>
     </div>

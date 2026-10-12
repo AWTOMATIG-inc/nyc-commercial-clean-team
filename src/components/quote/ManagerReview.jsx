@@ -89,7 +89,7 @@ export default function ManagerReview({ feedbacks }) {
               />
             ))}
         </div>
-        <p className="mt-0.5">4.9 out of 5 — based on 200+ reviews</p>
+        <p className="mt-0.5">4.9 out of 5 — based on 55 Google reviews</p>
       </div>
 
       <div className="mt-12 ">
