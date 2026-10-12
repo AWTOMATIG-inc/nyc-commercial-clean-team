@@ -1,9 +1,12 @@
 import BlogListArea from "@/components/blogs/BlogListArea";
 import HeroBanner from "@/components/HeroBanner";
-export const metadata = {
+import { pageMeta } from "@/utility/pageMeta";
+export const metadata = pageMeta({
+  path: "/blogs",
   title: "Blogs - New York Commercial Clean Team INC",
-  description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
-};
+  description:
+    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+});
 export default async function Blogs() {
 
   return (

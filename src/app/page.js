@@ -2,6 +2,7 @@ import HeroSection from "@/components/home/HeroSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import WhySection from "@/components/home/WhySection";
 import { getFeedback } from "@/utility/getFeedback";
+import { pageMeta } from "@/utility/pageMeta";
 import dynamic from "next/dynamic";
 
 const DynamicIndusriesSection = dynamic(
@@ -25,9 +26,12 @@ const DynamicMarqueHighlightText = dynamic(
 const DynamicFAQs = dynamic(() => import("@/components/home/FAQs"));
 const DiscountPopup = dynamic(() => import("@/components/DiscountPopup"));
 export const metadata = {
-  title: "Commercial Cleaning Services NYC | NYC Clean Team",
-  description:
-    "NYC’s trusted commercial cleaning company for offices, retail, medical facilities &amp; more.Serving all 5 boroughs. Request a free quote today.",
+  ...pageMeta({
+    path: "/",
+    title: "Commercial Cleaning Services NYC | NYC Clean Team",
+    description:
+      "NYC’s trusted commercial cleaning company for offices, retail, medical facilities & more. Serving all 5 boroughs. Request a free quote today.",
+  }),
   links: [
     {
       rel: "preload",

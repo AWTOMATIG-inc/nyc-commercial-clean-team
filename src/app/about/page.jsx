@@ -3,11 +3,13 @@ import ExpertiseSection from "@/components/about/ExpertiseSection";
 import WhyChooseUs from "@/components/about/WhyChooseUs";
 import HeroBanner from "@/components/HeroBanner";
 import MarqueHighlightText from "@/components/MarqueHighlightText";
-export const metadata = {
+import { pageMeta } from "@/utility/pageMeta";
+export const metadata = pageMeta({
+  path: "/about",
   title: "About - New York Commercial Clean Team INC",
   description:
     "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
-};
+});
 export default function AboutUs() {
   return (
     <main>

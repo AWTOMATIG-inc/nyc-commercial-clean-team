@@ -1,10 +1,13 @@
 import BookingForm from "@/components/Booking/BookingForm";
 import RightSideContentBox from "@/components/Booking/RightSideContentBox";
 import HeroBanner from "@/components/HeroBanner";
-export const metadata = {
+import { pageMeta } from "@/utility/pageMeta";
+export const metadata = pageMeta({
+  path: "/booking",
   title: "Booking - New York Commercial Clean Team INC",
-  description: "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
-};
+  description:
+    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+});
 export default function page() {
   return (
     <main>
