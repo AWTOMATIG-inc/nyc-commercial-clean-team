@@ -45,7 +45,7 @@ export const metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "New York Commercial Clean Team Inc",
+  name: "New York Commercial Clean Team Inc.",
   url: "https://nyccleantinc.com",
   telephone: "+16313817252",
   address: {
