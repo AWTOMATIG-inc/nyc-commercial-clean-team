@@ -1,5 +1,3 @@
-import { CalendarCheck, CircleCheck, GraduationCap, Paintbrush, Quote, Sparkles, SprayCan, UserCheck, Users } from "lucide-react";
-
 export const CycleCircleIcon = ({ className }) => {
   return (
     <svg
@@ -89,13 +87,46 @@ export const ArrowWithShadowIcon = ({ className }) => {
   );
 };
 export const CalenderBookIcon = ({ className }) => (
-  <CalendarCheck width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  <span
+    role="img"
+    aria-hidden="true"
+    className={`inline-block ${className || ""}`}
+    style={{
+      width: 60,
+      height: 60,
+      backgroundColor: "#1D2F64",
+      WebkitMask: "url(/images/icons/calendar-book.webp) center / contain no-repeat",
+      mask: "url(/images/icons/calendar-book.webp) center / contain no-repeat",
+    }}
+  />
 );
 export const GroupPeopleIcon = ({ className }) => (
-  <Users width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  <span
+    role="img"
+    aria-hidden="true"
+    className={`inline-block ${className || ""}`}
+    style={{
+      width: 60,
+      height: 60,
+      backgroundColor: "#1D2F64",
+      WebkitMask: "url(/images/icons/group-people.webp) center / contain no-repeat",
+      mask: "url(/images/icons/group-people.webp) center / contain no-repeat",
+    }}
+  />
 );
 export const BrushIcon = ({ className }) => (
-  <Paintbrush width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  <span
+    role="img"
+    aria-hidden="true"
+    className={`inline-block ${className || ""}`}
+    style={{
+      width: 60,
+      height: 60,
+      backgroundColor: "#1D2F64",
+      WebkitMask: "url(/images/icons/brush.webp) center / contain no-repeat",
+      mask: "url(/images/icons/brush.webp) center / contain no-repeat",
+    }}
+  />
 );
 export const WebFlowIcon = ({ className }) => {
   return (
@@ -167,19 +198,24 @@ export const RelumeIcon = ({ className }) => {
   );
 };
 export const GreenSignIcon = ({ className }) => (
-  <CircleCheck width={30} height={30} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/green-sign.webp" alt="" width={30} height={30} className={className} />
 );
 export const ServiceCardIcon = ({ className }) => (
-  <Sparkles width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/service-card.webp" alt="" width={60} height={60} className={className} />
 );
 export const DayPorterServiceIcon = ({ className }) => (
-  <UserCheck width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/day-porter-service.webp" alt="" width={60} height={60} className={className} />
 );
 export const JanitorialServiceIcon = ({ className }) => (
-  <SprayCan width={60} height={60} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/janitorial-service.webp" alt="" width={60} height={60} className={className} />
 );
 export const QoateIcon = ({ className }) => (
-  <Quote width={50} height={50} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/quote.webp" alt="" width={50} height={50} className={className} />
 );
 export const AssessmentIcon = ({ className }) => {
   return (
@@ -766,7 +802,8 @@ export const EcoIcon = ({ className }) => {
   );
 };
 export const TrainTeamIcon = ({ className }) => (
-  <GraduationCap width={48} height={48} strokeWidth={1.5} color="#1D2F64" className={className} />
+  // eslint-disable-next-line @next/next/no-img-element
+  <img src="/images/icons/train-team.webp" alt="" width={48} height={48} className={className} />
 );
 export const TrackIcon = ({ className }) => {
   return (
