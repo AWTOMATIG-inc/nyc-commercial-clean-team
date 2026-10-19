@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase 1 Overview</title>
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --ink:#1c1d1f; --muted:#62656b; --line:#e2e0d9;
+  --accent:#1f6f5c; --accent-soft:#e3f0ec; --warn:#a4462b; --warn-soft:#f7e6e0;
+  --bar1:#1f6f5c; --bar2:#2f5d8a; --bar3:#7a5a1e;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141516; --surface:#1d1f21; --ink:#ececea; --muted:#9a9da3; --line:#2e3135;
+    --accent:#5fbfa3; --accent-soft:#1e3330; --warn:#e88a6c; --warn-soft:#3a2620;
+    --bar1:#3f9c83; --bar2:#5486b8; --bar3:#b08a43;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141516; --surface:#1d1f21; --ink:#ececea; --muted:#9a9da3; --line:#2e3135;
+  --accent:#5fbfa3; --accent-soft:#1e3330; --warn:#e88a6c; --warn-soft:#3a2620;
+  --bar1:#3f9c83; --bar2:#5486b8; --bar3:#b08a43;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:40px 16px 80px}
+header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:clamp(26px,4.5vw,38px);line-height:1.15;margin:6px 0 10px;letter-spacing:-.01em}
+h2{font-size:20px;margin:0 0 14px;display:flex;align-items:baseline;gap:10px}
+h2 .n{font-size:13px;color:var(--accent);font-variant-numeric:tabular-nums}
+section{padding:32px 0;border-bottom:1px solid var(--line)}
+p{margin:0 0 10px}
+.muted{color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.fact b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;margin-bottom:4px}
+
+/* journey */
+.journey{list-style:none;margin:0;padding:0;counter-reset:s;display:grid;gap:10px}
+.journey li{counter-increment:s;display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.journey li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--accent-soft);
+  color:var(--accent);font-weight:700;display:grid;place-items:center;font-size:14px}
+.journey strong{display:block}
+.tag{display:inline-block;font-size:12px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:1px}
+
+/* gantt */
+.gantt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;overflow:hidden}
+.grow{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:12px;align-items:center;padding:8px 0;border-top:1px dashed var(--line)}
+.grow:first-child{border-top:0}
+.grow .lab{font-size:14px}
+.grow .lab small{display:block;color:var(--muted);font-size:12px}
+.track{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;height:22px}
+.bar{border-radius:5px;background:var(--bar1);color:#fff;font-size:11px;display:flex;align-items:center;padding:0 6px;white-space:nowrap;overflow:hidden}
+.scale{display:grid;grid-template-columns:minmax(120px,30%) 1fr;gap:12px;font-size:11px;color:var(--muted);padding-bottom:6px}
+.scale .track{height:auto}
+.scale .track span{text-align:center}
+.evidence{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* lists */
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.card h3{margin:0 0 8px;font-size:15px}
+.card ul{margin:0;padding-left:18px}
+.card li{margin:4px 0}
+.card.no{background:var(--warn-soft);border-color:transparent}
+.card.no h3{color:var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:4px 12px;font-size:14px}
+.chip.x{border-color:transparent;background:var(--warn-soft);color:var(--warn);text-decoration:line-through;text-decoration-thickness:1px}
+
+/* matrix */
+.matrix{display:grid;gap:8px}
+.mrow{display:grid;grid-template-columns:24px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:12px 14px;cursor:pointer}
+.mrow input{margin-top:4px;width:18px;height:18px;accent-color:var(--accent)}
+.mrow b{display:block}
+.mrow span{font-size:14px;color:var(--muted)}
+.mrow:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.progress{font-size:14px;color:var(--muted);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.progress b{color:var(--accent)}
+
+.done{background:var(--accent-soft);border-radius:var(--radius);padding:16px 18px}
+.done ol{margin:6px 0 0;padding-left:20px}
+footer{padding-top:24px;font-size:13px;color:var(--muted)}
+@media (max-width:560px){
+  .grow,.scale{grid-template-columns:1fr}
+  .scale .lab{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">AWTOMATIG · Internal delivery overview · v1.0 · 12 Oct 2026</div>
+  <h1>NYC Clean Team Inc. — Phase 1 Digital Service Platform</h1>
+  <p class="muted">Extend the existing app into a secure, database-backed commercial service workflow: intake → quote → payment → accounting → scheduling → completion.</p>
+  <div class="facts">
+    <div class="fact"><b>Delivery window</b>12 weeks from kickoff</div>
+    <div class="fact"><b>Support</b>60 days post-launch defect fixes</div>
+    <div class="fact"><b>Stack (kept)</b>Next.js 16 · React 19 · Node · MongoDB/Mongoose · VPS</div>
+    <div class="fact"><b>Approach</b>Extend, never rebuild or migrate</div>
+  </div>
+</header>
+
+<section>
+  <h2><span class="n">01</span>The journey being built</h2>
+  <ol class="journey">
+    <li><div><strong>Customer signs up</strong>Register, sign in, recover access. Company profile with two or more service properties.</div></li>
+    <li><div><strong>Requests service</strong>Service catalog, conditional questions, frequency, requested date/time, secure attachments, review before submit. Gets a unique request ID. <span class="tag">time = request until staff confirm</span></div></li>
+    <li><div><strong>Admin quotes</strong>Create and revise quotes. Customer reviews and approves the current revision; earlier revisions stay linked.</div></li>
+    <li><div><strong>Customer pays</strong>One-time Stripe payment (card / wallet where supported). Signed webhook records success or failure exactly once. <span class="tag">idempotent</span></div></li>
+    <li><div><strong>QuickBooks syncs</strong>Customer, invoice, and payment reference/status via OAuth. Failed sync is visible; an authorized admin can retry.</div></li>
+    <li><div><strong>Admin schedules &amp; completes</strong>Protected dashboard: search, open, update status, confirm schedule, see payment and sync status, full activity history.</div></li>
+    <li><div><strong>Emails at every step</strong>Customer: receipt, quote, approval, payment result, confirmation, reminders, completion, invoice. Admin: new request, approval, payment, cancellation.</div></li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Twelve-week pathway</h2>
+  <div class="gantt">
+    <div class="scale"><div class="lab"></div><div class="track">
+      <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+    </div></div>
+    <div class="grow"><div class="lab">Review &amp; decisions<small>Week 1</small></div>
+      <div class="track"><div class="bar" style="grid-column:1/2;background:var(--bar3)"></div></div></div>
+    <div class="grow"><div class="lab">Data &amp; services foundation<small>Weeks 1–3</small></div>
+      <div class="track"><div class="bar" style="grid-column:1/4;background:var(--bar3)">models · IDs · APIs</div></div></div>
+    <div class="grow"><div class="lab">Customer side<small>Weeks 3–6</small></div>
+      <div class="track"><div class="bar" style="grid-column:3/7">accounts · intake · files</div></div></div>
+    <div class="grow"><div class="lab">Quotes &amp; admin<small>Weeks 5–8</small></div>
+      <div class="track"><div class="bar" style="grid-column:5/9">quotes · dashboard</div></div></div>
+    <div class="grow"><div class="lab">Integrations<small>Weeks 7–10</small></div>
+      <div class="track"><div class="bar" style="grid-column:7/11;background:var(--bar2)">Stripe · QBO · email</div></div></div>
+    <div class="grow"><div class="lab">QA, UAT, launch<small>Weeks 10–12</small></div>
+      <div class="track"><div class="bar" style="grid-column:10/13;background:var(--bar2)">deploy · handover</div></div></div>
+  </div>
+  <p class="evidence">At each checkpoint the delivery lead records build state, evidence, open defects, dependencies, and next actions. The client validates journeys and reports reproducible failures; the team fixes and retests before a journey is marked complete.</p>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Rules that don't bend</h2>
+  <div class="grid2">
+    <div class="card"><h3>Security</h3><ul>
+      <li>Role and ownership checks run server-side on every record and file.</li>
+      <li>Changing an ID in a URL or API call must never expose another customer's data.</li>
+      <li>HTTPS in production; rate limits and input validation.</li>
+      <li>Audit trail: actor, event, timestamp, state changes, with no secrets.</li>
+    </ul></div>
+    <div class="card"><h3>Payments &amp; secrets</h3><ul>
+      <li>Never store full card numbers or CVC, in records or logs.</li>
+      <li>Provider-hosted/tokenized payment flows only.</li>
+      <li>Keys and OAuth tokens live only in protected env config. Never in git, client bundles, docs, or emails.</li>
+    </ul></div>
+    <div class="card"><h3>Architecture</h3><ul>
+      <li>Pages handle presentation; business rules live in server services/APIs.</li>
+      <li>Store stable cross-system IDs on the related records.</li>
+      <li>Files: type/size validated, linked to the request, time-limited links where supported.</li>
+    </ul></div>
+    <div class="card"><h3>Source of truth</h3><ul>
+      <li><b>MongoDB</b> holds operational records.</li>
+      <li><b>Stripe</b> decides transaction outcomes.</li>
+      <li><b>QuickBooks Online</b> holds accounting records.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span>Scope boundary</h2>
+  <p class="muted">Phase 1 leaves room for these later, but does not build them:</p>
+  <div class="chips">
+    <span class="chip x">Workforce assignment &amp; dispatch</span>
+    <span class="chip x">GPS tracking</span>
+    <span class="chip x">Field status</span>
+    <span class="chip x">Native mobile apps</span>
+    <span class="chip x">Auto accounting reconciliation</span>
+    <span class="chip x">Payroll</span>
+    <span class="chip x">Historical data migration</span>
+    <span class="chip x">Stored-card billing</span>
+    <span class="chip x">Subscriptions / recurring charges</span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>What the client must provide</h2>
+  <div class="grid2">
+    <div class="card"><h3>Access</h3><ul>
+      <li>Repository, VPS, database, test environment, all through an agreed secure method.</li>
+      <li>Stripe and QuickBooks Online test access, plus OAuth/account approvals.</li>
+      <li>Domain/DNS verification for production email.</li>
+    </ul></div>
+    <div class="card"><h3>Decisions (at the foundation checkpoint)</h3><ul>
+      <li>Service catalog and conditional intake questions.</li>
+      <li>Quote workflow and statuses.</li>
+      <li>Customer email content.</li>
+      <li>QuickBooks field mapping and sync direction.</li>
+      <li>Named UAT reviewers.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">06</span>Acceptance matrix</h2>
+  <p class="progress">Ticked here: <b id="cnt">0</b> / 12 <span class="muted">· saved in this browser only</span></p>
+  <div class="matrix" id="matrix">
+    <label class="mrow"><input type="checkbox"><div><b>Accounts &amp; ownership</b><span>Register, sign in, recover. Customers see only their own records. APIs reject unauthorized and altered-ID access.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Multiple properties</b><span>A company creates and selects two or more properties; requests keep the right company and property.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Service intake</b><span>Conditional questions and validation work; review-before-submit; one unique request ID; date/time kept as a request.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Quote workflow</b><span>Admin creates and revises; customer approves the current revision; prior revisions and approvals stay visible.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Admin workflow</b><span>Search, open, update, confirm scheduling, view status, activity, payment and sync state.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Stripe</b><span>A test payment completes and fails; webhooks update the right request exactly once; refund status recorded; no card data or CVC kept.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>QuickBooks Online</b><span>Customer and invoice sync per mapping; payment ref sent when supported; failed sync visible; retry succeeds.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Notifications</b><span>Every configured event sends an accurate, correctly addressed email with no secrets or other customers' data.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Files &amp; security</b><span>Valid files linked to the right request; bad type/size rejected; no unauthorized access via UI or direct API.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Responsive &amp; production</b><span>Customer and admin journeys work on mobile, tablet, and desktop; smoke checks confirm HTTPS, config, protected admin.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>Backup procedure</b><span>Existing backup config and restore steps reviewed at kickoff and included in handover.</span></div></label>
+    <label class="mrow"><input type="checkbox"><div><b>End-to-end journey</b><span>One request goes all the way: reviewed, quoted, revised, approved, paid, synced, scheduled, completed, with linked history.</span></div></label>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">07</span>Handover documents</h2>
+  <div class="grid2">
+    <div class="card"><ul>
+      <li><b>Architecture overview</b>: components, API boundaries, integrations, deployment topology</li>
+      <li><b>Data model &amp; workflow map</b>: entities, roles, states, events</li>
+      <li><b>Integration notes</b>: Stripe events, QBO mapping and retry, email events</li>
+      <li><b>Configuration guide</b>: env var names and setup, with no secret values</li>
+      <li><b>Deployment &amp; rollback guide</b>: release, health checks, smoke test</li>
+    </ul></div>
+    <div class="card"><ul>
+      <li><b>Security &amp; file access notes</b></li>
+      <li><b>Backup/restoration notes</b>: current setup and owner</li>
+      <li><b>QA &amp; UAT record</b>: matrix results, known issues, retests</li>
+      <li><b>Admin quick-start</b>: daily staff workflow and fixing integration errors</li>
+      <li><b>Source &amp; access handover</b>: repository, accounts, credentials control</li>
+    </ul></div>
+  </div>
+</section>
+
+<section style="border-bottom:0">
+  <h2><span class="n">08</span>When it's done</h2>
+  <div class="done">
+    The delivery lead closes the work order once:
+    <ol>
+      <li>The acceptance matrix and handover records are complete.</li>
+      <li>Production deployment and smoke check are documented.</li>
+      <li>Repository and account handover is confirmed.</li>
+      <li>The 60-day defect-support window has been communicated to the client contact.</li>
+    </ol>
+  </div>
+  <p class="muted" style="margin-top:14px">Post-launch support covers reproducible defects in accepted Phase 1 scope. New features, changed workflows, extra integrations, provider outages, and third-party config changes are not defects.</p>
+</section>
+
+<footer>Summary of "NYC Clean Team Inc. – Phase 1 Team Work Order" v1.0. The PDF is the authoritative version.</footer>
+</div>
+
+<script>
+(function(){
+  var KEY='phase1-matrix';
+  var boxes=[].slice.call(document.querySelectorAll('#matrix input'));
+  var cnt=document.getElementById('cnt');
+  var saved=[];
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){}
+  boxes.forEach(function(b,i){ b.checked=!!saved[i]; });
+  function update(){
+    var s=boxes.map(function(b){return b.checked;});
+    cnt.textContent=s.filter(Boolean).length;
+    try{ localStorage.setItem(KEY,JSON.stringify(s)); }catch(e){}
+  }
+  boxes.forEach(function(b){ b.addEventListener('change',update); });
+  update();
+})();
+</script>
+</body>
+</html>
