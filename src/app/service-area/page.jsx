@@ -7,7 +7,7 @@ export const metadata = pageMeta({
   path: "/service-area",
   title: "Locations - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Commercial cleaning in Manhattan, Brooklyn, Queens, the Bronx, Staten Island and Long Island. Local teams with consistent standards in every borough.",
 });
 export default function ServieArea() {
   return (

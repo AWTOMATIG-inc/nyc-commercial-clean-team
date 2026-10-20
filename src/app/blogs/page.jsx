@@ -5,7 +5,7 @@ export const metadata = pageMeta({
   path: "/blogs",
   title: "Blogs - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Commercial cleaning guides, compliance tips and facility management best practices for NYC businesses, from the New York Commercial Clean Team.",
 });
 export default async function Blogs() {
 

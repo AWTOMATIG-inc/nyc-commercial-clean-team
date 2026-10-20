@@ -9,7 +9,7 @@ export const metadata = pageMeta({
   path: "/about",
   title: "About - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Meet New York Commercial Clean Team: fully insured, background-checked commercial cleaners serving offices, retail and medical facilities across all five boroughs.",
 });
 export default function AboutUs() {
   return (

@@ -9,7 +9,7 @@ export const metadata = pageMeta({
   path: "/services",
   title: "Services - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Recurring janitorial, specialty, surface and support cleaning services built for NYC commercial facilities, from offices and retail to medical spaces.",
 });
 export default function page() {
   return (

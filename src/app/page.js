@@ -64,7 +64,7 @@ const jsonLd = {
     "Staten Island",
     "Long Island",
   ],
-  serviceType: "Commercial Cleaning",
+  knowsAbout: "Commercial Cleaning",
   priceRange: "$$",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",

@@ -8,7 +8,7 @@ export const metadata = pageMeta({
   path: "/contact",
   title: "Contact - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Request a fast, free commercial cleaning quote. Tell us about your NYC facility and our team will get back to you within 24 hours.",
 });
 export default function Contact() {
   return (

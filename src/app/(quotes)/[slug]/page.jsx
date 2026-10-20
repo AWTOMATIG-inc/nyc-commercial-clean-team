@@ -13,16 +13,35 @@ import { cache } from "react";
 
 const getCachedPage = cache(async (slug) => getPageBySlug(slug));
 
+// Borough variants of a service share the same CMS title, so the location is
+// taken from the slug and added to the meta title only (page copy stays as is).
+const LOCATIONS = [
+  ["staten-island", "Staten Island"],
+  ["long-island", "Long Island"],
+  ["manhattan", "Manhattan"],
+  ["brooklyn", "Brooklyn"],
+  ["queens", "Queens"],
+  ["bronx", "Bronx"],
+  ["nyc", "NYC"],
+];
+
+const metaTitle = (title, slug) => {
+  const location = LOCATIONS.find(([key]) => slug.includes(key))?.[1];
+  if (!location || title.toLowerCase().includes(location.toLowerCase())) return title;
+  return `${title} ${location}`;
+};
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const pageDetail = await getCachedPage(slug);
   if (!pageDetail) return {};
   const url = `https://nyccleantinc.com/${slug}`;
+  const title = metaTitle(pageDetail.title, slug);
   return {
-    title: `${pageDetail.title} | nyccleantinc`,
+    title: `${title} | nyccleantinc`,
     description: pageDetail.shortDescription,
     alternates: { canonical: url },
-    openGraph: { url, title: pageDetail.title, description: pageDetail.shortDescription },
+    openGraph: { url, title, description: pageDetail.shortDescription },
   };
 }
 

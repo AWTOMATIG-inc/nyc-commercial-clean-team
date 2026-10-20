@@ -6,7 +6,7 @@ export const metadata = pageMeta({
   path: "/booking",
   title: "Booking - New York Commercial Clean Team INC",
   description:
-    "professional Cleaning You Can Trust! Your Space, Our Care. Experience the Clean Difference",
+    "Schedule your commercial cleaning service online. Fill out the form and get a custom, no-obligation quote within 24 hours.",
 });
 export default function page() {
   return (
