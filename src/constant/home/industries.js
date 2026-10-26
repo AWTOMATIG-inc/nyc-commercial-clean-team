@@ -45,6 +45,9 @@ export const details = [
   {
     id: 1,
     slug: "office",
+    metaTitle: "Office Building Cleaning Company NYC",
+    metaDesc:
+      "Office cleaning for NYC corporate spaces and multi-tenant buildings. After-hours crews, insured staff and consistent standards. Request a free walkthrough.",
     heading:
       "Office Cleaning Company — Keeping Corporate Spaces Clean, Productive, and Professional",
     desc: "A cluttered, poorly maintained office doesn't just look bad — it costs you. Employees work less effectively in dirty environments, clients draw immediate conclusions about your organization based on what they see when they walk in, and facility managers spend time they don't have managing cleaning-related complaints. Finding a dependable office cleaning company in NYC means finding a vendor who understands that your office is a working environment with specific schedules, access restrictions, and expectations — not just a space that needs vacuuming.",
@@ -84,6 +87,9 @@ export const details = [
   {
     id: 2,
     slug: "food",
+    metaTitle: "Restaurant Cleaning Services NYC",
+    metaDesc:
+      "Restaurant cleaning in NYC built around DOH inspections: kitchens, dining rooms and restrooms cleaned between services. Insured crews. Get a free quote.",
     heading:
       "Restaurant Cleaning Services — Health Code Compliance and Operational Sanitation You Can Count On",
     desc: "In New York City's restaurant industry, cleanliness isn't a preference — it's a legal requirement with direct consequences for your license, your rating, and your reputation. A single failed DOH inspection can close your doors. A single social media post about visible hygiene issues can cost you weeks of business. Restaurant cleaning services in NYC must operate at a different standard than general commercial cleaning — faster, more thorough, more compliance-aware, and calibrated to the specific demands of a food service environment running multiple services per day.",
@@ -124,6 +130,9 @@ export const details = [
   {
     id: 3,
     slug: "retail",
+    metaTitle: "Retail Store Cleaning Services NYC",
+    metaDesc:
+      "Retail store cleaning across NYC: sales floors, fitting rooms, windows and restrooms kept customer-ready before opening. Insured crews, free quote.",
     heading:
       "Retail Store Cleaning — Customer-Facing Spaces That Reflect Your Brand Standard",
     desc: "Your retail space is your brand made physical. Before a customer speaks to your staff, looks at your merchandise, or reads a price tag, they've already assessed how you operate based on the cleanliness of your floor, your display surfaces, your fitting rooms, and your restrooms. Retail store cleaning in NYC requires a provider who understands that every visible surface is a brand touchpoint — and that inconsistency in cleaning is inconsistency in customer experience. In a market where foot traffic is earned and loyalty is fragile, the condition of your space is part of your competitive position.",
@@ -165,6 +174,9 @@ export const details = [
   {
     id: 4,
     slug: "medical",
+    metaTitle: "Medical Office Cleaning NYC",
+    metaDesc:
+      "Medical office cleaning in NYC for clinics, dental and outpatient practices. Disinfection that follows OSHA and CDC guidelines. Request a free walkthrough.",
     heading:
       "Medical Facility Cleaning — Infection Control and Compliance-Grade Sanitation for Healthcare Environments",
     desc: "Medical facilities operate in an environment where cleaning failures are not an inconvenience — they are a patient safety risk. Infection control, cross-contamination prevention, and compliance with OSHA and CDC sanitation guidelines are not optional in a healthcare setting; they are baseline operational requirements. Medical facility cleaning in NYC demands a provider who understands clinical environments, uses the right disinfection products for healthcare use, and executes with a level of precision that standard commercial cleaning does not require. New York Commercial Clean Team Inc. provides cleaning services specifically calibrated for medical offices, outpatient clinics, dental practices, imaging centers, and healthcare facilities across New York City.",
@@ -206,6 +218,9 @@ export const details = [
   {
     id: 5,
     slug: "education",
+    metaTitle: "School Cleaning Services NYC",
+    metaDesc:
+      "School and campus cleaning across NYC: classrooms, restrooms, cafeterias and gyms cleaned after hours for students and staff. Insured crews, free quote.",
     heading:
       "School Cleaning Services — Safe, Consistent Environments for Students and Staff",
     desc: "Schools concentrate large numbers of children in shared spaces — classrooms, hallways, cafeterias, gymnasiums, and restrooms — where hygiene failures spread quickly and affect everyone. School cleaning services in NYC must account for the specific health risks of high-occupancy educational environments: illness transmission, allergen management, surface disinfection in spaces used continuously throughout the day, and restrooms that see volumes of use that most commercial facilities never approach. For school administrators, facility managers, and heads of operations, maintaining a clean campus is a student health issue, a compliance obligation, and a direct reflection on institutional standards.",

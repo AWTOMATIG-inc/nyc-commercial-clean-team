@@ -57,7 +57,7 @@ export default function HeroSection() {
         <div className="w-full bg-black/10 backdrop-blur-[2px] sm:backdrop-blur-[4px] relative sm:absolute sm:top-0 sm:left-0 sm:h-full rounded-[20px]">
           <div className="text-white flex flex-col items-center justify-center text-center h-full min-h-100 xs:min-h-85 sm:min-h-0 py-10 sm:py-0 px-2 sm:px-4">
             <h1 className="text-[28px] sm:text-5xl lg:text-[56px] leading-[120%] ">
-              Commercial Cleaning & Facility <br className="hidden sm:inline" /> Maintenance for NYC Properties
+              Commercial Cleaning Services <br className="hidden sm:inline" /> in New York City
             </h1>
             <p className="md:text-lg my-6 md:my-9 max-w-250">
               Reliable janitorial, porter, floor care, window cleaning and

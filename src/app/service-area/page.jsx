@@ -5,7 +5,7 @@ import Foundation from "@/components/service-area/Foundation";
 import { pageMeta } from "@/utility/pageMeta";
 export const metadata = pageMeta({
   path: "/service-area",
-  title: "Locations - New York Commercial Clean Team INC",
+  title: "NYC Commercial Cleaning Service Areas | nyccleantinc",
   description:
     "Commercial cleaning in Manhattan, Brooklyn, Queens, the Bronx, Staten Island and Long Island. Local teams with consistent standards in every borough.",
 });

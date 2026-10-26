@@ -9,11 +9,14 @@ export async function generateMetadata({ params }) {
   const detail = details.find((service) => service.slug === slug);
   if (!item || !detail) return {};
   const url = `https://nyccleantinc.com/industries/${slug}`;
+  // heading/desc are page copy and run far past what search results show
+  const title = detail.metaTitle ?? detail.heading;
+  const description = detail.metaDesc ?? detail.desc;
   return {
-    title: `${detail.heading} | nyccleantinc`,
-    description: detail.desc,
+    title: `${title} | nyccleantinc`,
+    description,
     alternates: { canonical: url },
-    openGraph: { url, title: detail.heading, description: detail.desc },
+    openGraph: { url, title, description },
   };
 }
 
