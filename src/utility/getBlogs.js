@@ -28,6 +28,19 @@ export const getBlogs = async () => {
     throw err;
   }
 };
+// Titles and slugs only, for internal links (skips the heavy post body).
+export const getBlogLinks = async () => {
+  try {
+    await db_connect();
+    const blogs = await BlogModel.find({}, { title: 1, slug: 1 })
+      .sort({ createdAt: -1 })
+      .lean();
+    return JSON.parse(JSON.stringify(blogs));
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
 // export const getBlogById = async (id) => {
 //   try {
 //     const res = await fetch(process.env.BASE_URL + "/api/blog/" + id, {

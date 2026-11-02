@@ -1,29 +1,49 @@
 import CommentForm from "@/components/blogs/CommentForm";
-import { getBlogBySlug } from "@/utility/getBlogs";
+import { getBlogBySlug, getBlogLinks } from "@/utility/getBlogs";
 import { GetTime } from "@/utility/GetTime";
 import { timeAgo } from "@/utility/timeAgo";
 import { Icon } from "@iconify/react";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import "react-quill-new/dist/quill.snow.css";
 
 const getCachedBlog = cache(async (slug) => getBlogBySlug(slug));
+
+// Semrush flags titles over 70 chars; most blog titles are longer, so cut at a
+// word boundary and only add the brand suffix when it still fits.
+const SUFFIX = " | nyccleantinc";
+const metaTitle = (title) => {
+  if (title.length + SUFFIX.length <= 60) return title + SUFFIX;
+  if (title.length <= 60) return title;
+  const beforeColon = title.split(":")[0];
+  if (beforeColon.length <= 60) return beforeColon;
+  return title
+    .slice(0, 60)
+    .replace(/\s+\S*$/, "")
+    .replace(/(\s+(and|or|of|a|an|the|to|for|in|on|what|how|why|vs))+$/i, "")
+    .replace(/[\s,;-]+$/, "");
+};
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const blog = await getCachedBlog(slug);
   if (!blog) return {};
   return {
-    title: `Blogs - ${blog.title} |`,
+    title: metaTitle(blog.title),
     description: blog.shortDescription || blog.metaDescription,
     alternates: { canonical: `https://nyccleantinc.com/blogs/${slug}` },
   };
 }
 export default async function BlogDetails({ params }) {
   const { slug } = await params;
-  const blog = await getCachedBlog(slug);
+  const [blog, blogLinks] = await Promise.all([
+    getCachedBlog(slug),
+    getBlogLinks(),
+  ]);
   if (!blog) notFound();
+  const moreBlogs = blogLinks.filter((b) => b.slug !== slug).slice(0, 5);
   return (
     <main>
       <section className="container my-8 sm:my-16">
@@ -89,6 +109,23 @@ export default async function BlogDetails({ params }) {
           </div>
         </div>
       </section>
+      {moreBlogs.length > 0 && (
+        <section className="container mb-10 sm:mb-16">
+          <h2 className="text-slate text-2xl font-bold">More from our blog</h2>
+          <ul className="mt-4 space-y-3">
+            {moreBlogs.map((b) => (
+              <li key={b.slug}>
+                <Link
+                  href={`/blogs/${b.slug}`}
+                  className="text-light-blue hover:underline hover:text-blue-500"
+                >
+                  {b.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }

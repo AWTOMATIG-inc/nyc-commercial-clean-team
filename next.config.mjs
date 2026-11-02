@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // HSTS (Semrush audit 11-2-26). No includeSubDomains: other subdomains may not all serve HTTPS.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [{ key: "Strict-Transport-Security", value: "max-age=31536000" }],
+      },
+    ];
+  },
   async redirects() {
     return [
       // www -> non-www (GSC fix 10-4-26, Fix 6): Google had indexed both hosts, splitting ranking

@@ -174,7 +174,7 @@ export const details = [
   {
     id: 4,
     slug: "medical",
-    metaTitle: "Medical Office Cleaning NYC",
+    metaTitle: "Clinic & Dental Office Cleaning NYC",
     metaDesc:
       "Medical office cleaning in NYC for clinics, dental and outpatient practices. Disinfection that follows OSHA and CDC guidelines. Request a free walkthrough.",
     heading:
@@ -218,7 +218,7 @@ export const details = [
   {
     id: 5,
     slug: "education",
-    metaTitle: "School Cleaning Services NYC",
+    metaTitle: "Campus & Classroom Cleaning NYC",
     metaDesc:
       "School and campus cleaning across NYC: classrooms, restrooms, cafeterias and gyms cleaned after hours for students and staff. Insured crews, free quote.",
     heading:
