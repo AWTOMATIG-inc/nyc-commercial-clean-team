@@ -1,6 +1,6 @@
 "use client";
 import logo from "@/assets/logos/nyc-logo.png";
-import { companyLinks, followUsLinks, servicesLinks } from "@/constant/footer";
+import { areaLinks, companyLinks, followUsLinks, servicesLinks } from "@/constant/footer";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -103,6 +103,21 @@ export default function Footer() {
               >
                 Privacy Policy
               </Link>
+            </ul>
+          </div>
+          <div>
+            <p className="text-lg font-semibold">Service Areas</p>
+            <ul className="mt-4.75 space-y-3.5">
+              {areaLinks.map((link) => (
+                <li key={link.id}>
+                  <Link
+                    className=" text-light hover:underline hover:text-blue-500"
+                    href={link.href}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

@@ -6,7 +6,9 @@ import ManagerReview from "@/components/quote/ManagerReview";
 import ProfessionalCareServices from "@/components/quote/ProfessionalCareServices";
 import QuoteForm from "@/components/quote/QuoteForm";
 import { getFeedback } from "@/utility/getFeedback";
-import { getPageBySlug } from "@/utility/getPages";
+import RelatedPages from "@/components/quote/RelatedPages";
+import { getPageBySlug, getPages } from "@/utility/getPages";
+import { getRelatedPages } from "@/utility/relatedPages";
 import { Icon } from "@iconify/react";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -47,11 +49,15 @@ export async function generateMetadata({ params }) {
 
 export default async function Quotes({ params }) {
   const { slug } = await params;
-  const feedbacks = await getFeedback();
-  const pageDetail = await getCachedPage(slug);
+  const [feedbacks, pageDetail, allPages] = await Promise.all([
+    getFeedback(),
+    getCachedPage(slug),
+    getPages(),
+  ]);
   if (!pageDetail) {
     notFound();
   }
+  const related = getRelatedPages(slug, allPages.map((p) => p.pageName));
 const imageUrl = `/api/uploads/page/${pageDetail?.bannerImage}`;
 
   return (
@@ -153,6 +159,7 @@ const imageUrl = `/api/uploads/page/${pageDetail?.bannerImage}`;
         </div>
       </section>
       <ManagerReview feedbacks={feedbacks} />
+      <RelatedPages {...related} />
       <ProfessionalCareServices />
     </main>
   );

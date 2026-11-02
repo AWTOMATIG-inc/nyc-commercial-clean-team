@@ -5,6 +5,13 @@ export const servicesLinks = [
   { id: 4, name: "Floor care", href: "/floor-stripping-waxing-nyc" },
   { id: 5, name: "Window cleaning", href: "/commercial-window-cleaning-nyc" },
 ];
+export const areaLinks = [
+  { id: 1, name: "Manhattan", href: "/commercial-cleaning-services-manhattan-nyc" },
+  { id: 2, name: "Brooklyn", href: "/commercial-cleaning-brooklyn" },
+  { id: 3, name: "Queens", href: "/commercial-cleaning-queens" },
+  { id: 4, name: "Bronx", href: "/commercial-cleaning-bronx" },
+  { id: 5, name: "Staten Island", href: "/commercial-cleaning-staten-island" },
+];
 export const companyLinks = [
   { id: 1, name: "About us", href: "/about" },
   { id: 2, name: "Locations", href: "/service-area" },
