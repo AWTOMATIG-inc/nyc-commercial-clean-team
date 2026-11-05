@@ -10,6 +10,10 @@ export const QUOTE_FIELDS = [
 
 export const MAX_ATTEMPTS = 3;
 
+export const RETRY_SUBMIT_FIELD = "__retry_submit__";
+
+const MAX_FIELD_LENGTH = 200;
+
 // Mirrors the HTML5 input[type=email] pattern — a practical stand-in for
 // quoteYupSchema.js's .email() check, good enough for chat-side validation.
 const EMAIL_REGEX =
@@ -124,6 +128,76 @@ const FIELD_CONFIG = {
     prompt: "Last question — what's the zip code for the facility?",
   },
 };
+
+function isValidCollectedValue(field, value) {
+  if (typeof value !== "string" || value.length > MAX_FIELD_LENGTH) {
+    return false;
+  }
+  if (field === "facilityType") {
+    return value === "Other" || industryOptions.includes(value);
+  }
+  return FIELD_CONFIG[field].validate(value);
+}
+
+// The browser holds the quote state between messages, so it can't be trusted.
+// Rebuilds a clean copy from a fixed set of fields. Returns { valid: false } if
+// anything is off, including answers that were never validated by this server.
+export function parseQuoteFlow(raw) {
+  if (raw === null || raw === undefined) {
+    return { valid: true, state: null };
+  }
+  if (typeof raw !== "object" || raw.active !== true) {
+    return { valid: false };
+  }
+
+  const { field, collected, attempts } = raw;
+  const isRetry = field === RETRY_SUBMIT_FIELD;
+  if (!isRetry && !QUOTE_FIELDS.includes(field)) {
+    return { valid: false };
+  }
+  if (!collected || typeof collected !== "object") {
+    return { valid: false };
+  }
+  if (attempts !== undefined && (!attempts || typeof attempts !== "object")) {
+    return { valid: false };
+  }
+
+  // Exactly the fields before the current one, or all of them on a retry.
+  const expectedFields = isRetry
+    ? QUOTE_FIELDS
+    : QUOTE_FIELDS.slice(0, QUOTE_FIELDS.indexOf(field));
+  if (Object.keys(collected).length !== expectedFields.length) {
+    return { valid: false };
+  }
+
+  const cleanCollected = {};
+  for (const expected of expectedFields) {
+    if (!isValidCollectedValue(expected, collected[expected])) {
+      return { valid: false };
+    }
+    cleanCollected[expected] = collected[expected];
+  }
+
+  const cleanAttempts = {};
+  for (const quoteField of QUOTE_FIELDS) {
+    const count = attempts?.[quoteField];
+    if (count === undefined) continue;
+    if (!Number.isInteger(count) || count < 0 || count > MAX_ATTEMPTS) {
+      return { valid: false };
+    }
+    cleanAttempts[quoteField] = count;
+  }
+
+  return {
+    valid: true,
+    state: {
+      active: true,
+      field,
+      collected: cleanCollected,
+      attempts: cleanAttempts,
+    },
+  };
+}
 
 export function createInitialQuoteFlowState() {
   return {

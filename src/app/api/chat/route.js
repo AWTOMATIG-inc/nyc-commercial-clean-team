@@ -1,24 +1,62 @@
 import { NextResponse } from "next/server";
 import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
 import { isRateLimited } from "@/lib/chat/rateLimiter";
+import { guardReply } from "@/lib/chat/replyGuard";
 import {
   advanceQuoteFlow,
   createInitialQuoteFlowState,
   detectsQuoteIntent,
   getFieldPrompt,
   MAX_ATTEMPTS,
+  parseQuoteFlow,
+  RETRY_SUBMIT_FIELD,
 } from "@/lib/chat/quoteFlow";
 
 const MODEL = "openai/gpt-oss-120b";
 const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MAX_MESSAGE_LENGTH = 500;
+const MAX_MESSAGES = 60; // Same cap as ChatWidget.jsx.
+// The widget trims history at 7,000 characters but always keeps the last pair,
+// and one bot reply can be long. This leaves room for that.
+const MAX_TOTAL_CHARACTERS = 12000;
+const CHAT_ROLES = ["user", "assistant"];
+const DEFAULT_CATEGORY = "chatbot-general";
 
+// nginx must overwrite X-Real-IP with $remote_addr, which a client can't fake.
+// The first X-Forwarded-For value is whatever the client sent. The last one is
+// the only value a proxy appends, so it's the fallback.
 function getClientIp(request) {
-  const forwardedFor = request.headers.get("x-forwarded-for");
-  if (forwardedFor) {
-    return forwardedFor.split(",")[0].trim();
+  const realIp = request.headers.get("x-real-ip")?.trim();
+  if (realIp) {
+    return realIp;
   }
-  return request.headers.get("x-real-ip") || "unknown";
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  return forwardedFor?.split(",").pop().trim() || "unknown";
+}
+
+// Only role and content reach the model, and only user/assistant roles, so a
+// caller can't add a system message.
+function parseMessages(messages) {
+  if (
+    !Array.isArray(messages) ||
+    messages.length === 0 ||
+    messages.length > MAX_MESSAGES
+  ) {
+    return null;
+  }
+  const isValid = messages.every(
+    (m) => CHAT_ROLES.includes(m?.role) && typeof m.content === "string",
+  );
+  if (!isValid || messages[messages.length - 1].role !== "user") {
+    return null;
+  }
+  return messages.map(({ role, content }) => ({ role, content }));
+}
+
+function parseCategory(category) {
+  return typeof category === "string" && /^[a-z0-9-]{1,100}$/i.test(category)
+    ? category
+    : DEFAULT_CATEGORY;
 }
 
 // Simple keyword check for "wants to book" intent — distinct from
@@ -52,7 +90,7 @@ async function submitQuote(request, collected, category) {
   formData.append("phone", collected.phone);
   formData.append("facilityType", collected.facilityType);
   formData.append("zipCode", collected.zipCode);
-  formData.append("category", category || "chatbot-general");
+  formData.append("category", category);
 
   const quoteUrl = new URL("/api/quote", request.url);
   const res = await fetch(quoteUrl, { method: "POST", body: formData });
@@ -75,15 +113,16 @@ export async function POST(request) {
   }
 
   try {
-    const { messages, quoteFlow, category } = await request.json();
-    if (!Array.isArray(messages) || messages.length === 0) {
+    const body = await request.json();
+    const messages = parseMessages(body?.messages);
+    if (!messages) {
       return NextResponse.json(
         { error: "messages is required" },
         { status: 400 },
       );
     }
 
-    const lastUserMessage = messages[messages.length - 1]?.content || "";
+    const lastUserMessage = messages[messages.length - 1].content;
 
     if (lastUserMessage.length > MAX_MESSAGE_LENGTH) {
       return NextResponse.json({
@@ -92,8 +131,30 @@ export async function POST(request) {
       });
     }
 
-    if (quoteFlow?.active) {
-      if (quoteFlow.field === "__retry_submit__") {
+    const totalCharacters = messages.reduce(
+      (sum, m) => sum + m.content.length,
+      0,
+    );
+    if (totalCharacters > MAX_TOTAL_CHARACTERS) {
+      return NextResponse.json(
+        { error: "conversation is too long" },
+        { status: 400 },
+      );
+    }
+
+    const parsedFlow = parseQuoteFlow(body.quoteFlow);
+    if (!parsedFlow.valid) {
+      return NextResponse.json({
+        reply:
+          "Sorry, something went wrong with that quote request. Just ask for a quote again and we'll start over.",
+        quoteFlow: null,
+      });
+    }
+    const quoteFlow = parsedFlow.state;
+    const category = parseCategory(body.category);
+
+    if (quoteFlow) {
+      if (quoteFlow.field === RETRY_SUBMIT_FIELD) {
         const submitted = await submitQuote(request, quoteFlow.collected, category);
         if (!submitted) {
           return NextResponse.json({
@@ -152,7 +213,7 @@ export async function POST(request) {
             "Sorry, something went wrong submitting your quote request. Send any message and I'll try again, or give us a call.",
           quoteFlow: {
             active: true,
-            field: "__retry_submit__",
+            field: RETRY_SUBMIT_FIELD,
             collected: result.collected,
             attempts: quoteFlow.attempts,
           },
@@ -189,10 +250,7 @@ export async function POST(request) {
 
     const chatMessages = [
       { role: "system", content: buildSystemPrompt() },
-      ...messages.map((m) => ({
-        role: m.role === "bot" ? "assistant" : "user",
-        content: m.content,
-      })),
+      ...messages,
     ];
 
     const groqRes = await fetch(GROQ_URL, {
@@ -229,7 +287,7 @@ export async function POST(request) {
       );
     }
 
-    return NextResponse.json({ reply });
+    return NextResponse.json({ reply: guardReply(reply) });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
