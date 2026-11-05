@@ -2,7 +2,7 @@ import { db_connect } from "@/database";
 import { BlogModel } from "@/database/models/blogModel";
 import { UserModel } from "@/database/models/userModel";
 import { deleteFile } from "@/lib/deleteFile";
-import { fileuploader } from "@/lib/fileuploader";
+import { fileuploader, UPLOAD_ERROR } from "@/lib/fileuploader";
 import { makeSlug } from "@/utility/makeSlug";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
@@ -87,6 +87,9 @@ export async function PUT(request, context) {
     const isExistSlug = await BlogModel.find({ slug });
     if (image) {
       const filename = await fileuploader(image, "blog");
+      if (!filename) {
+        return NextResponse.json({ error: UPLOAD_ERROR }, { status: 400 });
+      }
       blogData = {
         title,
         slug: isExistSlug.length > 0 ? slug + "-" + isExistSlug.length : slug,

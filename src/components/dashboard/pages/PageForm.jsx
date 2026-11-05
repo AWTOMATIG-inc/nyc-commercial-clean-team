@@ -163,6 +163,10 @@ export default function PageForm({ pagesData, pageNames }) {
       });
       const imageUrl = await res.json();
       setLoading(false);
+      if (!res.ok) {
+        toast.error(imageUrl.error || "Image upload failed");
+        return;
+      }
       return imageUrl.image;
     } catch (error) {
       setLoading(false);

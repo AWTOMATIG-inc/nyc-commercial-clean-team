@@ -1,6 +1,6 @@
 import { db_connect } from "@/database";
 import { BlogModel } from "@/database/models/blogModel";
-import { fileuploader } from "@/lib/fileuploader";
+import { fileuploader, UPLOAD_ERROR } from "@/lib/fileuploader";
 import { verifyToken } from "@/lib/jwt";
 import { makeSlug } from "@/utility/makeSlug";
 import { revalidatePath } from "next/cache";
@@ -34,8 +34,8 @@ export async function POST(request) {
 
     if (!filename) {
       return NextResponse.json(
-        { error: "File upload failed" },
-        { status: 500 },
+        { error: UPLOAD_ERROR },
+        { status: 400 },
       );
     }
 

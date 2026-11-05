@@ -1,7 +1,7 @@
 import { db_connect } from "@/database";
 import { ImageModel } from "@/database/models/imageModel";
 import { deleteFile } from "@/lib/deleteFile";
-import { fileuploader } from "@/lib/fileuploader";
+import { fileuploader, UPLOAD_ERROR } from "@/lib/fileuploader";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
@@ -20,8 +20,8 @@ export async function POST(request) {
     const filename = await fileuploader(image, "page");
     if (!filename) {
       return NextResponse.json(
-        { error: "File upload failed" },
-        { status: 500 },
+        { error: UPLOAD_ERROR },
+        { status: 400 },
       );
     }
 

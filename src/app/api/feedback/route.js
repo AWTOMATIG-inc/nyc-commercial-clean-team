@@ -1,6 +1,6 @@
 import { db_connect } from "@/database";
 import { FeedbackModel } from "@/database/models/feedbackModel";
-import { fileuploader } from "@/lib/fileuploader";
+import { fileuploader, UPLOAD_ERROR } from "@/lib/fileuploader";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
@@ -26,8 +26,8 @@ export async function POST(request) {
 
     if (!filename) {
       return NextResponse.json(
-        { error: "File upload failed" },
-        { status: 500 }
+        { error: UPLOAD_ERROR },
+        { status: 400 }
       );
     }
 
