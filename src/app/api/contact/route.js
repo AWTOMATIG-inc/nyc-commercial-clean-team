@@ -1,38 +1,42 @@
+import { escapeHtml, isEmail, isNonEmptyString, pickStrings } from "@/lib/sanitize";
 import { transporter } from "@/lib/transporter";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const formData = await request.formData();
-  console.log(Object.fromEntries(formData));
+  const { name, email, phone, subject, message } = pickStrings(
+    Object.fromEntries(formData),
+    ["name", "email", "phone", "subject", "message"],
+    5000,
+  );
   if (
-    !formData.has("name") ||
-    !formData.has("email") ||
-    !formData.has("phone") ||
-    !formData.has("subject") ||
-    !formData.has("message")
+    !isNonEmptyString(name) ||
+    !isEmail(email) ||
+    !isNonEmptyString(phone) ||
+    !isNonEmptyString(subject) ||
+    !isNonEmptyString(message)
   ) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 },
     );
   }
-  const { name, email, phone, subject, message } = Object.fromEntries(formData);
 
   try {
     const mail_html = `
       <div style="font-family: Arial, sans-serif; color: #333;">
         <h2 style="color: #4CAF50;">New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
         <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <p>${escapeHtml(message)}</p>
       </div>
     `;
     const mailOptions = {
       from: process.env.EMAIL,
       to: process.env.EMAIL,
-      subject: `${subject}`,
+      subject: subject.replace(/[\r\n]+/g, " ").slice(0, 200),
       html: mail_html,
       attachments: [],
     };

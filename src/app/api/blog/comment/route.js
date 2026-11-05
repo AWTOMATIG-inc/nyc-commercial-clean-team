@@ -1,16 +1,23 @@
 import { db_connect } from "@/database";
 import { BlogModel } from "@/database/models/blogModel";
 import { CommentModel } from "@/database/models/commentModel";
+import { isEmail, isNonEmptyString, pickStrings } from "@/lib/sanitize";
+import { isValidObjectId } from "mongoose";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 export async function POST(request) {
   const formData = await request.formData();
   await db_connect();
+  const { name, email, message, blogId } = pickStrings(
+    Object.fromEntries(formData),
+    ["name", "email", "message", "blogId"],
+    5000,
+  );
   if (
-    !formData.has("name") ||
-    !formData.has("email") ||
-    !formData.has("message") ||
-    !formData.has("blogId")
+    !isNonEmptyString(name) ||
+    !isEmail(email) ||
+    !isNonEmptyString(message) ||
+    !isValidObjectId(blogId)
   ) {
     return NextResponse.json(
       { error: "Missing required fields" },
@@ -18,8 +25,10 @@ export async function POST(request) {
     );
   }
 
-  const { name, email, message, blogId } = Object.fromEntries(formData);
   try {
+    if (!(await BlogModel.exists({ _id: blogId }))) {
+      return NextResponse.json({ error: "Blog not found" }, { status: 404 });
+    }
 
     const comment = await CommentModel.create({
       name,

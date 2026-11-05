@@ -1,17 +1,24 @@
 import { db_connect } from "@/database";
 import { QuoteModel } from "@/database/models/quoteModel";
+import { pickStrings } from "@/lib/sanitize";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
+const QUOTE_FIELDS = [
+  "fullName",
+  "email",
+  "phone",
+  "facilityType",
+  "zipCode",
+  "category",
+];
+
 export async function POST(request) {
   const formData = await request.formData();
-  const quoteFormData = Object.fromEntries(formData);
-//   const { email, fullName, category, zipCode,facilityType, phone } = quoteFormData;
+  const quoteFormData = pickStrings(Object.fromEntries(formData), QUOTE_FIELDS);
   try {
     await db_connect();
-    const quoteData = await QuoteModel.create({
-      ...quoteFormData,
-    });
+    const quoteData = await QuoteModel.create(quoteFormData);
     if (!quoteData) {
       return NextResponse.json(
         { error: "quote creation failed" },

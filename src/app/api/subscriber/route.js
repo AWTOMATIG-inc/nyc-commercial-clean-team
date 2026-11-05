@@ -1,10 +1,11 @@
 import { db_connect } from "@/database";
 import { SubscriberModel } from "@/database/models/subscribeModel";
+import { isEmail } from "@/lib/sanitize";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const body = await request.json();
-  if (!body.email) {
+  if (!isEmail(body?.email)) {
     return NextResponse.json({ error: "Email is required" }, { status: 400 });
   }
 

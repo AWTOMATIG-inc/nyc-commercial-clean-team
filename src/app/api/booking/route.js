@@ -1,9 +1,47 @@
 import { db_connect } from "@/database";
 import { BookingModel } from "@/database/models/bookingModel";
+import { escapeHtml, pickStrings } from "@/lib/sanitize";
 import { transporter } from "@/lib/transporter";
 import { GetTime } from "@/utility/GetTime";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
+
+// Customer-supplied fields only. status and bookingId are set by the server.
+const BOOKING_FIELDS = [
+  "firstName",
+  "lastName",
+  "email",
+  "phone",
+  "companyName",
+  "jobTitle",
+  "facilityType",
+  "facilitySize",
+  "numberOfFloors",
+  "propertyAddress",
+  "area",
+  "zipCode",
+  "cleaningSchedule",
+  "preferredStartDate",
+  "preferredTime",
+  "facilityAccess",
+  "currentlyUsingCleaner",
+  "notes",
+  "termAndCondition",
+];
+
+const parseServices = (value) => {
+  try {
+    const services = JSON.parse(value);
+    const isValid =
+      Array.isArray(services) &&
+      services.length <= 30 &&
+      services.every((s) => typeof s === "string" && s.length <= 200);
+    return isValid ? services : null;
+  } catch {
+    return null;
+  }
+};
+
 const serializedNumber = (number) => {
   let newNum;
   if (number < 10) {
@@ -17,14 +55,26 @@ const serializedNumber = (number) => {
 };
 export async function POST(request) {
   const formData = await request.formData();
-  const bookingFormData = Object.fromEntries(formData);
-  const { email, firstName, lastName, notes, phone } = bookingFormData;
+  const rawFormData = Object.fromEntries(formData);
+  const bookingFormData = pickStrings(rawFormData, BOOKING_FIELDS);
+  const services = parseServices(rawFormData.services);
+  if (!services) {
+    return NextResponse.json(
+      { error: "Invalid services selection" },
+      { status: 400 },
+    );
+  }
+  const firstName = escapeHtml(bookingFormData.firstName);
+  const lastName = escapeHtml(bookingFormData.lastName);
+  const email = escapeHtml(bookingFormData.email);
+  const phone = escapeHtml(bookingFormData.phone);
+  const notes = escapeHtml(bookingFormData.notes);
   try {
     await db_connect();
     const total = await BookingModel.countDocuments();
     const bookingData = await BookingModel.create({
       ...bookingFormData,
-      services: JSON.parse(bookingFormData.services),
+      services,
       bookingId:serializedNumber(total + 1),
     });
     if (!bookingData) {
@@ -54,7 +104,7 @@ export async function POST(request) {
     const mailOptions = {
       from: process.env.EMAIL,
       to: process.env.EMAIL,
-      subject: `New Booking Submission Received from ${firstName+""+lastName}`,
+      subject: `New Booking Submission Received from ${bookingFormData.firstName} ${bookingFormData.lastName}`.replace(/[\r\n]+/g, " "),
       html: mail_html,
     };
 

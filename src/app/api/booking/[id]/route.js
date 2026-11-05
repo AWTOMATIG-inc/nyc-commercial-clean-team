@@ -1,5 +1,6 @@
 import { db_connect } from "@/database";
 import { BookingModel } from "@/database/models/bookingModel";
+import { escapeHtml } from "@/lib/sanitize";
 import { UserModel } from "@/database/models/userModel";
 import { transporter } from "@/lib/transporter";
 import { GetTime } from "@/utility/GetTime";
@@ -89,7 +90,7 @@ export async function PUT(request, context) {
     }
     const mail_html = `
           <div>
-          <p>Dear ${editBooking.firstName + " " + editBooking.lastName}</p>
+          <p>Dear ${escapeHtml(editBooking.firstName + " " + editBooking.lastName)}</p>
           <p> Your booking status has been updated. Please check the latest details below: </p>
           <h3 style="margin-top:20px;">Booking Information:</h3>
           <ul style="padding-left:20px;">
