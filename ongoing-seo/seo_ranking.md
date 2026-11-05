@@ -1,116 +1,106 @@
-# SEO Ranking: Where We Stand
+# SEO Ranking Plan: Progress Report
 
 **Site:** nyccleantinc.com
 **Last updated:** November 2, 2026
-**Source:** Semrush reports (Domain Overview Oct 31, Site Audit Oct 21) and our own work logs
+**Measured against:** "SEO Ranking Growth Plan" (Semrush, prepared November 1, 2026)
 
 ---
 
 ## The short version
 
-- The website itself is in good shape. Semrush gives it a 95% health score with 0 errors.
-- Most of the technical problems the audit found have already been fixed.
-- Traffic is growing: about **183 visits a month, up 58%**.
-- What holds us back now is mostly **marketing work**, not website code: reviews, local listings and links from other sites.
-- The audit we are working from may be out of date. We should **re-run it** before deciding what to do next (see the "Heads up" section).
+- **The website work in the plan is almost finished.** Every technical fix the plan asked for is done and live, except two small jobs.
+- **What's left is mostly outside the website:** reviews, Google Business Profile, directory listings, links from other sites and written content.
+- Those outside tasks are what will move our rankings from here. The website alone can't raise our Authority Score.
 
 ---
 
-## Where we are today
+## What we fixed, section by section
 
-| Measure | Now | What it means |
-|---|---|---|
-| Keywords we rank for | 121 | Google shows us for 121 searches. This is down 27% from last month. |
-| Organic visits per month | 183 | Up 58% from last month. |
-| Authority Score | 9 (low) | Google doesn't yet see us as well-known. Competitors are much higher. |
-| Site health | 95% | The site is technically clean. |
-| Mentions in AI tools (ChatGPT, Gemini) | 0 | AI tools do not recommend us yet. |
+### Section 2 of the plan: merge pages that compete for the same keywords
 
-**The main gap:** most people who find us were already searching for our company name. Very few find us by searching for the service itself, such as "commercial cleaning NYC". Those searches are where new customers come from.
-
----
-
-## What has been fixed
-
-| Fix | Why it mattered |
+| Plan said | Status |
 |---|---|
-| **Duplicate pages merged.** There were 3 office cleaning pages, 3 day porter pages and 3 window cleaning pages. The old ones now forward to a single page. | Pages competing for the same search split their strength, so none ranked well. |
-| **www and non-www versions of the site combined.** | Google had indexed both and was switching between them. |
-| **Page titles and descriptions rewritten** on the 7 most important pages. | Clear titles help us show up for the right searches. |
-| **One main heading per page.** | Google reads one main heading as "this is what the page is about". Some pages had up to 7. |
-| **Address and phone number added to every page footer.** | This helps Google trust that we are a real local business. |
-| **Business details added to the homepage** in a format Google reads (called structured data). | Gives Google our correct address and business name. |
-| **Missing pages and server errors fixed.** About 74 landing pages were missing titles. Some broken pages crashed instead of showing a normal "not found". | Fixes the indexing problems reported in Google Search Console. |
-| **Sitemap rebuilt** to list all 162 pages. | Helps Google find everything on the site. |
-| **Short meta titles on industry pages** and Semrush errors on titles and structured data. | Cleans up issues from the last Semrush audit. |
-| **Links between pages (built, waiting for review).** Every page now has a "Service Areas" footer, and each service or borough page links to related ones. | 58 pages had no links pointing to them, so Google could barely find them. |
+| 3 office cleaning pages competing with each other | **Fixed.** The old pages now forward to one page. |
+| 3 day porter pages competing | **Fixed.** Same as above. |
+| 3 window cleaning pages competing | **Fixed.** Same as above. |
+| Google shows both www and non-www versions | **Fixed.** www now forwards to non-www. |
+| Update internal links and sitemap to use only the final pages | **Fixed.** |
+| Add canonical tags (tells Google which page is the "real" one) | **Fixed.** |
 
----
+### Section 3 of the plan: link the borough and service-area pages
 
-## What is still open
-
-### Website work (small jobs for the developer)
-
-| Task | Plain-English explanation |
+| Plan said | Status |
 |---|---|
-| **Structured data on service pages ("schema")** | Hidden labels in the page code that tell Google "this is a service", "this is an FAQ", "this is our business". Only the homepage has this today. It can lead to richer Google results. |
-| **`llms.txt` file** | A short text file that helps AI tools (ChatGPT, Gemini) understand what our site is about. We don't have one. |
-| **Industry pages** (restaurants, retail, medical, offices, schools) | We already rank on page 2 or 3 for searches like "restaurant cleaning services NYC", and competition for that term is very low. Better titles and links could move it up. |
-| **Lorem ipsum captions** | On hold. See below. |
+| 58 pages in the sitemap had no links pointing to them | **Fixed.** The latest audit shows **0**. |
+| Add a "Service Areas" block to the footer | **Fixed.** Every page now links to all 5 boroughs. |
+| Link service pages and borough pages to each other | **Fixed.** Each of our 74 landing pages now links to the same service in other boroughs and to other services in the same borough. |
+| Pages with only one internal link | **Fixed.** Every blog post now links to 5 other posts. |
 
-### Why the "Lorem ipsum" captions are still there
+### Section 4 of the plan: on-page fixes
 
-Every one of our 74 landing pages has a "before and after" photo section. The caption under each photo still says placeholder text: "Lorem ipsum dolor sit amet".
+| Plan said | Status |
+|---|---|
+| Page titles too long | **Fixed.** Industry and blog titles shortened. |
+| Broken links to other websites | **Fixed.** None in the latest audit. |
+| No `llms.txt` file (helps AI tools read the site) | **Fixed.** Added and live. |
+| No HSTS (a security setting) | **Fixed.** Turned on. |
+| One main heading per page | **Fixed.** Some pages had up to 7. |
+| Business details (LocalBusiness data) on the homepage | **Fixed.** Correct address and phone added. |
+| Address and phone on every page | **Fixed.** Added to the footer. |
 
-**We have not yet received real before-and-after photos from the client.** Without real photos, we cannot write honest captions. We could replace the placeholder with plain text now, but the real fix needs real photos. This item is **on hold until the photos arrive.**
+### Section 6 of the plan: getting mentioned in AI search
+
+| Plan said | Status |
+|---|---|
+| Add an `llms.txt` file | **Fixed.** |
 
 ---
 
-## Most of what's left is marketing, not code
+## What is still open, and why
 
-The remaining ranking problems are mostly about **how well known we are**, which the developer cannot fix by changing the website.
-
-| Task | Owner | Why |
+| Item from the plan | Why it's still open | Who can fix it |
 |---|---|---|
-| Add our target keywords to Semrush Position Tracking | Marketing | Semrush only tracks 4 keywords right now, so we can't measure progress. |
-| Complete and keep up the Google Business Profile (categories, photos, weekly posts) | Marketing | The biggest driver of "near me" and local searches. |
-| Ask happy clients for Google reviews | Marketing and client relations | Reviews build trust and help local ranking. The plan targets 25 new reviews. |
-| Get listed on Yelp, BBB, Angi, Bing Places, Apple Business Connect and Chambers of Commerce | Marketing | Same name, address and phone everywhere tells Google we are real. |
-| Get links from industry sites (BOMA, ISSA, property-management directories) | Marketing | Our Authority Score is 9. Links from trusted sites are what raises it. |
-| Review the existing links to our site (Semrush Backlink Audit) and remove spam | Marketing | We have about 2,000 linking sites but a low score, which suggests many are low quality. |
-| Case studies with named clients (with permission) | Marketing | Real proof helps both customers and Google. |
+| **FAQ and service data on our pages ("schema")** | Hidden labels that tell Google "this is an FAQ" or "this is a service we offer". Only the homepage has business details today. | Developer |
+| **Business details on the contact page** | Same as above, for the contact page. | Developer |
+| **Better titles and links on industry pages** (restaurants, retail) | We rank on page 2 or 3 for searches like "restaurant cleaning services NYC", and competition for it is very low. | Developer |
+| **"Before and after" photo captions still say "Lorem ipsum"** | **We haven't received real before-and-after photos from the client yet.** We can't write honest captions without them. On hold until the photos arrive. | Client, then developer |
+| **Longer, richer page content** (neighborhoods served, our process, checklists, credentials, FAQs, testimonials) | This is writing, not code. The pages are edited through our dashboard, so the text needs to come from someone who knows the business. | Marketing or content writer |
+| **3 blog posts flagged "content not optimized"** | Same as above: this is writing work. | Marketing or content writer |
+| **"Low text compared to page code" warning** | Mostly caused by the technology the site is built on, not missing words. It's a minor warning. Fixing it would mean rebuilding large parts of the site for little gain, so we are leaving it. | No action planned |
+| **"Very little text" on 3 pages** | These are the privacy policy, terms of service and one small "about us" page. Short is normal for these. | No action planned |
 
 ---
 
-## Heads up: the audit may be out of date
+## How much can the website code actually fix?
 
-The Semrush ranking plan (dated Nov 1) lists several problems that **we have already fixed**:
+**Most of the code work is already done.** Almost every technical item in the plan is fixed and live. Only two code jobs remain: adding schema and tuning the industry pages.
 
-- It says there are duplicate office, day porter and window pages. Those were merged and redirected.
-- It says Google shows both www and non-www. That redirect is already live.
-- It says page titles are too long. We already shortened them.
+But the plan's biggest goals depend on things code can't do:
 
-That tells us the audit data was captured **before those fixes took effect** (the site audit is from Oct 21). It also means some numbers in it may be stale. For example, the plan says 80% of traffic is from our brand name, but the latest dashboard shows 63%.
-
-**Recommended next step:** re-run the Semrush Site Audit campaign and refresh the report. This will show what is really still broken and give us a clean starting point for the marketing work.
+| Goal from the plan | Can the website code fix it? |
+|---|---|
+| No duplicate or competing pages | Yes, **done** |
+| No orphaned pages | Yes, **done** |
+| Clean technical audit | Yes, **almost done** |
+| Rich, helpful page content | Partly. The code is ready; the words must come from marketing. |
+| Move "money" keywords into Google's top 5 | Partly. The website is ready; rankings now depend on reviews, links and content. |
+| Authority Score above 15 (it's 9 today) | **No.** This comes only from other trusted websites linking to us. |
+| 25 new Google reviews | **No.** Clients have to leave them. |
+| Mentions in ChatGPT, Gemini and Google AI | Mostly no. AI tools learn about us from directories, review sites and news, not just our own site. |
 
 ---
 
-## Rough 90-day plan
+## What we have to do outside the website
 
-| When | What | Who |
-|---|---|---|
-| Now | Review and publish the internal-links work. Re-run the Semrush audit. | Developer, Marketing |
-| Weeks 1 to 2 | Add keywords to Position Tracking. Add schema and `llms.txt`. | Marketing, Developer |
-| Weeks 2 to 4 | Fix Google Business Profile. Start asking for reviews. Update industry pages. | Marketing |
-| Weeks 4 to 8 | Directory listings. Backlink audit. Case studies. | Marketing |
-| Weeks 6 to 12 | Outreach to BOMA, ISSA and local business associations. Add real photos if received. | Marketing |
-| Monthly | Check rankings, re-run the audit, count leads from search. | Marketing |
-
-## How we will know it's working
-
-- 8 of the main "money" keywords in Google's top 5 within 90 days.
-- Non-brand traffic up 3x.
-- Authority Score above 15.
-- 25 new Google reviews.
-- A clean re-run audit with no orphaned or duplicate pages.
+| Task | Why it matters |
+|---|---|
+| **Add our target keywords to Semrush Position Tracking** | Semrush only tracks 4 keywords right now, so we can't measure progress. |
+| **Complete the Google Business Profile** (every service and area, weekly posts, job photos) | The biggest driver of local and "near me" searches. |
+| **Ask every happy client for a Google review** | Reviews build trust and help local ranking. Target: 25 new reviews. |
+| **Get listed in directories** (Yelp, BBB, Angi, Thumbtack, Bing Places, Apple Business Connect, Chambers of Commerce in Queens, Brooklyn and Staten Island) | The same name, address and phone everywhere tells Google we're a real local business. |
+| **Get links from industry sites** (BOMA New York, ISSA, property and facility management directories, supplier pages) | This is what raises our Authority Score from 9. |
+| **Review the existing links to our site** (Semrush Backlink Audit) and reject spam | We have about 2,000 linking sites but a low score, which suggests many are low quality. |
+| **Local PR and case studies** with named clients (with permission), sponsorships, local business associations | Real proof helps customers, Google and AI tools. |
+| **Compare us against top competitors** (Semrush Keyword Gap and Backlink Gap) | Shows the pages and links competitors have that we don't. |
+| **Write the page content** (neighborhoods, process, FAQs, testimonials) | The website is ready to show it; it needs the words. |
+| **Send the real before-and-after photos** | Unblocks the photo captions on all 74 landing pages. |
