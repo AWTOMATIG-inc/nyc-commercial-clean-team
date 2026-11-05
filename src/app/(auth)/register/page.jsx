@@ -38,6 +38,9 @@ export default function Register() {
         throw new Error("Email already Exists!");
       }
       const user = await res.json();
+      if (!res.ok) {
+        throw new Error(user.error || "Registration failed");
+      }
       if (user) {
         toast.success("Register successfully!");
         router.push("/login");

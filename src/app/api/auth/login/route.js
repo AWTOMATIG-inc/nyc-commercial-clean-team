@@ -5,15 +5,16 @@ import { signToken } from "@/lib/jwt";
 import { NextResponse } from "next/server";
 const EXPIRES_IN = parseInt(process.env.JWT_TOKEN_EXPIRED || "86400");
 export async function POST(request) {
-  await db_connect();
-  const { email, password } = await request.json();
-  if ((!email, !password)) {
+  const body = await request.json().catch(() => null);
+  const { email, password } = body ?? {};
+  if (typeof email !== "string" || !email || typeof password !== "string" || !password) {
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 }
     );
   }
   try {
+    await db_connect();
     const user = await UserModel.findOne({ email });
     if (!user || !(await comparePassword(password, user.password))) {
       return NextResponse.json(
