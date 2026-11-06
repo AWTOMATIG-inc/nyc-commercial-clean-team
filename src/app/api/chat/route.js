@@ -21,6 +21,11 @@ const MAX_MESSAGES = 60; // Same cap as ChatWidget.jsx.
 const MAX_TOTAL_CHARACTERS = 12000;
 const CHAT_ROLES = ["user", "assistant"];
 const DEFAULT_CATEGORY = "chatbot-general";
+// Two tries at most, so the customer waits about 20 seconds in the worst case.
+const GROQ_TIMEOUT_MS = 10000;
+const GROQ_RETRY_DELAY_MS = 500;
+const CHAT_FALLBACK_REPLY =
+  "Sorry, I couldn't answer that just now. Please try again in a moment, or give us a call.";
 
 // nginx must overwrite X-Real-IP with $remote_addr, which a client can't fake.
 // The first X-Forwarded-For value is whatever the client sent. The last one is
@@ -99,6 +104,51 @@ async function submitQuote(request, collected, category) {
   const quoteUrl = new URL("/api/quote", request.url);
   const res = await fetch(quoteUrl, { method: "POST", body: formData });
   return res.ok;
+}
+
+// Returns { reply } on success, otherwise { retryable }. Logs only the failure
+// type, never message content or Groq's response body, which can echo it.
+async function requestGroqReply(chatMessages, apiKey, attempt) {
+  let groqRes;
+  try {
+    groqRes = await fetch(GROQ_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: chatMessages,
+        temperature: 1,
+        max_completion_tokens: 2048,
+        top_p: 1,
+        stream: false,
+      }),
+      signal: AbortSignal.timeout(GROQ_TIMEOUT_MS),
+    });
+  } catch (error) {
+    console.error(`Groq request failed: ${error.name}, attempt ${attempt}`);
+    return { retryable: true };
+  }
+
+  if (!groqRes.ok) {
+    console.error(`Groq API error: status ${groqRes.status}, attempt ${attempt}`);
+    groqRes.body?.cancel();
+    return { retryable: groqRes.status === 429 || groqRes.status >= 500 };
+  }
+
+  const data = await groqRes.json().catch(() => null);
+  const choice = data?.choices?.[0];
+  const reply = choice?.message?.content;
+  if (!reply?.trim()) {
+    console.error(
+      `Groq empty reply: finish_reason ${choice?.finish_reason}, attempt ${attempt}`,
+    );
+    return { retryable: true };
+  }
+
+  return { reply };
 }
 
 export async function POST(request) {
@@ -257,41 +307,16 @@ export async function POST(request) {
       ...messages,
     ];
 
-    const groqRes = await fetch(GROQ_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: chatMessages,
-        temperature: 1,
-        max_completion_tokens: 2048,
-        top_p: 1,
-        stream: false,
-      }),
-    });
-
-    if (!groqRes.ok) {
-      const errBody = await groqRes.text();
-      console.log("Groq API error:", groqRes.status, errBody);
-      return NextResponse.json(
-        { error: "something went wrong" },
-        { status: 502 },
-      );
+    let result = await requestGroqReply(chatMessages, apiKey, 1);
+    if (result.retryable) {
+      await new Promise((resolve) => setTimeout(resolve, GROQ_RETRY_DELAY_MS));
+      result = await requestGroqReply(chatMessages, apiKey, 2);
+    }
+    if (!result.reply) {
+      return NextResponse.json({ reply: CHAT_FALLBACK_REPLY });
     }
 
-    const data = await groqRes.json();
-    const reply = data.choices?.[0]?.message?.content;
-    if (!reply) {
-      return NextResponse.json(
-        { error: "something went wrong" },
-        { status: 502 },
-      );
-    }
-
-    return NextResponse.json({ reply: guardReply(reply) });
+    return NextResponse.json({ reply: guardReply(result.reply) });
   } catch (error) {
     console.log(error);
     return NextResponse.json(
