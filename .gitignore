@@ -45,3 +45,6 @@ next-env.d.ts
 
 # chatbot implementation (local-only, not pushed)
 chatbot-implementation/
+
+# Private security follow-up notes
+do-soon.md
