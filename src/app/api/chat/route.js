@@ -72,15 +72,19 @@ function detectsBookingIntent(message) {
   return BOOKING_INTENT_PATTERN.test(message || "");
 }
 
-// Simple, non-exhaustive keyword check for gratitude/closing phrases — see
-// 00-ARCHITECTURE.md's "Session closing" section. Only checked outside an
-// active quote flow so it can't misfire on a field answer that happens to
-// contain "thanks".
-const CLOSING_INTENT_PATTERN =
-  /\b(thanks|thank you|thank u|thx|ty|that'?s all|that is all|no more questions|nothing else|goodbye|good ?bye|bye)\b/i;
+// Closes only when the whole message is a closing, so "thanks, one more
+// question..." still gets answered. See 00-ARCHITECTURE.md's "Session closing"
+// section. Only checked outside an active quote flow so it can't misfire on a
+// field answer that happens to contain "thanks".
+const CLOSING_PHRASE =
+  "(?:(?:thanks|thank you|thank u|thx|ty)(?: (?:a lot|so much|very much))?(?: for (?:the|your|all your) (?:help|info))?|that['’]?s all|that is all|no more questions|nothing else|good ?bye|bye)";
+const CLOSING_INTENT_PATTERN = new RegExp(
+  `^(?:(?:ok|okay|great|perfect|cool|awesome|no)[\\s,.!]+)?${CLOSING_PHRASE}(?:[\\s,.!]+${CLOSING_PHRASE})*[\\s.!]*$`,
+  "i",
+);
 
 function detectsClosingIntent(message) {
-  return CLOSING_INTENT_PATTERN.test(message || "");
+  return CLOSING_INTENT_PATTERN.test((message || "").trim());
 }
 
 async function submitQuote(request, collected, category) {
