@@ -25,9 +25,10 @@ const MAX_MESSAGES = 60; // Same cap as ChatWidget.jsx.
 const MAX_TOTAL_CHARACTERS = 12000;
 const CHAT_ROLES = ["user", "assistant"];
 const DEFAULT_CATEGORY = "chatbot-general";
-// Two tries at most, so the customer waits about 20 seconds in the worst case.
+// Two tries at most, so the customer waits about 23 seconds in the worst case.
 const GROQ_TIMEOUT_MS = 10000;
 const GROQ_RETRY_DELAY_MS = 500;
+const GROQ_MAX_RETRY_DELAY_MS = 3000;
 const CHAT_FALLBACK_REPLY =
   "Sorry, I couldn't answer that just now. Please try again in a moment, or give us a call.";
 
@@ -147,7 +148,11 @@ async function requestGroqReply(chatMessages, apiKey, attempt) {
   if (!groqRes.ok) {
     console.error(`Groq API error: status ${groqRes.status}, attempt ${attempt}`);
     groqRes.body?.cancel();
-    return { retryable: groqRes.status === 429 || groqRes.status >= 500 };
+    return {
+      retryable: groqRes.status === 429 || groqRes.status >= 500,
+      // Groq sends this in seconds on a 429. Retrying sooner just fails again.
+      retryAfterMs: Number(groqRes.headers.get("retry-after")) * 1000 || 0,
+    };
   }
 
   const data = await groqRes.json().catch(() => null);
@@ -340,7 +345,11 @@ export async function POST(request) {
 
     let result = await requestGroqReply(chatMessages, apiKey, 1);
     if (result.retryable) {
-      await new Promise((resolve) => setTimeout(resolve, GROQ_RETRY_DELAY_MS));
+      const delayMs = Math.min(
+        Math.max(result.retryAfterMs || 0, GROQ_RETRY_DELAY_MS),
+        GROQ_MAX_RETRY_DELAY_MS,
+      );
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
       result = await requestGroqReply(chatMessages, apiKey, 2);
     }
     if (!result.reply) {
