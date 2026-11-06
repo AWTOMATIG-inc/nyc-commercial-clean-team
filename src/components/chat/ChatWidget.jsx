@@ -254,7 +254,7 @@ export default function ChatWidget() {
 
     const nextMessages = trimHistory([
       ...messages,
-      { role: "user", content: trimmed },
+      { role: "user", content: trimmed, quoteDetail: !!quoteFlow },
     ]);
     setMessages(nextMessages);
     setInput("");
@@ -269,11 +269,18 @@ export default function ChatWidget() {
         // sessionStorage unavailable — keep the default category.
       }
 
+      // Quote answers stay on screen but never go back to the server after the
+      // message that sent them, so customer details can't reach the model.
+      const lastIndex = nextMessages.length - 1;
+      const apiMessages = nextMessages.filter(
+        (m, index) => !m.quoteDetail || index === lastIndex,
+      );
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: nextMessages.map((m) => ({
+          messages: apiMessages.map((m) => ({
             role: m.role === "bot" ? "assistant" : "user",
             content: m.content,
           })),
@@ -287,14 +294,23 @@ export default function ChatWidget() {
         throw new Error(data.error || "Chat request failed");
       }
 
-      setQuoteFlow(data.quoteFlow ?? null);
+      // The rate-limit and too-long replies leave out quoteFlow. Dropping the
+      // flow on those would send the customer's next answer to the model.
+      if ("quoteFlow" in data) {
+        setQuoteFlow(data.quoteFlow);
+      }
       if (data.close) {
         closeChat(data.reply);
       } else {
         setMessages((prev) =>
           trimHistory([
             ...prev,
-            { role: "bot", content: data.reply, booking: !!data.booking },
+            {
+              role: "bot",
+              content: data.reply,
+              booking: !!data.booking,
+              quoteDetail: !!data.quoteFlow,
+            },
           ])
         );
       }
