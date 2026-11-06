@@ -64,17 +64,24 @@ function parseCategory(category) {
     : DEFAULT_CATEGORY;
 }
 
-// Simple keyword check for "wants to book" intent — distinct from
-// detectsQuoteIntent's keywords (quote/estimate/pricing/price/proposal/how
-// much), so the two rarely collide. Checked before quote intent: on the
-// genuinely ambiguous overlap ("how much to book weekly cleaning"), a low-
-// friction "Book Now" link is a safer default than kicking off the 5-field
-// quote flow the customer may not have wanted.
-const BOOKING_INTENT_PATTERN =
-  /\b(book|booking|schedule|scheduling|reserve|reservation|appointment)\b/i;
+// Matches a customer asking to book, not a message that only contains a booking
+// word: "schedule a visit" is a booking, "what's your cleaning schedule?" goes
+// to the model, which can tell them how to book. The action must open the
+// message or follow a first-person lead-in such as "I'd like to".
+//
+// Checked before quote intent: on the genuinely ambiguous overlap ("how much to
+// book weekly cleaning"), a low-friction "Book Now" link is a safer default than
+// kicking off the 5-field quote flow the customer may not have wanted. A message
+// with a price word and no booking request now falls through to the quote flow.
+const BOOKING_LEAD = String.raw`(?:^(?:(?:please|yes|yeah|ok|okay|hi|hello|hey|great|thanks)[\s,.!]+)*|\b(?:i|we|me|us|let['’]?s)(?:['’](?:d|m|re))?\s+(?:(?:would|want|wanna|need|like|love|to|looking|ready|am|are|please|just)\s+)*|\bhow (?:much )?to\s+)`;
+const BOOKING_ACTION = String.raw`(?:(?:book|schedule|reserve)\s+(?!for\b|of\b)(?:[\w-]+\s+){0,3}?(?:cleanings?|cleans?|visits?|appointments?|walk-?throughs?|consultations?|services?|crew|team)\b|(?:book|schedule|arrange|set\s+up|make|get|need|want)\s+(?:an?\s+)?(?:[\w-]+\s+)?(?:appointment|booking|reservation|visit)s?\b|book(?:\s+(?:now|online))?[\s.!?]*$)`;
+const BOOKING_INTENT_PATTERN = new RegExp(
+  `^(?:booking|schedule|reserve|reservation|appointment)[\\s.!]*$|${BOOKING_LEAD}${BOOKING_ACTION}`,
+  "i",
+);
 
 function detectsBookingIntent(message) {
-  return BOOKING_INTENT_PATTERN.test(message || "");
+  return BOOKING_INTENT_PATTERN.test((message || "").trim());
 }
 
 // Closes only when the whole message is a closing, so "thanks, one more
