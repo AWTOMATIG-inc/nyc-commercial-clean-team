@@ -3,6 +3,10 @@ import { buildSystemPrompt } from "@/lib/chat/systemPrompt";
 import { isRateLimited } from "@/lib/chat/rateLimiter";
 import { guardReply } from "@/lib/chat/replyGuard";
 import {
+  clearFailedAttempts,
+  recordFailedAttempt,
+} from "@/lib/chat/quoteAttempts";
+import {
   advanceQuoteFlow,
   createInitialQuoteFlowState,
   detectsQuoteIntent,
@@ -168,7 +172,8 @@ export async function POST(request) {
     );
   }
 
-  if (isRateLimited(getClientIp(request))) {
+  const clientIp = getClientIp(request);
+  if (isRateLimited(clientIp)) {
     return NextResponse.json({
       reply: "You're sending messages a bit fast — give me a moment!",
     });
@@ -241,7 +246,11 @@ export async function POST(request) {
       const result = advanceQuoteFlow(quoteFlow, lastUserMessage);
 
       if (result.status === "invalid") {
-        if (result.attempts >= MAX_ATTEMPTS) {
+        const attempts = Math.max(
+          result.attempts,
+          recordFailedAttempt(clientIp, quoteFlow.field),
+        );
+        if (attempts >= MAX_ATTEMPTS) {
           return NextResponse.json({
             reply:
               "I wasn't able to get a valid answer for that, so I'll close this chat for now. Feel free to start over anytime, or give us a call!",
@@ -255,11 +264,13 @@ export async function POST(request) {
             ...quoteFlow,
             attempts: {
               ...quoteFlow.attempts,
-              [quoteFlow.field]: result.attempts,
+              [quoteFlow.field]: attempts,
             },
           },
         });
       }
+
+      clearFailedAttempts(clientIp, quoteFlow.field);
 
       if (result.status === "advance") {
         return NextResponse.json({
