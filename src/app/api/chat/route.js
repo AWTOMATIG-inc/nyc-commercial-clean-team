@@ -52,7 +52,8 @@ function parseMessages(messages) {
   const isValid = messages.every(
     (m) => CHAT_ROLES.includes(m?.role) && typeof m.content === "string",
   );
-  if (!isValid || messages[messages.length - 1].role !== "user") {
+  const lastMessage = messages[messages.length - 1];
+  if (!isValid || lastMessage.role !== "user" || !lastMessage.content.trim()) {
     return null;
   }
   return messages.map(({ role, content }) => ({ role, content }));
@@ -174,7 +175,13 @@ export async function POST(request) {
   }
 
   try {
-    const body = await request.json();
+    let body;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "invalid JSON" }, { status: 400 });
+    }
+
     const messages = parseMessages(body?.messages);
     if (!messages) {
       return NextResponse.json(
@@ -309,9 +316,15 @@ export async function POST(request) {
       });
     }
 
+    // Older messages are cut rather than rejected: the widget keeps a too-long
+    // message in its history after asking the customer to shorten it.
     const chatMessages = [
       { role: "system", content: buildSystemPrompt() },
-      ...messages,
+      ...messages.map((m) =>
+        m.role === "user"
+          ? { ...m, content: m.content.slice(0, MAX_MESSAGE_LENGTH) }
+          : m,
+      ),
     ];
 
     let result = await requestGroqReply(chatMessages, apiKey, 1);
