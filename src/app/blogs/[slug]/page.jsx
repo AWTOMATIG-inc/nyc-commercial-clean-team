@@ -66,6 +66,13 @@ export default async function BlogDetails({ params }) {
               className="mt-6 ql-editor body-text"
               dangerouslySetInnerHTML={{
                 __html: blog?.content
+                  // Some posts were pasted from the old local WordPress build and
+                  // still link to http://localhost/wordpress/. Point those at the
+                  // homepage so crawlers don't report broken external links.
+                  .replace(
+                    /href="https?:\/\/(?:localhost|127\.0\.0\.1)(?::\d+)?[^"]*"/gi,
+                    'href="/"',
+                  )
                   .replace(/&nbsp;/g, " ")
                   .replace(/<p><\/p>/g, ""),
               }}
