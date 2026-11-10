@@ -12,6 +12,11 @@ export const foundations = [
     title: "Foundation",
     heading: "Built on experience and accountability",
     desc: "New York Commercial Clean Team Inc. has maintained the highest standards of commercial cleaning across the city for twenty-five years. We are fully insured, background-checked, and licensed to serve the most demanding facilities in Manhattan, Brooklyn, Queens, the Bronx, and Long Island.",
+    body: [
+      "Experience matters most in the details. We don't rotate random staff through your building every week. Each client gets the same cleaning crew on the same schedule, so the people in your space know your floors, your priorities, and your expectations. Our crews are background-checked, uniformed, and trained in commercial cleaning protocols before they ever set foot in a client facility.",
+      "Accountability means you always know what you are paying for. Every new account starts with a walkthrough of your facility, followed by a written quote within 24 to 48 hours. We schedule cleaning around your business hours, including after-hours service, so your team and your customers are never disrupted. Start dates are typically within the same week for standard commercial accounts.",
+      "From offices and retail spaces to medical facilities, schools, and multi-tenant buildings, we serve all five boroughs and Long Island. Call us at (631) 381-7252 or request a free quote below to see how we can keep your facility clean, safe, and ready for business.",
+    ],
     image:cleaningImg
   },
 ];

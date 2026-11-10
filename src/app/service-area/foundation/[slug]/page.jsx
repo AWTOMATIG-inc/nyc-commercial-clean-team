@@ -32,6 +32,9 @@ export default async function SurfaceDetails({params}) {
           </p>
           <h1 className="text-2xl sm:text-3xl lg:text-[32px] mt-8">{foundation.heading}</h1>
           <p className="text-base sm:text-lg mt-6 text-justify">{foundation.desc}</p>
+          {foundation.body?.map((paragraph, i) => (
+            <p key={i} className="text-base sm:text-lg mt-4 text-justify">{paragraph}</p>
+          ))}
           </div>
           <div>
             <Image src={foundation.image} alt="detail-image" width={576} height={576} className="h-144 rounded-[20px] object-cover"/>
