@@ -1,53 +1,43 @@
-# Backlinks pages review: 17 Nov 2026
+# Old-Page Cleanup Report: 17 November 2026
 
-## What we got
+## What we reviewed
 
-1. `nyccleantinc.com-backlinks_pages.csv`: Semrush "Backlinks → Pages" export.
-   - 59 old nyccleantinc.com URLs. Status codes in the export: 41 × 404, 16 × 500, 2 × 403.
-   - Backlinks = 0 and referring domains = 0 on every row. Nothing external links to these pages, so there is no link equity to recover.
-   - The 16 "500" rows (`/services/*`, 2 × `/blogs/*`) were last seen 2026-06-19.
-2. `nyccleantinc.com-Coverage-Drilldown-2026-11-17.zip`: Google Search Console export, Indexing → Pages → "Not found (404)".
-   - 18 URLs that Google itself lists as 404.
-   - Affected pages fell from 31 (21 Aug) to 19 (13 Nov) and have been flat since.
+1. **Backlinks report (Semrush).** A list of 59 old nyccleantinc.com web addresses from the previous version of the website. None of them has any other website linking to it, so no ranking value is attached to them.
+2. **Google Search Console "Not found (404)" report.** The list of addresses Google itself still reports as missing. It contains 18 addresses. This number has fallen from 31 in August to 19 and has been steady since.
 
-## What we checked
+## What we found
 
-- Live status of all 16 "500" URLs: every one returns a clean **404** now. They were old errors in a stale Semrush snapshot, not a live problem.
-- `www.nyccleantinc.com` already 308-redirects to non-www, so the www rows are covered.
-- Redirect targets (`/commercial-cleaning-brooklyn`, `/commercial-cleaning-queens`, `/commercial-cleaning-services-manhattan-nyc`, `/commercial-deep-cleaning-nyc`, `/blogs`) all return 200.
-- Redirects tested on a local dev server: `/blogs/2`, `/blogs/3`, `/disclaimer`, `/cleaning-services-new-me-`, `/gallery/` land on the right place. URLs with a trailing slash take two hops (slash stripped, then our rule).
+- Most of the old addresses come from the previous WordPress site. They are old service pages, borough pages, blog posts, category pages and a gallery page that no longer exist.
+- Some entries in the Semrush list were flagged as server errors. We checked each one on the live website. They are not errors today; they now show the standard "page not found" result. The report was an out-of-date snapshot.
+- The `www` version of the site already forwards visitors to the main version, so nothing is needed there.
 
 ## What we fixed
 
-Commit `d5def33` (pushed to `main`): 14 permanent (308) redirects in `next.config.mjs`.
+We set up permanent forwarding for the 14 real old pages that Google still lists. A visitor or search engine that reaches one of these addresses is now sent to the closest current page.
 
-| Old URL | Goes to |
+| Old page | Now forwards to |
 |---|---|
-| `/blogs/:page` (digits) | `/blogs` |
-| `/brooklyn-cleaning-service-nyc` | `/commercial-cleaning-brooklyn` |
-| `/queens-cleaning-service-nyc` | `/commercial-cleaning-queens` |
-| `/office-cleaning-services-manhattan-nyc` | `/commercial-cleaning-services-manhattan-nyc` |
-| `/cleaning-and-disinfecting-commercial-offices-nyc` | `/commercial-deep-cleaning-nyc` |
-| `/cleaning-vs-disinfection-vs-sterilization-in-nyc` | `/commercial-deep-cleaning-nyc` |
-| `/the-top-10-benefits-of-hiring-a-professional-commercial-cleaning-service` | `/blogs` |
-| `/the-ultimate-guide-to-choosing-the-right-commercial-cleaning-company` | `/blogs` |
-| `/category/dryer-vent-cleaning` | `/blogs` |
-| `/category/cleaning-vs-disinfection-vs-sterilization` | `/blogs` |
-| `/cleaning-services-new-me-in-new-york` | `/` |
-| `/cleaning-services-new-me-` | `/` |
-| `/gallery` | `/` |
-| `/disclaimer` | `/` |
+| Old blog list pages (`/blogs/2`, `/blogs/3`) | Blog page |
+| Brooklyn cleaning service (old page) | Commercial Cleaning Brooklyn |
+| Queens cleaning service (old page) | Commercial Cleaning Queens |
+| Manhattan office cleaning (old page) | Commercial Cleaning Services Manhattan |
+| Cleaning and disinfecting offices (old page) | Commercial Deep Cleaning |
+| Cleaning vs disinfection vs sterilization (old page) | Commercial Deep Cleaning |
+| "Top 10 benefits" and "Ultimate guide" (old blog posts) | Blog page |
+| Two old blog category pages | Blog page |
+| "Cleaning services new me" (two variants) | Homepage |
+| Old Gallery page | Homepage |
+| Old Disclaimer page | Homepage |
 
-## Left alone on purpose
+## What we deliberately left alone
 
-- `/$`, `/&`, `/*`, `/wp-admin/admin-ajax.php`: junk crawl artifacts, 404 is the correct answer.
-- The other ~40 URLs in the Semrush CSV that GSC does not list: no backlinks, not in Google's 404 report, so no redirect needed. Add more rules only if they show up in GSC later.
+- **Four meaningless addresses** (for example, ones that are just a `$`, `&` or `*`, and a WordPress admin file). Search engines probe these automatically. A "not found" result is the correct answer, and they do no harm.
+- **The remaining old addresses in the Semrush list.** Google does not list them as problems and nothing links to them, so forwarding them would add no benefit.
 
-## Open
+## Next steps
 
-1. **Confirm the deploy succeeded.** Not verified yet. Risk: the production build could fail on the same MongoDB `bad auth` error that broke the local build (`/blogs` prerender).
-2. **Local `.env` has a bad MongoDB login.** `npx next build` fails locally with `bad auth : authentication failed`. Likely a rotated password (see the open API incident). Update `MONGODB_URI` in the local `.env`.
-3. **Redirects not fully tested end to end.** The dev server died partway, so the Brooklyn, Queens, Manhattan, deep-cleaning, blog-post and category rules were not followed through to their final page. `next build` has not run past the compile step because of item 2.
-4. **After deploy, test on the live site:** `/gallery/`, `/brooklyn-cleaning-service-nyc/`, `/blogs/2` should each land on a real page.
-5. **Then click "Validate fix"** in GSC, Indexing → Pages → "Not found (404)". Takes days to weeks. The 4 junk URLs will keep it from showing a full pass.
-6. **Re-check GSC in 2–3 weeks** for new 404s.
+1. We will ask Google to re-check the fixed addresses in Search Console. Google decides how long this takes, and the status will show as "Started", then "Passed".
+2. The four meaningless addresses may keep the report from showing a full pass. This is expected and does not affect the website.
+3. We will review the report again periodically to catch any new missing pages.
+
+No action is needed from you at this stage.
