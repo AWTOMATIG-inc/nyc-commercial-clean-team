@@ -7,7 +7,11 @@
 
 ## What we found
 
-- Most of the old addresses come from the previous WordPress site. They are old service pages, borough pages, blog posts, category pages and a gallery page that no longer exist.
+**Nothing is broken on the current website.** These addresses were not created by the new site. They are leftovers that Google and Semrush still remember from the previous WordPress site, which was removed almost a year ago. The new sitemap tells Google which pages exist today, but it does not make Google forget addresses it already knows. Google keeps re-checking old addresses and drops them gradually, which is why the count has fallen from 31 to 19 but has not reached zero.
+
+A "page not found" result is the correct answer for a page that no longer exists, and Google will keep clearing these on its own. The forwarding we set up below is optional tidy-up. It tidies the Search Console report and sends any stray visitors to a relevant page, but it does not change rankings.
+
+- The old addresses are former service pages, borough pages, blog posts, category pages and a gallery page that no longer exist.
 - Some entries in the Semrush list were flagged as server errors. We checked each one on the live website. They are not errors today; they now show the standard "page not found" result. The report was an out-of-date snapshot.
 - The `www` version of the site already forwards visitors to the main version, so nothing is needed there.
 
