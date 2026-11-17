@@ -49,6 +49,22 @@ const nextConfig = {
       { source: "/service-area/manhattan", destination: "/commercial-cleaning-services-manhattan-nyc", permanent: true },
       { source: "/service-area/bronx", destination: "/commercial-cleaning-bronx", permanent: true },
       { source: "/service-area/long-island", destination: "/commercial-cleaning-long-island", permanent: true },
+
+      // GSC 404 report (11-17-26): old WordPress URLs Google still lists as Not found
+      { source: "/blogs/:page(\\d+)", destination: "/blogs", permanent: true },
+      { source: "/brooklyn-cleaning-service-nyc", destination: "/commercial-cleaning-brooklyn", permanent: true },
+      { source: "/queens-cleaning-service-nyc", destination: "/commercial-cleaning-queens", permanent: true },
+      { source: "/office-cleaning-services-manhattan-nyc", destination: "/commercial-cleaning-services-manhattan-nyc", permanent: true },
+      { source: "/cleaning-and-disinfecting-commercial-offices-nyc", destination: "/commercial-deep-cleaning-nyc", permanent: true },
+      { source: "/cleaning-vs-disinfection-vs-sterilization-in-nyc", destination: "/commercial-deep-cleaning-nyc", permanent: true },
+      { source: "/the-top-10-benefits-of-hiring-a-professional-commercial-cleaning-service", destination: "/blogs", permanent: true },
+      { source: "/the-ultimate-guide-to-choosing-the-right-commercial-cleaning-company", destination: "/blogs", permanent: true },
+      { source: "/category/dryer-vent-cleaning", destination: "/blogs", permanent: true },
+      { source: "/category/cleaning-vs-disinfection-vs-sterilization", destination: "/blogs", permanent: true },
+      { source: "/cleaning-services-new-me-in-new-york", destination: "/", permanent: true },
+      { source: "/cleaning-services-new-me-", destination: "/", permanent: true },
+      { source: "/gallery", destination: "/", permanent: true },
+      { source: "/disclaimer", destination: "/", permanent: true },
     ];
   },
 };
