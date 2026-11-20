@@ -30,3 +30,17 @@ export const services = [
   },
   
 ];
+
+export const allServiceLinks = [
+  { label: "Office Cleaning NYC", href: "/commercial-office-cleaning-nyc" },
+  { label: "Janitorial Services NYC", href: "/janitorial-services-nyc" },
+  { label: "Day Porter Services NYC", href: "/day-porter-services-nyc" },
+  { label: "Post-Construction Cleaning NYC", href: "/post-construction-cleaning-nyc" },
+  { label: "Commercial Deep Cleaning NYC", href: "/commercial-deep-cleaning-nyc" },
+  { label: "Commercial Move-Out Cleaning NYC", href: "/commercial-move-out-cleaning-nyc" },
+  { label: "Floor Stripping & Waxing NYC", href: "/floor-stripping-waxing-nyc" },
+  { label: "Commercial Carpet Cleaning NYC", href: "/commercial-carpet-cleaning-nyc" },
+  { label: "Commercial Window Cleaning NYC", href: "/commercial-window-cleaning-nyc" },
+  { label: "Commercial Handyman Services NYC", href: "/commercial-handyman-services-nyc" },
+  { label: "Restroom Supply Management NYC", href: "/restroom-supply-management-nyc" },
+];

@@ -1,5 +1,5 @@
 import glassClean from "@/assets/home/services/clean-man.jpg";
-import { services } from "@/constant/home/services";
+import { allServiceLinks, services } from "@/constant/home/services";
 import Image from "next/image";
 import Link from "next/link";
 import ButtonSolid from "../ButtonSolid";
@@ -69,14 +69,16 @@ export default function ServicesSection() {
                     <div className="min-h-56 xs:min-h-54 sm:min-h-48 mt-10">
                       <div className="py-2 rounded-r-xl absolute bg-white w-[85%] z-20">
                         <h5 className="font-bold  my-3 before:w-0 hover:before:w-full before:h-px before:absolute before:bg-black before:-bottom-1 before:left-0 before:transition-all before:duration-300  relative w-fit cursor-pointer text-3xl">
-                          {item.heading}
+                          <Link href={item.newUrl}>
+                            {item.heading}
+                          </Link>
                         </h5>
                         <p className="mb-4 text-xl  pr-3">
                           {item.desc}
                         </p>
                       </div>
                     </div>
-                    <Link href={item.newUrl}>
+                    <Link href={item.newUrl} aria-label={`Learn more about ${item.heading}`}>
                       <ButtonSolid color="white" className="text-nowrap">
                         Learn more
                       </ButtonSolid>
@@ -95,6 +97,23 @@ export default function ServicesSection() {
                 </div>
               </div>
             ))}
+            <div className="pt-2">
+              <h4 className="text-lg sm:text-xl font-bold text-gray-800 mb-3">
+                All our commercial cleaning services
+              </h4>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                {allServiceLinks.map((service) => (
+                  <li key={service.href}>
+                    <Link
+                      href={service.href}
+                      className="text-gray-700 hover:text-black hover:underline transition-colors text-sm sm:text-base"
+                    >
+                      {service.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
